@@ -25,4 +25,8 @@ source ${EXAWIND_SRCDIR}/codes/%%PROJECT%%.bash
 
 
 ### Execute main function (must be last line of this script)
-exawind_main "$@"
+if [[ "${BASH_SOURCE[0]}" != "${0}" ]] ; then
+    exawind_env && exawind_proj_env
+else
+    exawind_main "$@"
+fi
