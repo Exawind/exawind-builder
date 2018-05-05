@@ -85,7 +85,15 @@ exawind_rpath_dirs ()
 
     for dep in "$@" ; do
         root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
-        rpath_dirs=${!root_dir_var}/lib:${rpath_dirs}
+        libpath=${!root_dir_var}/lib
+        if [ -d ${libpath} ] ; then
+            rpath_dirs=${libpath}:${rpath_dirs}
+        fi
+
+        lib64path=${!root_dir_var}/lib64
+        if [ -d ${lib64path} ] ; then
+            rpath_dirs=${lib64path}:${rpath_dirs}
+        fi
     done
     echo $rpath_dirs
 }
