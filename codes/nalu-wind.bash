@@ -12,7 +12,7 @@ exawind_cmake ()
     command cmake \
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR} \
         -DYAML_DIR:PATH=${YAML_ROOT_DIR} \
-        -DCMAKE_BUILD_TYPE=RELEASE \
+        -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE} \
         -DENABLE_HYPRE:BOOL=ON \
         -DHYPRE_DIR:PATH=${HYPRE_ROOT_DIR} \
         -DENABLE_TIOGA:BOOL=ON \

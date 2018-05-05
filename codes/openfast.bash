@@ -10,7 +10,7 @@ exawind_cmake ()
     local extra_args="$@"
 
     cmake \
-        -DCMAKE_BUILD_TYPE=RELEASE \
+        -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE} \
         -DFPE_TRAP_ENABLED:BOOL=ON \
         -DBUILD_FAST_CPP_API:BOOL=ON \
         -DYAML_ROOT:PATH=${YAML_ROOT_DIR} \
