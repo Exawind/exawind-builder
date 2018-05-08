@@ -2,7 +2,7 @@
 
 exawind_proj_env ()
 {
-    exawind_load_deps trilinos yaml-cpp
+    exawind_load_deps zlib libxml2 hdf5 trilinos yaml-cpp
 }
 
 exawind_cmake ()
