@@ -16,6 +16,7 @@ exawind_cmake ()
     command cmake \
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE} \
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR} \
+        -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR} \
         -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR} \
         -DNALU_DIR:PATH=${NALU_WIND_ROOT_DIR} \
         ${install_dir} \
