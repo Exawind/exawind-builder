@@ -84,6 +84,9 @@ if [[ err_stat -ne 0 ]] ; then
     exit 1
 fi
 
+# Set the install directory
+install_dir_var="$(echo ${project} | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')_INSTALL_PREFIX"
+
 
 # Output and template file
 output_file=$1
@@ -93,7 +96,7 @@ if [ -z "$output_file" ]; then
     output_file=${project}-${compiler}.sh
 fi
 
-sed -e "s#%%SRCDIR%%#${EXAWIND_SRCDIR}#g;s#%%COMPILER%%#${compiler}#g;s#%%SYSTEM%%#${system}#g;s#%%PROJECT%%#${project}#g" $tmpl_file > $output_file
+sed -e "s#%%SRCDIR%%#${EXAWIND_SRCDIR}#g;s#%%COMPILER%%#${compiler}#g;s#%%SYSTEM%%#${system}#g;s#%%PROJECT%%#${project}#g;s#%%INSTALL_DIR%%#${install_dir_var}#g" $tmpl_file > $output_file
 chmod a+x ${output_file}
 
 cat <<EOF
