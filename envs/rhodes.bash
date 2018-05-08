@@ -16,13 +16,22 @@ exawind_env_gcc ()
 {
     exawind_module_env
     module purge
-    module load gcc/7.3.0 cmake/3.9.4
+    module load cmake/3.9.4
+
+    export CC=gcc
+    export CXX=g++
+    export FC=gfortran
 }
 
 exawind_env_intel ()
 {
-    echo "ERROR: Intel environment not supported on this system"
-    exit 1
+    exawind_module_env
+    module purge
+    module load intel-parallel-studio/cluster.2018.1 cmake/3.9.4
+
+    export CC=icc
+    export CXX=icpc
+    export FC=ifort
 }
 
 exawind_load_deps ()
