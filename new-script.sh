@@ -24,6 +24,22 @@ Argument:
 EOF
 }
 
+check_inputs ()
+{
+    local dirname=${EXAWIND_SRCDIR}/$1
+    local value=$2
+    local option=$3
+
+    local tgt_file=${dirname}/${value}.bash
+    if [ ! -f ${tgt_file} ] ; then
+        echo "Invalid value provided for ${option} = ${value}. Valid options are: "
+        for fname in $(ls ${dirname}); do
+            echo "    - $(basename -s .bash $fname)"
+        done
+        err_stat=1
+    fi
+}
+
 # Get the source directory
 EXAWIND_SRCDIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
@@ -59,6 +75,14 @@ done
 
 shift $((OPTIND-1))
 [ "$1" == "--" ] && shift
+
+err_stat=0
+check_inputs envs ${system} "system"
+check_inputs codes ${project} "project"
+if [[ err_stat -ne 0 ]] ; then
+    echo "Invalid options encountered, exiting now"
+    exit 1
+fi
 
 
 # Output and template file
