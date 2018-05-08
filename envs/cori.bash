@@ -29,10 +29,15 @@ exawind_env_intel ()
 exawind_load_deps () {
 
     for dep in $@ ; do
-        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
+        mod_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')"
+        root_dir_var="${mod_var}_ROOT_DIR"
+        root_var="${mod_var}_ROOT"
 
-        if [ -z ${!root_dir_var} ] ; then
+        if [ -s ${!root_dir_var} ] ; then continue ; fi
+
+        if [ -z ${!root_var} ] ; then
             module load $dep
         fi
+        eval "export $root_dir_var=${!root_var}"
     done
 }
