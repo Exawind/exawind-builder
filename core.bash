@@ -79,6 +79,16 @@ exawind_ctest ()
     command ctest ${extra_args}
 }
 
+exawind_run ()
+{
+    export OMP_NUM_THREADS=${OMP_NUM_THREADS:-1};
+    export OMP_PROC_BIND=${OMP_PROC_BIND:-true};
+    export OMP_PLACES=${OMP_PLACES:-threads}
+
+    echo "+ $@"
+    eval "$@"
+}
+
 exawind_rpath_dirs ()
 {
     local rpath_dirs=""
