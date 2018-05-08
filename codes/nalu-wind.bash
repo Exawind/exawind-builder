@@ -9,6 +9,11 @@ exawind_cmake ()
 {
     local extra_args="$@"
 
+    # Force CMake to use absolute paths for the libraries so that it doesn't
+    # pick up versions installed in `/usr/lib64` on peregrine
+    local lib_path_save=${LIBRARY_PATH}
+    unset LIBRARY_PATH
+
     command cmake \
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR} \
         -DYAML_DIR:PATH=${YAML_ROOT_DIR} \
@@ -21,4 +26,6 @@ exawind_cmake ()
         -DOpenFAST_DIR:PATH=${OPENFAST_ROOT_DIR} \
         -DENABLE_TESTS:BOOL=ON \
         ${extra_args} ..
+
+    export LIBRARY_PATH=${lib_path_save}
 }
