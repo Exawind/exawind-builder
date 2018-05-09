@@ -14,10 +14,10 @@ exawind_env_intel ()
 
     module load cmake/3.8.2
     module load zlib/1.2.8
-    module load cray-parallel-netcdf/1.6.1
-    module load cray-netcdf-hdf5parallel/4.3.3.1
-    module load cray-hdf5-parallel/1.8.16
-    module load boost/1.61
+    module load cray-parallel-netcdf/1.8.1.3
+    module load cray-netcdf-hdf5parallel/4.4.1.1.3
+    module load cray-hdf5-parallel/1.10.1.1
+    module load boost/1.63
     module load libxml2/2.9.3
 
     export CC=cc
