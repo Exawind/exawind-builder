@@ -33,7 +33,7 @@ exawind_load_deps () {
         root_dir_var="${mod_var}_ROOT_DIR"
         root_var="${mod_var}_ROOT"
 
-        if [ -s ${!root_dir_var} ] ; then continue ; fi
+        if [ -n "${!root_dir_var}" ] ; then continue ; fi
 
         if [ -z ${!root_var} ] ; then
             module load $dep
