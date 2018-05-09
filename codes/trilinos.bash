@@ -17,7 +17,7 @@ exawind_cmake ()
     # Configure BLAS/LAPACK if user has setup the BLASLIB variable
     local blas_lapack=""
     if [ -n "$BLASLIB" ] ; then
-        blas_lapack="-DTPL_BLAS_LIBRARIES=\"$BLASLIB\" -DTPL_LAPACK_LIBRARIES=\"$BLASLIB\""
+        blas_lapack="-DTPL_BLAS_LIBRARIES=$BLASLIB -DTPL_LAPACK_LIBRARIES=$BLASLIB"
     fi
 
     # Force CMake to use absolute paths for the libraries so that it doesn't
