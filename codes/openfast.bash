@@ -18,7 +18,7 @@ exawind_cmake ()
     # Configure BLAS/LAPACK if user has setup the BLASLIB variable
     local blas_lapack=""
     if [ -n "$BLASLIB" ] ; then
-        blas_lapack="-DBLAS_LIBRARIES=\"$BLASLIB\" -DLAPACK_LIBRARIES=\"$BLASLIB\""
+        blas_lapack="-DBLAS_LIBRARIES=$BLASLIB -DLAPACK_LIBRARIES=$BLASLIB"
     fi
 
     # Force CMake to use absolute paths for the libraries so that it doesn't
@@ -33,7 +33,7 @@ exawind_cmake ()
         -DFPE_TRAP_ENABLED:BOOL=ON \
         -DUSE_DLL_INTERFACE:BOOL=ON \
         -DBUILD_FAST_CPP_API:BOOL=ON \
-        -DYAML_ROOT:PATH=${YAML_ROOT_DIR} \
+        -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR} \
         -DHDF5_ROOT:PATH=${HDF5_ROOT_DIR} \
         ${blas_lapack} \
         ${extra_args} ..
