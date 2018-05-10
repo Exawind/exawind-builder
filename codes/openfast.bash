@@ -36,7 +36,7 @@ exawind_cmake ()
         -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR} \
         -DHDF5_ROOT:PATH=${HDF5_ROOT_DIR} \
         ${blas_lapack} \
-        ${extra_args} ..
+        ${extra_args} .. 2>&1 | tee cmake_output.log
 
     export LIBRARY_PATH=${lib_path_save}
 }

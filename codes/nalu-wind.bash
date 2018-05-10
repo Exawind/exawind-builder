@@ -25,7 +25,7 @@ exawind_cmake ()
         -DENABLE_OPENFAST:BOOL=ON \
         -DOpenFAST_DIR:PATH=${OPENFAST_ROOT_DIR} \
         -DENABLE_TESTS:BOOL=ON \
-        ${extra_args} ..
+        ${extra_args} .. 2>&1 | tee cmake_output.log
 
     export LIBRARY_PATH=${lib_path_save}
 }

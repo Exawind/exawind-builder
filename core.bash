@@ -59,7 +59,7 @@ exawind_make ()
         extra_args="$@"
     fi
 
-    command make ${extra_args}
+    command make ${extra_args} 2>&1 | tee make_output.log
 }
 
 exawind_ctest ()

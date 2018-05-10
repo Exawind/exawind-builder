@@ -23,7 +23,7 @@ exawind_cmake ()
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR} \
         -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR} \
         ${install_dir} \
-        ${extra_args} ..
+        ${extra_args} .. 2>&1 | tee cmake_output.log
 
     export LIBRARY_PATH=${lib_path_save}
 }
