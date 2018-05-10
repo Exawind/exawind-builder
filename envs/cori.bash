@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export EXAWIND_NUM_JOBS=8
+
 exawind_env_gcc ()
 {
     echo "ERROR: No GCC environment set up for Cori"
