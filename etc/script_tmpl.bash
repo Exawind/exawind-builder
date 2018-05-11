@@ -22,8 +22,10 @@ source ${EXAWIND_SRCDIR}/envs/%%SYSTEM%%.bash
 source ${EXAWIND_SRCDIR}/codes/%%PROJECT%%.bash
 
 ### Override specific functions here and/or provide extra configuration
-EXAWIND_INSTALL_DIR=${HOME}/exawind/install/
-%%INSTALL_DIR%%=${HOME}/exawind/install/%%PROJECT%%
+export EXAWIND_PROJECT_DIR=${HOME}/exawind/
+export EXAWIND_INSTALL_DIR=${EXAWIND_PROJECT_DIR}/install/
+%%CODE_DIR%%=${EXAWIND_PROJECT_DIR}/source/%%PROJECT%%
+%%INSTALL_DIR%%=${EXAWIND_INSTALL_DIR}/%%PROJECT%%
 
 ### Execute main function (must be last line of this script)
 if [[ "${BASH_SOURCE[0]}" != "${0}" ]] ; then
