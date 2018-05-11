@@ -10,7 +10,7 @@ exawind_cmake ()
     local extra_args="$@"
     local install_dir=""
     if [ -n "$TIOGA_UTILS_INSTALL_PREFIX" ] ; then
-        install_dir="-DCMAKE_INSTALL_PREFIX=\"$TIOGA_UTILS_INSTALL_PREFIX\""
+        install_dir="-DCMAKE_INSTALL_PREFIX=$TIOGA_UTILS_INSTALL_PREFIX"
     fi
 
     # Force CMake to use absolute paths for the libraries so that it doesn't
