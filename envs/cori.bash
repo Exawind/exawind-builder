@@ -26,6 +26,7 @@ exawind_env_intel ()
     export BLASLIB="$CRAY_LIBSCI_PREFIX_DIR/lib/libsci_intel.a"
 
     export PARALLEL_NETCDF_ROOT=${PARALLEL_NETCDF_DIR}
+    export NETCDF_ROOT=${NETCDF_DIR}
 }
 
 exawind_load_deps () {
