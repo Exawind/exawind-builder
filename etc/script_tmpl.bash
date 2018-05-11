@@ -22,7 +22,7 @@ source ${EXAWIND_SRCDIR}/envs/%%SYSTEM%%.bash
 source ${EXAWIND_SRCDIR}/codes/%%PROJECT%%.bash
 
 ### Override specific functions here and/or provide extra configuration
-export EXAWIND_PROJECT_DIR=${HOME}/exawind/
+export EXAWIND_PROJECT_DIR=${EXAWIND_PROJECT_DIR:-${HOME}/exawind/}
 export EXAWIND_INSTALL_DIR=${EXAWIND_PROJECT_DIR}/install/
 %%CODE_DIR%%=${EXAWIND_PROJECT_DIR}/source/%%PROJECT%%
 %%INSTALL_DIR%%=${EXAWIND_INSTALL_DIR}/%%PROJECT%%
