@@ -1,17 +1,19 @@
 #!/bin/bash
 
 export EXAWIND_NUM_JOBS=24
-export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/ecp/base/c/spack/share/spack/modules/linux-centos7-x86_64/
+export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/ecp/base/modules
 
 # Mapping identifying versions to load for each dependency
 declare -A EXAWIND_MODMAP
-EXAWIND_MODMAP[trilinos]=trilinos/develop-omp
+EXAWIND_MODMAP[trilinos]=trilinos/develop
 EXAWIND_MODMAP[openmpi]=openmpi/1.10.4
 
 exawind_env_gcc ()
 {
     module purge
     module load gcc/6.2.0
+    # For extra protection, explicitly disable path to Intel modules in user environment
+    module unuse ${EXAWIND_MODULES_DIR}/intel-18.1.163
     module use ${EXAWIND_MODULES_DIR}/gcc-6.2.0
 
     module load binutils openmpi/1.10.4 netlib-lapack cmake
