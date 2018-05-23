@@ -66,6 +66,7 @@ exawind_cmake ()
         -DTrilinos_ENABLE_STKUnit_test_utils:BOOL=ON \
         -DTrilinos_ENABLE_Gtest:BOOL=ON \
         -DTrilinos_ENABLE_STKClassic:BOOL=OFF \
+        -DTrilinos_ENABLE_STKExprEval:BOOL=ON \
         -DTrilinos_ENABLE_SEACASExodus:BOOL=ON \
         -DTrilinos_ENABLE_SEACASEpu:BOOL=ON \
         -DTrilinos_ENABLE_SEACASExodiff:BOOL=ON \
@@ -85,6 +86,8 @@ exawind_cmake ()
         -DNetCDF_ROOT:PATH=${NETCDF_ROOT_DIR} \
         -DNetcdf_LIBRARY_DIRS=${NETCDF_ROOT_DIR}/lib \
         -DNetcdf_INCLUDE_DIRS=${NETCDF_ROOT_DIR}/include \
+        -DTPL_Netcdf_PARALLEL:BOOL=ON \
+        -DTPL_Netcdf_Enables_Netcdf4:BOOL=ON \
         -DTPL_ENABLE_Pnetcdf:BOOL=ON \
         -DPNetCDF_ROOT:PATH=${PARALLEL_NETCDF_ROOT_DIR} \
         -DPnetcdf_LIBRARY_DIRS=${PARALLEL_NETCDF_DIR}/lib \
