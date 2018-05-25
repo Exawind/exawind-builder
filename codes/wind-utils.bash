@@ -22,6 +22,7 @@ exawind_cmake ()
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE} \
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR} \
         -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR} \
+        -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=TRUE \
         ${install_dir} \
         ${extra_args} .. 2>&1 | tee cmake_output.log
 
