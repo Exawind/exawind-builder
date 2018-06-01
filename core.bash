@@ -51,7 +51,7 @@ exawind_cmake_full ()
 
 exawind_make ()
 {
-    local extra_args=${EXAWIND_NUM_JOBS:-8}
+    local num_tasks=${EXAWIND_NUM_JOBS:-8}
 
     if [ "$#" == "0" ] ; then
         extra_args="-j ${num_tasks}"
@@ -68,7 +68,7 @@ exawind_ctest ()
     export OMP_PROC_BIND=${OMP_PROC_BIND:-true};
     export OMP_PLACES=${OMP_PLACES:-threads}
 
-    local extra_args=${EXAWIND_NUM_JOBS:-8}
+    local num_tasks=${EXAWIND_NUM_JOBS:-8}
 
     if [ "$#" == "0" ] ; then
         extra_args="-j ${num_tasks}"
