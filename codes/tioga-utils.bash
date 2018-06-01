@@ -25,7 +25,8 @@ exawind_cmake ()
         -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR} \
         -DNALU_DIR:PATH=${NALU_WIND_ROOT_DIR} \
         ${install_dir} \
-        ${extra_args} ../src
+        ${extra_args} \
+        ${TIOGA_UTILS_SOURCE_DIR:-..}/src
 
     export LIBRARY_PATH=${lib_path_save}
 }
