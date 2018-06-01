@@ -103,7 +103,7 @@ exawind_cmake ()
         -DTPL_ENABLE_BLAS:BOOL=ON \
         ${blas_lapack} \
         ${extra_args} \
-        .. 2>&1 | tee cmake_output.log
+        ${TRILINOS_SOURCE_DIR:-..} 2>&1 | tee cmake_output.log
 
     export LIBRARY_PATH=${lib_path_save}
 }
