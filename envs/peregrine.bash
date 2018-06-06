@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export EXAWIND_NUM_JOBS=24
+export EXAWIND_NUM_JOBS_DEFAULT=24
 export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/ecp/base/modules
 
 # Mapping identifying versions to load for each dependency

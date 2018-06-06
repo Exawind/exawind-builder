@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export EXAWIND_NUM_JOBS=8
+export EXAWIND_NUM_JOBS_DEFAULT=8
 
 exawind_spack_env ()
 {
