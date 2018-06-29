@@ -24,7 +24,16 @@ source ${EXAWIND_SRCDIR}/codes/%%PROJECT%%.bash
 ### Override specific functions here and/or provide extra configuration
 export EXAWIND_PROJECT_DIR=${EXAWIND_PROJECT_DIR:-${HOME}/exawind/}
 export EXAWIND_INSTALL_DIR=${EXAWIND_PROJECT_DIR}/install/
-%%CODE_DIR%%=${EXAWIND_PROJECT_DIR}/source/%%PROJECT%%
+
+# Path to the source directory, default assumes that the user is executing cmake
+# from SOURCE/build directory. See the commented option below for
+# out of source builds
+%%CODE_DIR%%=..
+# Use this for out of source builds
+#%%CODE_DIR%%=${EXAWIND_PROJECT_DIR}/source/%%PROJECT%%
+
+# Directory where "make install" will install the project
+# executables, libraries, and headers
 %%INSTALL_DIR%%=${EXAWIND_INSTALL_DIR}/%%PROJECT%%
 
 ### Execute main function (must be last line of this script)
