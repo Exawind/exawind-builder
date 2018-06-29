@@ -1,0 +1,73 @@
+packages:
+  all:
+    compiler:
+      - xl
+    modules: {}
+    paths: {}
+    providers:
+      blas:
+        - netlib-lapack
+      lapack:
+        - netlib-lapack
+      mpi:
+        - spectrum-mpi
+    version: []
+    variants: +mpi build_type=Release
+  spectrum-mpi:
+    version: [10.2.0]
+    buildable: false
+    modules:
+      spectrum-mpi@10.2.0: spectrum-mpi/10.2.0.0-20180110
+    paths: {}
+    providers: {}
+    compiler: []
+  boost:
+    version: [1.59.0]
+    buildable: false
+    modules:
+      boost@1.59.0: boost/1.59.0
+  hdf5:
+    version: [1.10.0]
+    buildable: false
+    variants: +mpi+hl
+    modules:
+      hdf5@1.10.0+mpi+hl: hdf5/1.10.0-patch1
+  netcdf:
+    version: [4.4.1]
+    buildable: false
+    modules:
+      netcdf@4.4.1: netcdf/4.4.1
+  parallel-netcdf:
+    version: [1.8.0]
+    buildable: false
+    modules:
+      parallel-netcdf@1.8.0: parallel-netcdf/1.8.0
+  cmake:
+    version: [3.11.3]
+    buildable: false
+    modules:
+      cmake@3.11.3: cmake/3.11.3
+  cuda:
+    version: [9.0.69]
+    buildable: false
+    modules:
+      cuda@9.0.69: cuda/9.0.69
+  zlib:
+    version: [1.2.7]
+    buildable: false
+    paths:
+      zlib@1.2.7: /usr
+  bzip2:
+    version: [1.0.6]
+    buildable: false
+    paths:
+      bzip2@1.0.6: /usr
+  libxml2:
+    version: [2.9.1]
+    buildable: false
+    paths:
+      libxml2@2.9.1: /usr
+  superlu:
+    version: [4.3]
+  yaml-cpp:
+    version: [develop]
