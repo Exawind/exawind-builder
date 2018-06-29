@@ -30,6 +30,8 @@ exawind_env_xl ()
     export CXX=$(which xlc++)
     export F77=$(which xlf)
     export FC=$(which xlf2003)
+
+    exawind_load_deps netlib-lapack zlib libxml2
 }
 
 exawind_load_deps ()
