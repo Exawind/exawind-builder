@@ -27,9 +27,10 @@ exawind_load_deps ()
     for dep in $@ ; do
         root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
 
+        local depname=${EXAWIND_MODMAP[$dep]:-$dep}
         if [ -z ${!root_dir_var} ] ; then
-            module load $(${SPACK_EXE} module find $dep %${EXAWIND_COMPILER})
-            eval "export $root_dir_var=$(${SPACK_EXE} location -i $dep %${EXAWIND_COMPILER})"
+            module load $(${SPACK_EXE} module find $depname %${EXAWIND_COMPILER})
+            eval "export $root_dir_var=$(${SPACK_EXE} location -i $depname %${EXAWIND_COMPILER})"
         fi
     done
 }

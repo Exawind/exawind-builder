@@ -40,7 +40,7 @@ exawind_load_deps () {
         if [ -n "${!root_dir_var}" ] ; then continue ; fi
 
         if [ -z ${!root_var} ] ; then
-            module load $dep
+            module load ${EXAWIND_MODMAP[$dep]:-$dep}
         fi
         eval "export $root_dir_var=${!root_var}"
     done

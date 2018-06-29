@@ -2,6 +2,9 @@
 
 __EXAWIND_CORE_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
+# Array holding exact module/spack descriptor for a dependency
+declare -A EXAWIND_MODMAP
+
 exawind_help ()
 {
     cat <<EOF
@@ -39,6 +42,17 @@ exawind_env ()
     local compiler=${EXAWIND_COMPILER:-gcc}
     source ${srcdir}/envs/${sys}.bash
     exawind_env_${compiler}
+}
+
+exawind_load_deps ()
+{
+    for dep in $@ ; do
+        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
+
+        if [ -z ${!root_dir_var} ] ; then
+            module load ${EXAWIND_MODMAP[$dep]:-$dep}
+        fi
+    done
 }
 
 exawind_cmake_full ()
