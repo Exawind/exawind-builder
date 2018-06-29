@@ -13,5 +13,13 @@ exawind_cmake ()
         install_dir="-DCMAKE_INSTALL_PREFIX=$TIOGA_INSTALL_PREFIX"
     fi
 
-    command cmake ${install_dir} ${extra_args} ${TIOGA_SOURCE_DIR:-..}
+    local cmake_cmd=(
+        cmake
+        ${install_dir}
+        ${extra_args}
+        ${TIOGA_SOURCE_DIR:-..}
+    )
+
+    echo "${cmake_cmd[@]}" > cmake_output.log
+    eval "${cmake_cmd[@]}" 2>&1 | tee -a cmake_output.log
 }

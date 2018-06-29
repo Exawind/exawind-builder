@@ -19,20 +19,25 @@ exawind_cmake ()
     local lib_path_save=${LIBRARY_PATH}
     unset LIBRARY_PATH
 
-    command cmake \
-        -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR} \
-        -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR} \
-        -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE} \
-        -DENABLE_HYPRE:BOOL=${ENABLE_HYPRE:-ON} \
-        -DHYPRE_DIR:PATH=${HYPRE_ROOT_DIR} \
-        -DENABLE_TIOGA:BOOL=${ENABLE_TIOGA:-ON} \
-        -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR} \
-        -DENABLE_OPENFAST:BOOL=${ENABLE_OPENFAST:-ON} \
-        -DOpenFAST_DIR:PATH=${OPENFAST_ROOT_DIR} \
-        -DENABLE_TESTS:BOOL=ON \
-        ${install_dir} \
-        ${extra_args} \
-        ${NALU_SOURCE_DIR:-..} 2>&1 | tee cmake_output.log
+    local cmake_cmd=(
+        cmake
+        -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
+        -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR}
+        -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
+        -DENABLE_HYPRE:BOOL=${ENABLE_HYPRE:-ON}
+        -DHYPRE_DIR:PATH=${HYPRE_ROOT_DIR}
+        -DENABLE_TIOGA:BOOL=${ENABLE_TIOGA:-ON}
+        -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR}
+        -DENABLE_OPENFAST:BOOL=${ENABLE_OPENFAST:-ON}
+        -DOpenFAST_DIR:PATH=${OPENFAST_ROOT_DIR}
+        -DENABLE_TESTS:BOOL=${ENABLE_TESTS:-ON}
+        ${install_dir}
+        ${extra_args}
+        ${NALU_WIND_SOURCE_DIR:-..}
+    )
+
+    echo "${cmake_cmd[@]}" > cmake_output.log
+    eval "${cmake_cmd[@]}" 2>&1 | tee -a cmake_output.log
 
     export LIBRARY_PATH=${lib_path_save}
 }

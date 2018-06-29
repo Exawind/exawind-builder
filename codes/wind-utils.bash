@@ -18,14 +18,19 @@ exawind_cmake ()
     local lib_path_save=${LIBRARY_PATH}
     unset LIBRARY_PATH
 
-    command cmake \
-        -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE} \
-        -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR} \
-        -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR} \
-        -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=TRUE \
-        ${install_dir} \
-        ${extra_args} \
-        ${WIND_UTILS_SOURCE_DIR:-..} 2>&1 | tee cmake_output.log
+    local cmake_cmd=(
+        cmake
+        -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
+        -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
+        -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR}
+        -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=TRUE
+        ${install_dir}
+        ${extra_args}
+        ${WIND_UTILS_SOURCE_DIR:-..}
+    )
+
+    echo "${cmake_cmd[@]}" > cmake_output.log
+    eval "${cmake_cmd[@]}" 2>&1 | tee -a cmake_output.log
 
     export LIBRARY_PATH=${lib_path_save}
 }

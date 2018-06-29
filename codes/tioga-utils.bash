@@ -18,15 +18,20 @@ exawind_cmake ()
     local lib_path_save=${LIBRARY_PATH}
     unset LIBRARY_PATH
 
-    command cmake \
-        -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE} \
-        -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR} \
-        -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR} \
-        -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR} \
-        -DNALU_DIR:PATH=${NALU_WIND_ROOT_DIR} \
-        ${install_dir} \
-        ${extra_args} \
+    local cmake_cmd=(
+        cmake
+        -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
+        -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
+        -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR}
+        -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR}
+        -DNALU_DIR:PATH=${NALU_WIND_ROOT_DIR}
+        ${install_dir}
+        ${extra_args}
         ${TIOGA_UTILS_SOURCE_DIR:-..}/src
+    )
+
+    echo "${cmake_cmd[@]}" > cmake_output.log
+    eval "${cmake_cmd[@]}" 2>&1 | tee -a cmake_output.log
 
     export LIBRARY_PATH=${lib_path_save}
 }
