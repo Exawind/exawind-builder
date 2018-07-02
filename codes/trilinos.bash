@@ -5,7 +5,7 @@ exawind_proj_env ()
     exawind_load_deps zlib libxml2 hdf5 netcdf parallel-netcdf superlu boost
 }
 
-exawind_cmake ()
+exawind_cmake_base ()
 {
     local extra_args="$@"
     if [ -n "$TRILINOS_INSTALL_PREFIX" ] ; then
@@ -20,6 +20,9 @@ exawind_cmake ()
         blas_lapack="-DTPL_BLAS_LIBRARIES=$BLASLIB -DTPL_LAPACK_LIBRARIES=$BLASLIB"
     fi
 
+    # Allow user to configure OpenMP
+    local enable_openmp=${ENABLE_OPENMP:-ON}
+
     # Force CMake to use absolute paths for the libraries so that it doesn't
     # pick up versions installed in `/usr/lib64` on peregrine
     local lib_path_save=${LIBRARY_PATH}
@@ -30,9 +33,9 @@ exawind_cmake ()
             -DCMAKE_INSTALL_PREFIX=${install_dir}
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE:-RELEASE}
             -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS:-OFF}
-            -DTrilinos_ENABLE_OpenMP:BOOL=ON
-            -DKokkos_ENABLE_OpenMP:BOOL=ON
-            -DTpetra_INST_OPENMP:BOOL=ON
+            -DTrilinos_ENABLE_OpenMP:BOOL=${enable_openmp}
+            -DKokkos_ENABLE_OpenMP:BOOL=${enable_openmp}
+            -DTpetra_INST_OPENMP:BOOL=${enable_openmp}
             -DTpetra_INST_SERIAL:BOOL=ON
             -DTrilinos_ENABLE_CXX11:BOOL=ON
             -DTrilinos_ENABLE_EXPLICIT_INSTANTIATION:BOOL=ON
@@ -111,4 +114,30 @@ exawind_cmake ()
     eval "${cmake_cmd[@]}" 2>&1 | tee -a cmake_output.log
 
     export LIBRARY_PATH=${lib_path_save}
+}
+
+exawind_cmake_osx ()
+{
+    local extra_args="$@"
+
+    exawind_cmake_orig \
+        -DTrilinos_ENABLE_OpenMP=OFF \
+        -DKokkos_ENABLE_OpenMP:BOOL=OFF \
+        -DTpetra_INST_OPENMP=OFF \
+        -DSuperLU_INCLUDE_DIRS=${SUPERLU_ROOT_DIR}/include/superlu \
+        ${extra_args}
+}
+
+exawind_cmake_cori ()
+{
+    local extra_args="$@"
+    exawind_cmake_orig \
+        -DMPI_USE_COMPILER_WRAPPERS:BOOL=ON \
+        -DMPI_CXX_COMPILER:FILEPATH=${CXX} \
+        -DMPI_C_COMPILER:FILEPATH=${CC} \
+        -DMPI_Fortran_COMPILER:FILEPATH=${FC} \
+        -DMPI_EXEC=srun \
+        -DMPI_EXEC_NUMPROCS_FLAG=-n \
+        -DCMAKE_SKIP_INSTALL_RPATH=TRUE \
+        ${extra_args}
 }

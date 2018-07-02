@@ -63,6 +63,17 @@ exawind_cmake_full ()
     exawind_cmake
 }
 
+exawind_cmake ()
+{
+    if [ "$(uname)" = "Darwin" && "$(type -f exawind_cmake_osx)" = "function" ] ; then
+        exawind_cmake_osx "$@"
+    elif [ "$(type -f exawind_cmake_${EXAWIND_SYSTEM})" = "function" ] ; then
+        exawind_cmake_${EXAWIND_SYSTEM} "$@"
+    else
+        exawind_cmake_base "$@"
+    fi
+}
+
 exawind_make ()
 {
     local num_tasks=${EXAWIND_NUM_JOBS:-$EXAWIND_NUM_JOBS_DEFAULT}
