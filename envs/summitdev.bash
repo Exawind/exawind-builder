@@ -2,19 +2,9 @@
 
 export EXAWIND_NUM_JOBS_DEFAULT=32
 
-exawind_env_gcc ()
+exawind_env_common ()
 {
-    echo "ERROR: No GCC environment setup for SummitDev"
-}
-
-exawind_env_intel ()
-{
-    echo "ERROR: No GCC environment setup for SummitDev"
-}
-
-exawind_env_xl ()
-{
-    if [ -z "${OLCF_XL_ROOT}" ] ; then
+    if [ -z "${OLCF_SPECTRUM_MPI_ROOT}" ] ; then
         module load DefApps
     fi
 
@@ -24,7 +14,33 @@ exawind_env_xl ()
     export SPACK_ROOT=${SPACK_ROOT:-/ccs/proj/csc249/exawind/spack}
     export SPACK_EXE=${SPACK_ROOT}/bin/spack
     module use ${SPACK_ROOT}/share/spack/modules/$(${SPACK_EXE} arch)
+}
 
+exawind_env_gcc ()
+{
+    exawind_env_common
+
+    module load gcc/7.1.0
+
+    export SPACK_COMPILER=xl
+    export CC=${OMPI_CC}
+    export CXX=${OMPI_CXX}
+    export F77=${OMPI_FC}
+    export FC=${OMPI_FC}
+
+    exawind_load_deps netlib-lapack zlib libxml2
+}
+
+exawind_env_intel ()
+{
+    echo "ERROR: No GCC environment setup for SummitDev"
+}
+
+exawind_env_xl ()
+{
+    exawind_env_common
+
+    export SPACK_COMPILER=xl
     export EXAWIND_COMPILER=xl
     export CC=$(which xlc)
     export CXX=$(which xlc++)
@@ -41,8 +57,8 @@ exawind_load_deps ()
 
         local depname=${EXAWIND_MODMAP[$dep]:-$dep}
         if [ -z ${!root_dir_var} ] ; then
-            module load $(${SPACK_EXE} module find $depname %${EXAWIND_COMPILER})
-            eval "export $root_dir_var=$(${SPACK_EXE} location -i $depname %${EXAWIND_COMPILER})"
+            module load $(${SPACK_EXE} module find $depname %${SPACK_COMPILER})
+            eval "export $root_dir_var=$(${SPACK_EXE} location -i $depname %${SPACK_COMPILER})"
         fi
     done
 }
