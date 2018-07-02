@@ -12,13 +12,19 @@ exawind_spack_env ()
 
 exawind_env_gcc ()
 {
-    export EXAWIND_COMPILER=gcc
+    export EXAWIND_COMPILER=${EXAWIND_COMPILER:-gcc}
     exawind_spack_env
 }
 
 exawind_env_intel ()
 {
-    export EXAWIND_COMPILER=intel
+    export EXAWIND_COMPILER=${EXAWIND_COMPILER:-intel}
+    exawind_spack_env
+}
+
+exawind_env_clang ()
+{
+    export EXAWIND_COMPILER=${EXAWIND_COMPILER:-clang}
     exawind_spack_env
 }
 
