@@ -21,9 +21,9 @@ exawind_env_intel ()
     module load boost/1.63
     module load libxml2/2.9.3
 
-    export CC=cc
-    export CXX=CC
-    export FC=ftn
+    export CC=$(which cc)
+    export CXX=$(which CC)
+    export FC=$(which ftn)
     export BLASLIB="$CRAY_LIBSCI_PREFIX_DIR/lib/libsci_intel.a"
 
     export PARALLEL_NETCDF_ROOT=${PARALLEL_NETCDF_DIR}
