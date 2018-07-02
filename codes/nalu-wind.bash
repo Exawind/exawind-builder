@@ -2,7 +2,20 @@
 
 exawind_proj_env ()
 {
-    exawind_load_deps hypre openfast tioga trilinos yaml-cpp
+    local opt_packages=(
+        hypre
+        openfast
+        tioga
+    )
+
+    exawind_load_deps trilinos yaml-cpp
+
+    for pkg in ${opt_packages[@]} ; do
+        local pkg_flag="ENABLE_${pkg^^}"
+        if [ "${!pkg_flag}" = "ON" ] ; then
+            exawind_load_deps $pkg
+        fi
+    done
 }
 
 exawind_cmake ()
