@@ -18,7 +18,7 @@ exawind_proj_env ()
     done
 }
 
-exawind_cmake ()
+exawind_cmake_base ()
 {
     local extra_args="$@"
     local install_dir=""
@@ -53,4 +53,13 @@ exawind_cmake ()
     eval "${cmake_cmd[@]}" 2>&1 | tee -a cmake_output.log
 
     export LIBRARY_PATH=${lib_path_save}
+}
+
+exawind_cmake_osx ()
+{
+    local extra_args="$@"
+    exawind_cmake_base \
+        -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON \
+        -DMPIEXEC_PREFLAGS:STRING='"--use-hwthread-cpus --oversubscribe"' \
+        ${extra_args}
 }
