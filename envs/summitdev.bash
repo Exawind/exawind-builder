@@ -22,7 +22,7 @@ exawind_env_gcc ()
 
     module load gcc/7.1.0
 
-    export SPACK_COMPILER=xl
+    export SPACK_COMPILER=gcc
     export CC=${OMPI_CC}
     export CXX=${OMPI_CXX}
     export F77=${OMPI_FC}

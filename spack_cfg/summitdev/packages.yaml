@@ -1,7 +1,6 @@
 packages:
   all:
-    compiler:
-      - xl
+    compiler: [ gcc, xl ]
     modules: {}
     paths: {}
     providers:
@@ -22,14 +21,14 @@ packages:
     providers: {}
     compiler: []
   boost:
-    version: [1.59.0]
-    buildable: false
-    modules:
-      boost@1.59.0: boost/1.59.0
+    version: [1.67.0]
+    #buildable: false
+    #modules:
+    #  boost@1.59.0: boost/1.59.0
   hdf5:
     version: [1.10.0]
     buildable: false
-    variants: +mpi+hl
+    variants: +mpi+hl+cxx
     modules:
       hdf5@1.10.0+mpi+hl: hdf5/1.10.0-patch1
   netcdf:
@@ -71,3 +70,4 @@ packages:
     version: [4.3]
   yaml-cpp:
     version: [develop]
+
