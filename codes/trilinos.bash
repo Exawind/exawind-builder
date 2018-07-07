@@ -48,8 +48,11 @@ exawind_cmake_base ()
             -DTrilinos_ALLOW_NO_PACKAGES:BOOL=OFF
             -DTrilinos_ENABLE_Epetra:BOOL=OFF
             -DTrilinos_ENABLE_Tpetra:BOOL=ON
+            -DTrilinos_ENABLE_KokkosKernels:BOOL=ON
             -DTrilinos_ENABLE_ML:BOOL=OFF
             -DTrilinos_ENABLE_MueLu:BOOL=ON
+            -DXpetra_ENABLE_Kokkos_Refactor:BOOL=ON
+            -DMueLu_ENABLE_Kokkos_Refactor:BOOL=ON
             -DTrilinos_ENABLE_EpetraExt:BOOL=OFF
             -DTrilinos_ENABLE_AztecOO:BOOL=OFF
             -DTrilinos_ENABLE_Belos:BOOL=ON
