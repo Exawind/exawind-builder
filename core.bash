@@ -65,9 +65,9 @@ exawind_cmake_full ()
 
 exawind_cmake ()
 {
-    if [ "$(uname)" = "Darwin" && "$(type -f exawind_cmake_osx)" = "function" ] ; then
+    if [ "$(uname)" = "Darwin" -a "$(type -t exawind_cmake_osx)" = "function" ] ; then
         exawind_cmake_osx "$@"
-    elif [ "$(type -f exawind_cmake_${EXAWIND_SYSTEM})" = "function" ] ; then
+    elif [ "$(type -t exawind_cmake_${EXAWIND_SYSTEM})" = "function" ] ; then
         exawind_cmake_${EXAWIND_SYSTEM} "$@"
     else
         exawind_cmake_base "$@"
