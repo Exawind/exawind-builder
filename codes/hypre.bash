@@ -1,6 +1,6 @@
 #!bin/bash
 
-exawind_proj_deps ()
+exawind_proj_env ()
 {
     echo "HYPRE: No additional dependencies"
 }
