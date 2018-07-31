@@ -120,7 +120,7 @@ exawind_cmake_osx ()
 {
     local extra_args="$@"
 
-    exawind_cmake_orig \
+    exawind_cmake_base \
         -DTrilinos_ENABLE_OpenMP=OFF \
         -DKokkos_ENABLE_OpenMP:BOOL=OFF \
         -DTpetra_INST_OPENMP=OFF \
@@ -131,7 +131,7 @@ exawind_cmake_osx ()
 exawind_cmake_cori ()
 {
     local extra_args="$@"
-    exawind_cmake_orig \
+    exawind_cmake_base \
         -DMPI_USE_COMPILER_WRAPPERS:BOOL=ON \
         -DMPI_CXX_COMPILER:FILEPATH=${CXX} \
         -DMPI_C_COMPILER:FILEPATH=${CC} \
