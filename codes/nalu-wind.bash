@@ -12,7 +12,7 @@ exawind_proj_env ()
 
     for pkg in ${opt_packages[@]} ; do
         local pkg_flag="ENABLE_${pkg^^}"
-        if [ "${!pkg_flag}:-ON" = "ON" ] ; then
+        if [ "${!pkg_flag:-ON}" = "ON" ] ; then
             exawind_load_deps $pkg
         fi
     done
