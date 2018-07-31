@@ -1,11 +1,11 @@
 #!/bin/bash
 
 export EXAWIND_NUM_JOBS_DEFAULT=24
-export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/ecp/base/modules
+#export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/ecp/base/modules
+export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/ecp/base/c/spack/share/spack/modules/linux-centos7-x86_64
 
 # Mapping identifying versions to load for each dependency
 declare -A EXAWIND_MODMAP
-EXAWIND_MODMAP[trilinos]=trilinos/develop
 EXAWIND_MODMAP[openmpi]=openmpi/1.10.4
 
 exawind_env_gcc ()
