@@ -1,10 +1,18 @@
 #!/bin/bash
 
+source ${__EXAWIND_CORE_DIR}/envs/spack.bash
+
 export EXAWIND_NUM_JOBS_DEFAULT=8
 
 exawind_env_gcc ()
 {
     echo "ERROR: No GCC environment set up for Cori"
+    exit 1
+}
+
+exawind_env_clang ()
+{
+    echo "ERROR: No CLANG environment set up for Cori"
     exit 1
 }
 
@@ -14,34 +22,28 @@ exawind_env_intel ()
        module load PrgEnv-intel/6.0.4
     fi
 
-    module load cmake/3.8.2
-    module load zlib/1.2.8
-    module load cray-parallel-netcdf/1.8.1.3
-    module load cray-hdf5-parallel/1.10.1.1
-    module load boost/1.63
-    module load libxml2/2.9.3
-
     export CC=$(which cc)
     export CXX=$(which CC)
     export FC=$(which ftn)
     export BLASLIB="$CRAY_LIBSCI_PREFIX_DIR/lib/libsci_intel.a"
 
-    export PARALLEL_NETCDF_ROOT=${PARALLEL_NETCDF_DIR}
-    echo "WARNING: User must provide a NetCDF library. Cori modules do not work!!"
+    export EXAWIND_COMPILER=${EXAWIND_COMPILER:-intel}
+    export SPACK_COMPILER=${SPACK_COMPILER:-${EXAWIND_COMPILER}}
+    exawind_spack_env
 }
 
-exawind_load_deps () {
+# exawind_load_deps () {
 
-    for dep in $@ ; do
-        mod_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')"
-        root_dir_var="${mod_var}_ROOT_DIR"
-        root_var="${mod_var}_ROOT"
+#     for dep in $@ ; do
+#         mod_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')"
+#         root_dir_var="${mod_var}_ROOT_DIR"
+#         root_var="${mod_var}_ROOT"
 
-        if [ -n "${!root_dir_var}" ] ; then continue ; fi
+#         if [ -n "${!root_dir_var}" ] ; then continue ; fi
 
-        if [ -z ${!root_var} ] ; then
-            module load ${EXAWIND_MODMAP[$dep]:-$dep}
-        fi
-        eval "export $root_dir_var=${!root_var}"
-    done
-}
+#         if [ -z ${!root_var} ] ; then
+#             module load ${EXAWIND_MODMAP[$dep]:-$dep}
+#         fi
+#         eval "export $root_dir_var=${!root_var}"
+#     done
+# }
