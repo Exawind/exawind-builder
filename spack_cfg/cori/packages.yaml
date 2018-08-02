@@ -64,3 +64,4 @@ packages:
     version: [3.8.0]
   yaml-cpp:
     version: [develop]
+    variants: ~shared

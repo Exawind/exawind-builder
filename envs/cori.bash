@@ -22,6 +22,8 @@ exawind_env_intel ()
        module load PrgEnv-intel/6.0.4
     fi
 
+    module load cmake/3.8.2
+
     export CC=$(which cc)
     export CXX=$(which CC)
     export FC=$(which ftn)
