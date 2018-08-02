@@ -45,7 +45,7 @@ exawind_load_deps ()
 
         local depname=${EXAWIND_MODMAP[$dep]:-$dep}
         if [ -z ${!root_dir_var} ] ; then
-            module load $(${SPACK_EXE} module find $depname %${SPACK_COMPILER})
+            module load $(${SPACK_EXE} module tcl find $depname %${SPACK_COMPILER})
             eval "export $root_dir_var=$(${SPACK_EXE} location -i $depname %${SPACK_COMPILER})"
         fi
     done
