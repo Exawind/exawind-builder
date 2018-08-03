@@ -63,3 +63,11 @@ exawind_cmake_osx ()
         -DMPIEXEC_PREFLAGS:STRING='"--use-hwthread-cpus --oversubscribe"' \
         ${extra_args}
 }
+
+exawind_cmake_cori ()
+{
+    local extra_args="$@"
+    exawind_cmake_base \
+        -DMPIEXEC_NUMPROC_FLAG="-n" \
+        ${extra_args}
+}
