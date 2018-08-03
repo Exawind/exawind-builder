@@ -21,6 +21,8 @@ exawind_env_gcc ()
     export CC=$(which gcc)
     export CXX=$(which g++)
     export FC=$(which gfortran)
+
+    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/gcc-6.2.0)"
 }
 
 exawind_env_intel ()
@@ -36,6 +38,8 @@ exawind_env_intel ()
     export CC=$(which icc)
     export CXX=$(which icpc)
     export FC=$(which ifort)
+
+    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/intel-18.1.163)"
 }
 
 exawind_load_deps ()
@@ -46,5 +50,6 @@ exawind_load_deps ()
         if [ -z ${!root_dir_var} ] ; then
             module load ${EXAWIND_MODMAP[$dep]:-$dep}
         fi
+        echo "==> ${depname} = ${!root_dir_var}"
     done
 }

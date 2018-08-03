@@ -4,7 +4,7 @@ export EXAWIND_NUM_JOBS_DEFAULT=8
 
 exawind_spack_env ()
 {
-    export SPACK_ROOT=${SPACK_ROOT:-${HOME}/spack}
+    export SPACK_ROOT=${SPACK_ROOT:-${EXAWIND_PROJECT_DIR}/spack}
     export SPACK_EXE=${SPACK_ROOT}/bin/spack
 
     if [[ $OSTYPE = "darwin"* ]] ; then
@@ -15,6 +15,8 @@ exawind_spack_env ()
         fi
     fi
     module use ${SPACK_ROOT}/share/spack/modules/$(${SPACK_EXE} arch)
+
+    echo "==> Using spack configuration: ${SPACK_ROOT}"
 }
 
 exawind_env_gcc ()
@@ -48,5 +50,6 @@ exawind_load_deps ()
             module load $(${SPACK_EXE} module tcl find $depname %${SPACK_COMPILER})
             eval "export $root_dir_var=$(${SPACK_EXE} location -i $depname %${SPACK_COMPILER})"
         fi
+        echo "==> ${depname} = ${!root_dir_var}"
     done
 }

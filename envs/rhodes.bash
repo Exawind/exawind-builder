@@ -42,5 +42,6 @@ exawind_load_deps ()
         if [ -z ${!root_dir_var} ] ; then
             module load $dep
         fi
+        echo "==> ${depname} = ${!root_dir_var}"
     done
 }

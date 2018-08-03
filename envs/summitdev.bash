@@ -60,5 +60,6 @@ exawind_load_deps ()
             module load $(${SPACK_EXE} module find $depname %${SPACK_COMPILER})
             eval "export $root_dir_var=$(${SPACK_EXE} location -i $depname %${SPACK_COMPILER})"
         fi
+        echo "==> ${depname} = ${!root_dir_var}"
     done
 }
