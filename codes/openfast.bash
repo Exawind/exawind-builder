@@ -2,7 +2,11 @@
 
 exawind_proj_env ()
 {
-    exawind_load_deps zlib libxml2 hdf5 yaml-cpp
+    if [ "${FAST_CPP_API:-ON}" = "ON" ] ; then
+        exawind_load_deps zlib libxml2 hdf5 yaml-cpp
+    else
+        echo "==> FAST C++ API is disabled. No additional dependencies."
+    fi
 }
 
 exawind_cmake_base ()
