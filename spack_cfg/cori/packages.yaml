@@ -65,3 +65,6 @@ packages:
   yaml-cpp:
     version: [develop]
     variants: ~shared
+  hypre:
+    version: [2.14.0]
+    variants: +int64~shared
