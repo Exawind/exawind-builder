@@ -67,6 +67,8 @@ ExaWind Builder configuration
    passing ``-j X`` at the command line for ``make``.
 
 
+.. _ref-project-vars:
+
 Variables controlling project properties
 ----------------------------------------
 
