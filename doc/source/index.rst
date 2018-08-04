@@ -12,9 +12,9 @@ ExaWind Build Scripts User Manual
    :Version: |version|
    :Date: |today|
 
-`ExaWind Builder <https://github.com/sayerhs/exawind-builder>` is a collection
+`ExaWind Builder <https://github.com/sayerhs/exawind-builder>`_ is a collection
 of build scripts to configure and compile the codes used within the `ExaWind
-<https://github.com/exawind>` project on various high-performance computing
+<https://github.com/exawind>`_ project on various high-performance computing
 (HPC) systems. The builder provides the following
 
 - *Platform configuration*: Provides the minimal set of modules that must be
