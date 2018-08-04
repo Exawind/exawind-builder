@@ -66,7 +66,7 @@ packages:
     version: [develop]
     variants: ~shared
   openfast:
-    version: develop
+    version: [develop]
     variants: +cxx
   hypre:
     version: [2.14.0]
