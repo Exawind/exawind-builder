@@ -5,7 +5,7 @@ exawind_proj_env ()
     echo "no additional dependencies"
 }
 
-exawind_cmake ()
+exawind_cmake_base ()
 {
     local extra_args="$@"
     local install_dir=""

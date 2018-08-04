@@ -5,7 +5,7 @@ exawind_proj_env ()
     exawind_load_deps zlib libxml2 hdf5 trilinos yaml-cpp tioga nalu-wind
 }
 
-exawind_cmake ()
+exawind_cmake_base ()
 {
     local extra_args="$@"
     local install_dir=""

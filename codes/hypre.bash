@@ -5,7 +5,7 @@ exawind_proj_env ()
     echo "HYPRE: No additional dependencies"
 }
 
-exawind_cmake ()
+exawind_cmake_base ()
 {
     # Not exactly CMake, but we use this function anyway. Must be executed from
     # `hypre/src` directory
