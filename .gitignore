@@ -1,2 +1,3 @@
 # gitignore for exawind-builder
 .*.swp
+doc/build/*
