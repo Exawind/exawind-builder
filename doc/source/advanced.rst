@@ -18,12 +18,14 @@ are shown below:
   ├── install
   │   ├── hypre
   │   ├── tioga
+  │   ├── trilinos-omp
   │   └── trilinos
   ├── scripts
   │   ├── hypre-clang.sh
   │   ├── nalu-wind-clang.sh
   │   ├── tioga-clang.sh
   │   └── trilinos-clang.sh
+  ├── spack
   └── source
       ├── hypre
       ├── nalu-wind
@@ -36,6 +38,9 @@ The sub-directories are:
 
 - ``exawind-builder``: The build script package cloned from the git repository
   that contains scripts to configure and build codes on different systems.
+
+- ``spack``: Optional location for `spack <https://github.com/llnl/spack>`_ if
+  using Spack to manage dependencies.
 
 - ``source``: Local git repository checkouts of the ExaWind codes of interest to the user.
 
@@ -155,6 +160,15 @@ Setup ExaWind directory structure as described in :ref:`Installation`.
    Users can also copy :file:`compilers.yaml` if desired to override default
    compilers detected by spack.
 
+   .. note::
+
+      For automatic updates, users can symlink the packages.yaml file within the
+      spack configuration directory to the version in ``exawind-builder``
+
+      .. code-block:: bash
+
+         ln -s packages.yaml ${HOME}/.spack/$(spack arch -p)/
+
 #. Instruct spack to track packages installed via Homebrew. Note that on most
    systems the following commands will run very quickly and will not attempt to
    download and build packages.
@@ -192,7 +206,22 @@ Setup ExaWind directory structure as described in :ref:`Installation`.
    use ``-s spack`` for the system when generating the build scripts. For Cori
    and SummitDev, use the appropriate :envvar:`system <EXAWIND_SYSTEM>` which
    will initialize the compiler and MPI modules first and then activate Spack in
-   the background.
+   the background. You will need to configure at least :envvar:`SPACK_ROOT` if
+   it was not installed in the default location suggested in the directory
+   layout at the beginning of this section.
+
+Upon successful installation, executing ``spack find`` at the command line
+should show you the following packages (on Mac OSX)
+
+.. code-block:: bash
+
+   $ spack find
+   ==> 12 installed packages.
+   -- darwin-sierra-x86_64 / clang@9.0.0-apple ---------------------
+   boost@1.67.0  libxml2@2.2     netlib-lapack@3.8.0    superlu@4.3
+   cmake@3.12.0  m4@1.4.6        openmpi@3.1.1          yaml-cpp@develop
+   hdf5@1.10.1   netcdf@4.4.1.1  parallel-netcdf@1.8.0  zlib@1.2.8
+
 
 .. _builder-config:
 

@@ -66,6 +66,11 @@ ExaWind Builder configuration
    invoked. Setting this variable within the build script is equivalent to
    passing ``-j X`` at the command line for ``make``.
 
+.. envvar:: SPACK_ROOT
+
+   Absolute path to the spack installation, if using spack to manage
+   dependencies. The default path is :file:`${EXAWIND_PROJECT_DIR}/spack`.
+
 
 .. _ref-project-vars:
 
