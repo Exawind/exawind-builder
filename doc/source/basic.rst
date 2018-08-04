@@ -9,12 +9,42 @@ common project location and build scripts are provided in
 scripts to configure and build ExaWind projects. If you want to setup your own
 independent :file:`exawind` directory structure see :ref:`advanced_usage` section.
 
+Compiling software
+------------------
+
 The build scripts by default are typically named ``$PROJECT-$COMPILER.sh``, so
 for example when compiling ``nalu-wind`` with the GCC compiler suite, the
 default script is :file:`nalu-wind-gcc.sh`. With no arguments, the script will
 load all necessary modules and execute CMake configuration step followed by
-``make``. However, the user can control which tasks are executed by providing
-additional parameters to the script upon invocation as shown below:
+``make``.
+
+On systems that have all dependencies installed, building a certain project
+(e.g., nalu-wind) requires the following steps:
+
+#. Clone the repository
+
+   .. code-block:: bash
+
+      git clone git@github.com:exawind/nalu-wind.git
+
+#. Create a build directory and copy the build script
+
+   .. code-block:: bash
+
+      cd nalu-wind
+      mkdir build-release # Create an optimized executable
+      cd build-release
+      cp <path_to_build_script> .
+      # Edit script if necessary
+
+      # Run CMake and make
+      ./nalu-wind-gcc.sh
+
+Available tasks
+~~~~~~~~~~~~~~~
+
+The user can control which tasks are executed by providing additional parameters
+to the script upon invocation as shown below:
 
 .. code-block:: bash
 
@@ -66,6 +96,24 @@ invoked. Some examples are shown below
 
    - The :file:`make_output.log` contains the output from the last invocation of
      ``make``. This output is also simultaneously echoed to the screen.
+
+Recreate build environment for job submission
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The user can recreate the same environment in job submission or during
+interactive work by simply sourcing the build script from within the job
+submission script.
+
+.. code-block:: bash
+
+   # Example for nalu-wind execution
+   export EXAWIND_PROJECT_DIR=[PATH_TO_EXAWIND_DIR]
+   source ${EXAWIND_PROJECT_DIR}/scripts/nalu-wind-gcc.sh
+
+   # Example for OpenFAST execution
+   export EXAWIND_PROJECT_DIR=[PATH_TO_EXAWIND_DIR]
+   source ${EXAWIND_PROJECT_DIR}/scripts/openfast-intel.sh
+
 
 .. _build-customization:
 
@@ -185,8 +233,11 @@ command line also for a one-off customization.
 
 .. note::
 
-   All configuration parameters described here can also be consolidated in the
-   :file:`${EXAWIND_PROJECT_DIR}/exawind-config.sh` file for use across several
-   projects. For example, user can specify their own build of Trilinos across
-   Nalu-Wind and Nalu-Wind-Utils by adding ``TRILINOS_ROOT_DIR`` to the
-   configuration file.
+   - All configuration variables described here can also be consolidated in the
+     :file:`${EXAWIND_PROJECT_DIR}/exawind-config.sh` file for use across several
+     projects. For example, user can specify their own build of Trilinos across
+     Nalu-Wind and Nalu-Wind-Utils by adding ``TRILINOS_ROOT_DIR`` to the
+     configuration file. See :ref:`builder-config` for more details.
+
+   - Since bash functions are project specific, they must be customized only in
+     the build script and not in the configuraiton file.

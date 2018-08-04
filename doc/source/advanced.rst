@@ -77,6 +77,157 @@ appropriately.
    cd ../source
    git clone https://github.com/exawind/nalu-wind.git
 
+If you are working on a system where the dependencies are already installed in a
+shared project location, then you can skip the next location and go to
+:ref:`new-script`.
+
+Setting up dependencies
+--------------------------
+
+This section details basic steps to install all dependencies from scratch and
+have a fully independent installation of the ExaWind software ecosystem. This is
+a one-time setup step.
+
+Initial Homebrew (Mac OS X only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For OS X we will use a combination of `Homebrew <https://brew.sh>`_ and `spack
+<https://github.com/llnl/spack>`_ to set up our dependencies. The setup will use
+Apple's Clang compiler for C and C++ and GNU GCC ``gfortran`` for Fortran codes.
+
+
+#. Setup homebrew if you don't already have it installed on your machine. Follow
+   the section **Install Homebrew** at the `Homebrew website <https://brew.sh>`.
+   Note that you will need ``sudo`` access and will have to enter your password
+   several times during the installation process.
+
+#. Setup ExaWind directory structure and clone ``exawind-builder`` as described
+   in :ref:`installation` section.
+
+#. Install necessary packages through Homebrew
+
+   .. code-block:: bash
+
+      # Switch to the location where you setup your exawind directory
+      cd ${HOME}/exawind
+      brew tap Homebrew/brewdler
+
+      # Install brew packages (fix path to the file appropriately)
+      brew bundle --file=./exawind-builder/spack_cfg/osx/Brewfile
+
+   This step will install the necessary packages, GCC compilers, OpenMPI, and
+   CMake.
+
+Install dependencies via spack (all systems)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Setup ExaWind directory structure as described in :ref:`Installation`.
+
+#. Clone the spack repository
+
+   .. code-block:: bash
+
+      cd ${HOME}/exawind
+      git clone git@github.com:LLNL/spack.git
+
+      # Activate spack (for the remainder of the steps)
+      source ./spack/share/spack/setup-env.sh
+
+      # Let spack detect compilers installed on your system
+      spack compiler find
+
+#. Copy package specifiations for Spack. The file :file:`packages.yaml`
+   instructs Spack to use the installed compilers and MPI packages thereby
+   cutting down on build time. It also pins other packages to specific versions
+   so that the build is consistent with other machines.
+
+   .. code-block:: bash
+
+      cd ${HOME}/exawind/exawind-builder/spack_cfg/osx
+      cp packages.yaml ${HOME}/.spack/$(spack arch -p)/
+
+   The above example shows the configuration of OSX. Choose other appropriate
+   directory within :file:`spack_cfg`. Spack configs for other systems can be
+   adapted from the `build-test
+   <https://github.com/Exawind/build-test/tree/master/configs/machines>`_
+   repository.
+
+   Users can also copy :file:`compilers.yaml` if desired to override default
+   compilers detected by spack.
+
+#. Instruct spack to track packages installed via Homebrew. Note that on most
+   systems the following commands will run very quickly and will not attempt to
+   download and build packages.
+
+   .. code-block:: bash
+
+      spack install cmake
+      spack install mpi
+      spack install m4
+      spack install zlib
+      spack install libxml2
+      spack install boost
+
+#. Install remaining dependencies via Spack. The following steps will download,
+   configure, and compile packages.
+
+   .. code-block:: bash
+
+      # These dependencies must be installed (mandatory)
+      spack install superlu
+      spack install hdf5
+      spack install netcdf
+      spack install yaml-cpp
+
+      # These are optional
+      spack install openfast
+      spack install hypre
+      spack install tioga
+
+   It is recommended that you build/install Trilinos using the build scripts
+   described in :ref:`basic_usage` section. The *optional* dependencies could be
+   installed via that method also.
+
+#. Generate build scripts as described in :ref:`new-script` section. On OS X,
+   use ``-s spack`` for the system when generating the build scripts. For Cori
+   and SummitDev, use the appropriate :envvar:`system <EXAWIND_SYSTEM>` which
+   will initialize the compiler and MPI modules first and then activate Spack in
+   the background.
+
+.. _builder-config:
+
+Generate builder configuration
+------------------------------
+
+Create your specific configuration in :file:`${HOME}/exawind/exawind-config.sh`.
+A sample file is shown below
+
+.. code-block:: bash
+
+   ### Example exawind-config.sh file
+   #
+   # Note: these variables can be overridden within the build script
+   #
+
+   # Specify path to your own Spack install (if not in default location)
+   export SPACK_ROOT=${HOME}/spack
+
+   # Track trilinos builds by date
+   # export TRILINOS_INSTALL_DIR=${EXAWIND_INSTALL_DIR}/trilinos-$(date "+%Y-%m-%d")
+
+   # Specify custom builds for certain packages
+   export TRILINOS_ROOT_DIR=${EXAWIND_INSTALL_DIR}/trilinos-omp
+   export TIOGA_ROOT_DIR=${EXAWIND_INSTALL_DIR}/tioga
+   export HYPRE_ROOT_DIR=${EXAWIND_INSTALL_DIR}/hypre
+   export OPENFAST_ROOT_DIR=${EXAWIND_INSTALL_DIR}/openfast
+
+   # Turn on/off certain TPLs and options
+   ENABLE_OPENMP=OFF
+   ENABLE_TIOGA=OFF
+   ENABLE_OPENFAST=ON
+
+See :ref:`reference` for more details. Note that the default path for Spack
+install is :file:`${EXAWIND_PROJECT_DIR}/spack`.
 
 .. _new-script:
 
