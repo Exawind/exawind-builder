@@ -64,3 +64,9 @@ packages:
     version: [1.8.0]
   netlib-lapack:
     version: [3.8.0]
+  openfast:
+    version: develop
+    variants: +cxx
+  hypre:
+    version: [2.14.0]
+    variants: +int64
