@@ -12,15 +12,15 @@ packages:
         - netlib-lapack
     variants: build_type=Release
   openmpi:
-    version: [3.1.0]
+    version: [3.1.1]
     buildable: false
     paths:
-      openmpi@3.1.0: /usr/local/Cellar/open-mpi/3.1.0
+      openmpi@3.1.1: /usr/local/Cellar/open-mpi/3.1.1
   cmake:
-    version: [3.11.4]
+    version: [3.12.0]
     buildable: false
     paths:
-      cmake@3.11.4: /usr/local/Cellar/cmake/3.11.2
+      cmake@3.12.0: /usr/local/Cellar/cmake/3.12.0
   zlib:
     version: [1.2.8]
     buildable: false
@@ -41,11 +41,6 @@ packages:
     buildable: false
     paths:
       boost@1.67.0: /usr/local/Cellar/boost/1.67.0_1
-  superlu:
-    version: [4.3]
-    buildable: false
-    paths:
-      superlu@4.3: /usr/local/Cellar/superlu43/4.3_3
   pkg-config:
     paths:
       pkg-config@0.29.2: /usr/local/Cellar/pkg-config/0.29.2
@@ -54,11 +49,14 @@ packages:
     paths:
       m4@1.4.6: /usr
     buildable: false
+  superlu:
+    version: [4.3]
   yaml-cpp:
     version: [develop]
+    variants: ~shared
   hdf5:
     version: [1.10.1]
-    variants: +cxx+hl
+    variants: +mpi+cxx+hl
   netcdf:
     version: [4.4.1.1]
     variants: +parallel-netcdf maxdims=65536 maxvars=524288
