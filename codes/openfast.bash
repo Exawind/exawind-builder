@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Throttle max number of jobs to ensure fortran modules build properly
+export EXAWIND_NUM_JOBS_DEFAULT=8
+
 exawind_proj_env ()
 {
     if [ "${FAST_CPP_API:-ON}" = "ON" ] ; then

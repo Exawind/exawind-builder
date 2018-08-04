@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Throttle max processors for fortran build with modules
+export EXAWIND_NUM_JOBS_DEFAULT=4
+
 exawind_proj_env ()
 {
     echo "no additional dependencies"
