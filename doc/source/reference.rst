@@ -138,6 +138,9 @@ Common build variables
 
    Path to BLAS/LAPACK libraries.
 
+.. envvar:: ENABLE_OPENMP
+
+   Boolean flag indicating whether OpenMP is enabled. (default: ON)
 
 Nalu-Wind
 ~~~~~~~~~
@@ -169,9 +172,23 @@ OpenFAST
 
    Boolean flag indicating whether the C++ API is enabled. (default: ON)
 
+Other variables used: :envvar:`BUILD_SHARED_LIBS`, :envvar:`BUILD_TYPE`, and
+:envvar:`BLASLIB`.
+
 Trilinos
 ~~~~~~~~
 
-.. envvar:: ENABLE_OPENMP
+Trilinos uses :envvar:`ENABLE_OPENMP` and :envvar:`BLASLIB` if configured.
+OpenMP is enabled by default, and CMake attempts to automatically detect
+BLAS/LAPACK.
 
-   Boolean flag indicating whether OpenMP is enabled. (default: ON)
+
+HYPRE
+~~~~~
+
+HYPRE uses :envvar:`ENABLE_OPENMP` if configured. OpenMP is disabled by default
+for HYPRE builds.
+
+.. envvar:: ENABLE_BIGINT
+
+   Boolean flag indicating whether 64-bit integer support is enabled. (default: ON)

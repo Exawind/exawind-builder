@@ -13,7 +13,7 @@ ExaWind Build Scripts User Manual
    :Date: |today|
 
 `ExaWind Builder <https://github.com/sayerhs/exawind-builder>`_ is a collection
-of build scripts to configure and compile the codes used within the `ExaWind
+of bash scripts to configure and compile the codes used within the `ExaWind
 <https://github.com/exawind>`_ project on various high-performance computing
 (HPC) systems. The builder provides the following
 
@@ -22,9 +22,9 @@ of build scripts to configure and compile the codes used within the `ExaWind
   HPC systems.
 
 - *Software configuration*: Provides baseline CMake configuration that can be
-  used to configure the various options when building a *project*, e.g., enable/disable
-  optional modules, automate specification of paths to various libraries,
-  configure release vs. debug builds.
+  used to configure the various options when building a *project*, e.g.,
+  enable/disable optional modules, automate specification of paths to various
+  libraries, configure release vs. debug builds.
 
 - *Build script generation*: Generates an executable end-user script for a
   combination of *system*, *compiler*, and *project*.
@@ -40,6 +40,8 @@ that is currently not available in the standard installation on the system.
    :maxdepth: 4
 
    introduction
+   basic
+   advanced
    reference
 
 
