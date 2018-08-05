@@ -11,7 +11,7 @@ exawind_help ()
 Exawind build script
 
 Usage:
-    ${BASH_SOURCE[0]} <task> <arguments>
+    ${0} <task> <arguments>
 
 With no tasks provided, the script will configure the project and compile the code
 
