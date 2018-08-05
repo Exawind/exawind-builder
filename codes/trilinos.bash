@@ -128,7 +128,6 @@ exawind_cmake_osx ()
         -DTrilinos_ENABLE_OpenMP=OFF \
         -DKokkos_ENABLE_OpenMP:BOOL=OFF \
         -DTpetra_INST_OPENMP=OFF \
-        -DSuperLU_INCLUDE_DIRS=${SUPERLU_ROOT_DIR}/include/superlu \
         ${extra_args}
 }
 
