@@ -6,6 +6,7 @@ export EXAWIND_NUM_JOBS_DEFAULT=8
 exawind_proj_env ()
 {
     if [ "${FAST_CPP_API:-ON}" = "ON" ] ; then
+        echo "==> Loading dependencies for OpenFAST... "
         exawind_load_deps zlib libxml2 hdf5 yaml-cpp
     else
         echo "==> FAST C++ API is disabled. No additional dependencies."
@@ -26,6 +27,10 @@ exawind_cmake_base ()
     local blas_lapack=""
     if [ -n "$BLASLIB" ] ; then
         blas_lapack="-DBLAS_LIBRARIES=$BLASLIB -DLAPACK_LIBRARIES=$BLASLIB"
+    fi
+
+    if [ "${FAST_CPP_API:-ON}" = "OFF" ] ; then
+        echo "==> OpenFAST: Disabling C++ API"
     fi
 
     # Force CMake to use absolute paths for the libraries so that it doesn't

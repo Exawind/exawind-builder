@@ -2,6 +2,7 @@
 
 exawind_proj_env ()
 {
+    echo "==> Loading dependencies for wind-utils..."
     exawind_load_deps zlib libxml2 hdf5 trilinos yaml-cpp
 }
 

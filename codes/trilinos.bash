@@ -2,6 +2,7 @@
 
 exawind_proj_env ()
 {
+    echo "==> Loading dependencies for Trilinos..."
     exawind_load_deps zlib libxml2 hdf5 netcdf parallel-netcdf superlu boost
 }
 

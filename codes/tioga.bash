@@ -5,7 +5,7 @@ export EXAWIND_NUM_JOBS_DEFAULT=4
 
 exawind_proj_env ()
 {
-    echo "no additional dependencies"
+    echo "==> TIOGA: No additional dependencies"
 }
 
 exawind_cmake_base ()

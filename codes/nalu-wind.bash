@@ -8,6 +8,7 @@ exawind_proj_env ()
         tioga
     )
 
+    echo "==> Loading dependencies for nalu-wind... "
     exawind_load_deps trilinos yaml-cpp
 
     for pkg in ${opt_packages[@]} ; do
