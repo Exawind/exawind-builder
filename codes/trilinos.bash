@@ -23,6 +23,12 @@ exawind_cmake_base ()
 
     # Allow user to configure OpenMP
     local enable_openmp=${ENABLE_OPENMP:-ON}
+    if [[ $OSTYPE = "darwin" ]] ; then
+        enable_openmp=OFF
+    fi
+    if [ "${enable_openmp}" = "OFF" ] ; then
+        echo "==> Trilinos: disabling OpenMP"
+    fi
 
     # Force CMake to use absolute paths for the libraries so that it doesn't
     # pick up versions installed in `/usr/lib64` on peregrine
