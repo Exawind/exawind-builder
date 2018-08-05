@@ -288,6 +288,9 @@ system using the Intel compiler, they would execute the following at the command
    # Switch to scripts directory
    cd ${HOME}/exawind/scripts
 
+   # Declare project directory variable (default is parent directory of exawind-builder)
+   export EXAWIND_PROJECT_DIR=${HOME}/exawind
+
    # Create the new script
    ../exawind-builder/new-script.sh -s cori -c intel -p trilinos
 
