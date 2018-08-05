@@ -13,7 +13,7 @@ exawind_cmake_base ()
     local extra_args="$@"
     local install_dir=""
     local enable_openmp=${ENABLE_OPENMP:-NO}
-    local enable_bigint=${ENABLE_BIGINT:-NO}
+    local enable_bigint=${ENABLE_BIGINT:-YES}
     local openmp_args=" --without-openmp "
     local bigint_args=" --enable-bigint "
 
