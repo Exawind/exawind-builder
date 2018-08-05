@@ -16,10 +16,11 @@ Usage:
 With no tasks provided, the script will configure the project and compile the code
 
 Available tasks:
-    cmake - configure the project
-    make  - compile the code
-    ctest - run tests (if available)
-    run   - run arbitrary command using the environment used to compile the code
+    cmake       - configure the project
+    cmake_full  - configure project after removing CMakeCache
+    make        - compile the code
+    ctest       - run tests (if available)
+    run         - run arbitrary command using the environment used to compile the code
 EOF
 }
 

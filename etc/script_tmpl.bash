@@ -27,23 +27,25 @@ export EXAWIND_INSTALL_DIR=${EXAWIND_PROJECT_DIR}/install
 
 # Source any user specific configuration
 if [ -f ${HOME}/.exawind-config ] ; then
+    echo "==> Loading options from ${HOME}/.exawind-config"
     source ${HOME}/.exawind-config
 fi
 
 # Source exawind project specific configuration
 if [ -f ${EXAWIND_PROJECT_DIR}/exawind-config.sh ] ; then
+    echo "==> Loading options from ${EXAWIND_PROJECT_DIR}/exawind-config.sh"
     source ${EXAWIND_PROJECT_DIR}/exawind-config.sh
 fi
 
 # Path to the source directory, default assumes that the user is executing cmake
 # from SOURCE/build directory. See the commented option below for
 # out of source builds
-%%CODE_DIR%%=..
+%%CODE_DIR%%=${%%CODE_DIR%%:-..}
 ### Use this for out of source builds
 ###%%CODE_DIR%%=${EXAWIND_PROJECT_DIR}/source/%%PROJECT%%
 # Directory where "make install" will install the project
 # executables, libraries, and headers
-%%INSTALL_DIR%%=${EXAWIND_INSTALL_DIR}/%%PROJECT%%
+%%INSTALL_DIR%%=${%%INSTALL_DIR%%:-${EXAWIND_INSTALL_DIR}/%%PROJECT%%}
 
 ########## BEGIN user specific configuration ###########
 
