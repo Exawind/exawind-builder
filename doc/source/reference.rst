@@ -1,7 +1,10 @@
 .. _reference:
 
 Reference
-=========
+##########
+
+Configuration variables
+=======================
 
 This section documents all the available options that the user can use to
 customize the build process. It is divided into common options (most begin with
@@ -223,3 +226,105 @@ for HYPRE builds.
 .. envvar:: ENABLE_BIGINT
 
    Boolean flag indicating whether 64-bit integer support is enabled. (default: ON)
+
+
+Function reference
+==================
+
+Core functions
+--------------
+
+.. function:: exawind_save_func old new
+
+   Create a new function with the implementation of the old one. This is used to
+   override functions within bash but still retain the ability to call the old
+   function within the new one.
+
+   .. code-block:: bash
+
+      # Example to override the cmake_function
+      exawind_save_func exawind_cmake exawind_cmake_orig
+
+      exawind_cmake ()
+      {
+          echo "Executing CMAKE"
+          exawind_cmake_orig "$@"
+      }
+
+.. function:: exawind_env ()
+
+   Activates the environment for a particular system and compiler combination.
+   The actual function is implemented in system specific files and are of the
+   form ``exawind_env_${EXAWIND_COMPILER}``.
+
+.. function:: exawind_cmake [arg1 [arg2 ...]]
+
+   Invoke CMake configuration step for a particular project with additional
+   arguments. If the project defines ``exawind_cmake_${EXAWIND_SYSTEM}`` then
+   that function is invoked, else it invokes :func:`exawind_cmake_base`. All
+   software codes are required to provide the base function.
+
+.. function:: exawind_cmake_full
+
+   Removes :file:`CMakeCache.txt` and :file:`CMakeFiles` directory before
+   invoking :func:`exawind_cmake`.
+
+.. function:: exawind_make [args...]
+
+   Invokes ``make`` to compile the project. With no arguments, it will invoke
+   ``make -j ${EXAWIND_NUM_PROCS}`` otherwise it will pass user arguments to
+   ``make``. Note, if passing arguments you must also pass ``-j <N>`` for
+   parallel builds, e.g., ``make VERBOSE=1 -j 12``.
+
+.. function:: exawind_ctest [args...]
+
+   Invokes CTest runs if the software supports tests via CTest.
+
+   .. code-block:: bash
+
+      exawind_ctest --output-on-failure -R ablNeutralEdge
+
+System specific functions
+-------------------------
+
+.. function:: exawind_spack_env
+
+   Configure Spack environment and set up module loading
+
+.. function:: exawind_env_${EXAWIND_COMPILER}
+
+   Configuration for the :envvar:`${EXAWIND_COMPILER}` if supported on this
+   particular system.
+
+.. function:: exawind_load_deps dep [dep ...]
+
+   Loads the required dependencies either via spack or module load.
+
+Project specific functions
+--------------------------
+
+.. function:: exawind_cmake_base [args...]
+
+   Base implementation of CMake configure for the project.
+
+.. function:: exawind_project_env
+
+   Additional project configuration. Usually this just is a simple call to
+   :func:`exawind_load_deps` with the list of required dependencies.
+
+.. function:: exawind_cmake_${EXAWIND_SYSTEM}
+
+   Optional system-specific configuration. For example, on Mac OSX ``nalu-wind``
+   declares the following function to enable running CTest on more than four MPI
+   ranks with OpenMPI v3.0.0 or greater.
+
+   .. code-block:: bash
+
+      exawind_cmake_osx ()
+      {
+          local extra_args="$@"
+          exawind_cmake_base \
+              -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON \
+              -DMPIEXEC_PREFLAGS:STRING='"--use-hwthread-cpus --oversubscribe"' \
+              ${extra_args}
+      }
