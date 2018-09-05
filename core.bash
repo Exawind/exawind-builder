@@ -115,6 +115,24 @@ exawind_run ()
     eval "$@"
 }
 
+exawind_load_user_configs ()
+{
+    local cfgname=${EXAWIND_CFGFILE:-exawind-config}
+    local global_cfg=${EXAWIND_CONFIG:-${EXAWIND_PROJECT_DIR}/${EXAWIND_CFGFILE}.sh}
+    local cfgfiles=(
+        ${HOME}/.${cfgname}
+        ${global_cfg}
+        $(pwd)/${cfgname}.sh
+    )
+
+    for cfg in ${cfgfiles[@]}; do
+        if [ -f ${cfg} ] ; then
+            echo "==> Loading options from ${cfg}"
+            source ${cfg}
+        fi
+    done
+}
+
 exawind_rpath_dirs ()
 {
     local rpath_dirs=""
