@@ -30,6 +30,9 @@ exawind_cmake_base ()
         echo "==> Trilinos: disabling OpenMP"
     fi
 
+    local enable_cuda=${ENABLE_CUDA:-OFF}
+
+
     # Force CMake to use absolute paths for the libraries so that it doesn't
     # pick up versions installed in `/usr/lib64` on peregrine
     local lib_path_save=${LIBRARY_PATH}
@@ -43,6 +46,12 @@ exawind_cmake_base ()
             -DTrilinos_ENABLE_OpenMP:BOOL=${enable_openmp}
             -DKokkos_ENABLE_OpenMP:BOOL=${enable_openmp}
             -DTpetra_INST_OPENMP:BOOL=${enable_openmp}
+            -DTrilinos_ENABLE_CUDA:BOOL=${enable_cuda}
+            -DTPL_ENABLE_CUDA:BOOL=${enable_cuda}
+            -DKokkos_ENABLE_CUDA:BOOL=${enable_cuda}
+            -DKokkos_ENABLE_Cuda_UVM:BOOL=${enable_cuda}
+            -DTpetra_ENABLE_CUDA:BOOL=${enable_cuda}
+            -DTpetra_INST_CUDA:BOOL=${enable_cuda}
             -DTpetra_INST_SERIAL:BOOL=ON
             -DTrilinos_ENABLE_CXX11:BOOL=ON
             -DTrilinos_ENABLE_EXPLICIT_INSTANTIATION:BOOL=ON
@@ -71,6 +80,7 @@ exawind_cmake_base ()
             -DTrilinos_ENABLE_Zoltan:BOOL=ON
             -DTrilinos_ENABLE_STKMesh:BOOL=ON
             -DTrilinos_ENABLE_STKSimd:BOOL=ON
+            -DTrilinos_ENABLE_STKNGP:BOOL=ON
             -DTrilinos_ENABLE_STKIO:BOOL=ON
             -DTrilinos_ENABLE_STKTransfer:BOOL=ON
             -DTrilinos_ENABLE_STKSearch:BOOL=ON
