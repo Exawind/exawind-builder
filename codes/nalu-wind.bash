@@ -45,6 +45,7 @@ exawind_cmake_base ()
         -DENABLE_OPENFAST:BOOL=${ENABLE_OPENFAST:-ON}
         -DOpenFAST_DIR:PATH=${OPENFAST_ROOT_DIR}
         -DENABLE_TESTS:BOOL=${ENABLE_TESTS:-ON}
+        -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON
         ${install_dir}
         ${extra_args}
         ${NALU_WIND_SOURCE_DIR:-..}
