@@ -11,9 +11,13 @@ exawind_env_common ()
     module load cmake/3.11.3
     module load cuda
 
-    export SPACK_ROOT=${SPACK_ROOT:-/ccs/proj/csc249/exawind/spack}
+    export SPACK_ROOT=${SPACK_ROOT:-${EXAWIND_PROJECT_DIR}/spack}
     export SPACK_EXE=${SPACK_ROOT}/bin/spack
     module use ${SPACK_ROOT}/share/spack/modules/$(${SPACK_EXE} arch)
+
+    export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper}
+    export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
+    export ENABLE_CUDA=${ENABLE_CUDA:-ON}
 }
 
 exawind_env_gcc ()
@@ -28,12 +32,15 @@ exawind_env_gcc ()
     export F77=${OMPI_FC}
     export FC=${OMPI_FC}
 
+    export NVCC_WRAPPER_DEFAULT_COMPILER=${OMPI_CXX}
+    export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
+
     exawind_load_deps netlib-lapack zlib libxml2
 }
 
 exawind_env_intel ()
 {
-    echo "ERROR: No GCC environment setup for SummitDev"
+    echo "ERROR: No Intel environment setup for SummitDev"
 }
 
 exawind_env_xl ()
@@ -42,10 +49,13 @@ exawind_env_xl ()
 
     export SPACK_COMPILER=xl
     export EXAWIND_COMPILER=xl
-    export CC=$(which xlc)
-    export CXX=$(which xlc++)
-    export F77=$(which xlf)
-    export FC=$(which xlf2003)
+    export CC=${OMPI_CC}
+    export CXX=${OMPI_CXX}
+    export F77=${OMPI_FC}
+    export FC=${OMPI_FC}
+
+    export NVCC_WRAPPER_DEFAULT_COMPILER=${OMPI_CXX}
+    export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
 
     exawind_load_deps netlib-lapack zlib libxml2
 }
