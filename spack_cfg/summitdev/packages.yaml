@@ -21,10 +21,10 @@ packages:
     providers: {}
     compiler: []
   boost:
-    version: [1.67.0]
-    #buildable: false
-    #modules:
-    #  boost@1.59.0: boost/1.59.0
+    version: [1.66.0]
+    buildable: false
+    modules:
+      boost@1.66.0: boost/1.66.0
   hdf5:
     version: [1.10.0]
     buildable: false
@@ -32,15 +32,16 @@ packages:
     modules:
       hdf5@1.10.0+mpi+hl: hdf5/1.10.0-patch1
   netcdf:
-    version: [4.4.1]
-    buildable: false
-    modules:
-      netcdf@4.4.1: netcdf/4.4.1
+    version: [4.4.1.1]
+    variants: +parallel-netcdf maxdims=65536 maxvars=52488
+    #buildable: false
+    #modules:
+    #  netcdf@4.4.1: netcdf/4.4.1
   parallel-netcdf:
     version: [1.8.0]
-    buildable: false
-    modules:
-      parallel-netcdf@1.8.0: parallel-netcdf/1.8.0
+    #buildable: false
+    #modules:
+    #  parallel-netcdf@1.8.0: parallel-netcdf/1.8.0
   cmake:
     version: [3.11.3]
     buildable: false
@@ -66,8 +67,16 @@ packages:
     buildable: false
     paths:
       libxml2@2.9.1: /usr
+  m4:
+    version: [1.4.16]
+    buildable: false
+    paths:
+      m4@1.4.16: /usr
+  netlib-lapack:
+    version: [3.8.0]
   superlu:
     version: [4.3]
   yaml-cpp:
     version: [develop]
+    variants: ~shared
 
