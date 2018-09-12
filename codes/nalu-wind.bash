@@ -1,5 +1,13 @@
 #!/bin/bash
 
+_EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
+    src
+    unit_tests
+    reg_tests
+    Testing
+    include
+)
+
 exawind_proj_env ()
 {
     local opt_packages=(

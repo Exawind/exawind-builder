@@ -1,5 +1,11 @@
 #!/bin/bash
 
+_EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
+    packages
+    commonTools
+    Testing
+)
+
 exawind_proj_env ()
 {
     echo "==> Loading dependencies for Trilinos..."

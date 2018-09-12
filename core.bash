@@ -4,6 +4,8 @@ __EXAWIND_CORE_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
 # Array holding exact module/spack descriptor for a dependency
 declare -A EXAWIND_MODMAP
+# Build directories that must be removed when performing cmake_full
+declare -a _EXAWIND_PROJECT_CMAKE_RMEXTRA_
 
 exawind_help ()
 {
@@ -59,7 +61,10 @@ exawind_load_deps ()
 exawind_cmake_full ()
 {
     set +e
-    rm -rf CMakeCache.txt CMakeFiles Makefile *.ninja
+    rm -rf CMakeCache.txt CMakeFiles *.cmake *Makefile* *.ninja
+    if [ "${#_EXAWIND_PROJECT_CMAKE_RMEXTRA_[@]}" -gt 0 ] ; then
+        rm -rf "${_EXAWIND_PROJECT_CMAKE_RMEXTRA_[@]}"
+    fi
     set -e
     exawind_cmake "$@"
 }
