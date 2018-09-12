@@ -2,18 +2,18 @@ compilers:
 - compiler:
     environment: {}
     extra_rpaths: 
-      - /sw/summitdev/gcc/7.1.0/lib
-      - /sw/summitdev/gcc/7.1.0/lib64
-      - /sw/summitdev/gcc/7.1.0/libexec
+      - /sw/summitdev/gcc/6.4.0/lib
+      - /sw/summitdev/gcc/6.4.0/lib64
+      - /sw/summitdev/gcc/6.4.0/libexec
     flags: {}
     modules: []
     operating_system: rhel7
     paths:
-      cc: /autofs/nccs-svm1_sw/summitdev/gcc/7.1.0/bin/gcc
-      cxx: /autofs/nccs-svm1_sw/summitdev/gcc/7.1.0/bin/g++
-      f77: /autofs/nccs-svm1_sw/summitdev/gcc/7.1.0/bin/gfortran
-      fc: /autofs/nccs-svm1_sw/summitdev/gcc/7.1.0/bin/gfortran
-    spec: gcc@7.1.0
+      cc: /autofs/nccs-svm1_sw/summitdev/gcc/6.4.0/bin/gcc
+      cxx: /autofs/nccs-svm1_sw/summitdev/gcc/6.4.0/bin/g++
+      f77: /autofs/nccs-svm1_sw/summitdev/gcc/6.4.0/bin/gfortran
+      fc: /autofs/nccs-svm1_sw/summitdev/gcc/6.4.0/bin/gfortran
+    spec: gcc@6.4.0
     target: ppc64le
 - compiler:
     environment: {}

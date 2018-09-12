@@ -22,15 +22,9 @@ packages:
     compiler: []
   boost:
     version: [1.66.0]
-    buildable: false
-    modules:
-      boost@1.66.0: boost/1.66.0
   hdf5:
-    version: [1.10.0]
-    buildable: false
+    version: [1.10.1]
     variants: +mpi+hl+cxx
-    modules:
-      hdf5@1.10.0+mpi+hl: hdf5/1.10.0-patch1
   netcdf:
     version: [4.4.1.1]
     variants: +parallel-netcdf maxdims=65536 maxvars=52488
