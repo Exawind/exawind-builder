@@ -24,7 +24,7 @@ exawind_env_gcc ()
 {
     exawind_env_common
 
-    module load gcc/6.4.0
+    module load gcc/5.4.0
 
     export SPACK_COMPILER=gcc
     export CC=${OMPI_CC}
