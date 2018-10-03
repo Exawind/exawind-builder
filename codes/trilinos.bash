@@ -58,6 +58,7 @@ exawind_cmake_base ()
             -DKokkos_ENABLE_Cuda_UVM:BOOL=${enable_cuda}
             -DTpetra_ENABLE_CUDA:BOOL=${enable_cuda}
             -DTpetra_INST_CUDA:BOOL=${enable_cuda}
+            -DKokkos_ENABLE_Cuda_Lambda:BOOL=${enable_cuda}
             -DTpetra_INST_SERIAL:BOOL=ON
             -DTrilinos_ENABLE_CXX11:BOOL=ON
             -DTrilinos_ENABLE_EXPLICIT_INSTANTIATION:BOOL=ON
