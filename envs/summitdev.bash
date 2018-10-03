@@ -34,6 +34,7 @@ exawind_env_gcc ()
 
     export NVCC_WRAPPER_DEFAULT_COMPILER=${OMPI_CXX}
     export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
+    export CXX=$(which mpic++)
 
     exawind_load_deps netlib-lapack zlib libxml2
 }
