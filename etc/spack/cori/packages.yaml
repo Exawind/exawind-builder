@@ -1,0 +1,73 @@
+packages:
+  all:
+    compiler:
+      - intel
+    modules: {}
+    paths: {}
+    providers:
+      mpi:
+        - mpich
+      blas:
+        - netlib-lapack
+      lapack:
+        - netlib-lapack
+    variants: +mpi build_type=Release
+  mpich:
+    version: [7.7.0]
+    buildable: false
+    modules:
+      mpich@7.7.0: cray-mpich/7.7.0
+    paths: {}
+    providers: {}
+    compiler: []
+  cmake:
+    version: [3.8.2]
+    buildable: false
+    modules:
+      cmake@3.8.2: cmake/3.8.2
+  zlib:
+    version: [1.2.8]
+    buildable: false
+    modules:
+      zlib@1.2.8: zlib/1.2.8
+  libxml2:
+    version: [2.9.3]
+    buildable: false
+    modules:
+      libxml2@2.9.3: libxml2/2.9.3
+  bzip2:
+    version: [1.0.6]
+    buildable: false
+    paths:
+      bzip2@1.0.6: /usr
+  m4:
+    version: [1.4.16]
+    buildable: false
+    paths:
+      m4@1.4.16: /usr
+  boost:
+    version: [1.63]
+    buildable: false
+    modules:
+      boost@1.63: boost/1.63
+  hdf5:
+    version: [1.10.1]
+    variants: +mpi+cxx+hl
+  netcdf:
+    version: [4.4.1.1]
+    variants: +parallel-netcdf maxdims=65536 maxvars=524288
+  parallel-netcdf:
+    version: [1.8.0]
+  superlu:
+    version: [4.3]
+  netlib-lapack:
+    version: [3.8.0]
+  yaml-cpp:
+    version: [develop]
+    variants: ~shared
+  openfast:
+    version: [develop]
+    variants: +cxx
+  hypre:
+    version: [2.14.0]
+    variants: +int64~shared

@@ -1,0 +1,34 @@
+compilers:
+- compiler:
+    environment: {}
+    extra_rpaths: 
+      - /sw/summitdev/gcc/5.4.0new/lib
+      - /sw/summitdev/gcc/5.4.0new/lib64
+      - /sw/summitdev/gcc/5.4.0new/libexec
+    flags: {}
+    modules: []
+    operating_system: rhel7
+    paths:
+      cc:  /sw/summitdev/gcc/5.4.0new/bin/gcc
+      cxx: /sw/summitdev/gcc/5.4.0new/bin/g++
+      f77: /sw/summitdev/gcc/5.4.0new/bin/gfortran
+      fc:  /sw/summitdev/gcc/5.4.0new/bin/gfortran
+    spec: gcc@5.4.0
+    target: ppc64le
+- compiler:
+    environment: {}
+    extra_rpaths: 
+      - /autofs/nccs-svm1_sw/summitdev/xl/20180125/xlC/13.1.6/lib
+      - /autofs/nccs-svm1_sw/summitdev/xl/20180125/xlf/15.1.6/lib
+    flags:
+      fflags: -qzerosize -qextname
+      cxxflags: -std=c++11
+    modules: []
+    operating_system: rhel7
+    paths:
+      cc: /autofs/nccs-svm1_sw/summitdev/xl/20180125/xlC/13.1.6/bin/xlc
+      cxx: /autofs/nccs-svm1_sw/summitdev/xl/20180125/xlC/13.1.6/bin/xlC
+      f77: /autofs/nccs-svm1_sw/summitdev/xl/20180125/xlf/15.1.6/bin/xlf
+      fc: /autofs/nccs-svm1_sw/summitdev/xl/20180125/xlf/15.1.6/bin/xlf2003
+    spec: xl@13.1
+    target: ppc64le

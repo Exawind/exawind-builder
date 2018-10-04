@@ -1,0 +1,15 @@
+# Bootstrap script to get all brew packages installed for exawind-builder
+#
+# To install:
+#
+# brew bundle --file=<PATH_TO_THIS_FILE>
+#
+
+brew "bash"
+brew "cmake"
+brew "gcc"
+brew "boost"
+brew "libxml2"
+brew "open-mpi"
+brew "pkg-config"
+brew "modules"
