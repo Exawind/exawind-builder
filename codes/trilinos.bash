@@ -37,7 +37,10 @@ exawind_cmake_base ()
     fi
 
     local enable_cuda=${ENABLE_CUDA:-OFF}
-
+    local kokkos_args=""
+    if [ "${enable_cuda}" = "ON" ] ; then
+        kokkos_args="-DKOKKOS_ARCH=${KOKKOS_ARCH:-None}"
+    fi
 
     # Force CMake to use absolute paths for the libraries so that it doesn't
     # pick up versions installed in `/usr/lib64` on peregrine
@@ -127,6 +130,7 @@ exawind_cmake_base ()
             -DZlib_LIBRARY_DIRS:PATH=${ZLIB_ROOT_DIR}/lib
             -DTPL_ENABLE_BLAS:BOOL=ON
             ${blas_lapack}
+            ${kokkos_args}
             ${extra_args}
             ${TRILINOS_SOURCE_DIR:-..}
     )

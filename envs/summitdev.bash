@@ -18,6 +18,7 @@ exawind_env_common ()
     export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper}
     export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
     export ENABLE_CUDA=${ENABLE_CUDA:-ON}
+    export KOKKOS_ARCH=Pascal60
 }
 
 exawind_env_gcc ()
