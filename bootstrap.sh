@@ -40,7 +40,6 @@ exw_init_spack ()
        exwsys=osx
     fi
 
-    echo ${exwsys}
     cd ${basedir}
 
     # Bail out if this is not our known directory structure
@@ -49,7 +48,7 @@ exw_init_spack ()
         exit 1
     fi
 
-    local need_setup=yes
+    local need_setup=no
     if [ ! -d spack ] ; then
         git clone git@github.com:LLNL/spack.git
         need_setup=yes
@@ -121,6 +120,7 @@ exw_create_config ()
         return
     fi
 
+    echo "==> Creating default config file: ${EXAWIND_PROJECT_DIR}/exawind-config.sh"
     cat <<EOF > ${EXAWIND_PROJECT_DIR}/exawind-config.sh
 export SPACK_ROOT=${EXAWIND_PROJECT_DIR}/spack
 
@@ -140,8 +140,14 @@ EOF
 exw_main ()
 {
     export EXAWIND_PROJECT_DIR=${EXAWIND_PROJECT_DIR:-${HOME}/exawind}
-    export EXAWIND_COMPILER=${EXAWIND_COMPILER:-gcc}
     export EXAWIND_SYSTEM=${EXAWIND_SYSTEM:-spack}
+    local exwcomp=gcc
+    if [ "$(uname)" = "Darwin" ] ; then
+        exwcomp=clang
+    elif [ "${EXAWIND_SYSTEM}" = "cori" ] ; then
+        exwcomp=intel
+    fi
+    export EXAWIND_COMPILER=${EXAWIND_COMPILER:-$exwcomp}
 
     OPTIND=1
     while getopts ":s:c:p:h" opt; do
