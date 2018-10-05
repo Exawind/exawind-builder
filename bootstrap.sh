@@ -13,6 +13,22 @@ Options:
 EOF
 }
 
+exw_check_system ()
+{
+    local envdir=${EXAWIND_PROJECT_DIR}/exawind-builder/envs
+    local sys_file=${envdir}/${EXAWIND_SYSTEM}.bash
+
+    if [ ! -f ${sys_file} ] ; then
+       echo "ERROR! Unknown system provided. Valid options are"
+
+       for fname in $(ls $envdir) ; do
+           echo "  - $(basename -s .bash $fname)"
+       done
+       return 1
+    fi
+    return 0
+}
+
 exw_init ()
 {
     export EXAWIND_PROJECT_DIR=${EXAWIND_PROJECT_DIR:-${HOME}/exawind}
@@ -174,6 +190,7 @@ exw_main ()
     done
 
     exw_init
+    exw_check_system || exit 1
     exw_init_spack
     exw_install_deps
     exw_create_scripts
