@@ -56,6 +56,40 @@ In addition to the sub-directories, users can also provide an optional
 configuration file :file:`exawind-config.sh` that can be used to customize
 options common to building all the codes.
 
+.. _quick-start:
+
+Installation via bootstrap script
+----------------------------------
+
+You can use the :file:`bootstrap.sh` script provided by ``exawind-builder`` to
+install on your preferred system. Skip to :ref:`installation` section if you
+want more fine-tuned control over the installation process. Mac OS X users will
+need to have Hombrew packages installed as documented in :ref:`homebrew-setup`.
+The bootstrap script will create the directory structure, clone exawind-builder
+and spack repositories, installl all the necessary dependencies and create build
+scripts for the different software packages.
+
+.. code-block:: bash
+
+   bootstrap.sh [options]
+
+   Options:
+     -h             - Show help message and exit
+     -s <system>    - Select system profile (spack, cori, summitdev, etc.)
+     -c <compiler>  - Select compiler type (gcc, clang, intel, etc.)
+     -p <path>      - Root path for exawind project (default: ${HOME}/exawind)
+
+To install using ``bootstrap`` script follow these steps:
+
+.. code-block:: bash
+
+   # Download bootstrap script
+   curl -fsSL https://raw.githubusercontent.com/sayerhs/exawind-builder/master/bootstrap.sh
+
+   # Invoke by providing the system specification (cori is shown as example here)
+   ./bootstrap.sh -p cori
+
+
 .. _installation:
 
 Installation
@@ -92,6 +126,8 @@ Setting up dependencies
 This section details basic steps to install all dependencies from scratch and
 have a fully independent installation of the ExaWind software ecosystem. This is
 a one-time setup step.
+
+.. _homebrew-setup:
 
 Initial Homebrew (Mac OS X only)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
