@@ -154,7 +154,7 @@ Apple's Clang compiler for C and C++ and GNU GCC ``gfortran`` for Fortran codes.
       brew tap Homebrew/brewdler
 
       # Install brew packages (fix path to the file appropriately)
-      brew bundle --file=./exawind-builder/spack_cfg/osx/Brewfile
+      brew bundle --file=./exawind-builder/etc/spack/osx/Brewfile
 
    This step will install the necessary packages, GCC compilers, OpenMPI, and
    CMake.
@@ -174,9 +174,6 @@ Setup ExaWind directory structure as described in :ref:`Installation`.
       # Activate spack (for the remainder of the steps)
       source ./spack/share/spack/setup-env.sh
 
-      # Let spack detect compilers installed on your system
-      spack compiler find
-
 #. Copy package specifiations for Spack. The file :file:`packages.yaml`
    instructs Spack to use the installed compilers and MPI packages thereby
    cutting down on build time. It also pins other packages to specific versions
@@ -184,7 +181,7 @@ Setup ExaWind directory structure as described in :ref:`Installation`.
 
    .. code-block:: bash
 
-      cd ${HOME}/exawind/exawind-builder/spack_cfg/osx
+      cd ${HOME}/exawind/exawind-builder/etc/spack/osx
       cp packages.yaml ${HOME}/.spack/$(spack arch -p)/
 
    The above example shows the configuration of OSX. Choose other appropriate
@@ -204,6 +201,31 @@ Setup ExaWind directory structure as described in :ref:`Installation`.
       .. code-block:: bash
 
          ln -s packages.yaml ${HOME}/.spack/$(spack arch -p)/
+
+#. Setup compilers to be used by spack. As with :file:`packages.yaml`, it is
+   recommended that the users use the compiler configuration provided with
+   ``exawind-builder``.
+
+   .. code-block:: bash
+
+      cp compilers.yaml ${HOME}/.spack/$(spack arch -p)/
+
+   For more flexibility, users can use ``spack`` to determine the compilers
+   available on their system.
+
+   .. code-block:: bash
+
+      spack compiler find
+
+   The command will detect all available compiler on users environment and
+   create a :file:`compilers.yaml` in the :file:`${HOME}/.spack/$(spack arch -p)`.
+
+   .. note::
+
+      If you have multiple :file:`compilers.yaml` in several locations, make
+      sure that the specs are not conflicting. Also check :file:`packages.yaml`
+      to make sure that the compilers are listed in the preferred order for
+      spack to pick up the right compiler.
 
 #. Instruct spack to track packages installed via Homebrew. Note that on most
    systems the following commands will run very quickly and will not attempt to
@@ -271,7 +293,7 @@ A sample file is shown below
 
    ### Example exawind-config.sh file
    #
-   # Note: these variables can be overridden within the build script
+   # Note: these variables can be overridden through the script in build directory
    #
 
    # Specify path to your own Spack install (if not in default location)
@@ -280,8 +302,10 @@ A sample file is shown below
    # Track trilinos builds by date
    # export TRILINOS_INSTALL_DIR=${EXAWIND_INSTALL_DIR}/trilinos-$(date "+%Y-%m-%d")
 
-   # Specify custom builds for certain packages
-   export TRILINOS_ROOT_DIR=${EXAWIND_INSTALL_DIR}/trilinos-omp
+   ### Specify custom builds for certain packages. The following are only
+   ### necessary if you didn't install these packages via spack, but instead are
+   ### using your own development versions.
+   export TRILINOS_ROOT_DIR=${EXAWIND_INSTALL_DIR}/trilinos
    export TIOGA_ROOT_DIR=${EXAWIND_INSTALL_DIR}/tioga
    export HYPRE_ROOT_DIR=${EXAWIND_INSTALL_DIR}/hypre
    export OPENFAST_ROOT_DIR=${EXAWIND_INSTALL_DIR}/openfast
@@ -289,7 +313,8 @@ A sample file is shown below
    # Turn on/off certain TPLs and options
    ENABLE_OPENMP=OFF
    ENABLE_TIOGA=OFF
-   ENABLE_OPENFAST=ON
+   ENABLE_OPENFAST=OFF
+   ENABLE_HYPRE=OFF
 
 See :ref:`reference` for more details. Note that the default path for Spack
 install is :file:`${EXAWIND_PROJECT_DIR}/spack`.

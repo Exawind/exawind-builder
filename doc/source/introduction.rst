@@ -23,24 +23,26 @@ the following three categories:
   compiler specified by the user. Configurations are available for the following
   systems:
 
-  ============== ============================================================================================
-  ``spack``       `Spack <https:://github.com/LLNL/spack>`_ (system agnostic)
-  ``peregrine``   `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
-  ``cori``        `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_
-  ``summitdev``   `OLCF SummitDev <https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/>`_
-  ``rhodes``      NREL nightly build and test system
-  ============== ============================================================================================
+  ================= ============================================================================================
+  ``spack``          `Spack <https:://github.com/LLNL/spack>`_ (system agnostic)
+  ``peregrine``      `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
+  ``cori``           `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_
+  ``summitdev``      `OLCF SummitDev <https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/>`_
+  ``snl-ascicgpu``   Sandia ASC GPU development machines
+  ``rhodes``         NREL nightly build and test system
+  ================= ============================================================================================
 
   The following compilers are configured for each machine
 
-  ============ ========================
-  Environment  Compilers
-  ============ ========================
-  peregrine    gcc, intel
-  cori         intel
-  summitdev    gcc, xl
-  Mac OSX      clang, gcc
-  ============ ========================
+  =============== ========================
+  Environment     Compilers
+  =============== ========================
+  peregrine       gcc, intel
+  cori            intel
+  summitdev       gcc, xl, cuda
+  snl-ascicgpu    gcc, cuda
+  Mac OSX         clang, gcc
+  =============== ========================
 
 
 **codes**

@@ -70,6 +70,11 @@ ExaWind Builder configuration
    The variables described above are set when :ref:`generating build scripts
    <new-script>` and rarely needs to be changed by the user.
 
+.. envvar:: EXAWIND_CFGFILE
+
+   The basename of the file where configuration is stored. The default value is
+   ``exawind-config``.
+
 .. envvar:: EXAWIND_MODMAP
 
    A dictionary containing the exact resolution of the module that must be
@@ -93,10 +98,30 @@ ExaWind Builder configuration
    invoked. Setting this variable within the build script is equivalent to
    passing ``-j X`` at the command line for ``make``.
 
+.. envvar:: EXAWIND_CUDA_WRAPPER
+
+   Absolute path to the location of :file:`nvcc_wrapper` script provided by
+   Kokkos. The default path is assumed to be
+   :file:`${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper`
+
+.. envvar:: KOKKOS_ARCH
+
+   The architectures for which Kokkos builds are optimized. See `Kokkos Wiki
+   <https://github.com/kokkos/kokkos/wiki/Compiling#table-43-architecture-variables>`_
+   for further information. Multiple architectures can be separated by commas.
+
+.. envvar:: CUDA_LAUNCH_BLOCKING
+
+   Variable set to control Kokkos configuration. Defaults to 1.
+
 .. envvar:: SPACK_ROOT
 
    Absolute path to the spack installation, if using spack to manage
    dependencies. The default path is :file:`${EXAWIND_PROJECT_DIR}/spack`.
+
+.. envvar:: SPACK_COMPILER
+
+   Variable controlling the compiler used by spack to install dependencies.
 
 
 .. _ref-project-vars:
@@ -176,6 +201,11 @@ Common build variables
 
    Boolean flag indicating whether OpenMP is enabled. (default: ON)
 
+.. envvar:: ENABLE_CUDA
+
+   Boolean flag indicating whether CUDA is enabled. The default value is OFF on
+   most architectures. Exceptions are: ORNL SummitDev, SNL ascicgpu.
+
 Nalu-Wind
 ~~~~~~~~~
 
@@ -212,9 +242,9 @@ Other variables used: :envvar:`BUILD_SHARED_LIBS`, :envvar:`BUILD_TYPE`, and
 Trilinos
 ~~~~~~~~
 
-Trilinos uses :envvar:`ENABLE_OPENMP` and :envvar:`BLASLIB` if configured.
-OpenMP is enabled by default, and CMake attempts to automatically detect
-BLAS/LAPACK.
+Trilinos uses :envvar:`ENABLE_OPENMP`, :envvar:`ENABLE_CUDA` and
+:envvar:`BLASLIB` if configured. OpenMP is enabled by default, and CMake
+attempts to automatically detect BLAS/LAPACK.
 
 
 HYPRE

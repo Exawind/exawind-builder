@@ -143,7 +143,8 @@ It is recommended that all user customizations be added within the block
 indicated by lines 53--55. User might want to customize :envvar:`install
 directory <PROJECTNAME_INSTALL_DIR>` when building different variants (e.g.,
 release, debug, etc.). In the following sections, only the modifications that
-must be entered between lines 53--55 are shown.
+must be entered between lines 53--55 are shown. See :ref:`Using configuration
+files` for alternate approach to editing the build scripts.
 
 Customizing module load
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -233,13 +234,26 @@ With the above changes, ParaView Catalyst support will always be enabled during
 builds. The user still has the option to pass additional parameters through the
 command line also for a one-off customization.
 
+Using configuration files
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The configuration options described above can be consolidated in configuration
+files that provided various levels of control. The following files are loaded in
+the specified order and options in later files will override the options defined
+previously. Thus, user can set generic options and refine them for specific projects.
+
+The files loaded are::
+
+.. code-block:: bash
+
+   ${HOME}/.exawind-config   # User configuration file
+   ${EXAWIND_CONFIG}         # File pointed to by the variable ${EXAWIND_CONFIG}
+   $(pwd)/exawind-config.sh  # File in the local build directory
+
+The default value of :envvar:`${EXAWIND_CONFIG}` is
+:file:`${EXAWIND_PROJECT_DIR}/exawind-config.sh`
+
 .. note::
 
-   - All configuration variables described here can also be consolidated in the
-     :file:`${EXAWIND_PROJECT_DIR}/exawind-config.sh` file for use across several
-     projects. For example, user can specify their own build of Trilinos across
-     Nalu-Wind and Nalu-Wind-Utils by adding ``TRILINOS_ROOT_DIR`` to the
-     configuration file. See :ref:`builder-config` for more details.
-
    - Since bash functions are project specific, they must be customized only in
-     the build script and not in the configuraiton file.
+     the build script and not in the configuration file.
