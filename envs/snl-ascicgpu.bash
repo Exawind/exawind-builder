@@ -6,6 +6,7 @@ exawind_env_common ()
 {
     module purge
     module load sierra-devel/nvidia
+    # Spack has issues with the default 2.7 python from sierra-devel
     module unload sierra-python/2.7
     module load sierra-python/3.6.3
 
@@ -26,10 +27,10 @@ exawind_env_gcc ()
     export SPACK_COMPILER=gcc
     export CC=$(which gcc)
     export CXX=$(which g++)
-    export F77=mpif90
-    export FC=mpif90
+    export F77=$(which mpif90)
+    export FC=$(which mpif90)
 
-    export NVCC_WRAPPER_DEFAULT_COMPILER=${OMPI_CXX}
+    export NVCC_WRAPPER_DEFAULT_COMPILER=$CXX
     export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
     export CXX=$(which mpic++)
 

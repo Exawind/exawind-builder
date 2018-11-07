@@ -3,13 +3,13 @@ packages:
     compiler: [gcc]
     modules:  {}
     paths: {}
-    providers: 
+    providers:
+      mpi:
+        - openmpi
       blas: 
         - netlib-lapack
       lapack:
         - netlib-lapack
-      mpi:
-        - openmpi
     variants: +mpi build_type=Release
   openmpi:
     version: [1.10.2]
@@ -26,6 +26,9 @@ packages:
     modules:
       cuda@9.2.88: sierra-compiler/nvidia/9.2.88
   python:
+    version: [3.6.3]
+    modules:
+      python@3.6.3: sierra-python/3.6.3
     paths:
       python@2.7.10: /projects/sierra/linux_rh6/install/Python/2.7/
     buildable: False
@@ -34,6 +37,8 @@ packages:
     buildable: false
     paths: 
       zlib@1.2.5: /usr/
+  netlib-lapack:
+    version: [3.8.0]
   boost:
     version: [1.66.0]
   netcdf:
@@ -44,9 +49,14 @@ packages:
   hdf5:
     version: [1.10.1]
     variants: +mpi+cxx+hl
+  superlu:
+    version: [4.3]
+  hypre:
+    version: [2.15.0]
+    variants: ~shared
   openfast:
     version: [develop]
+    variants: +cxx
   yaml-cpp:
-    version: [0.6.2]
-  netlib-lapack:
-    version: [3.8.0]
+    version: [develop]
+    variants: ~shared
