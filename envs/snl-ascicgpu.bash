@@ -6,6 +6,8 @@ exawind_env_common ()
 {
     module purge
     module load sierra-devel/nvidia
+    module unload sierra-python/2.7
+    module load sierra-python/3.6.3
 
     export SPACK_ROOT=${SPACK_ROOT:-${EXAWIND_PROJECT_DIR}/spack}
     export SPACK_EXE=${SPACK_ROOT}/bin/spack
@@ -22,10 +24,10 @@ exawind_env_gcc ()
     exawind_env_common
 
     export SPACK_COMPILER=gcc
-    export CC=${OMPI_CC}
-    export CXX=${OMPI_CXX}
-    export F77=${OMPI_FC}
-    export FC=${OMPI_FC}
+    export CC=$(which gcc)
+    export CXX=$(which g++)
+    export F77=mpif90
+    export FC=mpif90
 
     export NVCC_WRAPPER_DEFAULT_COMPILER=${OMPI_CXX}
     export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}

@@ -3,8 +3,10 @@ compilers:
     environment: {}
     extra_rpaths:
     - /projects/sierra/linux_rh6/SDK/compilers/gcc/7.2.0-RHEL6/lib64
+    - /projects/sierra/linux_rh6/SDK/compilers/gcc/7.2.0-RHEL6/lib
+    - /projects/sierra/linux_rh6/SDK/compilers/gcc/7.2.0-RHEL6/libexec
     flags: {}
-    modules: [sierra-devel]
+    modules: [sierra-devel/nvidia]
     operating_system: rhel6
     paths:
       cc: /projects/sierra/linux_rh6/SDK/compilers/gcc/7.2.0-RHEL6/bin/gcc
