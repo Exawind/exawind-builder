@@ -134,16 +134,22 @@ exw_create_scripts ()
 
 exw_create_config ()
 {
-    if [ -f ${EXAWIND_PROJECT_DIR}/exawind-config.sh ] ; then
+    local cfgprefix=${EXAWIND_CFGFILE:-exawind-config}
+    local cfgfile=${EXAWIND_PROJECT_DIR}/{cfgprefix}.sh
+    if [ -f ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh ] ; then
+        echo "==> Found previous configuration: ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh"
         return
     fi
 
-    echo "==> Creating default config file: ${EXAWIND_PROJECT_DIR}/exawind-config.sh"
-    cat <<EOF > ${EXAWIND_PROJECT_DIR}/exawind-config.sh
+    echo "==> Creating default config file: ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh"
+    cat <<EOF > ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh
 export SPACK_ROOT=${EXAWIND_PROJECT_DIR}/spack
+export SPACK_COMPILER=${SPACK_COMPILER:-${EXAWIND_COMPILER}}
 
-export TRILINOS_ROOT_DIR=${EXAWIND_INSTALL_DIR}/trilinos
-export TIOGA_ROOT_DIR=${EXAWIND_INSTALL_DIR}/tioga
+#export EXAWIND_CUDA_WRAPPER=${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper
+
+#export TRILINOS_ROOT_DIR=${EXAWIND_INSTALL_DIR}/trilinos
+#export TIOGA_ROOT_DIR=${EXAWIND_INSTALL_DIR}/tioga
 
 BUILD_TYPE=RELEASE
 ENABLE_OPENMP=OFF
@@ -153,6 +159,8 @@ ENABLE_TIOGA=OFF
 ENABLE_HYPRE=ON
 
 EOF
+
+    echo "==> Please check auto-generated configuration file: ${cfgfile}"
 }
 
 exw_main ()
