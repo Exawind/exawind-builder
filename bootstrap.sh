@@ -104,18 +104,20 @@ exw_install_deps ()
 {
     local basedir=${EXAWIND_PROJECT_DIR}
     cd ${basedir}
+    local exwcompiler=${EXAWIND_COMPILER}
+    local spack_compiler=${SPACK_COMPILER:-exwcompiler}
 
-    spack install cmake %${EXAWIND_COMPILER}
-    spack install mpi %${EXAWIND_COMPILER}
-    spack install m4 %${EXAWIND_COMPILER}
-    spack install zlib %${EXAWIND_COMPILER}
-    spack install libxml2 %${EXAWIND_COMPILER}
-    spack install boost %${EXAWIND_COMPILER}
-    spack install superlu %${EXAWIND_COMPILER}
-    spack install hdf5 %${EXAWIND_COMPILER}
-    spack install netcdf %${EXAWIND_COMPILER}
-    spack install yaml-cpp %${EXAWIND_COMPILER}
-    spack install hypre %${EXAWIND_COMPILER}
+    spack install cmake %${spack_compiler}
+    spack install mpi %${spack_compiler}
+    spack install m4 %${spack_compiler}
+    spack install zlib %${spack_compiler}
+    spack install libxml2 %${spack_compiler}
+    spack install boost %${spack_compiler}
+    spack install superlu %${spack_compiler}
+    spack install hdf5 %${spack_compiler}
+    spack install netcdf %${spack_compiler}
+    spack install yaml-cpp %${spack_compiler}
+    spack install hypre %${spack_compiler}
 }
 
 exw_create_scripts ()
