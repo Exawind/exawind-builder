@@ -94,6 +94,9 @@ To install using ``bootstrap`` script follow these steps:
    ./bootstrap.sh -s snl-ascicgpu -c gcc  # On SNL ASC GPU machine
    ./bootstrap.sh -s summitdev -c gcc     # On ORNL SummitDev
 
+Upon successful execution of the bootstrapping process, proceed to
+:ref:`code-build-steps` for instructions to build ``nalu-wind``.
+
 .. note::
 
    - If you have multiple compiler versions, then use :envvar:`SPACK_COMPILER`
@@ -370,3 +373,55 @@ system using the Intel compiler, they would execute the following at the command
 
    # Create a script with a different name
    ../exawind-builder/new-script.sh -s cori -c intel -p trilinos trilinos-haswell.sh
+
+
+.. _code-build-steps:
+
+Compiling Nalu-Wind
+-------------------
+
+If you followed the :ref:`bootstrap <quick-start>` or the :ref:`new-script` in
+the usual path, then the build scripts have already been generated for you. By
+default, Trilinos is not installed via Spack and must be installed manually by
+the user.
+
+Building Trilinos
+`````````````````
+
+.. code-block:: bash
+
+   # Clone trilinos
+   cd ${EXAWIND_PROJECT_DIR}/source
+   # Clone the repo
+   git clone https://github.com/trilinos/trilinos.git
+   # Create a build directory
+   mkdir trilinos/build
+   # Switch to build directory
+   cd trilinos/build
+   # link the build script (change gcc appropriately)
+   ln -s ${EXAWIND_PROJECT_DIR}/scripts/trilinos-gcc.sh
+   # Execute the script
+   ./trilinos-gcc.sh
+   # Install on successful build
+   ./trilinos-gcc make install
+   # Update TRILINOS_ROOT_DIR in `exawind-config.sh`
+
+Building nalu-wind
+``````````````````
+
+.. code-block:: bash
+
+   # Clone nalu-wind
+   cd ${EXAWIND_PROJECT_DIR}/source
+   # Clone the repo
+   git clone https://github.com/exawind/nalu-wind.git
+   # Create a build directory
+   mkdir nalu-wind/build
+   # Switch to build directory
+   cd nalu-wind/build
+   # link the build script (change gcc appropriately)
+   ln -s ${EXAWIND_PROJECT_DIR}/scripts/nalu-wind-gcc.sh
+   # Execute the script
+   ./nalu-wind-gcc.sh
+   # Install on successful build
+   ./nalu-wind-gcc make install
