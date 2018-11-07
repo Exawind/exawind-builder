@@ -63,11 +63,14 @@ Installation via bootstrap script
 
 You can use the :file:`bootstrap.sh` script provided by ``exawind-builder`` to
 install on your preferred system. Skip to :ref:`installation` section if you
-want more fine-tuned control over the installation process. Mac OS X users will
-need to have Hombrew packages installed as documented in :ref:`homebrew-setup`.
-The bootstrap script will create the directory structure, clone exawind-builder
-and spack repositories, installl all the necessary dependencies and create build
-scripts for the different software packages.
+want more fine-tuned control over the installation process. The bootstrap script
+will create the directory structure, clone exawind-builder and spack
+repositories, installl all the necessary dependencies and create build scripts
+for the different software packages.
+
+Mac OS X users will need to have Hombrew packages installed as documented in
+:ref:`homebrew-setup`. On other systems, certain modules might need to be loaded to
+ensure that spack will be able to detect system compilers.
 
 .. code-block:: bash
 
@@ -86,8 +89,18 @@ To install using ``bootstrap`` script follow these steps:
    # Download bootstrap script
    curl -fsSL https://raw.githubusercontent.com/sayerhs/exawind-builder/master/bootstrap.sh
 
-   # Invoke by providing the system specification (cori is shown as example here)
-   ./bootstrap.sh -p cori
+   # Invoke by providing the system specification
+   ./bootstrap.sh -s cori -c intel        # on NERSC Cori
+   ./bootstrap.sh -s snl-ascicgpu -c gcc  # On SNL ASC GPU machine
+   ./bootstrap.sh -s summitdev -c gcc     # On ORNL SummitDev
+
+.. note::
+
+   - If you have multiple compiler versions, then use :envvar:`SPACK_COMPILER`
+     to set an exact specification that you will when installing packages. For
+     example, to use GCC 7.2.0 version instead of older versions, it might be
+     necessary to set ``SPACK_COMPILER=gcc%7.2.0`` before executing the
+     bootstrap script.
 
 
 .. _installation:
