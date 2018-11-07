@@ -22,7 +22,7 @@ exw_check_system ()
        echo "ERROR! Unknown system provided. Valid options are"
 
        for fname in $(ls $envdir) ; do
-           echo "  - $(basename -s .bash $fname)"
+           echo "  - $(basename$fname .bash)"
        done
        return 1
     fi
@@ -125,7 +125,7 @@ exw_create_scripts ()
 
     echo "==> Creating build scripts for known projects"
     for fname in $(ls ${exwbld}/codes) ; do
-        local prj=$(basename -s .bash $fname)
+        local prj=$(basename $fname .bash)
         ${exwbld}/new-script.sh -s ${EXAWIND_SYSTEM} -c ${EXAWIND_COMPILER} -p ${prj}
     done
 }
