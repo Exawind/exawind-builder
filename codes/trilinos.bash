@@ -38,8 +38,11 @@ exawind_cmake_base ()
 
     local enable_cuda=${ENABLE_CUDA:-OFF}
     local kokkos_args=""
+    local enable_simd=${ENABLE_SIMD:-ON}
     if [ "${enable_cuda}" = "ON" ] ; then
         kokkos_args="-DKOKKOS_ARCH=${KOKKOS_ARCH:-None}"
+        enable_simd=OFF
+        echo "==> Trilinos: disabling SIMD for GPU builds"
     fi
 
     # Force CMake to use absolute paths for the libraries so that it doesn't
@@ -90,7 +93,7 @@ exawind_cmake_base ()
             -DTrilinos_ENABLE_Amesos:BOOL=OFF
             -DTrilinos_ENABLE_Zoltan:BOOL=ON
             -DTrilinos_ENABLE_STKMesh:BOOL=ON
-            -DTrilinos_ENABLE_STKSimd:BOOL=ON
+            -DTrilinos_ENABLE_STKSimd:BOOL=${enable_simd}
             -DTrilinos_ENABLE_STKNGP:BOOL=ON
             -DTrilinos_ENABLE_STKIO:BOOL=ON
             -DTrilinos_ENABLE_STKTransfer:BOOL=ON
