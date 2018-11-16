@@ -135,7 +135,7 @@ exw_create_scripts ()
 exw_create_config ()
 {
     local cfgprefix=${EXAWIND_CFGFILE:-exawind-config}
-    local cfgfile=${EXAWIND_PROJECT_DIR}/{cfgprefix}.sh
+    local cfgfile=${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh
     if [ -f ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh ] ; then
         echo "==> Found previous configuration: ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh"
         return
@@ -143,8 +143,8 @@ exw_create_config ()
 
     echo "==> Creating default config file: ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh"
     cat <<EOF > ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh
-export SPACK_ROOT=${EXAWIND_PROJECT_DIR}/spack
-export SPACK_COMPILER=${SPACK_COMPILER:-${EXAWIND_COMPILER}}
+#export SPACK_ROOT=${EXAWIND_PROJECT_DIR}/spack
+#export SPACK_COMPILER=${SPACK_COMPILER:-${EXAWIND_COMPILER}}
 
 #export EXAWIND_CUDA_WRAPPER=${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper
 
@@ -152,7 +152,7 @@ export SPACK_COMPILER=${SPACK_COMPILER:-${EXAWIND_COMPILER}}
 #export TIOGA_ROOT_DIR=${EXAWIND_INSTALL_DIR}/tioga
 
 BUILD_TYPE=RELEASE
-ENABLE_OPENMP=OFF
+ENABLE_OPENMP=ON
 
 ENABLE_OPENFAST=OFF
 ENABLE_TIOGA=OFF
@@ -161,6 +161,23 @@ ENABLE_HYPRE=ON
 EOF
 
     echo "==> Please check auto-generated configuration file: ${cfgfile}"
+}
+
+exw_need_spack_setup ()
+{
+    local no_spack_machines=(peregrine eagle rhodes)
+    local exwsys=${EXAWIND_SYSTEM:-spack}
+    local out=0
+
+    for sys in "${no_spack_machines[@]}" ; do
+        echo "$sys $exwsys"
+        if [[ "$exwsys" == "$sys" ]]; then
+            out=1
+            echo "==> Skipping Spack setup for this system"
+            break
+        fi
+    done
+    return $out
 }
 
 exw_main ()
@@ -201,8 +218,7 @@ exw_main ()
 
     exw_init
     exw_check_system || exit 1
-    exw_init_spack
-    exw_install_deps
+    exw_need_spack_setup && exw_init_spack && exw_install_deps
     exw_create_scripts
     exw_create_config
 }
