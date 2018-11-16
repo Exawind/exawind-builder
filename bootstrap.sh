@@ -22,7 +22,7 @@ exw_check_system ()
        echo "ERROR! Unknown system provided. Valid options are"
 
        for fname in $(ls $envdir) ; do
-           echo "  - $(basename$fname .bash)"
+           echo "  - $(basename $fname .bash)"
        done
        return 1
     fi
@@ -215,6 +215,7 @@ exw_main ()
         esac
     done
 
+    set -e
     exw_init
     exw_check_system || exit 1
     exw_need_spack_setup && exw_init_spack && exw_install_deps
