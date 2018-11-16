@@ -170,7 +170,6 @@ exw_need_spack_setup ()
     local out=0
 
     for sys in "${no_spack_machines[@]}" ; do
-        echo "$sys $exwsys"
         if [[ "$exwsys" == "$sys" ]]; then
             out=1
             echo "==> Skipping Spack setup for this system"
