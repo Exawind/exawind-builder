@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export EXAWIND_NUM_JOBS=36
-export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/hpacf/2018-11-09/spack/share/spack/modules/linux-centos7-x86_64/
+export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/hpacf/2018-11-09/spack/share/spack/modules/linux-centos7-x86_64
 
 declare -A EXAWIND_MODMAP
 EXAWIND_MODMAP[trilinos]=trilinos/develop
@@ -12,11 +12,11 @@ exawind_env_gcc ()
     module load gcc/7.3.0
     module use ${EXAWIND_MODULES_DIR}/gcc-7.3.0
 
-    module load binutils openmpi/3.1.3 netlib-lapack/3.8.0 cmake/3.12.3
+    module load binutils openmpi netlib-lapack/3.8.0 cmake/3.12.3
 
-    export CC=$(which gcc)
-    export CXX=$(which g++)
-    export FC=$(which gfortran)
+    export CC=$(which mpicc)
+    export CXX=$(which mpic++)
+    export FC=$(which mpif90)
 
     echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/gcc-7.3.0)"
 }
