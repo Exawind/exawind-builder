@@ -3,6 +3,7 @@
 source ${__EXAWIND_CORE_DIR}/envs/spack.bash
 
 export EXAWIND_NUM_JOBS_DEFAULT=8
+export EXAWIND_COMPILER_DEFAULT=intel
 
 exawind_env_gcc ()
 {
