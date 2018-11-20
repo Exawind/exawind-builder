@@ -10,17 +10,17 @@ packages:
         - netlib-lapack
       lapack:
         - netlib-lapack
-    variants: build_type=Release
+    variants: build_type=Release ~shared
   openmpi:
-    version: [3.1.1]
+    version: [brew-latest]
     buildable: false
     paths:
-      openmpi@3.1.1: /usr/local/Cellar/open-mpi/3.1.1
+      openmpi@brew-latest: /usr/local
   cmake:
-    version: [3.12.0]
+    version: [brew-latest]
     buildable: false
     paths:
-      cmake@3.12.0: /usr/local/Cellar/cmake/3.12.0
+      cmake@brew-latest: /usr/local
   zlib:
     version: [1.2.8]
     buildable: false
@@ -37,10 +37,10 @@ packages:
     paths:
       bzip2@2.1.0: /usr
   boost:
-    version: [1.67.0]
+    version: [brew-latest]
     buildable: false
     paths:
-      boost@1.67.0: /usr/local/Cellar/boost/1.67.0_1
+      boost@brew-latest: /usr/local
   pkg-config:
     paths:
       pkg-config@0.29.2: /usr/local/Cellar/pkg-config/0.29.2
