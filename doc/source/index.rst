@@ -29,6 +29,10 @@ of bash scripts to configure and compile the codes used within the `ExaWind
 - *Build script generation*: Generates an executable end-user script for a
   combination of *system*, *compiler*, and *project*.
 
+- *Exawind environment generation*: Generates a source-able, platform-specific
+  script that allows the user to recreate the exact environment used to build
+  the codes during runtime.
+
 The build scripts are intended for developers who might want to compile the
 codes with different configuration options, build different branches during
 their development cycle, or link to a different development version of a library
@@ -40,6 +44,7 @@ that is currently not available in the standard installation on the system.
    :maxdepth: 4
 
    introduction
+   installation
    basic
    advanced
    reference

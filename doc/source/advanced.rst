@@ -1,121 +1,12 @@
-.. _advanced_usage:
+.. _manual_installation:
 
-Advanced Usage
-==============
+Manual Installation
+===================
 
-We start with a description of the code organization that will be used in the
-rest of the manual before describing the installation and usage of the build
-scripts. All source code, build directories, installation directories, and the
-``exawind-builder`` package itself is assumed to be located within
-:file:`exawind` base directory. Within this directory the main subdirectories
-are shown below:
-
-::
-
-  exawind/
-  ├── exawind-builder
-  ├── exawind-config.sh
-  ├── install
-  │   ├── hypre
-  │   ├── tioga
-  │   ├── trilinos-omp
-  │   └── trilinos
-  ├── scripts
-  │   ├── hypre-clang.sh
-  │   ├── nalu-wind-clang.sh
-  │   ├── tioga-clang.sh
-  │   └── trilinos-clang.sh
-  ├── spack
-  └── source
-      ├── hypre
-      ├── nalu-wind
-      ├── openfast
-      ├── tioga
-      ├── trilinos
-      └── wind-utils
-
-The sub-directories are:
-
-- ``exawind-builder``: The build script package cloned from the git repository
-  that contains scripts to configure and build codes on different systems.
-
-- ``spack``: Optional location for `spack <https://github.com/llnl/spack>`_ if
-  using Spack to manage dependencies.
-
-- ``source``: Local git repository checkouts of the ExaWind codes of interest to the user.
-
-- ``scripts``: The default build scripts for different project and compiler
-  combination. Users can either symlink the scripts into the build directory or
-  copy and modify them within different build directories (e.g., release vs.
-  debug builds).
-
-- ``install``: The default install location where ``make install`` will install
-  the headers, libraries, and executables.
-
-In addition to the sub-directories, users can also provide an optional
-configuration file :file:`exawind-config.sh` that can be used to customize
-options common to building all the codes.
-
-.. _quick-start:
-
-Installation via bootstrap script
-----------------------------------
-
-You can use the :file:`bootstrap.sh` script provided by ``exawind-builder`` to
-install on your preferred system. Skip to :ref:`installation` section if you
-want more fine-tuned control over the installation process. The bootstrap script
-will create the directory structure, clone exawind-builder and spack
-repositories, installl all the necessary dependencies and create build scripts
-for the different software packages.
-
-Mac OS X users will need to have Hombrew packages installed as documented in
-:ref:`homebrew-setup`. On other systems, certain modules might need to be loaded to
-ensure that spack will be able to detect system compilers.
-
-.. code-block:: bash
-
-   bootstrap.sh [options]
-
-   Options:
-     -h             - Show help message and exit
-     -s <system>    - Select system profile (spack, cori, summitdev, etc.)
-     -c <compiler>  - Select compiler type (gcc, clang, intel, etc.)
-     -p <path>      - Root path for exawind project (default: ${HOME}/exawind)
-
-To install using ``bootstrap`` script follow these steps:
-
-.. code-block:: bash
-
-   # Download bootstrap script
-   curl -fsSL https://raw.githubusercontent.com/sayerhs/exawind-builder/master/bootstrap.sh
-
-   # Invoke by providing the system specification
-   ./bootstrap.sh -s cori -c intel        # on NERSC Cori
-   ./bootstrap.sh -s snl-ascicgpu -c gcc  # On SNL ASC GPU machine
-   ./bootstrap.sh -s summitdev -c gcc     # On ORNL SummitDev
-
-Upon successful execution of the bootstrapping process, proceed to
-:ref:`code-build-steps` for instructions to build ``nalu-wind``.
-
-.. note::
-
-   - If you have multiple compiler versions, then use :envvar:`SPACK_COMPILER`
-     to set an exact specification that you will when installing packages. For
-     example, to use GCC 7.2.0 version instead of older versions, it might be
-     necessary to set ``SPACK_COMPILER=gcc%7.2.0`` before executing the
-     bootstrap script.
-
-
-.. _installation:
-
-Installation
-------------
-
-
-This section will walk through the steps to creating a basic directory layout,
-cloning ``exawind-builder`` repository. In this example, we will create the
-:file:`exawind` base directory within the user's home directory. Modify this
-appropriately.
+This section will walk through the steps to creating a :ref:`basic directory
+layout <exawind_dir_layout>`, cloning ``exawind-builder`` repository. In this
+example, we will create the :file:`exawind` base directory within the user's
+home directory. Modify this appropriately.
 
 .. code-block:: bash
 
@@ -143,42 +34,13 @@ This section details basic steps to install all dependencies from scratch and
 have a fully independent installation of the ExaWind software ecosystem. This is
 a one-time setup step.
 
-.. _homebrew-setup:
-
-Initial Homebrew (Mac OS X only)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For OS X we will use a combination of `Homebrew <https://brew.sh>`_ and `spack
-<https://github.com/llnl/spack>`_ to set up our dependencies. The setup will use
-Apple's Clang compiler for C and C++ and GNU GCC ``gfortran`` for Fortran codes.
-
-
-#. Setup homebrew if you don't already have it installed on your machine. Follow
-   the section **Install Homebrew** at the `Homebrew website <https://brew.sh>`.
-   Note that you will need ``sudo`` access and will have to enter your password
-   several times during the installation process.
-
-#. Setup ExaWind directory structure and clone ``exawind-builder`` as described
-   in :ref:`installation` section.
-
-#. Install necessary packages through Homebrew
-
-   .. code-block:: bash
-
-      # Switch to the location where you setup your exawind directory
-      cd ${HOME}/exawind
-      brew tap Homebrew/brewdler
-
-      # Install brew packages (fix path to the file appropriately)
-      brew bundle --file=./exawind-builder/etc/spack/osx/Brewfile
-
-   This step will install the necessary packages, GCC compilers, OpenMPI, and
-   CMake.
+Mac OS X users will need to setup Homebrew as described in :ref:`homebrew-setup`
+before proceeding.
 
 Install dependencies via spack (all systems)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Setup ExaWind directory structure as described in :ref:`Installation`.
+Setup ExaWind directory structure as described in :ref:`exawind_dir_layout`.
 
 #. Clone the spack repository
 
@@ -190,7 +52,7 @@ Setup ExaWind directory structure as described in :ref:`Installation`.
       # Activate spack (for the remainder of the steps)
       source ./spack/share/spack/setup-env.sh
 
-#. Copy package specifiations for Spack. The file :file:`packages.yaml`
+#. Copy package specifications for Spack. The file :file:`packages.yaml`
    instructs Spack to use the installed compilers and MPI packages thereby
    cutting down on build time. It also pins other packages to specific versions
    so that the build is consistent with other machines.
@@ -380,48 +242,6 @@ system using the Intel compiler, they would execute the following at the command
 Compiling Nalu-Wind
 -------------------
 
-If you followed the :ref:`bootstrap <quick-start>` or the :ref:`new-script` in
-the usual path, then the build scripts have already been generated for you. By
-default, Trilinos is not installed via Spack and must be installed manually by
-the user.
-
-Building Trilinos
-`````````````````
-
-.. code-block:: bash
-
-   # Clone trilinos
-   cd ${EXAWIND_PROJECT_DIR}/source
-   # Clone the repo
-   git clone https://github.com/trilinos/trilinos.git
-   # Create a build directory
-   mkdir trilinos/build
-   # Switch to build directory
-   cd trilinos/build
-   # link the build script (change gcc appropriately)
-   ln -s ${EXAWIND_PROJECT_DIR}/scripts/trilinos-gcc.sh
-   # Execute the script
-   ./trilinos-gcc.sh
-   # Install on successful build
-   ./trilinos-gcc make install
-   # Update TRILINOS_ROOT_DIR in `exawind-config.sh`
-
-Building nalu-wind
-``````````````````
-
-.. code-block:: bash
-
-   # Clone nalu-wind
-   cd ${EXAWIND_PROJECT_DIR}/source
-   # Clone the repo
-   git clone https://github.com/exawind/nalu-wind.git
-   # Create a build directory
-   mkdir nalu-wind/build
-   # Switch to build directory
-   cd nalu-wind/build
-   # link the build script (change gcc appropriately)
-   ln -s ${EXAWIND_PROJECT_DIR}/scripts/nalu-wind-gcc.sh
-   # Execute the script
-   ./nalu-wind-gcc.sh
-   # Install on successful build
-   ./nalu-wind-gcc make install
+At this point you have manually recreated all the steps performed by the
+*bootstrap* process. Please follow :ref:`compiling-software` to build Trilinos
+and Nalu-Wind

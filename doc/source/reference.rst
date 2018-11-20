@@ -15,20 +15,16 @@ ExaWind Builder configuration
 
 .. envvar:: EXAWIND_SYSTEM
 
-   The system code used to determine modules to be loaded. The available systems are
-
-   ============== ============================================================================================
-   ``spack``       `Spack <https:://github.com/LLNL/spack>`_ (system agnostic)
-   ``peregrine``   `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
-   ``cori``        `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_
-   ``summitdev``   `OLCF SummitDev <https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/>`_
-   ============== ============================================================================================
+   The system code used to determine modules to be loaded. Please see
+   :ref:`available systems <introduction>`_ for a list of valid systems
+   supported by exawind-builder.
 
 
 .. envvar:: EXAWIND_COMPILER
 
    The compiler to be used for the build. Valid options are `gcc`, `clang`,
    `intel`, and `xl`. Not all compiler options are available on all systems.
+   Please consult :ref:`available compilers <introduction>` on individual systems.
 
 .. envvar:: EXAWIND_CODE
 
@@ -47,9 +43,9 @@ ExaWind Builder configuration
    :ref:`introduction` section the examples used :file:`${HOME}/exawind`.
 
    By default, the :ref:`build script generator <new-script>` will initialize
-   this to be the parent directory of :file:`${EXAWIND_SRCDIR}`. If you prefer
+   this to be the parent directory of :envvar:`EXAWIND_SRCDIR`. If you prefer
    to keep ``exawind-builder`` and your base install directory separate, then
-   declare ``export`` this variable to the appropriate value before invoking
+   ``export`` this variable to the appropriate value before invoking
    ``new-script.sh`` command.
 
 .. envvar:: EXAWIND_INSTALL_DIR
@@ -58,7 +54,7 @@ ExaWind Builder configuration
    :file:`${EXAWIND_PROJECT_DIR}/install`. By default, each project is installed
    within its own directory (:file:`${EXAWIND_INSTALL_DIR}/${PROJECT_NAME}`).
    User can change this by setting appropriate value for the :envvar:`project
-   install variable PROJECTNAME_INSTALL_DIR`.
+   install variable PROJECTNAME_INSTALL_PREFIX`.
 
 .. envvar:: EXAWIND_CONFIG
 
@@ -164,7 +160,7 @@ underscores. For example, ``parallel-netcdf`` becomes
      YAML_CPP_ROOT_DIR
      ZLIB_ROOT_DIR
 
-.. envvar:: PROJECTNAME_INSTALL_DIR
+.. envvar:: PROJECTNAME_INSTALL_PREFIX
 
    The location where ``make install`` will install the project. The default
    value for this variable is ``${EXAWIND_INSTALL_DIR}/${PROJECT_NAME}``
