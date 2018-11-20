@@ -130,6 +130,9 @@ exw_create_scripts ()
         local prj=$(basename $fname .bash)
         ${exwbld}/new-script.sh -s ${EXAWIND_SYSTEM} -c ${EXAWIND_COMPILER} -p ${prj}
     done
+
+    # Create the environment script
+    ${exwbld}/create-env.sh -s ${EXAWIND_SYSTEM} -c ${EXAWIND_COMPILER}
 }
 
 exw_create_config ()
