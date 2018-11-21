@@ -85,5 +85,5 @@ sed -e "s#%%SRCDIR%%#${EXAWIND_SRCDIR}#g;s#%%COMPILER%%#${compiler}#g;s#%%SYSTEM
 chmod a+x ${output_file}
 
 cat <<EOF
-Environment script ${output_file} created successfully. Modify script to change defaults
+==> Environment script ${output_file} created successfully.
 EOF

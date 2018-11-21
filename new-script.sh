@@ -102,5 +102,5 @@ sed -e "s#%%SRCDIR%%#${EXAWIND_SRCDIR}#g;s#%%COMPILER%%#${compiler}#g;s#%%SYSTEM
 chmod a+x ${output_file}
 
 cat <<EOF
-Build script ${output_file} created successfully. Modify script to change default parameters.
+==> Build script ${output_file} created successfully.
 EOF
