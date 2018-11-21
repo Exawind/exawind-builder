@@ -11,8 +11,11 @@ process please refer to the :ref:`manual_installation` section.
 Basic installation for all systems
 ----------------------------------
 
-To install using *bootstrap* script
-please follow these steps.
+To install using *bootstrap* script please follow these steps.
+
+
+#. Mac OS X users will need to have Hombrew packages installed as documented in
+   :ref:`homebrew-setup`.
 
 #. Download the *bootstrap* script
 
@@ -60,10 +63,6 @@ Nalu-Wind.
 
 .. note::
 
-   - Mac OS X users will need to have Hombrew packages installed as documented
-     in :ref:`homebrew-setup`. On other systems, certain modules might need to
-     be loaded to ensure that spack will be able to detect system compilers.
-
    - If you have multiple versions of the same compiler installed, then use
      :envvar:`SPACK_COMPILER` to set an exact specification that you will when
      installing packages. For example, to use GCC 7.2.0 version instead of older
@@ -83,7 +82,7 @@ compilation time required for compiling OpenMPI on Mac. Please follow these
 one-time installation process to set up your Homebrew environment.
 
 #. Setup homebrew if you don't already have it installed on your machine. Follow
-   the section **Install Homebrew** at the `Homebrew website <https://brew.sh>`.
+   the section **Install Homebrew** at the `Homebrew website <https://brew.sh>`_.
    Note that you will need ``sudo`` access and will have to enter your password
    several times during the installation process.
 

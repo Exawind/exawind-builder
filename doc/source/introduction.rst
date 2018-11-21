@@ -125,16 +125,23 @@ are shown below:
 The sub-directories are:
 
 - ``exawind-builder``: The build script package cloned from the git repository
-  that contains scripts to configure and build codes on different systems.
+  that contains scripts to configure and build codes on different systems. This
+  directory must be considered read-only unless you are adding features to
+  exawind-builder. This directory is not necessary if you are using one of the
+  central installations of ExaWind.
 
 - ``spack``: Optional location for Spack if using Spack to manage dependencies.
+  Not used on NREL systems -- Peregrine, Eagle, and Rhodes.
 
-- ``source``: Local git repository checkouts of the ExaWind codes of interest to the user.
+- ``source``: Local git repository checkouts of the ExaWind codes of interest to
+  the user. This is the recommended location for all the development versions of
+  the various codes (e.g., nalu-wind, openfast, etc.).
 
 - ``scripts``: The default build scripts for different project and compiler
   combination. Users can either symlink the scripts into the build directory or
   copy and modify them within different build directories (e.g., release vs.
-  debug builds).
+  debug builds). Use the :ref:`new-script.sh <new-script>` utility to generate
+  these build scripts.
 
 - ``install``: The default install location where ``make install`` will install
   the headers, libraries, and executables.
