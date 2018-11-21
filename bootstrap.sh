@@ -10,6 +10,7 @@ Options:
   -s <system>    - Select system profile (spack, cori, summitdev, etc.)
   -c <compiler>  - Select compiler type (gcc, clang, intel, etc.)
   -p <path>      - Root path for exawind project (default: ${HOME}/exawind)
+  -n             - Configure exawind-builder to use ninja system
 EOF
 }
 
@@ -135,6 +136,21 @@ exw_create_scripts ()
     ${exwbld}/create-env.sh -s ${EXAWIND_SYSTEM} -c ${EXAWIND_COMPILER}
 }
 
+exw_get_ninja ()
+{
+    local srcdir=${EXAWIND_PROJECT_DIR}/source
+    cd ${srcdir}
+
+    if [ ! -d ninja ] ; then
+        git clone git@github.com:Kitware/ninja.git
+    fi
+
+    if [ ! -f ninja/ninja ] ; then
+        cd ${srcdir}/ninja/
+        ./configure.py --bootstrap
+    fi
+}
+
 exw_create_config ()
 {
     local cfgprefix=${EXAWIND_CFGFILE:-exawind-config}
@@ -142,6 +158,12 @@ exw_create_config ()
     if [ -f ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh ] ; then
         echo "==> Found previous configuration: ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh"
         return
+    fi
+
+    local use_ninja=${1:-no}
+    local ninja_enable="#"
+    if [ "${use_ninja}" = "yes" ] ; then
+        ninja_enable=""
     fi
 
     echo "==> Creating default config file: ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh"
@@ -157,6 +179,9 @@ exw_create_config ()
 
 #SPACK_ROOT=\${EXAWIND_PROJECT_DIR}/spack
 #SPACK_COMPILER=\${SPACK_COMPILER:-\${EXAWIND_COMPILER}}
+
+${ninja_enable}EXAWIND_MAKE_TYPE=ninja
+${ninja_enable}export PATH=${EXAWIND_PROJECT_DIR}/source/ninja:\${PATH}
 
 BUILD_TYPE=RELEASE     # [RELEASE, DEBUG, RELWITHDEBINFO]
 ENABLE_OPENMP=ON       # [ON, OFF]
@@ -216,9 +241,10 @@ exw_main ()
         exwcomp=intel
     fi
     export EXAWIND_COMPILER=${EXAWIND_COMPILER:-$exwcomp}
+    local use_ninja=no
 
     OPTIND=1
-    while getopts ":s:c:p:h" opt; do
+    while getopts ":s:c:p:hn" opt; do
         case "$opt" in
             h)
                 exw_show_help
@@ -233,6 +259,9 @@ exw_main ()
             p)
                 EXAWIND_PROJECT_DIR=$OPTARG
                 ;;
+            n)
+                use_ninja=yes
+                ;;
             \?)
                 echo "ERROR: Invalid argument provided"
                 exw_show_help
@@ -246,7 +275,12 @@ exw_main ()
     exw_check_system || exit 1
     exw_need_spack_setup && exw_init_spack && exw_install_deps
     exw_create_scripts
-    exw_create_config
+
+    if [ "${use_ninja}" = "yes" ] ; then
+        exw_get_ninja
+    fi
+
+    exw_create_config ${use_ninja}
 }
 
 exw_main "$@"
