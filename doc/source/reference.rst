@@ -16,7 +16,7 @@ ExaWind Builder configuration
 .. envvar:: EXAWIND_SYSTEM
 
    The system code used to determine modules to be loaded. Please see
-   :ref:`available systems <introduction>`_ for a list of valid systems
+   :ref:`available systems <introduction>` for a list of valid systems
    supported by exawind-builder.
 
 
@@ -142,7 +142,7 @@ underscores. For example, ``parallel-netcdf`` becomes
 
       export OPENFAST_ROOT_DIR=${EXAWIND_INSTALL_DIR}/openfast-dev-debug
 
-   The primary purpose of this variable is to indicate pass this as a parameter
+   The primary purpose of this variable is to indicate this as the search path
    during the build process of other projects.
 
    Currently the following ``ROOT_DIR`` variables are used within the scripts::
