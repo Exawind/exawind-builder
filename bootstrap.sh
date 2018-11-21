@@ -105,7 +105,7 @@ exw_install_deps ()
     local basedir=${EXAWIND_PROJECT_DIR}
     cd ${basedir}
     local exwcompiler=${EXAWIND_COMPILER}
-    local spack_compiler=${SPACK_COMPILER:-exwcompiler}
+    local spack_compiler=${SPACK_COMPILER:-$exwcompiler}
 
     spack install cmake %${spack_compiler}
     spack install mpi %${spack_compiler}
