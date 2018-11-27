@@ -85,7 +85,7 @@ if [[ err_stat -ne 0 ]] ; then
 fi
 
 # Set the install directory
-project_name="$(echo ${project} | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')"
+project_name="$(echo ${project} | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')"
 install_dir_var="${project_name}_INSTALL_PREFIX"
 source_dir_var="${project_name}_SOURCE_DIR"
 ecp_prj_dir=${EXAWIND_PROJECT_DIR:-$(dirname ${EXAWIND_SRCDIR})}

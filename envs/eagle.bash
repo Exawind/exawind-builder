@@ -58,7 +58,7 @@ exawind_env_clang ()
 exawind_load_deps ()
 {
     for dep in $@ ; do
-        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
+        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
 
         local depname=${EXAWIND_MODMAP[$dep]:-$dep}
         if [ -z ${!root_dir_var} ] ; then

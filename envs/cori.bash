@@ -38,7 +38,7 @@ exawind_env_intel ()
 # exawind_load_deps () {
 
 #     for dep in $@ ; do
-#         mod_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')"
+#         mod_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')"
 #         root_dir_var="${mod_var}_ROOT_DIR"
 #         root_var="${mod_var}_ROOT"
 
