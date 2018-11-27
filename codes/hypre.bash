@@ -43,6 +43,7 @@ exawind_cmake_base ()
     if [ "${enable_cuda}" = "ON" ] ; then
         echo "==> HYPRE: Enabling CUDA"
         cuda_args=" --with-cuda --enable-unified-memory "
+        export HYPRE_CUDA_SM=${HYPRE_CUDA_SM:-60}
         exawind_hypre_fix_gpu
     else
         echo "==> HYPRE: Disabling CUDA"

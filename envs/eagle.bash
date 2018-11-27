@@ -12,6 +12,7 @@ exawind_eagle_gpu ()
     export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
     export ENABLE_CUDA=${ENABLE_CUDA:-ON}
     export KOKKOS_ARCH=${KOKKOS_ARCH:-Volta70}
+    export HYPRE_CUDA_SM=${HYPRE_CUDA_SM:-70}
 
     export NVCC_WRAPPER_DEFAULT_COMPILER=${CXX}
     export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
