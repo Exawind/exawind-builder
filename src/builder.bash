@@ -22,13 +22,15 @@ exawind_cmake ()
     local cmake_option=" "
 
     if [ ! -e "CMakeCache.txt" ] ; then
-        make_type=${EXAWIND_MAKE_TYPE:-make}
+        make_type=${EXAWIND_MAKE_TYPE:-auto}
         case ${make_type} in
             "ninja")
                 cmake_option="-G Ninja"
                 ;;
             "make")
                 cmake_option="-G 'Unix Makefiles'"
+                ;;
+            "auto")
                 ;;
             *)
                 echo "!!ERROR!! Unknown CMake generator provided: ${make_type}"
