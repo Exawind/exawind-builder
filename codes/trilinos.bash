@@ -40,6 +40,7 @@ exawind_cmake_base ()
     local kokkos_args=""
     local enable_simd=${ENABLE_SIMD:-ON}
     if [ "${enable_cuda}" = "ON" ] ; then
+        echo "==> Trilinos: enabling CUDA"
         kokkos_args="-DKOKKOS_ARCH=${KOKKOS_ARCH:-None}"
     fi
 
