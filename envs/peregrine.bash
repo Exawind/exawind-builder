@@ -21,7 +21,7 @@ exawind_env_gcc ()
     export CXX=$(which mpicxx)
     export FC=$(which mpifort)
 
-    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/gcc-7.3.0)"
+    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/software/modules/gcc-7.3.0)"
 }
 
 exawind_env_intel ()
@@ -38,7 +38,7 @@ exawind_env_intel ()
     export CXX=$(which mpiicpc)
     export FC=$(which mpiifort)
 
-    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/intel-18.0.4)"
+    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/software/modules/intel-18.0.4)"
 }
 
 exawind_load_deps ()
