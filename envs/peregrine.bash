@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export EXAWIND_NUM_JOBS_DEFAULT=24
-export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/ecp/base/modules
+export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/hpacf
 
 # Mapping identifying versions to load for each dependency
 declare -A EXAWIND_MODMAP
@@ -10,35 +10,35 @@ EXAWIND_MODMAP[trilinos]=trilinos/develop
 exawind_env_gcc ()
 {
     module purge
-    module load gcc/6.2.0
-    # For extra protection, explicitly disable path to Intel modules in user environment
-    module unuse ${EXAWIND_MODULES_DIR}/intel-18.1.163
-    module use ${EXAWIND_MODULES_DIR}/gcc-6.2.0
+    module unuse /nopt/nrel/apps/modules/centos7/modulefiles
+    module use ${EXAWIND_MODULES_DIR}/compilers/modules
+    module use ${EXAWIND_MODULES_DIR}/utilities/modules
+    module use ${EXAWIND_MODULES_DIR}/software/modules/gcc-7.3.0
 
-    module load binutils openmpi/3.1.1 netlib-lapack cmake
+    module load binutils openmpi netlib-lapack cmake
 
-    export CC=$(which gcc)
-    export CXX=$(which g++)
-    export FC=$(which gfortran)
+    export CC=$(which mpicc)
+    export CXX=$(which mpicxx)
+    export FC=$(which mpifort)
 
-    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/gcc-6.2.0)"
+    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/gcc-7.3.0)"
 }
 
 exawind_env_intel ()
 {
     module purge
-    module load gcc/6.2.0
-    module use ${EXAWIND_MODULES_DIR}/gcc-6.2.0
-    module load intel-parallel-studio/cluster.2018.1
-    module use ${EXAWIND_MODULES_DIR}/intel-18.1.163
+    module unuse /nopt/nrel/apps/modules/centos7/modulefiles
+    module use ${EXAWIND_MODULES_DIR}/compilers/modules
+    module use ${EXAWIND_MODULES_DIR}/utilities/modules
+    module use ${EXAWIND_MODULES_DIR}/software/modules/intel-18.0.4
 
-    module load binutils intel-mpi intel-mkl cmake
+    module load binutils intel-mpi/2018.4.274 intel-mkl/2018.4.274 cmake
 
-    export CC=$(which icc)
-    export CXX=$(which icpc)
-    export FC=$(which ifort)
+    export CC=$(which mpiicc)
+    export CXX=$(which mpiicpc)
+    export FC=$(which mpiifort)
 
-    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/intel-18.1.163)"
+    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/intel-18.0.4)"
 }
 
 exawind_load_deps ()
