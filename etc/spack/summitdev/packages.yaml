@@ -20,32 +20,16 @@ packages:
     paths: {}
     providers: {}
     compiler: []
-  boost:
-    version: [1.66.0]
-  hdf5:
-    version: [1.10.1]
-    variants: +mpi+hl+cxx
-  netcdf:
-    version: [4.4.1.1]
-    variants: +parallel-netcdf maxdims=65536 maxvars=52488
-    #buildable: false
-    #modules:
-    #  netcdf@4.4.1: netcdf/4.4.1
-  parallel-netcdf:
-    version: [1.8.0]
-    #buildable: false
-    #modules:
-    #  parallel-netcdf@1.8.0: parallel-netcdf/1.8.0
-  cmake:
-    version: [3.11.3]
-    buildable: false
-    modules:
-      cmake@3.11.3: cmake/3.11.3
   cuda:
     version: [9.0.69]
     buildable: false
     modules:
       cuda@9.0.69: cuda/9.0.69
+  cmake:
+    version: [3.11.3]
+    buildable: false
+    modules:
+      cmake@3.11.3: cmake/3.11.3
   zlib:
     version: [1.2.7]
     buildable: false
@@ -68,9 +52,32 @@ packages:
       m4@1.4.16: /usr
   netlib-lapack:
     version: [3.8.0]
+  boost:
+    version: [1.66.0]
+  hdf5:
+    version: [1.10.1]
+    variants: +mpi+hl+cxx
+  netcdf:
+    version: [4.4.1.1]
+    variants: +parallel-netcdf maxdims=65536 maxvars=52488
+  parallel-netcdf:
+    version: [1.8.0]
   superlu:
     version: [4.3]
   yaml-cpp:
     version: [develop]
     variants: ~shared
-
+  fftw:
+    variants: +mpi+fma
+  openfast:
+    version: [develop]
+    variants: +cxx~shared
+  hypre:
+    version: [develop]
+    variants: +int64~shared
+  tioga:
+    version: [develop]
+    variants: ~shared
+  trilinos:
+    version: [develop]
+    variants: ~alloptpkgs~xsdkflags~metis~mumps~superlu-dist+superlu~hypre+hdf5~suite-sparse~python~shared+boost+tpetra~epetra~epetraext+exodus+pnetcdf+zlib+stk+teuchos+belos+zoltan+zoltan2~amesos+amesos2~anasazi~ifpack+ifpack2+muelu~fortran~ml+gtest~aztec~sacado~x11+instantiate~instantiate_cmplx~dtk~fortrilinos+openmp~rol~nox+shards~intrepid~intrepid2~cgns

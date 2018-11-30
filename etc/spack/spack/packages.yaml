@@ -45,6 +45,8 @@ packages:
   yaml-cpp:
     version: [develop]
     variants: ~shared
+  fftw:
+    variants: +mpi+fma
   openfast:
     version: [develop]
     variants: +cxx~shared

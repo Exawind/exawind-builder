@@ -64,9 +64,17 @@ packages:
     version: [1.8.0]
   netlib-lapack:
     version: [3.8.0]
+  fftw:
+    variants: +mpi+fma
   openfast:
     version: [develop]
-    variants: +cxx
+    variants: +cxx~shared
   hypre:
     version: [2.14.0]
-    variants: +int64
+    variants: +int64~shared
+  tioga:
+    version: [develop]
+    variants: ~shared
+  trilinos:
+    version: [develop]
+    variants: ~alloptpkgs~xsdkflags~metis~mumps~superlu-dist+superlu~hypre+hdf5~suite-sparse~python~shared+boost+tpetra~epetra~epetraext+exodus+pnetcdf+zlib+stk+teuchos+belos+zoltan+zoltan2~amesos+amesos2~anasazi~ifpack+ifpack2+muelu~fortran~ml+gtest~aztec~sacado~x11+instantiate~instantiate_cmplx~dtk~fortrilinos+openmp~rol~nox+shards~intrepid~intrepid2~cgns
