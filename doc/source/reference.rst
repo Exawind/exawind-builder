@@ -148,6 +148,7 @@ underscores. For example, ``parallel-netcdf`` becomes
    Currently the following ``ROOT_DIR`` variables are used within the scripts::
 
      BOOST_ROOT_DIR
+     FFTW_ROOT_DIR
      HDF5_ROOT_DIR
      HYPRE_ROOT_DIR
      NALU_WIND_ROOT_DIR
@@ -205,6 +206,11 @@ Common build variables
 Nalu-Wind
 ~~~~~~~~~
 
+.. envvar:: ENABLE_FFTW
+
+   Boolean flag indicating whether FFTW library is activated when building
+   Nalu-Wind. (default: ON)
+
 .. envvar:: ENABLE_OPENFAST
 
    Boolean flag indicating whether OPENFAST TPL is activated when building
@@ -242,16 +248,26 @@ Trilinos uses :envvar:`ENABLE_OPENMP`, :envvar:`ENABLE_CUDA` and
 :envvar:`BLASLIB` if configured. OpenMP is enabled by default, and CMake
 attempts to automatically detect BLAS/LAPACK.
 
+CUDA is enabled by default on ``summitdev``, ``snl-ascicgpu``, and is optionally
+available on ``eagle``.
+
 
 HYPRE
 ~~~~~
 
-HYPRE uses :envvar:`ENABLE_OPENMP` if configured. OpenMP is disabled by default
-for HYPRE builds.
+HYPRE uses :envvar:`ENABLE_OPENMP` and :envvar:`ENABLE_CUDA` if configured.
+Both OpenMP and CUDA are disabled by default for HYPRE builds.
 
 .. envvar:: ENABLE_BIGINT
 
    Boolean flag indicating whether 64-bit integer support is enabled. (default: ON)
+
+.. envvar:: HYPRE_CUDA_SM
+
+   A number indicating the arch flag used when building HYPRE on CUDA. Requires
+   HYPRE v2.15.0 or newer. For example, if the user wishes to target Pascal60
+   cards, then the nvcc flag is ``sm_60`` and, therefore, the
+   ``HYPRE_CUDA_SM=60``, use ``70`` for Volta70 cards and so on.
 
 
 Function reference
