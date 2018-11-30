@@ -48,6 +48,7 @@ exawind_cmake_base ()
         -DBUILD_FAST_CPP_API:BOOL=${FAST_CPP_API:-ON}
         -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR}
         -DHDF5_ROOT:PATH=${HDF5_ROOT_DIR}
+        -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON
         ${blas_lapack}
         ${extra_args}
         ${OPENFAST_SOURCE_DIR:-..}
