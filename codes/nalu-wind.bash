@@ -11,6 +11,7 @@ _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
 exawind_proj_env ()
 {
     local opt_packages=(
+        fftw
         hypre
         openfast
         tioga
@@ -47,6 +48,8 @@ exawind_cmake_base ()
         -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR}
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
         -DENABLE_CUDA=${ENABLE_CUDA:-OFF}
+        -DENABLE_FFTW=${ENABLE_FFTW:-OFF}
+        -DFFTW_DIR:PATH=${FFTW_ROOT_DIR}
         -DENABLE_HYPRE:BOOL=${ENABLE_HYPRE:-ON}
         -DHYPRE_DIR:PATH=${HYPRE_ROOT_DIR}
         -DENABLE_TIOGA:BOOL=${ENABLE_TIOGA:-ON}
