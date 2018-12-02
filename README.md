@@ -13,7 +13,7 @@ details on how to use this to build ExaWind software.
 |`peregrine`     |   [NREL Peregrine](https://www.nrel.gov/hpc/peregrine-system.html)                         |
 |`eagle`         |   [NREL Eagle](https://www.nrel.gov/hpc/eagle-system.html)                                 |
 |`cori`          |   [NERSC Cori](http://www.nersc.gov/users/computational-systems/cori/)                     |
-|`summitdev`     |   [OLCF SummitDev](https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/**       |
+|`summitdev`     |   [OLCF SummitDev](https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/)      |
 |`snl-ascicgpu`  |   Sandia ASC GPU development machines                                                        |
 |`rhodes`        |   NREL nightly build and test system                                                         |
 
