@@ -4,19 +4,19 @@ ExaWind Builder is a collection of bash scripts to configure and compile the
 codes used within the [ExaWind](https://github.com/exawind) project on various
 high-performance computing (HPC) systems. The builder provides the following
 
-- *Platform configuration*: Provides the minimal set of modules that must be
+- **Platform configuration**: Provides the minimal set of modules that must be
   loaded when compiling with different compilers and MPI libraries on different
   HPC systems.
 
-- *Software configuration*: Provides baseline CMake configuration that can be
+- **Software configuration**: Provides baseline CMake configuration that can be
   used to configure the various options when building a *project*, e.g.,
   enable/disable optional modules, automate specification of paths to various
   libraries, configure release vs. debug builds.
 
-- *Build script generation*: Generates an executable end-user script for a
+- **Build script generation**: Generates an executable end-user script for a
   combination of *system*, *compiler*, and *project*.
 
-- *Exawind environment generation*: Generates a source-able, platform-specific
+- **Exawind environment generation**: Generates a source-able, platform-specific
   script that allows the user to recreate the exact environment used to build
   the codes during runtime.
 
