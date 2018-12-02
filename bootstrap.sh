@@ -43,7 +43,7 @@ exw_init ()
 
     cd ${basedir}
     if [ ! -d exawind-builder ] ; then
-        git clone git@github.com:sayerhs/exawind-builder.git
+        git clone https://github.com/sayerhs/exawind-builder.git
     fi
 }
 
@@ -67,7 +67,7 @@ exw_init_spack ()
 
     local need_setup=no
     if [ ! -d spack ] ; then
-        git clone git@github.com:LLNL/spack.git
+        git clone https://github.com/LLNL/spack.git
         need_setup=yes
     fi
 
@@ -142,7 +142,7 @@ exw_get_ninja ()
     cd ${srcdir}
 
     if [ ! -d ninja ] ; then
-        git clone git@github.com:Kitware/ninja.git
+        git clone https://github.com/Kitware/ninja.git
     fi
 
     if [ ! -f ninja/ninja ] ; then

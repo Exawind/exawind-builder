@@ -8,7 +8,7 @@ exw_get_ninja ()
     cd ${srcdir}
 
     if [ ! -d ninja ] ; then
-        git clone git@github.com:Kitware/ninja.git
+        git clone https://github.com/Kitware/ninja.git
     fi
 
     if [ ! -f ninja/ninja ] ; then
