@@ -19,10 +19,10 @@ To install using *bootstrap* script please follow these steps.
 
 #. Download the *bootstrap* script
 
-   .. code-block:: bash
+   .. code-block:: console
 
       # Download bootstrap script
-      curl -fsSL https://raw.githubusercontent.com/sayerhs/exawind-builder/master/bootstrap.sh
+      curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/sayerhs/exawind-builder/master/bootstrap.sh
       chmod a+x bootstrap.sh
 
 #. Execute the script by providing a target system and compiler -- see
@@ -30,7 +30,7 @@ To install using *bootstrap* script please follow these steps.
    available, you can use the generic ``spack`` system which will fetch and compile
    all necessary dependencies for you.
 
-   .. code-block:: bash
+   .. code-block:: console
 
       bootstrap.sh [options]
 
@@ -42,7 +42,7 @@ To install using *bootstrap* script please follow these steps.
 
    A few examples are shown below
 
-   .. code-block:: bash
+   .. code-block:: console
 
       # Invoke by providing the system specification
       ./bootstrap.sh -s cori -c intel        # on NERSC Cori
@@ -89,13 +89,13 @@ one-time installation process to set up your Homebrew environment.
 #. Once Homebrew has been installed execute the following commands to install
    packages necessary for exawind-builder from homebrew.
 
-.. code-block:: bash
+.. code-block:: console
 
    # Allow installation of brew bundles
    brew tap Homebrew/brewdler
 
    # Fetch the exawind Brewfile
-   curl -fsSL https://raw.githubusercontent.com/sayerhs/exawind-builder/master/etc/spack/osx/Brewfile
+   curl -fsSL -o Brewfile https://raw.githubusercontent.com/sayerhs/exawind-builder/master/etc/spack/osx/Brewfile
 
    # Install brew packages
    brew bundle --file=Brewfile
