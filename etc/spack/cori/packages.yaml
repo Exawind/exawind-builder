@@ -21,10 +21,10 @@ packages:
     providers: {}
     compiler: []
   cmake:
-    version: [3.8.2]
+    version: [3.11.4]
     buildable: false
     modules:
-      cmake@3.8.2: cmake/3.8.2
+      cmake@3.11.4: cmake/3.11.4
   zlib:
     version: [1.2.8]
     buildable: false
