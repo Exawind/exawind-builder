@@ -1,13 +1,35 @@
 # ExaWind Code Builder
 
-A collection of bash scripts to build codes used within the ExaWind project on
-different high-performance computing (HPC) systems. Please see the
+ExaWind Builder is a collection of bash scripts to configure and compile the
+codes used within the [ExaWind](https://github.com/exawind) project on various
+high-performance computing (HPC) systems. The builder provides the following
+
+- *Platform configuration*: Provides the minimal set of modules that must be
+  loaded when compiling with different compilers and MPI libraries on different
+  HPC systems.
+
+- *Software configuration*: Provides baseline CMake configuration that can be
+  used to configure the various options when building a *project*, e.g.,
+  enable/disable optional modules, automate specification of paths to various
+  libraries, configure release vs. debug builds.
+
+- *Build script generation*: Generates an executable end-user script for a
+  combination of *system*, *compiler*, and *project*.
+
+- *Exawind environment generation*: Generates a source-able, platform-specific
+  script that allows the user to recreate the exact environment used to build
+  the codes during runtime.
+
+The build scripts are intended for developers who might want to compile the
+codes with different configuration options, build different branches during
+their development cycle, or link to a different development version of a library
+that is currently not available in the standard installation on the system. Please see the
 [documentation](https://exawind-builder.readthedocs.io/en/latest/index.html) for
 details on how to use this to build ExaWind software.
 
-**Systems**
+**Pre-configured systems**
 
-|System Name       |  Description
+|System |  Description
 |----------------- |  --------------------------------------------------------------------------------------------|
 |`spack`         |   [Spack](https:://github.com/LLNL/spack) (system agnostic)                                |
 |`peregrine`     |   [NREL Peregrine](https://www.nrel.gov/hpc/peregrine-system.html)                         |
@@ -16,19 +38,6 @@ details on how to use this to build ExaWind software.
 |`summitdev`     |   [OLCF SummitDev](https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/)      |
 |`snl-ascicgpu`  |   Sandia ASC GPU development machines                                                        |
 |`rhodes`        |   NREL nightly build and test system                                                         |
-
-**Codes**
-
-Code                 |  Repository
--------------------- |  -------------------------------------------------
-Nalu-Wind            |  https://github.com/exawind/nalu-wind.git
-Trilinos             |  https://github.com/trilinos/trilinos.git
-OpenFAST             |  https://github.com/openfast/openfast.git
-Nalu Wind Utilities  |  https://github.com/exawind/wind-utils.git
-TIOGA                |  https://github.com/jsitaraman/tioga.git
-TIOGA Utilities      |  https://github.com/sayerhs/tioga_utils.git
-HYPRE                |  https://github.com/LLNL/hypre.git
-hypre-mini-app       |  https://github.com/exawind/hypre-mini-app.git
 
 ## Quick installation 
 
