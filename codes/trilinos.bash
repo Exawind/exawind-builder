@@ -101,6 +101,7 @@ exawind_cmake_base ()
             -DTrilinos_ENABLE_STKTopology:BOOL=ON
             -DTrilinos_ENABLE_STKUnit_tests:BOOL=ON
             -DTrilinos_ENABLE_STKUnit_test_utils:BOOL=ON
+            -DSTK_ENABLE_UnitMain:BOOL=OFF
             -DTrilinos_ENABLE_Gtest:BOOL=ON
             -DTrilinos_ENABLE_STKClassic:BOOL=OFF
             -DTrilinos_ENABLE_STKExprEval:BOOL=ON
