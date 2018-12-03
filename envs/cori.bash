@@ -23,8 +23,6 @@ exawind_env_intel ()
        module load PrgEnv-intel/6.0.4
     fi
 
-    module load cmake/3.11.4
-
     export CC=$(which cc)
     export CXX=$(which CC)
     export FC=$(which ftn)
@@ -33,6 +31,8 @@ exawind_env_intel ()
     export EXAWIND_COMPILER=${EXAWIND_COMPILER:-intel}
     export SPACK_COMPILER=${SPACK_COMPILER:-${EXAWIND_COMPILER}}
     exawind_spack_env
+
+    exawind_load_deps cmake
 }
 
 # exawind_load_deps () {

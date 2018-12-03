@@ -21,10 +21,12 @@ packages:
     providers: {}
     compiler: []
   cmake:
-    version: [3.11.4]
+    version: [3.12.4]
+  openssl:
+    version: [1.1.0]
     buildable: false
     modules:
-      cmake@3.11.4: cmake/3.11.4
+      openssl@1.1.0: openssl/1.1.0a
   zlib:
     version: [1.2.8]
     buildable: false
@@ -35,6 +37,11 @@ packages:
     buildable: false
     modules:
       libxml2@2.9.3: libxml2/2.9.3
+  ncurses:
+    version: [6.0]
+    buildable: false
+    paths:
+      ncurses@6.0: /usr
   bzip2:
     version: [1.0.6]
     buildable: false
