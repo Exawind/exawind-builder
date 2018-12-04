@@ -119,6 +119,7 @@ exw_install_deps ()
     spack install netcdf %${spack_compiler}
     spack install yaml-cpp %${spack_compiler}
     spack install hypre %${spack_compiler}
+    spack install fftw %${spack_compiler}
 }
 
 exw_create_scripts ()
@@ -189,6 +190,7 @@ ENABLE_OPENMP=ON       # [ON, OFF]
 ENABLE_OPENFAST=OFF    # Enable OpenFAST TPL with Nalu-Wind
 ENABLE_TIOGA=OFF       # Enable TIOGA for overset connectivity
 ENABLE_HYPRE=ON        # Enable HYPRE linear solvers with Nalu-Wind
+ENABLE_FFTW=OFF        # Enable FFTW for ABL simulations
 
 #
 # CUDA builds using Kokkos wrappers
