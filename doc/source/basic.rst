@@ -61,9 +61,13 @@ followed by ``make``.
    configured in the project directory. Users do not have to install their own
    exawind-builder on these systems.
 
-Compiling software, therefore, consists of the following steps:
+Compiling software, therefore, consists of the following steps (see detailed
+examples of trilinos and nalu-wind in the code snippets below that demonstrate
+these steps):
 
-#. Clone the apporpriate software repository into :file:`exawind/source` directory.
+#. Clone the appropriate software repository into :file:`exawind/source`
+   directory, e.g., ``nalu-wind``. See note below on ``trilinos`` status for
+   certain systems.
 
 #. Create a CMake build directory. We recommend out-of-source builds for all software.
 
@@ -76,18 +80,23 @@ Compiling software, therefore, consists of the following steps:
    applicable to multiple codes that you are building, then consolidate the
    common options in :file:`exawind/exawind-config.sh` to avoid duplication.
 
-#. Execute the build script
-
 #. Add an entry in :ref:`configuration file <exawind_config>` to override the
    default version of software with your custom build version when compiling
    other software, e.g., overriding the default version of HYPRE or OpenFAST --
    see :envvar:`PROJECTNAME_ROOT_DIR` for more details.
 
-On most systems, users will have to install Trilinos and Nalu-Wind manually.
-Exceptions are NREL Peregrine, Eagle, and Rhodes systems where Trilinos is
-installed and maintained by the ExaWind team. On these systems, users must
-install Trilinos and set :envvar:`TRILINOS_ROOT_DIR <PROJECTNAME_ROOT_DIR>` in
-their :ref:`configuration file <exawind_config>`.
+#. Execute the build script (assuming you've all prerequisites, see note on
+   Trilinos below).
+
+
+.. note::
+
+   On most systems, users will have to install Trilinos and Nalu-Wind manually.
+   For these systems, users must install Trilinos before attempting to build
+   ``nalu-wind`` and set :envvar:`TRILINOS_ROOT_DIR <PROJECTNAME_ROOT_DIR>` in
+   their :ref:`configuration file <exawind_config>`. Exceptions to this
+   requirement are NREL Peregrine, Eagle, and Rhodes systems where Trilinos is
+   installed and maintained by the ExaWind team (Jon Rood).
 
 For convenience, the list of commands necesssary to compile trilinos and
 nalu-wind are provided below.
