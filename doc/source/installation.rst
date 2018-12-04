@@ -1,17 +1,14 @@
 .. _installation:
 
-Installation
-============
+Setting up exawind-builder
+==========================
 
 Exawind-builder provides a *bootstrap* script that will create the exawind
 directory structure, fetch necessary repositories, install dependencies, and
-perform initial setup and configuration. For fine control of the installation
-process please refer to the :ref:`manual_installation` section.
-
-Basic installation for all systems
-----------------------------------
-
-To install using *bootstrap* script please follow these steps.
+perform initial setup and configuration. Note that this step is just preparation
+for being able to build ``nalu-wind`` and doesn't install ``nalu-wind`` itself.
+You will need to follow the additional steps mentioned in
+:ref:`compiling-software`.
 
 .. note::
 
@@ -21,6 +18,13 @@ To install using *bootstrap* script please follow these steps.
    you can skip the installation steps and proceed to the
    :ref:`compiling-software` section.
 
+For fine control of the installation process please refer to the
+:ref:`manual_installation` section.
+
+Basic installation for all systems
+----------------------------------
+
+To install using *bootstrap* script please follow these steps.
 
 #. Mac OS X users will need to have Hombrew packages installed as documented in
    :ref:`homebrew-setup`.
