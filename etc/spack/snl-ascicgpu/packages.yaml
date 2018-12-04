@@ -10,7 +10,7 @@ packages:
         - netlib-lapack
       lapack:
         - netlib-lapack
-    variants: +mpi build_type=Release
+    variants: +mpi~shared build_type=Release
   openmpi:
     version: [1.10.2]
     paths:
@@ -37,6 +37,11 @@ packages:
     buildable: false
     paths: 
       zlib@1.2.5: /usr/
+  bzip2:
+    version: [1.6.0]
+    buildable: false
+    paths:
+      bzip2@1.6.0: /usr/
   netlib-lapack:
     version: [3.8.0]
   superlu:
@@ -45,7 +50,7 @@ packages:
     version: [1.66.0]
   hdf5:
     version: [1.10.1]
-    variants: +mpi+cxx+hl
+    variants: +mpi+cxx+hl~shared
   netcdf:
     version: [4.4.1.1]
     variants: +parallel-netcdf maxdims=65536 maxvars=524288
