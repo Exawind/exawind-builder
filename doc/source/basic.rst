@@ -55,12 +55,6 @@ project on a system using GCC compiler suite will be called
 necessary modules for compiling the code, execute CMake configuration step
 followed by ``make``.
 
-.. note::
-
-   On NREL Peregrine and Eagle systems, the build scripts are pre-installed and
-   configured in the project directory. Users do not have to install their own
-   exawind-builder on these systems.
-
 Compiling software, therefore, consists of the following steps (see detailed
 examples of trilinos and nalu-wind in the code snippets below that demonstrate
 these steps):

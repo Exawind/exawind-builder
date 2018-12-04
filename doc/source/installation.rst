@@ -13,6 +13,14 @@ Basic installation for all systems
 
 To install using *bootstrap* script please follow these steps.
 
+.. note::
+
+   On NREL Peregrine, Eagle, and Rhodes systems, the build scripts are
+   pre-installed and configured in the project directory. Users do not have to
+   install their own exawind-builder on these systems. On these NREL systems,
+   you can skip the installation steps and proceed to the
+   :ref:`compiling-software` section.
+
 
 #. Mac OS X users will need to have Hombrew packages installed as documented in
    :ref:`homebrew-setup`.
