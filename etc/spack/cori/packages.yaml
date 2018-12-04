@@ -37,6 +37,11 @@ packages:
     buildable: false
     modules:
       libxml2@2.9.3: libxml2/2.9.3
+  fftw:
+    version: [3.3.8.1]
+    buildable: false
+    modules:
+      fftw@3.3.8.1: cray-fftw/3.3.8.1
   ncurses:
     version: [6.0]
     buildable: false
@@ -72,8 +77,6 @@ packages:
   yaml-cpp:
     version: [develop]
     variants: ~shared
-  fftw:
-    variants: +mpi+fma simd=avx2
   openfast:
     version: [develop]
     variants: +cxx

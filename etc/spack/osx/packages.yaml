@@ -41,6 +41,11 @@ packages:
     buildable: false
     paths:
       boost@brew-latest: /usr/local
+  fftw:
+    version: [brew-latest]
+    buildable: false
+    paths:
+      fftw@brew-latest: /usr/local
   pkg-config:
     paths:
       pkg-config@0.29.2: /usr/local/Cellar/pkg-config/0.29.2
@@ -64,8 +69,6 @@ packages:
     version: [1.8.0]
   netlib-lapack:
     version: [3.8.0]
-  fftw:
-    variants: +mpi+fma
   openfast:
     version: [develop]
     variants: +cxx~shared
