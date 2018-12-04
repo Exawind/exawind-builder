@@ -35,7 +35,7 @@ exawind_env_gcc ()
     export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
     export CXX=$(which mpic++)
 
-    exawind_load_deps netlib-lapack zlib libxml2
+    exawind_load_deps cmake netlib-lapack zlib libxml2
 }
 
 exawind_env_intel ()
