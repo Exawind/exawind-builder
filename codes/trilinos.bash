@@ -44,6 +44,14 @@ exawind_cmake_base ()
         kokkos_args="-DKOKKOS_ARCH=${KOKKOS_ARCH:-None}"
     fi
 
+    local enable_superlu=ON
+    local enable_klu2=OFF
+    if [ "${ENABLE_KLU2:-OFF}" = "ON" ] ; then
+        enable_superlu=OFF
+        enable_klu2=ON
+        echo "==> Trilinos: enabling KLU2 and disabling SuperLU"
+    fi
+
     # Force CMake to use absolute paths for the libraries so that it doesn't
     # pick up versions installed in `/usr/lib64` on peregrine
     local lib_path_save=${LIBRARY_PATH}
@@ -87,6 +95,7 @@ exawind_cmake_base ()
             -DTrilinos_ENABLE_Belos:BOOL=ON
             -DTrilinos_ENABLE_Ifpack2:BOOL=ON
             -DTrilinos_ENABLE_Amesos2:BOOL=ON
+            -DAmesos2_ENABLE_KLU2:BOOL=${enable_klu2}
             -DTrilinos_ENABLE_Zoltan2:BOOL=ON
             -DTrilinos_ENABLE_Ifpack:BOOL=OFF
             -DTrilinos_ENABLE_Amesos:BOOL=OFF
@@ -117,7 +126,7 @@ exawind_cmake_base ()
             -DBoostLib_LIBRARY_DIRS:PATH=${BOOST_ROOT_DIR}/lib
             -DBoost_INCLUDE_DIRS:PATH=${BOOST_ROOT_DIR}/include
             -DBoost_LIBRARY_DIRS:PATH=${BOOST_ROOT_DIR}/lib
-            -DTPL_ENABLE_SuperLU:BOOL=ON
+            -DTPL_ENABLE_SuperLU:BOOL=${enable_superlu}
             -DSuperLU_INCLUDE_DIRS:PATH=${SUPERLU_ROOT_DIR}/include
             -DSuperLU_LIBRARY_DIRS:PATH=${SUPERLU_ROOT_DIR}/lib
             -DTPL_ENABLE_Netcdf:BOOL=ON
