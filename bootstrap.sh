@@ -53,8 +53,13 @@ exw_init_spack ()
     local ewblddir=${basedir}/exawind-builder
     local exwsys=${EXAWIND_SYSTEM:-spack}
 
+    local check_homebrew="no"
     if [ "$(uname)" = "Darwin" ] ; then
        exwsys=osx
+
+       # On OSX we will try to check if brew is installed in a non-standard
+       # location and switch our paths accordingly.
+       check_homebrew="yes"
     fi
 
     cd ${basedir}
@@ -78,7 +83,11 @@ exw_init_spack ()
 
         if [ -d ${ewblddir}/etc/spack/${exwsys} ] ; then
             local cfgdir=${ewblddir}/etc/spack/${exwsys}
-            if [ -f ${cfgdir}/packages.yaml ] ; then
+            if [ "${check_homebrew}" = "yes" ]; then
+                local brew_prefix=$(brew config | awk -F: '/HOMEBREW_PREFIX/ {print $2;}')
+                sed -e "s#/usr/local#${brew_prefix}#g" ${cfgdir}/packages.yaml > spack/etc/spack/packages.yaml
+                have_packages_yaml=yes
+            elif [ -f ${cfgdir}/packages.yaml ] ; then
                 ln -s ${cfgdir}/packages.yaml spack/etc/spack/
                 have_packages_yaml=yes
             fi
