@@ -90,6 +90,12 @@ install_dir_var="${project_name}_INSTALL_PREFIX"
 source_dir_var="${project_name}_SOURCE_DIR"
 ecp_prj_dir=${EXAWIND_PROJECT_DIR:-$(dirname ${EXAWIND_SRCDIR})}
 
+# Setup bash shebang for OSX
+bash_shebang="/bin/bash"
+if [ "$(uname)" = "Darwin" ] ; then
+    bash_shebang='/usr/local/bin/bash'
+fi
+
 # Output and template file
 output_file=$1
 tmpl_file=${EXAWIND_SRCDIR}/etc/script_tmpl.bash
@@ -98,7 +104,7 @@ if [ -z "$output_file" ]; then
     output_file=${project}-${compiler}.sh
 fi
 
-sed -e "s#%%SRCDIR%%#${EXAWIND_SRCDIR}#g;s#%%COMPILER%%#${compiler}#g;s#%%SYSTEM%%#${system}#g;s#%%PROJECT%%#${project}#g;s#%%INSTALL_DIR%%#${install_dir_var}#g;s#%%CODE_DIR%%#${source_dir_var}#g;s#%%EXAWIND_PRJDIR%%#${ecp_prj_dir}#g" $tmpl_file > $output_file
+sed -e "s#%%SRCDIR%%#${EXAWIND_SRCDIR}#g;s#%%COMPILER%%#${compiler}#g;s#%%SYSTEM%%#${system}#g;s#%%PROJECT%%#${project}#g;s#%%INSTALL_DIR%%#${install_dir_var}#g;s#%%CODE_DIR%%#${source_dir_var}#g;s#%%EXAWIND_PRJDIR%%#${ecp_prj_dir}#g;s#%%BASH_SHEBANG%%#${bash_shebang}#" $tmpl_file > $output_file
 chmod a+x ${output_file}
 
 cat <<EOF

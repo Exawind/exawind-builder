@@ -73,6 +73,12 @@ if [[ err_stat -ne 0 ]] ; then
     exit 1
 fi
 
+# Setup bash shebang for OSX
+bash_shebang="/bin/bash"
+if [ "$(uname)" = "Darwin" ] ; then
+    bash_shebang='/usr/local/bin/bash'
+fi
+
 # Output and template file
 output_file=$1
 tmpl_file=${EXAWIND_SRCDIR}/etc/env_tmpl.bash
@@ -81,7 +87,7 @@ if [ -z "$output_file" ]; then
     output_file=exawind-env-${compiler}.sh
 fi
 
-sed -e "s#%%SRCDIR%%#${EXAWIND_SRCDIR}#g;s#%%COMPILER%%#${compiler}#g;s#%%SYSTEM%%#${system}#g;" $tmpl_file > $output_file
+sed -e "s#%%SRCDIR%%#${EXAWIND_SRCDIR}#g;s#%%COMPILER%%#${compiler}#g;s#%%SYSTEM%%#${system}#g;s#%%BASH_SHEBANG%%#${bash_shebang}#" $tmpl_file > $output_file
 chmod a+x ${output_file}
 
 cat <<EOF

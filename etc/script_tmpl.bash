@@ -1,4 +1,4 @@
-#!/bin/bash
+#!%%BASH_SHEBANG%%
 #
 # ExaWind build script for project: %%PROJECT%%
 #

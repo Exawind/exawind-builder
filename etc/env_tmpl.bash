@@ -1,4 +1,4 @@
-#!/bin/bash
+#!%%BASH_SHEBANG%%
 #
 # ExaWind environment source script for system: %%SYSTEM%%
 #
