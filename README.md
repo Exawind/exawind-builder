@@ -37,6 +37,7 @@ details on how to use this to build ExaWind software.
 |`cori`          |   [NERSC Cori](http://www.nersc.gov/users/computational-systems/cori/)                     |
 |`summitdev`     |   [OLCF SummitDev](https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/)      |
 |`snl-ascicgpu`  |   Sandia ASC GPU development machines                                                        |
+|`snl-ceerws` |   Sandia blade workstations |
 |`rhodes`        |   NREL nightly build and test system                                                         |
 
 ## Quick installation 

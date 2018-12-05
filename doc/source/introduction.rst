@@ -23,6 +23,7 @@ particular system.
   ``cori``           `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_
   ``summitdev``      `OLCF SummitDev <https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/>`_
   ``snl-ascicgpu``   Sandia ASC GPU development machines
+  ``snl-ceerws``     Sandia blade workstations
   ``rhodes``         NREL nightly build and test system
   ================= ============================================================================================
 
@@ -36,6 +37,7 @@ particular system.
   cori            intel
   summitdev       gcc, xl, cuda
   snl-ascicgpu    gcc, cuda
+  snl-ceerws      gcc
   Mac OSX         clang, gcc
   =============== ========================
 
