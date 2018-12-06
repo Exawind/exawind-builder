@@ -7,6 +7,7 @@ __EXAWIND_CORE_DIR=${__EXAWIND_CORE_DIR:-$(dirname ${__EXAWIND_CORESRC_DIR})}
 declare -A EXAWIND_MODMAP
 
 export EXAWIND_COMPILER_DEFAULT=gcc
+export EXAWIND_DEP_LOADER=spack
 
 exawind_env ()
 {
@@ -20,15 +21,68 @@ exawind_env ()
     exawind_env_${compiler}
 }
 
-exawind_load_deps ()
+exawind_default_install_dir ()
+{
+    local project_name=$1
+    local root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
+    local install_path=${EXAWIND_INSTALL_DIR}/${project_name}
+
+    echo "==> ${project_name}: Cannot find standard module; attempting to detect local install"
+    echo "==> ${project_name}: Set ${root_dir_var} to provide the exact location"
+    if [ -d ${install_path} ] ; then
+       eval "export $root_dir_var=${install_path}"
+    else
+        echo "==> WARNING! Cannot load dependency: ${project_name}"
+    fi
+}
+
+exawind_load_modules ()
 {
     for dep in $@ ; do
-        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
+        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
 
+        local depname=${EXAWIND_MODMAP[$dep]:-$dep}
         if [ -z ${!root_dir_var} ] ; then
-            module load ${EXAWIND_MODMAP[$dep]:-$dep}
+            module load ${depname} || exawind_default_install_dir $dep
         fi
+        echo "==> ${depname} = ${!root_dir_var}"
     done
+}
+
+exawind_load_spack ()
+{
+    for dep in $@ ; do
+        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
+
+        local depname=${EXAWIND_MODMAP[$dep]:-$dep}
+        if [ -z ${!root_dir_var} ] ; then
+            ${SPACK_EXE} module tcl find $depname %${SPACK_COMPILER} &>/dev/null &&
+            {
+                module load $(${SPACK_EXE} module tcl find $depname %${SPACK_COMPILER})
+                eval "export $root_dir_var=$(${SPACK_EXE} location -i $depname %${SPACK_COMPILER})"
+            } || exawind_default_install_dir $dep
+        fi
+        echo "==> ${depname} = ${!root_dir_var}"
+    done
+}
+
+exawind_load_deps ()
+{
+    local loader_type=${EXAWIND_DEP_LOADER:-spack}
+
+    case ${loader_type} in
+        spack)
+            exawind_load_spack $@
+            ;;
+
+        module)
+            exawind_load_modules $@
+            ;;
+        *)
+            echo "==> ERROR! Cannot determine how to load dependencies"
+            exit 1
+            ;;
+    esac
 }
 
 exawind_load_user_configs ()
