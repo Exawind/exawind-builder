@@ -28,25 +28,7 @@ exawind_env_intel ()
     export FC=$(which ftn)
     export BLASLIB="$CRAY_LIBSCI_PREFIX_DIR/lib/libsci_intel.a"
 
-    export EXAWIND_COMPILER=${EXAWIND_COMPILER:-intel}
-    export SPACK_COMPILER=${SPACK_COMPILER:-${EXAWIND_COMPILER}}
-    exawind_spack_env
+    exawind_spack_env intel
 
     exawind_load_deps cmake
 }
-
-# exawind_load_deps () {
-
-#     for dep in $@ ; do
-#         mod_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')"
-#         root_dir_var="${mod_var}_ROOT_DIR"
-#         root_var="${mod_var}_ROOT"
-
-#         if [ -n "${!root_dir_var}" ] ; then continue ; fi
-
-#         if [ -z ${!root_var} ] ; then
-#             module load ${EXAWIND_MODMAP[$dep]:-$dep}
-#         fi
-#         eval "export $root_dir_var=${!root_var}"
-#     done
-# }

@@ -6,6 +6,8 @@ export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/hpacf/2018-11-09/spack/share/spack/mo
 declare -A EXAWIND_MODMAP
 EXAWIND_MODMAP[trilinos]=trilinos/develop
 
+EXAWIND_DEP_LOADER=module
+
 exawind_eagle_gpu ()
 {
     export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper}
@@ -18,6 +20,8 @@ exawind_eagle_gpu ()
     export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
     export CXX=$(which mpic++)
     export CUDACXX=$(which nvcc)
+
+    echo "==> Activated CUDA programming environment"
 }
 
 exawind_env_gcc ()
@@ -53,17 +57,4 @@ exawind_env_clang ()
 {
     echo "ERROR: No Intel environment set up for NREL Eagle"
     exit 1
-}
-
-exawind_load_deps ()
-{
-    for dep in $@ ; do
-        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
-
-        local depname=${EXAWIND_MODMAP[$dep]:-$dep}
-        if [ -z ${!root_dir_var} ] ; then
-            module load ${depname}
-        fi
-        echo "==> ${depname} = ${!root_dir_var}"
-    done
 }

@@ -6,6 +6,8 @@ export EXAWIND_NUM_JOBS_DEFAULT=24
 declare -A EXAWIND_MODMAP
 EXAWIND_MODMAP[trilinos]=trilinos/develop
 
+EXAWIND_DEP_LOADER=module
+
 exawind_peregrine_common ()
 {
     local compiler_arg=$1
@@ -31,6 +33,8 @@ exawind_env_gcc ()
     export CC=$(which mpicc)
     export CXX=$(which mpicxx)
     export FC=$(which mpifort)
+
+    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/gcc-7.3.0)"
 }
 
 exawind_env_intel ()
@@ -44,17 +48,6 @@ exawind_env_intel ()
     export CC=$(which mpiicc)
     export CXX=$(which mpiicpc)
     export FC=$(which mpiifort)
-}
 
-exawind_load_deps ()
-{
-    for dep in $@ ; do
-        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
-
-        local depname=${EXAWIND_MODMAP[$dep]:-$dep}
-        if [ -z ${!root_dir_var} ] ; then
-            module load ${depname}
-        fi
-        echo "==> ${depname} = ${!root_dir_var}"
-    done
+    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/intel-18.0.4)"
 }

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+EXAWIND_DEP_LOADER=module
+
 exawind_module_env ()
 {
     export MODULE_PREFIX=/opt/utilities/module_prefix
@@ -27,6 +29,8 @@ exawind_env_gcc ()
     export CC=mpicc
     export CXX=mpicxx
     export FC=mpifort
+
+    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/gcc-7.3.0)"
 }
 
 exawind_env_intel ()
@@ -41,16 +45,6 @@ exawind_env_intel ()
     export CC=mpiicc
     export CXX=mpiicpc
     export FC=mpiifort
-}
 
-exawind_load_deps ()
-{
-    for dep in $@ ; do
-        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
-
-        if [ -z ${!root_dir_var} ] ; then
-            module load $dep
-        fi
-        echo "==> ${depname} = ${!root_dir_var}"
-    done
+    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/intel-18.0.4)"
 }

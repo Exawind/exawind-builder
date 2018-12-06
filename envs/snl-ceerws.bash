@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ${__EXAWIND_CORE_DIR}/envs/spack.bash
+
 export EXAWIND_NUM_JOBS_DEFAULT=32
 
 exawind_env_common ()
@@ -11,17 +13,13 @@ exawind_env_common ()
     # Spack has issues with the default 2.7 python from sierra-devel
     module unload sierra-python/2.7
     module load sierra-python/3.6.3
-
-    export SPACK_ROOT=${SPACK_ROOT:-${EXAWIND_PROJECT_DIR}/spack}
-    export SPACK_EXE=${SPACK_ROOT}/bin/spack
-    module use ${SPACK_ROOT}/share/spack/modules/$(${SPACK_EXE} arch)
 }
 
 exawind_env_gcc ()
 {
     exawind_env_common sierra-devel
+    exawind_spack_env gcc
 
-    export SPACK_COMPILER=gcc
     export CC=$(which mpicc)
     export CXX=$(which mpicxx)
     export F77=$(which mpifort)
@@ -33,6 +31,7 @@ exawind_env_gcc ()
 exawind_env_intel ()
 {
     exawind_env_common sierra-devel/intel
+    exawind_spack_env intel
 
     export SPACK_COMPILER=intel
     export CC=$(which mpiicc)
@@ -43,16 +42,8 @@ exawind_env_intel ()
     exawind_load_deps cmake zlib libxml2
 }
 
-exawind_load_deps ()
+exawind_env_clang ()
 {
-    for dep in $@ ; do
-        root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
-
-        local depname=${EXAWIND_MODMAP[$dep]:-$dep}
-        if [ -z ${!root_dir_var} ] ; then
-            module load $(${SPACK_EXE} module tcl find $depname %${SPACK_COMPILER})
-            eval "export $root_dir_var=$(${SPACK_EXE} location -i $depname %${SPACK_COMPILER})"
-        fi
-        echo "==> ${depname} = ${!root_dir_var}"
-    done
+    echo "ERROR: No CLANG environment set up for snl-ceerws"
+    exit 1
 }
