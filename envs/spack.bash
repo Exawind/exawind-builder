@@ -31,7 +31,12 @@ exawind_env_gcc ()
 
 exawind_env_intel ()
 {
-    exawind_spack_env intel
+    if [[ $OSTYPE = "darwin"* ]] ; then
+        echo "ERROR: Intel compiler not supported on OSX"
+        exit 1
+    else
+        exawind_spack_env intel
+    fi
 }
 
 exawind_env_clang ()
