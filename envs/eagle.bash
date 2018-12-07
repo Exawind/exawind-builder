@@ -25,6 +25,9 @@ exawind_eagle_common ()
 
 exawind_eagle_gpu ()
 {
+    # Enable CUDA support in OpenMPI
+    export OMPI_MCA_opal_cuda_support=1
+
     export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper}
     export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
     export CUDA_MANAGED_FORCE_DEVICE_ALLOC=${CUDA_MANAGED_FORCE_DEVICE_ALLOC:-1}
@@ -53,6 +56,9 @@ exawind_env_gcc ()
     if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
         export CC=$(which mpicc)
         export CXX=$(which mpic++)
+
+        # Suppress warnings about CUDA when running on standard nodes
+        export OMPI_MCA_opal_cuda_support=0
     else
         module load cuda/10.0.130
         export CC=$(which gcc)
