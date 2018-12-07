@@ -59,6 +59,9 @@ exawind_env_gcc ()
 
         # Suppress warnings about CUDA when running on standard nodes
         export OMPI_MCA_opal_cuda_support=0
+
+        # Set arch flags for optimization
+        export EXAWIND_ARCH_FLAGS="-march=skylake-avx512 -mtune=skylake-avx512"
     else
         module load cuda/10.0.130
         export CC=$(which gcc)
@@ -83,6 +86,8 @@ exawind_env_intel ()
 
        # Suppress warnings about CUDA when running on standard nodes
        export OMPI_MCA_opal_cuda_support=0
+
+       export EXAWIND_ARCH_FLAGS="-xSKYLAKE-AVX512"
     else
         echo "==> WARNING: Support for CUDA with Intel compilers not tested"
         module load cuda/10.0.130
