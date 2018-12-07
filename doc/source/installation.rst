@@ -51,6 +51,7 @@ To install using *bootstrap* script please follow these steps.
         -s <system>    - Select system profile (spack, cori, summitdev, etc.)
         -c <compiler>  - Select compiler type (gcc, clang, intel, etc.)
         -p <path>      - Root path for exawind project (default: ${HOME}/exawind)
+        -n             - Configure exawind-builder to use ninja build system
 
    A few examples are shown below
 
@@ -80,6 +81,15 @@ Nalu-Wind.
      installing packages. For example, to use GCC 7.2.0 version instead of older
      versions, it might be necessary to set ``SPACK_COMPILER=gcc%7.2.0`` before
      executing the bootstrap script.
+
+   - `Ninja <https://ninja-build.org>`_ is a build system that is an alternative
+     to :program:`make`. It provides several features of :program:`make` but is
+     considerably faster when building code. The speedup is particularly evident
+     when compiling Trilinos. Since codes used in ExaWind project contain
+     Fortran files, it requires a `special fork
+     <https://github.com/Kitware/ninja>`_ of Ninja (maintained by Kitware). If
+     you have already executed bootstrap and forgot to add the ``-n`` flag, then
+     use :ref:`get-ninja` to install Ninja for your use.
 
 .. _homebrew-setup:
 

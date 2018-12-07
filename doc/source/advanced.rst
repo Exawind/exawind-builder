@@ -8,7 +8,7 @@ layout <exawind_dir_layout>`, cloning ``exawind-builder`` repository. In this
 example, we will create the :file:`exawind` base directory within the user's
 home directory. Modify this appropriately.
 
-.. code-block:: bash
+.. code-block:: console
 
    cd ${HOME}  # Change this to your preferred location
 
@@ -44,7 +44,7 @@ Setup ExaWind directory structure as described in :ref:`exawind_dir_layout`.
 
 #. Clone the spack repository
 
-   .. code-block:: bash
+   .. code-block:: console
 
       cd ${HOME}/exawind
       git clone https://github.com/LLNL/spack.git
@@ -57,7 +57,7 @@ Setup ExaWind directory structure as described in :ref:`exawind_dir_layout`.
    cutting down on build time. It also pins other packages to specific versions
    so that the build is consistent with other machines.
 
-   .. code-block:: bash
+   .. code-block:: console
 
       cd ${HOME}/exawind/exawind-builder/etc/spack/osx
       cp packages.yaml ${HOME}/.spack/$(spack arch -p)/
@@ -76,7 +76,7 @@ Setup ExaWind directory structure as described in :ref:`exawind_dir_layout`.
       For automatic updates, users can symlink the packages.yaml file within the
       spack configuration directory to the version in ``exawind-builder``
 
-      .. code-block:: bash
+      .. code-block:: console
 
          ln -s packages.yaml ${HOME}/.spack/$(spack arch -p)/
 
@@ -84,14 +84,14 @@ Setup ExaWind directory structure as described in :ref:`exawind_dir_layout`.
    recommended that the users use the compiler configuration provided with
    ``exawind-builder``.
 
-   .. code-block:: bash
+   .. code-block:: console
 
       cp compilers.yaml ${HOME}/.spack/$(spack arch -p)/
 
    For more flexibility, users can use ``spack`` to determine the compilers
    available on their system.
 
-   .. code-block:: bash
+   .. code-block:: console
 
       spack compiler find
 
@@ -109,7 +109,7 @@ Setup ExaWind directory structure as described in :ref:`exawind_dir_layout`.
    systems the following commands will run very quickly and will not attempt to
    download and build packages.
 
-   .. code-block:: bash
+   .. code-block:: console
 
       spack install cmake
       spack install mpi
@@ -121,7 +121,7 @@ Setup ExaWind directory structure as described in :ref:`exawind_dir_layout`.
 #. Install remaining dependencies via Spack. The following steps will download,
    configure, and compile packages.
 
-   .. code-block:: bash
+   .. code-block:: console
 
       # These dependencies must be installed (mandatory)
       spack install superlu
@@ -149,7 +149,7 @@ Setup ExaWind directory structure as described in :ref:`exawind_dir_layout`.
 Upon successful installation, executing ``spack find`` at the command line
 should show you the following packages (on Mac OSX)
 
-.. code-block:: bash
+.. code-block:: console
 
    $ spack find
    ==> 12 installed packages.
@@ -167,7 +167,7 @@ Generate builder configuration
 Create your specific configuration in :file:`${HOME}/exawind/exawind-config.sh`.
 A sample file is shown below
 
-.. code-block:: bash
+.. code-block:: console
 
    ### Example exawind-config.sh file
    #
@@ -205,7 +205,7 @@ Generating Build Scripts
 ``exawind-builder`` provides a :file:`new-script.sh` command to generate build
 scripts for combination of system, project, and compiler. The basic usage is shown below
 
-.. code-block:: bash
+.. code-block:: console
 
    bash$ ./new-script.sh -h
    new-script.sh [options] [output_file]
@@ -222,7 +222,7 @@ scripts for combination of system, project, and compiler. The basic usage is sho
 So if the user desires to generate a build script for Trilinos on the NERSC Cori
 system using the Intel compiler, they would execute the following at the command line
 
-.. code-block:: bash
+.. code-block:: console
 
    # Switch to scripts directory
    cd ${HOME}/exawind/scripts
@@ -236,6 +236,74 @@ system using the Intel compiler, they would execute the following at the command
    # Create a script with a different name
    ../exawind-builder/new-script.sh -s cori -c intel -p trilinos trilinos-haswell.sh
 
+
+.. _create-env:
+
+Creating runtime environment script
+-----------------------------------
+
+``exawind-builder`` provides a :file:`create-env.sh` command to generate a
+source-able script that can be used within job submission scripts as well as to
+recreate the environment used to build the code in interactive shells.
+
+.. code-block:: console
+
+   create-env.sh [options] [output_file_name]
+
+   By default it will create a file called exawind-env-$COMPILER.sh
+
+   Options:
+     -h             - Show help message and exit
+     -s <system>    - Select system profile (spack, cori, summitdev, etc.)
+     -c <compiler>  - Select compiler type (gcc, clang, intel, etc.)
+
+Sample usage shown below
+
+.. code-block:: console
+
+   # Create a new environment file
+   cd ${HOME}/exawind/scripts
+
+   ../exawind-builder/create-env.sh -s eagle -c gcc
+
+   # Source the script within interactive shells
+   source ./exawind-env-gcc.sh
+
+   # Load additional modules
+   exawind_load_deps hdf5 netcdf
+
+It is recommended that the user use :func:`exawind_load_deps` instead of
+:program:`spack load` or :program:`module load` as this has several advantages:
+``exawind-builder`` will automatically use spack/module to load depending on the
+system you are on, so you can use one command across different systems; this
+command will respect :envvar:`EXAWIND_MODMAP` and load the appropriate module
+that you have configured instead of the defaults on the system; it will
+configure CUDA based on :envvar:`ENABLE_CUDA`.
+
+.. _get-ninja:
+
+Configuring exawind-builder to use Ninja
+----------------------------------------
+
+`Ninja <https://ninja-build.org>`_ is a build system that is an alternative to
+:program:`make`. It provides several features of :program:`make` but is
+considerably faster when building code. The speedup is particularly evident when
+compiling Trilinos. Since codes used in ExaWind project contain Fortran files,
+it requires a `special fork <https://github.com/Kitware/ninja>`_ of Ninja
+(maintained by Kitware). ``exawind-builder`` provides a script
+:file:`get-ninja.sh` to fetch and configure Ninja for builds.
+
+.. code-block:: console
+
+   # Get Ninja
+   cd ${HOME}/exawind
+   ./exawind-builder/utils/get-ninja.sh
+
+.. note::
+
+   You will need to execute ``cmake_full`` to force CMake to recreate build
+   files using Ninja if they were previously configured to use
+   :file:`Makefiles`.
 
 .. _code-build-steps:
 

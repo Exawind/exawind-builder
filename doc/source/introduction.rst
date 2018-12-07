@@ -27,7 +27,9 @@ particular system.
   ``rhodes``         NREL nightly build and test system
   ================= ============================================================================================
 
-  The following compilers are configured for each machine.
+  The following compilers are configured for each machine. In situations where
+  multiple compilers are present, we recommend that the users use the first one.
+  The latter ones have not received enough testing and might have issues.
 
   =============== ========================
   Environment     Compilers

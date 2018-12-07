@@ -88,6 +88,13 @@ ExaWind Builder configuration
    For system configuration using Spack, the compiler flag (e.g., ``%gcc``) is
    automatically added to the spec.
 
+.. envvar:: EXAWIND_MOD_LOADER
+
+   This variable determins whether :program:`spack` or :program:`module` is used
+   to load dependencies when compiling codes. The default value is set by the
+   system that users are using ``exawind-builder`` on and rarely needs to be
+   changed by the user.
+
 .. envvar:: EXAWIND_NUM_JOBS
 
    The maximum number of parallel build jobs to execute when ``make`` is
@@ -109,6 +116,15 @@ ExaWind Builder configuration
 .. envvar:: CUDA_LAUNCH_BLOCKING
 
    Variable set to control Kokkos configuration. Defaults to 1.
+
+   See `Kokkos Wiki <https://github.com/kokkos/kokkos/wiki/Compiling#43-using-trilinos-cmake-build-system>`_ for more details.
+
+.. envvar:: CUDA_MANAGED_FORCE_DEVICE_ALLOC
+
+   Variable necessary when CUDA UVM is enabled (currently required for certain
+   Trilinos packages) that manages device allocation.  Default value is 1.
+
+   See `Kokkos Wiki <https://github.com/kokkos/kokkos/wiki/Compiling#43-using-trilinos-cmake-build-system>`_ for more details.
 
 .. envvar:: SPACK_ROOT
 
@@ -326,6 +342,15 @@ Core functions
 
       exawind_ctest --output-on-failure -R ablNeutralEdge
 
+.. function:: exawind_run [args...]
+
+   Runs an arbitrary command within the environment used to build the code
+
+.. function:: exawind_guess_make_type
+
+   Helper function to determine whether to use :program:`make` or
+   :program:`ninja` when compiling the code.
+
 System specific functions
 -------------------------
 
@@ -338,9 +363,28 @@ System specific functions
    Configuration for the :envvar:`${EXAWIND_COMPILER}` if supported on this
    particular system.
 
+.. function:: exawind_load_modules [dep ...]
+
+   Uses :program:`module load` command to load modules. This is a specialization
+   of :func:`exawind_load_deps` on systems that have all dependencies available
+   via modules. Examples are: NREL Eagle, Peregrine, and Rhodes.
+
+.. function:: exawind_load_spack [dep ...]
+
+   Uses :program:`spack load` command to load dependencies. This is a
+   specialization of :func:`exawind_load_deps` on most systems which uses spack
+   to manage all dependencies.
+
 .. function:: exawind_load_deps dep [dep ...]
 
-   Loads the required dependencies either via spack or module load.
+   Loads the required dependencies either via spack or module load. Users should
+   use this command elsewhere.
+
+.. function:: exawind_default_install_dir dep
+
+   Check if the default installation location for a project
+   (``${EXAWIND_INSTALL_DIR}/${PROJECT_NAME}``) exists and if so set
+   :envvar:`${PROJECTNAME_ROOT_DIR}`.
 
 Project specific functions
 --------------------------
