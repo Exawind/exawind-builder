@@ -74,6 +74,9 @@ exawind_env_intel ()
     if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
        export CC=$(which mpiicc)
        export CXX=$(which mpiicxx)
+
+       # Suppress warnings about CUDA when running on standard nodes
+       export OMPI_MCA_opal_cuda_support=0
     else
         echo "==> WARNING: Support for CUDA with Intel compilers not tested"
         module load cuda/10.0.130
