@@ -6,6 +6,29 @@ __EXAWIND_CORE_DIR=${__EXAWIND_CORE_DIR:-$(dirname ${__EXAWIND_CORESRC_DIR})}
 # Build directories that must be removed when performing cmake_full
 declare -a _EXAWIND_PROJECT_CMAKE_RMEXTRA_
 
+exawind_get_compiler_flags ()
+{
+    local cxxflags=${CMAKE_CXX_FLAGS:-$CXXFLAGS}
+    local fflags=${CMAKE_Fortran_FLAGS:-$FFLAGS}
+    local cflags=${CMAKE_C_FLAGS:-$CFLAGS}
+
+    if [ -n "${EXAWIND_ARCH_FLAGS}" ] ; then
+        cxxflags="${cxxflags} ${EXAWIND_ARCH_FLAGS}"
+        cflags="${cflags} ${EXAWIND_ARCH_FLAGS}"
+        fflags="${fflags} ${EXAWIND_ARCH_FLAGS}"
+    fi
+
+    if [ -n "${cxxflags}" ] ; then
+        local compiler_flags=(
+            -DCMAKE_CXX_FLAGS="'${cxxflags}'"
+            -DCMAKE_C_FLAGS="'${cflags}'"
+            -DCMAKE_Fortran_FLAGS="'${fflags}'"
+        )
+
+        echo "${compiler_flags[@]}"
+    fi
+}
+
 exawind_cmake_full ()
 {
     set +e

@@ -14,6 +14,8 @@ exawind_cmake_base ()
         install_dir="-DCMAKE_INSTALL_PREFIX=$TIOGA_UTILS_INSTALL_PREFIX"
     fi
 
+    local compiler_flags=$(exawind_get_compiler_flags)
+
     # Force CMake to use absolute paths for the libraries so that it doesn't
     # pick up versions installed in `/usr/lib64` on peregrine
     local lib_path_save=${LIBRARY_PATH}
@@ -26,6 +28,7 @@ exawind_cmake_base ()
         -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR}
         -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR}
         -DNALU_DIR:PATH=${NALU_WIND_ROOT_DIR}
+        ${compiler_flags}
         ${install_dir}
         ${extra_args}
         ${TIOGA_UTILS_SOURCE_DIR:-..}/src

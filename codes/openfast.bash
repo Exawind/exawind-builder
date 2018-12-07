@@ -23,6 +23,8 @@ exawind_cmake_base ()
         install_dir="$(cd .. && pwd)/install"
     fi
 
+    local compiler_flags=$(exawind_get_compiler_flags)
+
     # Configure BLAS/LAPACK if user has setup the BLASLIB variable
     local blas_lapack=""
     if [ -n "$BLASLIB" ] ; then
@@ -50,6 +52,7 @@ exawind_cmake_base ()
         -DHDF5_ROOT:PATH=${HDF5_ROOT_DIR}
         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON
         ${blas_lapack}
+        ${compiler_flags}
         ${extra_args}
         ${OPENFAST_SOURCE_DIR:-..}
     )

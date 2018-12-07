@@ -14,6 +14,8 @@ exawind_cmake_base ()
         install_dir="-DCMAKE_INSTALL_PREFIX=$WIND_UTILS_INSTALL_PREFIX"
     fi
 
+    local compiler_flags=$(exawind_get_compiler_flags)
+
     # Force CMake to use absolute paths for the libraries so that it doesn't
     # pick up versions installed in `/usr/lib64` on peregrine
     local lib_path_save=${LIBRARY_PATH}
@@ -25,6 +27,7 @@ exawind_cmake_base ()
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
         -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR}
         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=TRUE
+        ${compiler_flags}
         ${install_dir}
         ${extra_args}
         ${WIND_UTILS_SOURCE_DIR:-..}

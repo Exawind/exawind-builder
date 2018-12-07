@@ -36,6 +36,7 @@ exawind_cmake_base ()
         install_dir="-DCMAKE_INSTALL_PREFIX=$NALU_WIND_INSTALL_PREFIX"
     fi
 
+    local compiler_flags=$(exawind_get_compiler_flags)
 
     # Force CMake to use absolute paths for the libraries so that it doesn't
     # pick up versions installed in `/usr/lib64` on peregrine
@@ -58,6 +59,7 @@ exawind_cmake_base ()
         -DOpenFAST_DIR:PATH=${OPENFAST_ROOT_DIR}
         -DENABLE_TESTS:BOOL=${ENABLE_TESTS:-ON}
         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON
+        ${compiler_flags}
         ${install_dir}
         ${extra_args}
         ${NALU_WIND_SOURCE_DIR:-..}

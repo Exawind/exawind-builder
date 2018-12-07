@@ -21,6 +21,8 @@ exawind_cmake_base ()
         install_dir="$(cd .. && pwd)/install"
     fi
 
+    local compiler_flags=$(exawind_get_compiler_flags)
+
     # Configure BLAS/LAPACK if user has setup the BLASLIB variable
     local blas_lapack=""
     if [ -n "$BLASLIB" ] ; then
@@ -144,6 +146,7 @@ exawind_cmake_base ()
             -DTPL_ENABLE_BLAS:BOOL=ON
             ${blas_lapack}
             ${kokkos_args}
+            ${compiler_flags}
             ${extra_args}
             ${TRILINOS_SOURCE_DIR:-..}
     )
