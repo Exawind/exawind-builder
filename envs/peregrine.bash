@@ -33,8 +33,6 @@ exawind_env_gcc ()
     export CC=$(which mpicc)
     export CXX=$(which mpicxx)
     export FC=$(which mpifort)
-
-    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/gcc-7.3.0)"
 }
 
 exawind_env_intel ()
@@ -42,12 +40,10 @@ exawind_env_intel ()
     module purge
     exawind_peregrine_common intel-18.0.4
 
-    module load intel-parallel-studio/cluster.2019.1
-    module load binutils intel-mpi/2018.4.274 intel-mkl/2018.4.274 cmake
+    module load intel-parallel-studio
+    module load binutils intel-mpi intel-mkl cmake
 
     export CC=$(which mpiicc)
     export CXX=$(which mpiicpc)
     export FC=$(which mpiifort)
-
-    echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/intel-18.0.4)"
 }
