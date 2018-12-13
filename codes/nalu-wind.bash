@@ -58,6 +58,7 @@ exawind_cmake_base ()
         -DENABLE_OPENFAST:BOOL=${ENABLE_OPENFAST:-ON}
         -DOpenFAST_DIR:PATH=${OPENFAST_ROOT_DIR}
         -DENABLE_TESTS:BOOL=${ENABLE_TESTS:-ON}
+        -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON
         ${compiler_flags}
         ${install_dir}
@@ -75,7 +76,6 @@ exawind_cmake_osx ()
 {
     local extra_args="$@"
     exawind_cmake_base \
-        -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON \
         -DMPIEXEC_PREFLAGS:STRING='"--use-hwthread-cpus --oversubscribe"' \
         ${extra_args}
 }

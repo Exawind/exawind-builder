@@ -26,6 +26,7 @@ exawind_cmake_base ()
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
         -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR}
+        -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=TRUE
         ${compiler_flags}
         ${install_dir}

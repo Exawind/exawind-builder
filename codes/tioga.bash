@@ -20,6 +20,7 @@ exawind_cmake_base ()
 
     local cmake_cmd=(
         cmake
+        -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         ${install_dir}
         ${compiler_flags}
         ${extra_args}

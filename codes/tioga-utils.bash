@@ -28,6 +28,7 @@ exawind_cmake_base ()
         -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR}
         -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR}
         -DNALU_DIR:PATH=${NALU_WIND_ROOT_DIR}
+        -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         ${compiler_flags}
         ${install_dir}
         ${extra_args}
