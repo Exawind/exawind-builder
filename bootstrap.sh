@@ -134,6 +134,9 @@ exw_install_deps ()
 exw_create_scripts ()
 {
     local exwbld=${EXAWIND_PROJECT_DIR}/exawind-builder
+    if [ ! -d ${EXAWIND_PROJECT_DIR}/scripts ]; then
+        mkdir -p ${EXAWIND_PROJECT_DIR}/scripts
+    fi
     cd ${EXAWIND_PROJECT_DIR}/scripts
 
     echo "==> Creating build scripts for known projects"
