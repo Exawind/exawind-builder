@@ -25,7 +25,7 @@ exawind_cmake_base ()
 
     # Configure BLAS/LAPACK if user has setup the BLASLIB variable
     local blas_lapack=""
-    if [ -n "$BLASLIB" ] ; then
+    if [[ "${EXAWIND_USE_BLASLIB:-ON}" = "ON" && -n "$BLASLIB" ]] ; then
         blas_lapack="-DTPL_BLAS_LIBRARIES=$BLASLIB -DTPL_LAPACK_LIBRARIES=$BLASLIB"
     fi
 

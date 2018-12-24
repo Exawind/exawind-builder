@@ -14,34 +14,38 @@ Pre-built configurations exist for the following systems. Use the ``system
 name`` shown on the following table when generating scripts targeting that
 particular system.
 
-  ================= ============================================================================================
-  System Name       Description
-  ================= ============================================================================================
-  ``spack``          `Spack <https:://github.com/LLNL/spack>`_ (system agnostic)
-  ``peregrine``      `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
-  ``eagle``          `NREL Eagle <https://www.nrel.gov/hpc/eagle-system.html>`_
-  ``cori``           `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_
-  ``summitdev``      `OLCF SummitDev <https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/>`_
-  ``snl-ascicgpu``   Sandia ASC GPU development machines
-  ``snl-ceerws``     Sandia blade workstations
-  ``rhodes``         NREL nightly build and test system
-  ================= ============================================================================================
+  ==================== ============================================================================================
+  System Name          Description
+  ==================== ============================================================================================
+  ``spack``             `Spack <https:://github.com/LLNL/spack>`_ (system agnostic)
+  ``peregrine``         `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
+  ``eagle``             `NREL Eagle <https://www.nrel.gov/hpc/eagle-system.html>`_
+  ``cori``              `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_
+  ``summitdev``         `OLCF SummitDev <https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/>`_
+  ``snl-ghost``         Sandia Ghost cluster
+  ``snl-skybridge``     Sandia Skybridge cluster
+  ``snl-ascicgpu``      Sandia ASC GPU development machines
+  ``snl-ceerws``        Sandia blade workstations
+  ``rhodes``            NREL nightly build and test system
+  ==================== ============================================================================================
 
   The following compilers are configured for each machine. In situations where
   multiple compilers are present, we recommend that the users use the first one.
   The latter ones have not received enough testing and might have issues.
 
-  =============== ========================
-  Environment     Compilers
-  =============== ========================
-  peregrine       gcc, intel
-  eagle           gcc
-  cori            intel
-  summitdev       gcc, xl, cuda
-  snl-ascicgpu    gcc, cuda
-  snl-ceerws      gcc
-  Mac OSX         clang, gcc
-  =============== ========================
+  ================== ========================
+  Environment        Compilers
+  ================== ========================
+  peregrine          gcc, intel
+  eagle              gcc
+  cori               intel
+  summitdev          gcc, xl, cuda
+  snl-ghost          intel
+  snl-skybridge      intel
+  snl-ascicgpu       gcc, cuda
+  snl-ceerws         gcc
+  Mac OSX            clang, gcc
+  ================== ========================
 
 
 Exawind-builder provides CMake configurations for the following codes used

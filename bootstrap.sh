@@ -30,10 +30,25 @@ exw_check_system ()
     return 0
 }
 
+exw_bstrap_env ()
+{
+    local basedir=${EXAWIND_PROJECT_DIR:-${HOME}/exawind}
+    local ewblddir=${basedir}/exawind-builder
+    local exwsys=${EXAWIND_SYSTEM:-spack}
+    local env_file=${exblddir}/etc/bootstrap/${exwsys}.bash
+
+    if [ -f ${env_file} ] ; then
+        echo "==> Sourcing bootstrap environment: ${env_file}"
+        source ${env_file}
+    fi
+}
+
 exw_init ()
 {
     export EXAWIND_PROJECT_DIR=${EXAWIND_PROJECT_DIR:-${HOME}/exawind}
     local basedir=${EXAWIND_PROJECT_DIR}
+
+    exw_bstrap_env
 
     if [ ! -d ${basedir} ] ; then
         echo "==> Creating project structure in ${EXAWIND_PROJECT_DIR}"
@@ -49,7 +64,7 @@ exw_init ()
 
 exw_init_spack ()
 {
-    local basedir=${EXAWIND_PROJECT_DIR:-$(pwd)}
+    local basedir=${EXAWIND_PROJECT_DIR:-${HOME}/exawind}
     local ewblddir=${basedir}/exawind-builder
     local exwsys=${EXAWIND_SYSTEM:-spack}
 
@@ -95,6 +110,10 @@ exw_init_spack ()
             if [ -f ${cfgdir}/compilers.yaml ] ; then
                 ln -s ${cfgdir}/compilers.yaml spack/etc/spack/
                 have_compiler_yaml=yes
+            fi
+
+            if [ -f ${cfgdir}/config.yaml ] ; then
+                ln -s ${cfgdir}/config.yaml spack/etc/spack
             fi
         fi
 

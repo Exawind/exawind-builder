@@ -107,6 +107,13 @@ ExaWind Builder configuration
    Kokkos. The default path is assumed to be
    :file:`${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper`
 
+.. envvar:: EXAWIND_CUDA_SM
+
+   Variable used to set the target architecture for CUDA compilations. This
+   variable is a numeric value. For example, when targeting Volta cards the
+   desired ``nvcc`` option is ``-arch=sm_70``, then set this variable to ``70``.
+   Currently, used by non-Trilinos codes like HYPRE, PIFUS, and TIOGA.
+
 .. envvar:: KOKKOS_ARCH
 
    The architectures for which Kokkos builds are optimized. See `Kokkos Wiki
@@ -266,6 +273,12 @@ attempts to automatically detect BLAS/LAPACK.
 
 CUDA is enabled by default on ``summitdev``, ``snl-ascicgpu``, and is optionally
 available on ``eagle``.
+
+.. envvar:: EXAWIND_USE_BLASLIB
+
+   Use :envvar:`BLASLIB` variable declared by Intel MKL for BLAS/LAPACK. The
+   default is ``ON``. The user can set this to ``OFF`` to force builds with
+   Spack's netlib-lapack package.
 
 
 HYPRE
