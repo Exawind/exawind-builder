@@ -1,5 +1,11 @@
 #!/bin/bash
 
+_EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
+    src
+    tests
+    Testing
+)
+
 exawind_proj_env ()
 {
     echo "==> Loading dependencies for wind-utils..."

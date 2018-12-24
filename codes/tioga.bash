@@ -3,6 +3,12 @@
 # Throttle max processors for fortran build with modules
 export EXAWIND_NUM_JOBS_DEFAULT=4
 
+_EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
+    src
+    driver
+    gridGen
+)
+
 exawind_proj_env ()
 {
     echo "==> TIOGA: No additional dependencies"

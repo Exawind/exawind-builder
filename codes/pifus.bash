@@ -1,5 +1,10 @@
 #!/bin/bash
 
+_EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
+    src
+    driver
+)
+
 exawind_proj_env ()
 {
     echo "==> PIFUS: No additional dependencies"

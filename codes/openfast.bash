@@ -3,6 +3,13 @@
 # Throttle max number of jobs to ensure fortran modules build properly
 export EXAWIND_NUM_JOBS_DEFAULT=8
 
+_EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
+    modules-local
+    modules-ext
+    glue-codes
+    ftnmods
+)
+
 exawind_proj_env ()
 {
     if [ "${FAST_CPP_API:-ON}" = "ON" ] ; then
