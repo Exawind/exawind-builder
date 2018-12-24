@@ -18,7 +18,7 @@ exawind_env_common ()
     export CUDA_MANAGED_FORCE_DEVICE_ALLOC=${CUDA_MANAGED_FORCE_DEVICE_ALLOC:-1}
     export ENABLE_CUDA=${ENABLE_CUDA:-ON}
     export KOKKOS_ARCH=${KOKKOS_ARCH:-Pascal60}
-    export HYPRE_CUDA_SM=${HYPRE_CUDA_SM:-60}
+    export EXAWIND_CUDA_SM=${EXAWIND_CUDA_SM:-60}
 }
 
 exawind_env_gcc ()

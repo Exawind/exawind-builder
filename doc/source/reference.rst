@@ -278,12 +278,12 @@ Both OpenMP and CUDA are disabled by default for HYPRE builds.
 
    Boolean flag indicating whether 64-bit integer support is enabled. (default: ON)
 
-.. envvar:: HYPRE_CUDA_SM
+.. envvar:: EXAWIND_CUDA_SM
 
    A number indicating the arch flag used when building HYPRE on CUDA. Requires
    HYPRE v2.15.0 or newer. For example, if the user wishes to target Pascal60
    cards, then the nvcc flag is ``sm_60`` and, therefore, the
-   ``HYPRE_CUDA_SM=60``, use ``70`` for Volta70 cards and so on.
+   ``EXAWIND_CUDA_SM=60``, use ``70`` for Volta70 cards and so on.
 
 
 Function reference
