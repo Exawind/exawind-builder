@@ -49,9 +49,12 @@ exawind_cmake_base ()
     local enable_superlu=ON
     local enable_klu2=OFF
     if [ "${ENABLE_KLU2:-OFF}" = "ON" ] ; then
-        enable_superlu=OFF
         enable_klu2=ON
-        echo "==> Trilinos: enabling KLU2 and disabling SuperLU"
+        echo "==> Trilinos: enabling KLU2"
+    fi
+    if [ "${ENABLE_SUPERLU:-ON}" = "OFF" ] ; then
+        enable_superlu=OFF
+        echo "==> Trilinos: disabling SuperLU"
     fi
 
     # Force CMake to use absolute paths for the libraries so that it doesn't
@@ -97,6 +100,7 @@ exawind_cmake_base ()
             -DTrilinos_ENABLE_Belos:BOOL=ON
             -DTrilinos_ENABLE_Ifpack2:BOOL=ON
             -DTrilinos_ENABLE_Amesos2:BOOL=ON
+            -DAmesos2_ENABLE_SuperLU:BOOL=${enable_superlu}
             -DAmesos2_ENABLE_KLU2:BOOL=${enable_klu2}
             -DTrilinos_ENABLE_Zoltan2:BOOL=ON
             -DTrilinos_ENABLE_Ifpack:BOOL=OFF
