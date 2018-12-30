@@ -29,16 +29,18 @@ details on how to use this to build ExaWind software.
 
 **Pre-configured systems**
 
-|System |  Description
-|----------------- |  --------------------------------------------------------------------------------------------|
-|`spack`         |   [Spack](https:://github.com/LLNL/spack) (system agnostic)                                |
-|`peregrine`     |   [NREL Peregrine](https://www.nrel.gov/hpc/peregrine-system.html)                         |
-|`eagle`         |   [NREL Eagle](https://www.nrel.gov/hpc/eagle-system.html)                                 |
-|`cori`          |   [NERSC Cori](http://www.nersc.gov/users/computational-systems/cori/)                     |
-|`summitdev`     |   [OLCF SummitDev](https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/)      |
-|`snl-ascicgpu`  |   Sandia ASC GPU development machines                                                        |
-|`snl-ceerws` |   Sandia blade workstations |
-|`rhodes`        |   NREL nightly build and test system                                                         |
+| System          | Description                                                                        |
+|-----------------|------------------------------------------------------------------------------------|
+| `spack`         | [Spack](https:://github.com/LLNL/spack) (system agnostic)                          |
+| `peregrine`     | [NREL Peregrine](https://www.nrel.gov/hpc/peregrine-system.html)                   |
+| `eagle`         | [NREL Eagle](https://www.nrel.gov/hpc/eagle-system.html)                           |
+| `cori`          | [NERSC Cori](http://www.nersc.gov/users/computational-systems/cori/)               |
+| `summitdev`     | [OLCF SummitDev](https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/) |
+| `snl-ghost`     | Sandia Ghost computational cluster                                                 |
+| `snl-skybridge` | Sandia Skybridge computational cluster                                             |
+| `snl-ascicgpu`  | Sandia ASC GPU development machines                                                |
+| `snl-ceerws`    | Sandia blade workstations                                                          |
+| `rhodes`        | NREL nightly build and test system                                                 |
 
 ## Quick installation 
 
