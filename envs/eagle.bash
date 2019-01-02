@@ -61,7 +61,7 @@ exawind_env_gcc ()
         export OMPI_MCA_opal_cuda_support=0
 
         # Set arch flags for optimization
-        export EXAWIND_ARCH_FLAGS="-march=skylake-avx512 -mtune=skylake-avx512"
+        # export EXAWIND_ARCH_FLAGS="-march=skylake-avx512 -mtune=skylake-avx512"
     else
         module load cuda/10.0.130
         export CC=$(which gcc)
