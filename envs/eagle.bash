@@ -13,9 +13,12 @@ exawind_eagle_common ()
 
     export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/hpacf
     local moddate=${EXAWIND_MODULES_SNAPSHOT:-modules}
-    module unuse /nopt/nrel/apps/modules/default/modulefiles
-    module unuse /usr/share/Modules/modulefiles
-    module unuse /nopt/modulefiles
+    local modlist=(${MODULEPATH//:/ })
+
+    for pth in "${modlist[@]}" ; do
+        module unuse ${pth}
+    done
+
     module use ${EXAWIND_MODULES_DIR}/compilers/${moddate}
     module use ${EXAWIND_MODULES_DIR}/utilities/${moddate}
     module use ${EXAWIND_MODULES_DIR}/software/${moddate}/${compiler_arg}
