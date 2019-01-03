@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export EXAWIND_NUM_JOBS=36
+export EXAWIND_NUM_JOBS_DEFAULT=36
 
 declare -A EXAWIND_MODMAP
 EXAWIND_MODMAP[trilinos]=trilinos/develop
