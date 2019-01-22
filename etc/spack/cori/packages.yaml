@@ -13,10 +13,10 @@ packages:
         - netlib-lapack
     variants: +mpi build_type=Release
   mpich:
-    version: [7.7.0]
+    version: [7.7.3]
     buildable: false
     modules:
-      mpich@7.7.0: cray-mpich/7.7.0
+      mpich@7.7.3: cray-mpich/7.7.3
     paths: {}
     providers: {}
     compiler: []
@@ -58,10 +58,10 @@ packages:
     paths:
       m4@1.4.16: /usr
   boost:
-    version: [1.63]
+    version: [1.67.0]
     buildable: false
     modules:
-      boost@1.63: boost/1.63
+      boost@1.67.0: boost/1.67.0
   hdf5:
     version: [1.10.1]
     variants: +mpi+cxx+hl
