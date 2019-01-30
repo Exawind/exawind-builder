@@ -4,6 +4,8 @@ export EXAWIND_NUM_JOBS_DEFAULT=36
 
 declare -A EXAWIND_MODMAP
 EXAWIND_MODMAP[trilinos]=trilinos/develop
+EXAWIND_MODMAP[cuda]=cuda/10.0.130
+EXAWIND_MODMAP[mpi]=mpich/3.3
 
 EXAWIND_DEP_LOADER=module
 
@@ -52,7 +54,7 @@ exawind_env_gcc ()
     exawind_eagle_common gcc-7.3.0
 
     module load gcc/7.3.0
-    module load binutils openmpi cmake netlib-lapack/3.8.0
+    exawind_load_deps binutils mpi cmake netlib-lapack/3.8.0
 
     export F77=$(which mpifort)
     export FC=$(which mpifort)
@@ -66,7 +68,7 @@ exawind_env_gcc ()
         # Set arch flags for optimization
         # export EXAWIND_ARCH_FLAGS="-march=skylake-avx512 -mtune=skylake-avx512"
     else
-        module load cuda/10.0.130
+        exawind_load_deps cuda
         export CC=$(which gcc)
         export CXX=$(which g++)
         exawind_eagle_gpu
@@ -78,22 +80,23 @@ exawind_env_intel ()
     module purge
     exawind_eagle_common intel-18.0.4
 
+    module load gcc/7.3.0
     module load intel-parallel-studio
-    module load binutils cmake intel-mpi intel-mkl
+    exawind_load_deps binutils cmake intel-mpi intel-mkl
 
     export F77=$(which mpiifort)
     export FC=$(which mpiifort)
     if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
        export CC=$(which mpiicc)
-       export CXX=$(which mpiicxx)
+       export CXX=$(which mpiicpc)
 
        # Suppress warnings about CUDA when running on standard nodes
        export OMPI_MCA_opal_cuda_support=0
 
-       export EXAWIND_ARCH_FLAGS="-xSKYLAKE-AVX512"
+       #export EXAWIND_ARCH_FLAGS="-xSKYLAKE-AVX512"
     else
         echo "==> WARNING: Support for CUDA with Intel compilers not tested"
-        module load cuda/10.0.130
+        exawind_load_deps cuda
         export CC=$(which icc)
         export CXX=$(which icpc)
         exawind_eagle_gpu
