@@ -35,9 +35,9 @@ exawind_env_intel ()
 
     export SPACK_COMPILER=intel
     export CC=$(which mpiicc)
-    export CXX=$(which mpicxx)
-    export F77=$(which mpifort)
-    export FC=$(which mpifort)
+    export CXX=$(which mpiicpc)
+    export F77=$(which mpiifort)
+    export FC=$(which mpiifort)
 
     exawind_load_deps cmake zlib libxml2
 }
