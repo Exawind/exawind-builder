@@ -53,8 +53,9 @@ exw_init ()
     if [ ! -d ${basedir} ] ; then
         echo "==> Creating project structure in ${EXAWIND_PROJECT_DIR}"
         mkdir -p ${basedir}
-        mkdir -p ${basedir}/{install,scripts,source}
     fi
+    mkdir -p ${basedir}/{install,scripts,source}
+
 
     cd ${basedir}
     if [ ! -d exawind-builder ] ; then
