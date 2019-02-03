@@ -27,8 +27,8 @@ exawind_proj_env ()
         fi
     done
 
-    if [ "${ENABLE_PARAVIEW_CATAYST:-OFF}" = "ON" ] ; then
-       exawind_load_deps trilinos-catalyst-ioss-adapter
+    if [ "${ENABLE_PARAVIEW_CATALYST:-OFF}" = "ON" ] ; then
+       exawind_load_deps paraview trilinos-catalyst-ioss-adapter
     fi
 }
 
