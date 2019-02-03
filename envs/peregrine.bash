@@ -40,6 +40,7 @@ exawind_env_intel ()
     module purge
     exawind_peregrine_common intel-18.0.4
 
+    module load gcc/7.3.0
     module load intel-parallel-studio
     module load binutils intel-mpi intel-mkl cmake
 
