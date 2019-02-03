@@ -26,6 +26,10 @@ exawind_proj_env ()
             exawind_load_deps $pkg
         fi
     done
+
+    if [ "${ENABLE_PARAVIEW_CATAYST:-OFF}" = "ON" ] ; then
+       exawind_load_deps trilinos-catalyst-ioss-adapter
+    fi
 }
 
 exawind_cmake_base ()
@@ -57,6 +61,8 @@ exawind_cmake_base ()
         -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR}
         -DENABLE_OPENFAST:BOOL=${ENABLE_OPENFAST:-ON}
         -DOpenFAST_DIR:PATH=${OPENFAST_ROOT_DIR}
+        -DENABLE_PARAVIEW_CATALYST=${ENABLE_PARAVIEW_CATALYST:-OFF}
+        -DPARAVIEW_CATALYST_INSTALL_PATH:PATH=${TRILINOS_CATALYST_IOSS_ADAPTER_ROOT_DIR}
         -DENABLE_TESTS:BOOL=${ENABLE_TESTS:-ON}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON
