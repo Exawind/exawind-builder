@@ -102,3 +102,40 @@ exawind_load_user_configs ()
         fi
     done
 }
+
+exawind_purge_env ()
+{
+    # Remove if we set it up
+    if [ ! -z "${SPACK_EXE}" ] ; then
+        echo "==> Purging spack variables"
+        module unuse ${SPACK_ROOT}/share/spack/modules/$(${SPACK_EXE} arch)
+        unset SPACK_ROOT
+        unset SPACK_EXE
+        unset SPACK_COMPILER
+    fi
+
+    # Unset any project specific variables
+    echo "==> Purging project specific variables"
+    for prj in $(ls ${__EXAWIND_CORE_DIR}/codes/*.bash) ; do
+        local prjname=$(basename ${prj} .bash)
+        local prjvar="$(echo ${prjname} | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
+        unset ${prjvar}_ROOT_DIR
+        unset ${prjvar}_INSTALL_PREFIX
+        unset ${prjvar}_SOURCE_DIR
+    done
+
+    echo "==> Purging exawind-builder variables"
+    for exvar in $(compgen -v EXAWIND_) ; do
+        unset ${exvar}
+    done
+
+    # Unset all private EXAWIND variables
+    for exvar in $(compgen -v __EXAWIND_) ; do
+        unset ${exvar}
+    done
+
+    echo "==> Purging exawind function definitions"
+    for exfunc in $(compgen -A function exawind_) ; do
+        unset ${exfunc}
+    done
+}
