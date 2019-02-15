@@ -126,16 +126,16 @@ exawind_purge_env ()
 
     echo "==> Purging exawind-builder variables"
     for exvar in $(compgen -v EXAWIND_) ; do
-        unset ${exvar}
+        unset -v ${exvar}
     done
 
     # Unset all private EXAWIND variables
     for exvar in $(compgen -v __EXAWIND_) ; do
-        unset ${exvar}
+        unset -v ${exvar}
     done
 
     echo "==> Purging exawind function definitions"
     for exfunc in $(compgen -A function exawind_) ; do
-        unset ${exfunc}
+        unset -f ${exfunc}
     done
 }
