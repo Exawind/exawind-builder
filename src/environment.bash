@@ -109,9 +109,9 @@ exawind_purge_env ()
     if [ ! -z "${SPACK_EXE}" ] ; then
         echo "==> Purging spack variables"
         module unuse ${SPACK_ROOT}/share/spack/modules/$(${SPACK_EXE} arch)
-        unset SPACK_ROOT
-        unset SPACK_EXE
-        unset SPACK_COMPILER
+        unset -v SPACK_ROOT
+        unset -v SPACK_EXE
+        unset -v SPACK_COMPILER
     fi
 
     # Unset any project specific variables
