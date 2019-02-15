@@ -119,9 +119,9 @@ exawind_purge_env ()
     for prj in $(ls ${__EXAWIND_CORE_DIR}/codes/*.bash) ; do
         local prjname=$(basename ${prj} .bash)
         local prjvar="$(echo ${prjname} | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
-        unset ${prjvar}_ROOT_DIR
-        unset ${prjvar}_INSTALL_PREFIX
-        unset ${prjvar}_SOURCE_DIR
+        unset -v ${prjvar}_ROOT_DIR
+        unset -v ${prjvar}_INSTALL_PREFIX
+        unset -v ${prjvar}_SOURCE_DIR
     done
 
     echo "==> Purging exawind-builder variables"
