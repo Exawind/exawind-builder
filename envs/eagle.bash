@@ -15,15 +15,18 @@ exawind_eagle_common ()
 
     export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/hpacf
     local moddate=${EXAWIND_MODULES_SNAPSHOT:-modules}
-    local modlist=(${MODULEPATH//:/ })
 
-    for pth in "${modlist[@]}" ; do
-        module unuse ${pth}
-    done
+    if [ ! -z "$MODULEPATH" ] ; then
+        module unuse $MODULEPATH
+    fi
 
     module use ${EXAWIND_MODULES_DIR}/compilers/${moddate}
     module use ${EXAWIND_MODULES_DIR}/utilities/${moddate}
     module use ${EXAWIND_MODULES_DIR}/software/${moddate}/${compiler_arg}
+
+    if [ ! -z "${EXAWIND_EXTRA_MODDIRS}" ] ; then
+        module use ${EXAWIND_EXTRA_MODDIRS}
+    fi
 
     echo "==> Using modules: $(readlink -f ${EXAWIND_MODULES_DIR}/software/${moddate}/${compiler_arg})"
 }
