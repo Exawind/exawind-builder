@@ -54,7 +54,7 @@ exawind_env_gcc ()
     exawind_eagle_common gcc-7.3.0
 
     module load gcc/7.3.0
-    exawind_load_deps binutils mpi cmake netlib-lapack/3.8.0
+    exawind_load_deps binutils ${EXAWIND_MODMAP[mpi]} cmake netlib-lapack/3.8.0
 
     export F77=$(which mpifort)
     export FC=$(which mpifort)
