@@ -12,11 +12,12 @@ You will need to follow the additional steps mentioned in
 
 .. note::
 
-   On NREL Peregrine, Eagle, and Rhodes systems, the build scripts are
-   pre-installed and configured in the project directory. Users do not have to
-   install their own exawind-builder on these systems. On these NREL systems,
-   you can skip the installation steps and proceed to the
-   :ref:`compiling-software` section.
+   On NREL Peregrine, Eagle, and Rhodes, and NERSC Cori systems, the build
+   scripts are pre-installed and configured in the project directory. Users do
+   not have to install their own exawind-builder on these systems. On these NREL
+   systems, you can skip the installation steps and proceed to the
+   :ref:`compiling-software` section. Please consult the Exawind team if you are
+   unsure where the build scripts are located on these systems.
 
 For fine control of the installation process please refer to the
 :ref:`manual_installation` section.
