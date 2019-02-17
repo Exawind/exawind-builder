@@ -62,7 +62,7 @@ packages:
   fftw:
     variants: +mpi+fma
   hypre:
-    version: [2.15.0]
+    version: [develop]
     variants: ~shared
   openfast:
     version: [develop]

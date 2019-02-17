@@ -82,7 +82,7 @@ packages:
     version: [develop]
     variants: +cxx
   hypre:
-    version: [2.15.0]
+    version: [develop]
     variants: +int64~shared
   tioga:
     version: [develop]
