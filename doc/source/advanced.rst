@@ -47,7 +47,7 @@ Setup ExaWind directory structure as described in :ref:`exawind_dir_layout`.
    .. code-block:: console
 
       cd ${HOME}/exawind
-      git clone https://github.com/LLNL/spack.git
+      git clone https://github.com/spack/spack.git
 
       # Activate spack (for the remainder of the steps)
       source ./spack/share/spack/setup-env.sh

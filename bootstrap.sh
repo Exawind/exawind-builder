@@ -88,7 +88,7 @@ exw_init_spack ()
 
     local need_setup=no
     if [ ! -d spack ] ; then
-        git clone https://github.com/LLNL/spack.git
+        git clone https://github.com/spack/spack.git
         need_setup=yes
     fi
 

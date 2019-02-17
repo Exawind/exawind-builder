@@ -17,7 +17,7 @@ particular system.
   ==================== ============================================================================================
   System Name          Description
   ==================== ============================================================================================
-  ``spack``             `Spack <https:://github.com/LLNL/spack>`_ (system agnostic)
+  ``spack``             `Spack <https:://github.com/spack/spack>`_ (system agnostic)
   ``peregrine``         `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
   ``eagle``             `NREL Eagle <https://www.nrel.gov/hpc/eagle-system.html>`_
   ``cori``              `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_

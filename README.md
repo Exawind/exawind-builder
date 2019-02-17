@@ -31,7 +31,7 @@ details on how to use this to build ExaWind software.
 
 | System          | Description                                                                        |
 |-----------------|------------------------------------------------------------------------------------|
-| `spack`         | [Spack](https:://github.com/LLNL/spack) (system agnostic)                          |
+| `spack`         | [Spack](https:://github.com/spack/spack) (system agnostic)                          |
 | `peregrine`     | [NREL Peregrine](https://www.nrel.gov/hpc/peregrine-system.html)                   |
 | `eagle`         | [NREL Eagle](https://www.nrel.gov/hpc/eagle-system.html)                           |
 | `cori`          | [NERSC Cori](http://www.nersc.gov/users/computational-systems/cori/)               |

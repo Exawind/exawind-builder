@@ -98,7 +98,7 @@ Initial Homebrew Setup for Mac OS-X Users
 -----------------------------------------
 
 On Mac OS X, we will use a combination of `Homebrew <https://brew.sh>`_ and
-`LLNL spack <https://github.com/llnl/spack>`_ to setup our dependencies. This
+`spack <https://github.com/spack/spack>`_ to setup our dependencies. This
 setup will use Apple's Clang compiler for C and C++ sources, and GNU GCC
 ``gfortran`` for Fortran sources. The dependency on Homebrew is to avoid the
 compilation time required for compiling OpenMPI on Mac. Please follow these
