@@ -76,6 +76,9 @@ exawind_env_gcc ()
         export CXX=$(which g++)
         exawind_eagle_gpu
     fi
+
+    # Supress warnings issued because of ulimit issues on Eagle when using MPICH
+    export MXM_LOG_LEVEL=error
 }
 
 exawind_env_intel ()
