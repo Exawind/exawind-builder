@@ -1,0 +1,14 @@
+compilers:
+- compiler:
+    environment: {}
+    extra_rpaths: []
+    flags: {}
+    modules: [gcc/7.3.0]
+    operating_system: rhel6
+    paths:
+      cc:  /share/apps/openmpi/1.10.1/gcc/7.3.0/bin/gcc
+      cxx: /share/apps/openmpi/1.10.1/gcc/7.3.0/bin/g++
+      f77: /share/apps/openmpi/1.10.1/gcc/7.3.0/bin/gfortran
+      fc:  /share/apps/openmpi/1.10.1/gcc/7.3.0/bin/gfortran
+    spec: gcc@7.3.0
+    target: x86_64
