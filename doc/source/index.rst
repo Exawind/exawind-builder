@@ -46,6 +46,7 @@ that is currently not available in the standard installation on the system.
    introduction
    installation
    basic
+   newsys
    advanced
    reference
 
