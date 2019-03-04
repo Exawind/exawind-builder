@@ -32,6 +32,9 @@ packages:
     paths:
       python@2.7.10: /projects/sierra/linux_rh6/install/Python/2.7/
     buildable: False
+  cmake:
+    version: [3.12.4]
+    variants: +ownlibs
   zlib:
     version: [1.2.5]
     buildable: false
