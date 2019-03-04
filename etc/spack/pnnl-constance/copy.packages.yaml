@@ -1,7 +1,7 @@
 packages:
   all:
     compiler:
-      - gcc@7.3.0
+      - gcc
     modules: {}
     paths: {}
     providers:
@@ -15,13 +15,13 @@ packages:
   openmpi:
     version: [1.10.1]
     buildable: false
-    paths:
-      openmpi@1.10.1: /share/apps/openmpi/1.10.1/gcc/7.3.0
+    modules:
+      openmpi@1.10.1: openmpi/1.10.1
   cmake:
     version: [3.12.3]
     buildable: false
-    paths:
-      cmake@3.12.3: /share/apps/cmake/3.12.3
+    modules:
+      cmake@3.12.3: cmake/3.12.3
     #variants: +ownlibs
   openssl:
     version: [1.1.0]
@@ -38,7 +38,7 @@ packages:
   m4:
     version: [1.4.16]
   boost:
-    version: [1.68.0]
+    version: [1.67.0]
   hdf5:
     version: [1.10.1]
     variants: +mpi+cxx+hl
