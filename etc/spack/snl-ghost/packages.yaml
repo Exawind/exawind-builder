@@ -37,7 +37,8 @@ packages:
     paths:
       ncurses@5.9: /usr
   cmake:
-    version: [3.12.0]
+    version: [3.12.4]
+    variants: +ownlibs
   binutils:
     version: [2.29.1]
   zlib:

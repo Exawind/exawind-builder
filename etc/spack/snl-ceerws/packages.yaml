@@ -42,6 +42,9 @@ packages:
     buildable: false
     paths:
       bzip2@1.6.0: /usr/
+  cmake:
+    version: [3.12.4]
+    variants: +ownlibs
   netlib-lapack:
     version: [3.8.0]
   superlu:
