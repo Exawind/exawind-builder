@@ -55,7 +55,7 @@ packages:
     version: [4.4.1.1]
     variants: +parallel-netcdf maxdims=65536 maxvars=524288
   parallel-netcdf:
-    version: [1.8.0]
+    version: [1.10.0]
   yaml-cpp:
     version: [develop]
     variants: ~shared
