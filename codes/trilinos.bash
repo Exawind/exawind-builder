@@ -26,7 +26,11 @@ exawind_cmake_base ()
     # Configure BLAS/LAPACK if user has setup the BLASLIB variable
     local blas_lapack=""
     if [[ "${EXAWIND_USE_BLASLIB:-ON}" = "ON" && -n "$BLASLIB" ]] ; then
+        echo "==> Trilinos: BLAS settings = ${BLASLIB}"
         blas_lapack="-DTPL_BLAS_LIBRARIES=$BLASLIB -DTPL_LAPACK_LIBRARIES=$BLASLIB"
+    elif [[ -n "${EXAWIND_MKL_LIBNAMES}" && -n "${EXAWIND_MKL_LIBDIRS}" ]] ; then
+        echo "==> Trilinos: BLAS settins = ${EXAWIND_MKL_LIBNAMES}"
+        blas_lapack="-DBLAS_LIBRARY_NAMES=${EXAWIND_MKL_LIBNAMES} -DBLAS_LIBRARY_DIRS=${EXAWIND_MKL_LIBDIRS} -DLAPACK_LIBRARY_NAMES=${EXAWIND_MKL_LIBNAMES} -DLAPACK_LIBRARY_DIRS=${EXAWIND_MKL_LIBDIRS} "
     fi
 
     # Allow user to configure OpenMP

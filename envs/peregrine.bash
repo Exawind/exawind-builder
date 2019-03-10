@@ -47,4 +47,8 @@ exawind_env_intel ()
     export CC=$(which mpiicc)
     export CXX=$(which mpiicpc)
     export FC=$(which mpiifort)
+
+    export _EXAWIND_MKL_LIBNAMES="'mkl_intel_lp64;mkl_sequential;mkl_core;pthread;m;dl'"
+    export EXAWIND_MKL_LIBNAMES=${EXAWIND_MKL_LIBNAMES:-${_EXAWIND_MKL_LIBNAMES}}
+    export EXAWIND_MKL_LIBDIRS=${EXAWIND_MKL_LIBDIRS:-${MKLROOT}/lib/intel64}
 }
