@@ -99,7 +99,7 @@ exawind_env_intel ()
        # Suppress warnings about CUDA when running on standard nodes
        export OMPI_MCA_opal_cuda_support=0
 
-       #export EXAWIND_ARCH_FLAGS="-xSKYLAKE-AVX512"
+       export EXAWIND_ARCH_FLAGS="-xSKYLAKE-AVX512"
     else
         echo "==> WARNING: Support for CUDA with Intel compilers not tested"
         exawind_load_deps cuda
@@ -115,6 +115,6 @@ exawind_env_intel ()
 
 exawind_env_clang ()
 {
-    echo "ERROR: No Intel environment set up for NREL Eagle"
+    echo "ERROR: No LLVM/Clang environment set up for NREL Eagle"
     exit 1
 }
