@@ -11,17 +11,17 @@ packages:
         - netlib-lapack
       lapack:
         - netlib-lapack
-    variants: +mpi~shared build_type=Release
+    variants: +mpi build_type=Release
   openmpi:
     version: [1.10.7]
     buildable: false
     modules:
       openmpi@1.10.7: openmpi-intel/1.10
-  #intel-mkl:
-  #  version: [17.0.1]
-  #  buildable: false
-  #  modules:
-  #    intel-mkl@17.0.1: mkl/17.0.1.132
+  intel-mkl:
+    version: [17.0.1]
+    buildable: false
+    modules:
+      intel-mkl@17.0.1: mkl/17.0.1.132
   pkg-config:
     paths:
       pkg-config@0.27.1: /usr/bin/pkg-config
@@ -77,13 +77,12 @@ packages:
     variants: +mpi+fma
   openfast:
     version: [develop]
-    variants: +cxx~shared
+    variants: +cxx
   hypre:
     version: [develop]
-    variants: +int64~shared
+    variants: +int64
   tioga:
     version: [develop]
-    variants: ~shared
   trilinos:
     version: [develop]
     variants: ~alloptpkgs~xsdkflags~metis~mumps~superlu-dist+superlu~hypre+hdf5~suite-sparse~python~shared+boost+tpetra~epetra~epetraext+exodus+pnetcdf+zlib+stk+teuchos+belos+zoltan+zoltan2~amesos+amesos2~anasazi~ifpack+ifpack2+muelu~fortran~ml+gtest~aztec~sacado~x11+instantiate~instantiate_cmplx~dtk~fortrilinos+openmp~rol~nox+shards~intrepid~intrepid2~cgns

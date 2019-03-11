@@ -26,7 +26,11 @@ exawind_env_intel ()
     export F77=$(which mpifort)
     export FC=$(which mpifort)
 
-    exawind_load_deps cmake netlib-lapack zlib libxml2
+    exawind_load_deps cmake intel-mkl zlib libxml2
+    export _EXAWIND_MKL_LIBNAMES="'mkl_intel_lp64;mkl_sequential;mkl_core;pthread;m;dl'"
+    export EXAWIND_MKL_LIBNAMES=${EXAWIND_MKL_LIBNAMES:-${_EXAWIND_MKL_LIBNAMES}}
+    export EXAWIND_MKL_LIBDIRS=${EXAWIND_MKL_LIBDIRS:-${MKLROOT}/lib/intel64}
+
 }
 
 exawind_env_gcc ()
