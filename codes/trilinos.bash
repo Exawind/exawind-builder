@@ -21,8 +21,6 @@ exawind_cmake_base ()
         install_dir="$(cd .. && pwd)/install"
     fi
 
-    local compiler_flags=$(exawind_get_compiler_flags)
-
     # Configure BLAS/LAPACK if user has setup the BLASLIB variable
     local blas_lapack=""
     if [[ "${EXAWIND_USE_BLASLIB:-ON}" = "ON" && -n "$BLASLIB" ]] ; then
@@ -43,18 +41,13 @@ exawind_cmake_base ()
     fi
 
     local enable_cuda=${ENABLE_CUDA:-OFF}
-    local kokkos_args=""
     local enable_simd=${ENABLE_SIMD:-ON}
-    if [ "${enable_cuda}" = "ON" ] ; then
-        echo "==> Trilinos: enabling CUDA; KOKKOS_ARCH=${KOKKOS_ARCH:-None}"
-        kokkos_args="-DKOKKOS_ARCH=${KOKKOS_ARCH:-None}"
-    fi
 
     local enable_superlu=ON
-    local enable_klu2=OFF
-    if [ "${ENABLE_KLU2:-OFF}" = "ON" ] ; then
-        enable_klu2=ON
-        echo "==> Trilinos: enabling KLU2"
+    local enable_klu2=ON
+    if [ "${ENABLE_KLU2:-ON}" = "OFF" ] ; then
+        enable_klu2=OFF
+        echo "==> Trilinos: disabling KLU2"
     fi
     if [ "${ENABLE_SUPERLU:-ON}" = "OFF" ] ; then
         enable_superlu=OFF
@@ -71,6 +64,11 @@ exawind_cmake_base ()
             -DCMAKE_INSTALL_PREFIX=${install_dir}
             -DCMAKE_BUILD_TYPE:STRING=${BUILD_TYPE:-RELEASE}
             -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS:-OFF}
+            -DKOKKOS_ARCH:STRING=${KOKKOS_ARCH:-None}
+            -DMPI_USE_COMPILER_WRAPPERS:BOOL=ON
+            -DMPI_CXX_COMPILER:FILEPATH=${CXX}
+            -DMPI_C_COMPILER:FILEPATH=${CC}
+            -DMPI_Fortran_COMPILER:FILEPATH=${FC}
             -DTrilinos_ENABLE_OpenMP:BOOL=${enable_openmp}
             -DKokkos_ENABLE_OpenMP:BOOL=${enable_openmp}
             -DTpetra_INST_OPENMP:BOOL=${enable_openmp}
@@ -154,8 +152,6 @@ exawind_cmake_base ()
             -DZlib_LIBRARY_DIRS:PATH=${ZLIB_ROOT_DIR}/lib
             -DTPL_ENABLE_BLAS:BOOL=ON
             ${blas_lapack}
-            ${kokkos_args}
-            ${compiler_flags}
             ${extra_args}
             ${TRILINOS_SOURCE_DIR:-..}
     )
