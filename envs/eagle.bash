@@ -40,8 +40,8 @@ exawind_eagle_gpu ()
     export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
     export CUDA_MANAGED_FORCE_DEVICE_ALLOC=${CUDA_MANAGED_FORCE_DEVICE_ALLOC:-1}
     export ENABLE_CUDA=${ENABLE_CUDA:-ON}
-    export KOKKOS_ARCH=${KOKKOS_ARCH:-Volta70}
-    export EXAWIND_CUDA_SM=${EXAWIND_CUDA_SM:-70}
+    export KOKKOS_ARCH=${KOKKOS_ARCH:-"'SKX;Volta72'"}
+    export EXAWIND_CUDA_SM=${EXAWIND_CUDA_SM:-72}
 
     export NVCC_WRAPPER_DEFAULT_COMPILER=${CXX}
     export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
@@ -69,7 +69,8 @@ exawind_env_gcc ()
         export OMPI_MCA_opal_cuda_support=0
 
         # Set arch flags for optimization
-        # export EXAWIND_ARCH_FLAGS="-march=skylake-avx512 -mtune=skylake-avx512"
+        export EXAWIND_ARCH_FLAGS="-march=skylake -mtune=skylake"
+        export KOKOS_ARCH=${KOKKOS_ARCH:-SKX}
     else
         exawind_load_deps cuda
         export CC=$(which gcc)
@@ -100,6 +101,7 @@ exawind_env_intel ()
        export OMPI_MCA_opal_cuda_support=0
 
        export EXAWIND_ARCH_FLAGS="-xSKYLAKE-AVX512"
+       export KOKOS_ARCH=${KOKKOS_ARCH:-SKX}
     else
         echo "==> WARNING: Support for CUDA with Intel compilers not tested"
         exawind_load_deps cuda
