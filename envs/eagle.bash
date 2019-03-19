@@ -3,7 +3,7 @@
 export EXAWIND_NUM_JOBS_DEFAULT=36
 
 declare -A EXAWIND_MODMAP
-EXAWIND_MODMAP[trilinos]=trilinos/develop
+EXAWIND_MODMAP[trilinos]=trilinos/2019-03-18
 EXAWIND_MODMAP[cuda]=cuda/10.0.130
 EXAWIND_MODMAP[mpi]=mpich/3.3
 
