@@ -69,7 +69,8 @@ exawind_env_gcc ()
         export OMPI_MCA_opal_cuda_support=0
 
         # Set arch flags for optimization
-        export EXAWIND_ARCH_FLAGS="-march=skylake -mtune=skylake"
+        export EXAWIND_ARCH_FLAGS_DEFAULT="'-march=skylake -mtune=skylake'"
+        export EXAWIND_ARCH_FLAGS=${EXAWIND_ARCH_FLAGS:-${EXAWIND_ARCH_FLAGS_DEFAULT}}
         export KOKOS_ARCH=${KOKKOS_ARCH:-SKX}
     else
         exawind_load_deps cuda

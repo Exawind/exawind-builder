@@ -22,13 +22,10 @@ exawind_cmake_base ()
         install_dir="-DCMAKE_INSTALL_PREFIX=$TIOGA_INSTALL_PREFIX"
     fi
 
-    local compiler_flags=$(exawind_get_compiler_flags)
-
     local cmake_cmd=(
         cmake
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         ${install_dir}
-        ${compiler_flags}
         ${extra_args}
         ${TIOGA_SOURCE_DIR:-..}
     )
