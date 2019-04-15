@@ -33,9 +33,9 @@ exw_check_system ()
 exw_bstrap_env ()
 {
     local basedir=${EXAWIND_PROJECT_DIR:-${HOME}/exawind}
-    local ewblddir=${basedir}/exawind-builder
+    local exwblddir=${basedir}/exawind-builder
     local exwsys=${EXAWIND_SYSTEM:-spack}
-    local env_file=${exblddir}/etc/bootstrap/${exwsys}.bash
+    local env_file=${exwblddir}/etc/bootstrap/${exwsys}.bash
 
     if [ -f ${env_file} ] ; then
         echo "==> Sourcing bootstrap environment: ${env_file}"
