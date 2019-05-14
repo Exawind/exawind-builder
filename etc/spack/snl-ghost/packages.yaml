@@ -80,7 +80,7 @@ packages:
     variants: +cxx
   hypre:
     version: [develop]
-    variants: +int64
+    variants: +int64~superlu-dist
   tioga:
     version: [develop]
   trilinos:

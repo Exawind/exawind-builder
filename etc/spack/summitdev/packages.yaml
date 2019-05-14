@@ -74,7 +74,7 @@ packages:
     variants: +cxx~shared
   hypre:
     version: [develop]
-    variants: +int64~shared
+    variants: +int64~superlu-dist~shared
   tioga:
     version: [develop]
     variants: ~shared
