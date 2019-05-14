@@ -21,8 +21,10 @@ packages:
     providers: {}
     compiler: []
   cmake:
-    version: [3.12.4]
-    variants: +ownlibs
+    version: [3.14.0]
+    buildable: false
+    modules:
+      cmake@3.14.0: cmake/3.14.0
   openssl:
     version: [1.1.0]
     buildable: false
@@ -60,9 +62,6 @@ packages:
       m4@1.4.16: /usr
   boost:
     version: [1.67.0]
-    buildable: false
-    modules:
-      boost@1.67.0: boost/1.67.0
   hdf5:
     version: [1.10.1]
     variants: +mpi+cxx+hl
@@ -83,7 +82,7 @@ packages:
     variants: +cxx
   hypre:
     version: [develop]
-    variants: +int64~shared
+    variants: +int64~shared~superlu-dist
   tioga:
     version: [develop]
     variants: ~shared
