@@ -3,7 +3,7 @@
 export EXAWIND_NUM_JOBS_DEFAULT=36
 
 declare -A EXAWIND_MODMAP
-EXAWIND_MODMAP[trilinos]=trilinos/2019-03-18
+EXAWIND_MODMAP[trilinos]=trilinos/develop
 EXAWIND_MODMAP[cuda]=cuda/10.0.130
 EXAWIND_MODMAP[mpi]=mpich/3.3
 
@@ -55,9 +55,9 @@ exawind_eagle_gpu ()
 exawind_env_gcc ()
 {
     module purge
-    exawind_eagle_common gcc-7.3.0
+    exawind_eagle_common gcc-7.4.0
 
-    module load gcc/7.3.0
+    module load gcc/7.4.0
     module load git
     exawind_load_deps binutils ${EXAWIND_MODMAP[mpi]} cmake netlib-lapack/3.8.0
 
