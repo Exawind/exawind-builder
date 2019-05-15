@@ -8,6 +8,7 @@ declare -A EXAWIND_MODMAP
 
 export EXAWIND_COMPILER_DEFAULT=gcc
 export EXAWIND_DEP_LOADER=spack
+export EXAWIND_CUDA_WRAPPER_DEFAULT=${__EXAWIND_CORE_DIR}/utils/nvcc_wrapper
 
 exawind_env ()
 {

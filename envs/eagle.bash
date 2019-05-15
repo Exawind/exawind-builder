@@ -36,7 +36,7 @@ exawind_eagle_gpu ()
     # Enable CUDA support in OpenMPI
     export OMPI_MCA_opal_cuda_support=1
 
-    export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper}
+    export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_CUDA_WRAPPER_DEFAULT}}
     export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
     export CUDA_MANAGED_FORCE_DEVICE_ALLOC=${CUDA_MANAGED_FORCE_DEVICE_ALLOC:-1}
     export ENABLE_CUDA=${ENABLE_CUDA:-ON}
