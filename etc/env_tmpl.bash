@@ -16,7 +16,6 @@ export EXAWIND_SYSTEM=%%SYSTEM%%
 export EXAWIND_COMPILER=%%COMPILER%%
 export EXAWIND_CFGFILE=exawind-config
 export EXAWIND_PROJECT_DIR=${EXAWIND_PROJECT_DIR:-$(dirname ${EXAWIND_SRCDIR})}
-export EXAWIND_CONFIG=${EXAWIND_CONFIG:-${EXAWIND_PROJECT_DIR}/${EXAWIND_CFGFILE}.sh}
 
 # Source scripts necessary for determining environment
 source ${EXAWIND_SRCDIR}/src/environment.bash

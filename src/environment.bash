@@ -88,10 +88,12 @@ exawind_load_deps ()
 exawind_load_user_configs ()
 {
     local cfgname=${EXAWIND_CFGFILE:-exawind-config}
-    local global_cfg=${EXAWIND_CONFIG:-${EXAWIND_PROJECT_DIR}/${EXAWIND_CFGFILE}.sh}
     local cfgfiles=(
         ${HOME}/.${cfgname}
-        ${global_cfg}
+        ${HOME}/.${cfgname}-${EXAWIND_COMPILER}
+        ${EXAWIND_PROJECT_DIR}/${EXAWIND_CFGFILE}.sh
+        ${EXAWIND_PROJECT_DIR}/${EXAWIND_CFGFILE}-${EXAWIND_COMPILER}.sh
+        ${EXAWIND_CONFIG}
         $(pwd)/${cfgname}.sh
     )
 
