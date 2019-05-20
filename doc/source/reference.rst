@@ -105,7 +105,7 @@ ExaWind Builder configuration
 
    Absolute path to the location of :file:`nvcc_wrapper` script provided by
    Kokkos. The default path is assumed to be
-   :file:`${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper`
+   :file:`${EXAWIND_PROJECT_DIR}/exawind-builder/utils/nvcc_wrapper`
 
 .. envvar:: EXAWIND_CUDA_SM
 
@@ -217,6 +217,16 @@ Common build variables
 
    Path to BLAS/LAPACK libraries.
 
+.. envvar:: EXAWIND_MKL_LIBNAMES
+
+   List of MKL libraries to link to when compiling with Intel MKL. Used as an
+   alterative to :envvar:`BLASLIB`, see also :envvar:`EXAWIND_MKL_LIBDIRS`.
+
+.. envvar:: EXAWIND_MKL_LIBDIRS
+
+   Path to Intel MKL libraries, always used in conjunction with
+   :envvar:`EXAWIND_MKL_LIBNAMES`.
+
 .. envvar:: ENABLE_OPENMP
 
    Boolean flag indicating whether OpenMP is enabled. (default: ON)
@@ -253,6 +263,11 @@ Nalu-Wind
 
    Boolean flag indicating whether tests are enabled when building Nalu-Wind.
    (default: ON)
+
+.. envvar:: EXAWIND_ARCH_FLAGS
+
+   Additional architecture specific optimization flags, e.g., to enable SIMD
+   optimizations.
 
 OpenFAST
 ~~~~~~~~
@@ -291,19 +306,20 @@ Both OpenMP and CUDA are disabled by default for HYPRE builds.
 
    Boolean flag indicating whether 64-bit integer support is enabled. (default: ON)
 
-.. envvar:: EXAWIND_CUDA_SM
-
-   A number indicating the arch flag used when building HYPRE on CUDA. Requires
-   HYPRE v2.15.0 or newer. For example, if the user wishes to target Pascal60
-   cards, then the nvcc flag is ``sm_60`` and, therefore, the
-   ``EXAWIND_CUDA_SM=60``, use ``70`` for Volta70 cards and so on.
-
-
 Function reference
 ==================
 
 Core functions
 --------------
+
+.. function:: exawind_purge_env
+
+   Purge an Exawind environment created by sourcing bash files, e.g.,
+   ``exawind-env-gcc.sh``. If this function exists in your environment, chances
+   are that the environment was sourced previously. Calling this function will
+   unset all exawind-builder related environment variables and functions, and
+   reset the environment to a clean state. Use this function if you see spurious
+   errors caused by conflicting environment variable settings.
 
 .. function:: exawind_save_func old new
 
