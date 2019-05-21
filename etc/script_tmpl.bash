@@ -26,7 +26,7 @@ source ${EXAWIND_SRCDIR}/codes/${EXAWIND_CODE}.bash
 
 # Path to ExaWind project and install directories
 export EXAWIND_PROJECT_DIR=${EXAWIND_PROJECT_DIR:-%%EXAWIND_PRJDIR%%}
-export EXAWIND_INSTALL_DIR=${EXAWIND_INSTALL_DIR:-${EXAWIND_PROJECT_DIR}/install}
+export EXAWIND_INSTALL_DIR=${EXAWIND_INSTALL_DIR:-${EXAWIND_PROJECT_DIR}/install/${EXAWIND_COMPILER}}
 export EXAWIND_CONFIG=${EXAWIND_CONFIG:-${EXAWIND_PROJECT_DIR}/${EXAWIND_CFGFILE}.sh}
 
 # Source any user specific configuration (see documentation)
