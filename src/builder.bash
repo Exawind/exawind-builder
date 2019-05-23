@@ -92,7 +92,7 @@ exawind_make ()
 
     case ${make_type} in
         *ninja)
-            command ${make_type} ${extra_args}
+            command ${make_type} ${extra_args} 2>&1 | tee make_output.log
             ;;
         *make)
             command ${make_type} ${extra_args} 2>&1 | tee make_output.log
