@@ -3,7 +3,11 @@
 exawind_proj_env ()
 {
     echo "==> Loading dependencies for tioga-utils..."
-    exawind_load_deps zlib libxml2 hdf5 trilinos yaml-cpp tioga nalu-wind
+    exawind_load_deps trilinos yaml-cpp tioga
+
+    if [ "${ENABLE_NALU_WIND:-OFF}" = "ON" ] ; then
+        exawind_load_deps nalu-wind
+    fi
 }
 
 exawind_cmake_base ()
@@ -27,6 +31,7 @@ exawind_cmake_base ()
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
         -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR}
         -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR}
+        -DENABLE_NALU_WIND:BOOL=${ENABLE_NALU_WIND:-OFF}
         -DNALU_DIR:PATH=${NALU_WIND_ROOT_DIR}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         ${compiler_flags}
