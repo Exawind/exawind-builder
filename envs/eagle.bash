@@ -6,7 +6,7 @@ declare -A EXAWIND_MODMAP
 EXAWIND_MODMAP[trilinos]=trilinos/develop
 EXAWIND_MODMAP[cuda]=cuda/10.0.130
 EXAWIND_MODMAP[mpi]=mpich/3.3
-EXAWIND_MODMAP[gcc]=gcc/7.3.0
+EXAWIND_MODMAP[gcc]=gcc/7.4.0
 
 EXAWIND_DEP_LOADER=module
 
@@ -21,6 +21,7 @@ exawind_eagle_common ()
         module unuse $MODULEPATH
     fi
 
+    module use ${EXAWIND_MODULES_DIR}/binaries/${moddate}
     module use ${EXAWIND_MODULES_DIR}/compilers/${moddate}
     module use ${EXAWIND_MODULES_DIR}/utilities/${moddate}
     module use ${EXAWIND_MODULES_DIR}/software/${moddate}/${compiler_arg}
@@ -56,7 +57,7 @@ exawind_eagle_gpu ()
 exawind_env_gcc ()
 {
     module purge
-    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-7.3.0}
+    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-7.4.0}
     exawind_eagle_common gcc-${EXAWIND_GCC_VERSION}
 
     exawind_load_deps gcc git binutils ${EXAWIND_MODMAP[mpi]} cmake netlib-lapack/3.8.0
@@ -89,7 +90,7 @@ exawind_env_intel ()
     module purge
     exawind_eagle_common intel-18.0.4
 
-    module load gcc/7.3.0
+    module load gcc/7.4.0
     module load intel-parallel-studio
     module load git
     exawind_load_deps binutils cmake intel-mpi intel-mkl
