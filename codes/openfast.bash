@@ -18,6 +18,8 @@ exawind_proj_env ()
     else
         echo "==> FAST C++ API is disabled. No additional dependencies."
     fi
+
+    export EXAWIND_MAKE_TYPE=make
 }
 
 exawind_cmake_base ()
@@ -70,4 +72,17 @@ exawind_cmake_base ()
     eval "${cmake_cmd[@]}" 2>&1 | tee -a cmake_output.log
 
     export LIBRARY_PATH=${lib_path_save}
+}
+
+exawind_make ()
+{
+    local num_tasks=${EXAWIND_NUM_JOBS:-$EXAWIND_NUM_JOBS_DEFAULT}
+
+    if [ "$#" == "0" ] ; then
+        extra_args="-j ${num_tasks}"
+    else
+        extra_args="$@"
+    fi
+
+    command make ${extra_args} 2>&1 | tee make_output.log
 }
