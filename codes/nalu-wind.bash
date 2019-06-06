@@ -102,6 +102,6 @@ exawind_cmake_eagle ()
     exawind_cmake_base \
         -DMPIEXEC_EXECUTABLE=$(which srun) \
         -DMPIEXEC_NUMPROC_FLAG="-n" \
-        -DMPIEXEC_PREFLAGS='"--cpu_bind=cores"' \
+        -DMPIEXEC_PREFLAGS='"--cpu_bind=cores --exclusive"' \
         ${extra_args}
 }
