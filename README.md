@@ -32,7 +32,7 @@ details on how to use this to build ExaWind software.
 | System          | Description                                                                        |
 |-----------------|------------------------------------------------------------------------------------|
 | `spack`         | [Spack](https:://github.com/spack/spack) (system agnostic)                          |
-| `peregrine`     | [NREL Peregrine](https://www.nrel.gov/hpc/peregrine-system.html)                   |
+| `ornl-summit`   | [ORNL Summit](https://www.olcf.ornl.gov/summit/)                                   |
 | `eagle`         | [NREL Eagle](https://www.nrel.gov/hpc/eagle-system.html)                           |
 | `cori`          | [NERSC Cori](http://www.nersc.gov/users/computational-systems/cori/)               |
 | `summitdev`     | [OLCF SummitDev](https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/) |
@@ -41,6 +41,8 @@ details on how to use this to build ExaWind software.
 | `snl-ascicgpu`  | Sandia ASC GPU development machines                                                |
 | `snl-ceerws`    | Sandia blade workstations                                                          |
 | `rhodes`        | NREL nightly build and test system                                                 |
+| `pnnl-constance` | PNNL Constance system  |
+| `peregrine`     | [NREL Peregrine](https://www.nrel.gov/hpc/peregrine-system.html)                   |
 
 ## Quick installation 
 

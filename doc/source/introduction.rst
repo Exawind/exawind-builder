@@ -18,7 +18,7 @@ particular system.
   System Name          Description
   ==================== ============================================================================================
   ``spack``             `Spack <https:://github.com/spack/spack>`_ (system agnostic)
-  ``peregrine``         `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
+  ``ornl-summit``       `OLCF Summit <https://www.olcf.ornl.gov/summit/>`_
   ``eagle``             `NREL Eagle <https://www.nrel.gov/hpc/eagle-system.html>`_
   ``cori``              `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_
   ``summitdev``         `OLCF SummitDev <https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/>`_
@@ -26,7 +26,9 @@ particular system.
   ``snl-skybridge``     Sandia Skybridge cluster
   ``snl-ascicgpu``      Sandia ASC GPU development machines
   ``snl-ceerws``        Sandia blade workstations
+  ``pnnl-constance``    PNNL Constance system
   ``rhodes``            NREL nightly build and test system
+  ``peregrine``         `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
   ==================== ============================================================================================
 
   The following compilers are configured for each machine. In situations where
@@ -36,7 +38,7 @@ particular system.
   ================== ========================
   Environment        Compilers
   ================== ========================
-  peregrine          gcc, intel
+  ornl-summit        gcc, cuda
   eagle              gcc
   cori               intel
   summitdev          gcc, xl, cuda
@@ -44,7 +46,10 @@ particular system.
   snl-skybridge      intel
   snl-ascicgpu       gcc, cuda
   snl-ceerws         gcc
+  pnnl-constance     gcc
+  rhodes             gcc, intel
   Mac OSX            clang, gcc
+  peregrine          gcc, intel
   ================== ========================
 
 
