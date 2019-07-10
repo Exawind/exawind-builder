@@ -48,6 +48,8 @@ exawind_env_gcc ()
 
     exawind_load_deps cmake netlib-lapack
 
+    export CC=$(which mpicc)
+    export FC=$(which mpifort)
     export CXX=$(which g++)
     exawind_summit_gpu
 }
