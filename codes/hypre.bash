@@ -87,6 +87,7 @@ exawind_cmake_base ()
 
     echo "${config_cmd[@]}"
     eval "${config_cmd[@]}"
+    command make clean
 }
 
 exawind_make ()
