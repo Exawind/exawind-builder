@@ -24,6 +24,7 @@ exawind_cmake_base ()
         cmake
         -DCMAKE_INSTALL_PREFIX=${install_dir}
         -DHYPRE_DIR=${HYPRE_ROOT_DIR}
+        -DYAML_ROOT_DIR=${YAML_CPP_ROOT_DIR}
         ${extra_args}
         ${HYPRE_MINI_APP_SOURCE_DIR:-..}
     )
