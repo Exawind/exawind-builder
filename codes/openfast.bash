@@ -24,12 +24,21 @@ exawind_proj_env ()
 
 exawind_cmake_base ()
 {
-    local extra_args="$@"
+    local extra_args_inp=( "$@" )
+    local extra_args=""
     local install_dir=""
     if [ -n "$OPENFAST_INSTALL_PREFIX" ] ; then
         install_dir="$OPENFAST_INSTALL_PREFIX"
     else
         install_dir="$(cd .. && pwd)/install"
+    fi
+
+    # OpenFAST cannot handle Ninja builds if testing is enabled and it needs to
+    # compile pfUnit, so disable any Ninja arguments.
+    if [[ $extra_args_inp[0] = -G* ]] ; then
+        extra_args=${extra_args_inp[@]:1}
+    else
+        extra_args=${extra_args_inp}
     fi
 
     local compiler_flags=$(exawind_get_compiler_flags)
@@ -64,7 +73,7 @@ exawind_cmake_base ()
         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON
         ${blas_lapack}
         ${compiler_flags}
-        ${extra_args}
+        ${extra_args[@]}
         ${OPENFAST_SOURCE_DIR:-..}
     )
 
