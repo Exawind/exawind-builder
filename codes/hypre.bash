@@ -19,25 +19,24 @@ exawind_cmake_base ()
     # Not exactly CMake, but we use this function anyway. Must be executed from
     # `hypre/src` directory
 
-    local extra_args="$@"
+    local extra_args_inp=( "$@" )
     local install_dir=""
     local enable_openmp=${ENABLE_OPENMP:-OFF}
     local enable_bigint=${ENABLE_BIGINT:-ON}
     local enable_cuda=${ENABLE_CUDA:-OFF}
-    local enable_uvm=${HYPRE_ENABLE_UVM:-ON}
+    local enable_uvm=${HYPRE_ENABLE_UVM:-OFF}
     local openmp_args=" --without-openmp "
-    local bigint_args=" --enable-bigint "
+    local bigint_args=""
     local cuda_args=" --without-cuda "
     local uvm_args=""
+    local extra_args=""
 
     # HYPRE configure cannot handle Ninja builds, so disable any CMake
     # directives that got added
-    if [[ $extra_args[0] = -G* ]] ; then
-        if [[ ${#extra_args[@]} -eq 1 ]] ; then
-            extra_args=""
-        else
-            extra_args=${extra_args[@]:1}
-        fi
+    if [[ $extra_args_inp[0] = -G* ]] ; then
+        extra_args=${extra_args_inp[@]:1}
+    else
+        extra_args=${extra_args_inp}
     fi
 
     if [ -n "$HYPRE_INSTALL_PREFIX" ] ; then
@@ -63,12 +62,16 @@ exawind_cmake_base ()
         else
             uvm_args=" --disable-unified-memory "
         fi
+
+        # Disable BIGINT as it doesn't work with CUDA
+        enable_bigint=OFF
     else
         echo "==> HYPRE: Disabling CUDA"
     fi
 
     if [ "${enable_bigint}" = "ON" ] ; then
         echo "==> HYPRE: Enabling big Integer support"
+        bigint_args=" --enable-bigint "
     else
         echo "==> HYPRE: Disabling big Integer support"
         bigint_args=" --disable-bigint "
@@ -82,12 +85,13 @@ exawind_cmake_base ()
         ${openmp_args}
         ${cuda_args}
         ${uvm_args}
-        ${extra_args}
+        ${extra_args[@]}
     )
 
     echo "${config_cmd[@]}"
     eval "${config_cmd[@]}"
-    command make clean
+    echo "==> Executing make clean to force full recompile"
+    command make clean > /dev/null
 }
 
 exawind_make ()
