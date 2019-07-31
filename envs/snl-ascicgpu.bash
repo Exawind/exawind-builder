@@ -25,7 +25,7 @@ exawind_env_gcc ()
     exawind_env_common
     exawind_spack_env gcc
 
-    export CC=$(which gcc)
+    export CC=$(which mpicc)
     export CXX=$(which g++)
     export F77=$(which mpif90)
     export FC=$(which mpif90)
