@@ -79,22 +79,33 @@ exawind_guess_make_type ()
     fi
 }
 
-exawind_make ()
+exawind_num_parjobs ()
 {
     local num_tasks=${EXAWIND_NUM_JOBS:-$EXAWIND_NUM_JOBS_DEFAULT}
+    local cmd_args="$*"
+
+    local par_args=$(echo ${cmd_args} | sed -n -e 's/^.*\(-j *[[:digit:]]*\).*$/\1/p')
+    local other_args=$(echo ${cmd_args} | sed 's/-j *[[:digit:]]*//')
+    if [ "${#par_args}"  = "0" ] ; then
+        par_args="-j ${num_tasks}"
+    fi
+
+    echo "${par_args} ${other_args}"
+}
+
+exawind_make ()
+{
     local make_type=$(exawind_guess_make_type)
 
     if [ "$#" == "0" ] ; then
         extra_args="-j ${num_tasks}"
     else
-        extra_args="$@"
+        extra_args=$(exawind_num_parjobs "$*")
     fi
 
+    echo "+ ${make_type} ${extra_args}"
     case ${make_type} in
-        *ninja)
-            command ${make_type} ${extra_args} 2>&1 | tee make_output.log
-            ;;
-        *make)
+        *ninja | *make)
             command ${make_type} ${extra_args} 2>&1 | tee make_output.log
             ;;
         *)
@@ -109,15 +120,13 @@ exawind_ctest ()
     export OMP_PROC_BIND=${OMP_PROC_BIND:-true};
     export OMP_PLACES=${OMP_PLACES:-threads}
 
-    local num_tasks=${EXAWIND_NUM_JOBS:-$EXAWIND_NUM_JOBS_DEFAULT}
-
     if [ "$#" == "0" ] ; then
         extra_args="-j ${num_tasks}"
     else
-        extra_args="$@"
+        extra_args=$(exawind_num_parjobs "$*")
     fi
 
-    command ctest ${extra_args}
+    command ctest --output-on-failure ${extra_args}
 }
 
 exawind_run ()
