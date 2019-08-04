@@ -4,7 +4,7 @@ module purge
 
 case "${EXAWIND_COMPILER:-gcc}" in
     gcc)
-        module load sierra-devel
+        module load sierra-devel/nvidia
         ;;
 
     intel)
