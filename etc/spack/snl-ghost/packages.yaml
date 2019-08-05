@@ -1,7 +1,7 @@
 packages:
   all:
     compiler:
-      - intel@17.0.1
+      - intel@19.0.3.199
     modules: {}
     paths: {}
     providers:
@@ -31,33 +31,21 @@ packages:
     buildable: false
     paths:
       openssl@1.0.2: /usr
-  ncurses:
-    version: [5.9]
-    buildable: false
-    paths:
-      ncurses@5.9: /usr
   cmake:
-    version: [3.12.4]
-    variants: +ownlibs
+    version: [3.12.2]
+    buildable: false
+    modules:
+      cmake@3.12.2: cmake/3.12.2
   binutils:
     version: [2.29.1]
   zlib:
     version: [1.2.7]
-    buildable: false
-    paths:
-      zlib@1.2.7: /usr
   bzip2:
     version: [1.0.6]
-    buildable: false
-    paths:
-      bzip2@1.0.6: /usr
   m4:
     version: [1.4.16]
-    buildable: false
-    paths:
-      m4@1.4.16: /usr
   boost:
-    version: [1.66.0]
+    version: [1.67.0]
   hdf5:
     version: [1.10.1]
     variants: +mpi+cxx+hl
