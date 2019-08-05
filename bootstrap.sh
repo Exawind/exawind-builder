@@ -148,7 +148,7 @@ exw_install_deps ()
     spack install netcdf %${spack_compiler}
     spack install yaml-cpp %${spack_compiler}
     spack install hypre %${spack_compiler}
-    spack install fftw %${spack_compiler}
+    #spack install fftw %${spack_compiler}
 }
 
 exw_create_scripts ()
