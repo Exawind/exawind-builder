@@ -38,8 +38,11 @@ exawind_env_intel ()
     export CXX=$(which mpiicpc)
     export F77=$(which mpiifort)
     export FC=$(which mpiifort)
-
     exawind_load_deps cmake zlib libxml2
+    export _EXAWIND_MKL_LIBNAMES="'mkl_intel_lp64;mkl_sequential;mkl_core;pthread;m;dl'"
+    export EXAWIND_MKL_LIBNAMES=${EXAWIND_MKL_LIBNAMES:-${_EXAWIND_MKL_LIBNAMES}}
+    export EXAWIND_MKL_LIBDIRS=${EXAWIND_MKL_LIBDIRS:-${MKLHOME}/lib/intel64}
+
 }
 
 exawind_env_clang ()
