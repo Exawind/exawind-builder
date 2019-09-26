@@ -95,6 +95,7 @@ exawind_num_parjobs ()
 
 exawind_make ()
 {
+    local num_tasks=${EXAWIND_NUM_JOBS:-$EXAWIND_NUM_JOBS_DEFAULT}
     local make_type=$(exawind_guess_make_type)
 
     if [ "$#" == "0" ] ; then
