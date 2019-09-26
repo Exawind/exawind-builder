@@ -8,8 +8,19 @@ _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
 
 exawind_proj_env ()
 {
+    local opt_packages=(
+        hypre
+    )
+
     echo "==> Loading dependencies for wind-utils..."
     exawind_load_deps zlib libxml2 hdf5 trilinos yaml-cpp
+
+    for pkg in ${opt_packages[@]} ; do
+        local pkg_flag="ENABLE_${pkg^^}"
+        if [ "${!pkg_flag:-ON}" = "ON" ] ; then
+            exawind_load_deps $pkg
+        fi
+    done
 }
 
 exawind_cmake_base ()
@@ -32,6 +43,8 @@ exawind_cmake_base ()
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
         -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR}
+        -DENABLE_HYPRE:BOOL=${ENABLE_HYPRE:-ON}
+        -DHYPRE_DIR=${HYPRE_ROOT_DIR}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=TRUE
         ${compiler_flags}
