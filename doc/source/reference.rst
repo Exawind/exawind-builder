@@ -95,6 +95,10 @@ ExaWind Builder configuration
    system that users are using ``exawind-builder`` on and rarely needs to be
    changed by the user.
 
+.. envvar:: EXAWIND_EXTRA_USER_MODULES
+
+   A list of extra modules that must be loaded before performing any actions.
+
 .. envvar:: EXAWIND_NUM_JOBS
 
    The maximum number of parallel build jobs to execute when ``make`` is
@@ -308,6 +312,15 @@ Both OpenMP and CUDA are disabled by default for HYPRE builds.
 
 Function reference
 ==================
+
+User customization functions
+----------------------------
+
+.. function:: exawind_env_user_actions
+
+   A function that is called after the base environment is loaded to allow the
+   user to further customize the environment that will be used to configure and
+   compile software.
 
 Core functions
 --------------

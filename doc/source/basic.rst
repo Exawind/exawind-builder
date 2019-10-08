@@ -300,6 +300,33 @@ file is described in the next section. Since bash functions are often project
 specific they should be overridden in the build script and not the configuration
 file.
 
+Customizing ExaWind environment
+```````````````````````````````
+
+The builder provides two additional options that allows the user to further
+configure the default environment that is enabled for a given system/compiler
+combination.
+
+#. To load additional modules, the user can use
+   :envvar:`EXAWIND_EXTRA_USER_MODULES` variable to orovide the list of modules
+   (in module or spack syntax as appropriate) and have them loaded after the
+   base modules have been loaded.
+
+#. Fine-grained customization is achieved by defining by overriding the function
+   :func:`exawind_env_user_actions` in the :file:`exawind-config.sh` configuration
+   file.
+
+   .. code-block:: bash
+
+      # Load additional modules and print out some variables
+      exawind_env_user_actions ()
+      {
+        module load paraview
+        echo ${CXX}
+        echo ${TRILINOS_ROOT_DIR}
+      }
+
+
 Customizing CMake configuration phase
 `````````````````````````````````````
 
