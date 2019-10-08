@@ -7,6 +7,7 @@ EXAWIND_MODMAP[trilinos]=trilinos/develop
 EXAWIND_MODMAP[cuda]=cuda/10.0.130
 EXAWIND_MODMAP[mpi]=mpich/3.3
 EXAWIND_MODMAP[gcc]=gcc/7.4.0
+EXAWIND_MODMAP[netlib-lapack]=netlib-lapack/3.8.0
 
 EXAWIND_DEP_LOADER=module
 
@@ -121,6 +122,38 @@ exawind_env_intel ()
 
 exawind_env_clang ()
 {
-    echo "ERROR: No LLVM/Clang environment set up for NREL Eagle"
-    exit 1
+    module purge
+    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-7.4.0}
+    exawind_eagle_common gcc-${EXAWIND_GCC_VERSION}
+
+    exawind_load_deps gcc llvm ${EXAWIND_MODMAP[mpi]}
+    exawind_load_deps cmake git binutils netlib-lapack
+
+    export F77=$(which mpifort)
+    export FC=$(which mpifort)
+    export CC=$(which mpicc)
+
+    # Override C/C++ compilers with LLVM
+    export OMPI_CXX=$(which clang++)
+    export OMPI_CC=$(which clang)
+    export MPICH_CXX=$(which clang++)
+    export MPICH_CC=$(which clang)
+    if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
+        export CXX=$(which mpic++)
+
+        # Suppress warnings about CUDA when running on standard nodes
+        export OMPI_MCA_opal_cuda_support=0
+
+        # Set arch flags for optimization
+        export EXAWIND_ARCH_FLAGS_DEFAULT="'-march=skylake -mtune=skylake'"
+        export EXAWIND_ARCH_FLAGS=${EXAWIND_ARCH_FLAGS:-${EXAWIND_ARCH_FLAGS_DEFAULT}}
+        export KOKOS_ARCH=${KOKKOS_ARCH:-SKX}
+    else
+        exawind_load_deps cuda
+        export CXX=$(which clang++)
+        exawind_eagle_gpu
+    fi
+
+    # Supress warnings issued because of ulimit issues on Eagle when using MPICH
+    export MXM_LOG_LEVEL=error
 }
