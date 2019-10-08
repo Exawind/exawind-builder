@@ -6,6 +6,9 @@ __EXAWIND_CORE_DIR=${__EXAWIND_CORE_DIR:-$(dirname ${__EXAWIND_CORESRC_DIR})}
 # Array holding exact module/spack descriptor for a dependency
 declare -A EXAWIND_MODMAP
 
+# Array holding extra modules to be loaded based on user configuration
+declare -a EXAWIND_EXTRA_USER_MODULES
+
 export EXAWIND_COMPILER_DEFAULT=gcc
 export EXAWIND_DEP_LOADER=spack
 export EXAWIND_CUDA_WRAPPER_DEFAULT=${__EXAWIND_CORE_DIR}/utils/nvcc_wrapper
@@ -20,6 +23,20 @@ exawind_env ()
 
     local compiler=${EXAWIND_COMPILER:-${EXAWIND_COMPILER_DEFAULT}}
     exawind_env_${compiler}
+
+    # Load any additional modules defined by the user
+    if [ ${#EXAWIND_EXTRA_USER_MODULES[@]} -gt 0 ] ; then
+        echo "==> Loading additional user modules: "
+        exawind_load_deps ${EXAWIND_EXTRA_USER_MODULES}
+    fi
+
+    # Allow user to customize the environment further
+    exawind_env_user_actions
+}
+
+exawind_env_user_actions ()
+{
+    echo "==> No user environment actions defined"
 }
 
 exawind_default_install_dir ()
