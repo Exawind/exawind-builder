@@ -138,6 +138,8 @@ exawind_cmake_base ()
             -DTPL_Netcdf_Enables_Netcdf4:BOOL=ON
             -DTPL_ENABLE_Pnetcdf:BOOL=ON
             -DPNetCDF_ROOT:PATH=${PARALLEL_NETCDF_ROOT_DIR}
+            -DPnetcdf_INCLUDE_DIRS:PATH=${PARALLEL_NETCDF_ROOT_DIR}/include
+            -DPnetcdf_LIBRARY_DIRS:PATH=${PARALLEL_NETCDF_ROOT_DIR}/lib
             -DTPL_ENABLE_HDF5:BOOL=ON
             -DHDF5_ROOT:PATH=${HDF5_ROOT_DIR}
             -DHDF5_NO_SYSTEM_PATHS:BOOL=ON

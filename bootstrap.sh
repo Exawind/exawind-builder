@@ -247,7 +247,7 @@ EOF
 
 exw_need_spack_setup ()
 {
-    local no_spack_machines=(peregrine eagle rhodes)
+    local no_spack_machines=(peregrine eagle rhodes snl-waterman-atdm)
     local exwsys=${EXAWIND_SYSTEM:-spack}
     local out=0
 
