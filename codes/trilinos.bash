@@ -54,10 +54,12 @@ exawind_cmake_base ()
         echo "==> Trilinos: disabling SuperLU"
     fi
 
-    # Force CMake to use absolute paths for the libraries so that it doesn't
-    # pick up versions installed in `/usr/lib64` on peregrine
-    local lib_path_save=${LIBRARY_PATH}
-    unset LIBRARY_PATH
+    if [ "${EXAWIND_UNSET_LIBRARY_PATH:-ON}" = "ON" ] ; then
+        # Force CMake to use absolute paths for the libraries so that it doesn't
+        # pick up versions installed in `/usr/lib64` on peregrine
+        local lib_path_save=${LIBRARY_PATH}
+        unset LIBRARY_PATH
+    fi
 
     local cmake_cmd=(
         cmake
@@ -149,7 +151,9 @@ exawind_cmake_base ()
     echo "${cmake_cmd[@]}" > cmake_output.log
     eval "${cmake_cmd[@]}" 2>&1 | tee -a cmake_output.log
 
-    export LIBRARY_PATH=${lib_path_save}
+    if [ "${EXAWIND_UNSET_LIBRARY_PATH:-ON}" = "ON" ] ; then
+        export LIBRARY_PATH=${lib_path_save}
+    fi
 }
 
 exawind_cmake_osx ()
