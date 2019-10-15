@@ -31,6 +31,8 @@ exawind_cmake_base ()
         blas_lapack="-DBLAS_LIBRARY_NAMES=${EXAWIND_MKL_LIBNAMES} -DBLAS_LIBRARY_DIRS=${EXAWIND_MKL_LIBDIRS} -DLAPACK_LIBRARY_NAMES=${EXAWIND_MKL_LIBNAMES} -DLAPACK_LIBRARY_DIRS=${EXAWIND_MKL_LIBDIRS} "
     fi
 
+    local compiler_flags=$(exawind_get_compiler_flags)
+
     # Allow user to configure OpenMP
     local enable_openmp=${ENABLE_OPENMP:-ON}
     if [[ $OSTYPE = "darwin" ]] ; then
@@ -144,6 +146,7 @@ exawind_cmake_base ()
             -DZlib_LIBRARY_DIRS:PATH=${ZLIB_ROOT_DIR}/lib
             -DTPL_ENABLE_BLAS:BOOL=ON
             ${blas_lapack}
+            ${compiler_flags}
             ${extra_args}
             ${TRILINOS_SOURCE_DIR:-..}
     )

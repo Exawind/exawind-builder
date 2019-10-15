@@ -29,6 +29,7 @@ exawind_env_gcc ()
 
     export NVCC_WRAPPER_DEFAULT_COMPILER=$CXX
     export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
+    export EXAWIND_NVCC_FLAGS="--remove-duplicate-link-files"
     export CXX=$(which mpic++)
 
     exawind_load_deps cmake netlib-lapack

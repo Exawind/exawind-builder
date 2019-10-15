@@ -18,6 +18,10 @@ exawind_get_compiler_flags ()
         fflags="${fflags} ${EXAWIND_ARCH_FLAGS}"
     fi
 
+    if [[ "${ENABLE_CUDA:-OFF}" = "ON" && -n "${EXAWIND_NVCC_FLAGS}" ]] ; then
+       cxxflags="${cxxflags} ${EXAWIND_NVCC_FLAGS}"
+    fi
+
     if [ -n "${cxxflags}" ] ; then
         local compiler_flags=(
             -DCMAKE_CXX_FLAGS="'${cxxflags}'"
