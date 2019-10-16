@@ -7,8 +7,6 @@
 # the `waterman` config.
 #
 
-source ${__EXAWIND_CORE_DIR}/envs/spack.bash
-
 export EXAWIND_NUM_JOBS_DEFAULT=32
 
 declare -A EXAWIND_MODMAP
