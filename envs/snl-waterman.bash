@@ -32,5 +32,8 @@ exawind_env_gcc ()
     export EXAWIND_NVCC_FLAGS="--remove-duplicate-link-files"
     export CXX=$(which mpic++)
 
+    export EXAWIND_MAKE_TYPE=${EXAWIND_MAKE_TYPE:-ninja}
+    export EXAWIND_UNSET_LIBRARY_PATH=${EXAWIND_UNSET_LIBRARY_PATH:-OFF}
+
     exawind_load_deps cmake netlib-lapack
 }
