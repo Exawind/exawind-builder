@@ -5,7 +5,7 @@ export EXAWIND_NUM_JOBS_DEFAULT=36
 declare -A EXAWIND_MODMAP
 EXAWIND_MODMAP[trilinos]=trilinos/develop
 EXAWIND_MODMAP[cuda]=cuda/10.0.130
-EXAWIND_MODMAP[mpi]=mpich/3.3
+EXAWIND_MODMAP[mpi]=mpich/3.3.1
 EXAWIND_MODMAP[gcc]=gcc/7.4.0
 EXAWIND_MODMAP[netlib-lapack]=netlib-lapack/3.8.0
 
@@ -73,7 +73,7 @@ exawind_env_gcc ()
         export OMPI_MCA_opal_cuda_support=0
 
         # Set arch flags for optimization
-        export EXAWIND_ARCH_FLAGS_DEFAULT="'-march=skylake -mtune=skylake'"
+        export EXAWIND_ARCH_FLAGS_DEFAULT="-march=skylake -mtune=skylake"
         export EXAWIND_ARCH_FLAGS=${EXAWIND_ARCH_FLAGS:-${EXAWIND_ARCH_FLAGS_DEFAULT}}
         export KOKOS_ARCH=${KOKKOS_ARCH:-SKX}
     else
@@ -145,7 +145,7 @@ exawind_env_clang ()
         export OMPI_MCA_opal_cuda_support=0
 
         # Set arch flags for optimization
-        export EXAWIND_ARCH_FLAGS_DEFAULT="'-march=skylake -mtune=skylake'"
+        export EXAWIND_ARCH_FLAGS_DEFAULT="-march=skylake -mtune=skylake"
         export EXAWIND_ARCH_FLAGS=${EXAWIND_ARCH_FLAGS:-${EXAWIND_ARCH_FLAGS_DEFAULT}}
         export KOKOS_ARCH=${KOKKOS_ARCH:-SKX}
     else
