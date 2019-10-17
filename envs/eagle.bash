@@ -123,8 +123,8 @@ exawind_env_intel ()
 exawind_env_clang ()
 {
     module purge
-    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-7.4.0}
-    exawind_eagle_common gcc-${EXAWIND_GCC_VERSION}
+    export EXAWIND_CLANG_VERSION=${EXAWIND_CLANG_VERSION:-7.0.1}
+    exawind_eagle_common clang-${EXAWIND_CLANG_VERSION}
 
     exawind_load_deps gcc llvm ${EXAWIND_MODMAP[mpi]}
     exawind_load_deps cmake git binutils netlib-lapack
