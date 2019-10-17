@@ -14,7 +14,7 @@ exawind_proj_env ()
 {
     if [ "${FAST_CPP_API:-ON}" = "ON" ] ; then
         echo "==> Loading dependencies for OpenFAST... "
-        exawind_load_deps zlib libxml2 hdf5 yaml-cpp
+        exawind_load_deps zlib libxml2 hdf5 netcdf yaml-cpp
     else
         echo "==> FAST C++ API is disabled. No additional dependencies."
     fi
