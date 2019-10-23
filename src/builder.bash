@@ -6,6 +6,9 @@ __EXAWIND_CORE_DIR=${__EXAWIND_CORE_DIR:-$(dirname ${__EXAWIND_CORESRC_DIR})}
 # Build directories that must be removed when performing cmake_full
 declare -a _EXAWIND_PROJECT_CMAKE_RMEXTRA_
 
+export EXAWIND_NICE_PRIORITY=10
+export EXAWIND_IONICE_PRIORITY=3
+
 exawind_get_compiler_flags ()
 {
     local cxxflags=${CMAKE_CXX_FLAGS:-$CXXFLAGS}
@@ -108,10 +111,15 @@ exawind_make ()
         extra_args=$(exawind_num_parjobs "$*")
     fi
 
+    local nice_args="nice -n${EXAWIND_NICE_PRIORITY} "
+    if [ ! -z "$(which ionice 2>/dev/null)" ] ; then
+        nice_args="${nice_args} ionice -c${EXAWIND_IONICE_PRIORITY} "
+    fi
+
     echo "+ ${make_type} ${extra_args}"
     case ${make_type} in
         *ninja | *make)
-            command ${make_type} ${extra_args} 2>&1 | tee make_output.log
+            ${nice_args} command ${make_type} ${extra_args} 2>&1 | tee make_output.log
             ;;
         *)
             echo "!!ERROR!! Invalid make type detected"
