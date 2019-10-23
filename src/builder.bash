@@ -116,7 +116,7 @@ exawind_make ()
         nice_args="${nice_args} ionice -c${EXAWIND_IONICE_PRIORITY} "
     fi
 
-    echo "+ ${make_type} ${extra_args}"
+    echo "+ ${nice_args} ${make_type} ${extra_args}"
     case ${make_type} in
         *ninja | *make)
             ${nice_args} command ${make_type} ${extra_args} 2>&1 | tee make_output.log
