@@ -78,7 +78,7 @@ Setup ExaWind directory structure as described in :ref:`exawind_dir_layout`.
 
       .. code-block:: console
 
-         ln -s packages.yaml ${HOME}/.spack/$(spack arch -p)/
+         ln -s ${HOME}/exawind/exawind-builder/etc/spack/${SYSTEM}/packages.yaml ${HOME}/.spack/$(spack arch -p)/
 
 #. Setup compilers to be used by spack. As with :file:`packages.yaml`, it is
    recommended that the users use the compiler configuration provided with
