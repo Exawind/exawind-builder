@@ -80,7 +80,7 @@ exawind_env_gcc ()
     export EXAWIND_USE_BLASLIB=${EXAWIND_USE_BLASLIB:-ON}
 
     # Fix duplicate libraries issue
-    export EXAWIND_NVCC_EXTRA_FLAGS="--remove-duplicate-link-files'"
+    export EXAWIND_NVCC_FLAGS="--remove-duplicate-link-files"
 
     # Fix issue with LIBRARY_PATH on waterman
     export EXAWIND_UNSET_LIBRARY_PATH=${EXAWIND_UNSET_LIBRARY_PATH:-OFF}
