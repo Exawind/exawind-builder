@@ -10,6 +10,8 @@ exawind_proj_env ()
 {
     echo "==> Loading dependencies for Trilinos..."
     exawind_load_deps zlib libxml2 hdf5 netcdf parallel-netcdf superlu boost
+
+    export EXAWIND_NVCC_FLAGS=${EXAWIND_NVCC_FLAGS:-"--remove-duplicate-link-files"}
 }
 
 exawind_cmake_base ()
