@@ -94,18 +94,24 @@ exw_init_spack ()
 
     if [ "${need_setup}" = "yes" ] ; then
         echo "==> Setting up spack compiler and package settings"
-        local have_packages_yaml=no
         local have_compiler_yaml=no
+        local spackos=$(uname -s | tr "[:upper:]" "[:lower:]")
+
+        if [ ! -d spack/etc/spack/${spackos} ] ; then
+            mkdir spack/etc/spack/${spackos}
+        fi
 
         if [ -d ${ewblddir}/etc/spack/${exwsys} ] ; then
             local cfgdir=${ewblddir}/etc/spack/${exwsys}
+
+            # Copy the base packages.yaml common to all systems
+            ln -s ${ewblddir}/etc/spack/spack/packages.yaml spack/etc/spack/packages.yaml
+
             if [ "${check_homebrew}" = "yes" ]; then
                 local brew_prefix=$(brew config | awk -F: '/HOMEBREW_PREFIX/ {print $2;}')
-                sed -e "s#/usr/local#${brew_prefix}#g" ${cfgdir}/packages.yaml > spack/etc/spack/packages.yaml
-                have_packages_yaml=yes
+                sed -e "s#/usr/local#${brew_prefix}#g" ${cfgdir}/packages.yaml > spack/etc/spack/${spackos}/packages.yaml
             elif [ -f ${cfgdir}/packages.yaml ] ; then
-                ln -s ${cfgdir}/packages.yaml spack/etc/spack/
-                have_packages_yaml=yes
+                ln -s ${cfgdir}/packages.yaml spack/etc/spack/${spackos}
             fi
 
             if [ -f ${cfgdir}/compilers.yaml ] ; then
@@ -116,10 +122,6 @@ exw_init_spack ()
             if [ -f ${cfgdir}/config.yaml ] ; then
                 ln -s ${cfgdir}/config.yaml spack/etc/spack
             fi
-        fi
-
-        if [ "${have_packages_yaml}" = "no" ] ; then
-            ln -s ${ewblddir}/etc/spack/spack/packages.yaml spack/etc/spack
         fi
     fi
 
@@ -145,7 +147,7 @@ exw_install_deps ()
     spack install boost %${spack_compiler}
     spack install superlu %${spack_compiler}
     spack install hdf5 %${spack_compiler}
-    spack install netcdf %${spack_compiler}
+    spack install netcdf-c %${spack_compiler}
     spack install yaml-cpp %${spack_compiler}
     spack install hypre %${spack_compiler}
     #spack install fftw %${spack_compiler}

@@ -3,17 +3,9 @@ packages:
     compiler:
       - gcc@7.4.0
       - xl@16.1
-    modules: {}
-    paths: {}
     providers:
-      blas:
-        - netlib-lapack
-      lapack:
-        - netlib-lapack
       mpi:
         - spectrum-mpi
-    version: []
-    variants: +mpi build_type=Release
   spectrum-mpi:
     version: [10.3.0]
     buildable: false
@@ -52,34 +44,3 @@ packages:
     buildable: false
     modules:
       m4@1.4.18: m4/1.4.18
-  netlib-lapack:
-    version: [3.8.0]
-  boost:
-    version: [1.66.0]
-  hdf5:
-    version: [1.10.1]
-    variants: +mpi+hl+cxx
-  netcdf:
-    version: [4.4.1.1]
-    variants: +parallel-netcdf maxdims=65536 maxvars=52488
-  parallel-netcdf:
-    version: [1.8.0]
-  superlu:
-    version: [4.3]
-  yaml-cpp:
-    version: [develop]
-    variants: ~shared
-  fftw:
-    variants: +mpi~fma simd=vsx
-  openfast:
-    version: [develop]
-    variants: +cxx~shared
-  hypre:
-    version: [develop]
-    variants: +int64~superlu-dist~shared
-  tioga:
-    version: [develop]
-    variants: ~shared
-  trilinos:
-    version: [develop]
-    variants: ~alloptpkgs~xsdkflags~metis~mumps~superlu-dist+superlu~hypre+hdf5~suite-sparse~python~shared+boost+tpetra~epetra~epetraext+exodus+pnetcdf+zlib+stk+teuchos+belos+zoltan+zoltan2~amesos+amesos2~anasazi~ifpack+ifpack2+muelu~fortran~ml+gtest~aztec~sacado~x11+instantiate~instantiate_cmplx~dtk~fortrilinos+openmp~rol~nox+shards~intrepid~intrepid2~cgns

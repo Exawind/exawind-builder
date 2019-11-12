@@ -1,8 +1,8 @@
 packages:
   all:
-    compiler: [ clang, gcc ]
-    modules: {}
-    paths: {}
+    compiler:
+      - clang
+      - gcc
     providers:
       mpi:
         - openmpi
@@ -36,16 +36,6 @@ packages:
     buildable: false
     paths:
       bzip2@2.1.0: /usr
-  boost:
-    version: [brew-latest]
-    buildable: false
-    paths:
-      boost@brew-latest: /usr/local
-  fftw:
-    version: [brew-latest]
-    buildable: false
-    paths:
-      fftw@brew-latest: /usr/local
   pkg-config:
     paths:
       pkg-config@0.29.2: /usr/local/Cellar/pkg-config/0.29.2
@@ -54,30 +44,3 @@ packages:
     paths:
       m4@1.4.6: /usr
     buildable: false
-  superlu:
-    version: [4.3]
-  yaml-cpp:
-    version: [develop]
-    variants: ~shared
-  hdf5:
-    version: [1.10.1]
-    variants: +mpi+cxx+hl
-  netcdf:
-    version: [4.4.1.1]
-    variants: +parallel-netcdf maxdims=65536 maxvars=524288
-  parallel-netcdf:
-    version: [1.8.0]
-  netlib-lapack:
-    version: [3.8.0]
-  openfast:
-    version: [develop]
-    variants: +cxx~shared
-  hypre:
-    version: [develop]
-    variants: +int64~superlu-dist~shared
-  tioga:
-    version: [develop]
-    variants: ~shared
-  trilinos:
-    version: [develop]
-    variants: ~alloptpkgs~xsdkflags~metis~mumps~superlu-dist+superlu~hypre+hdf5~suite-sparse~python~shared+boost+tpetra~epetra~epetraext+exodus+pnetcdf+zlib+stk+teuchos+belos+zoltan+zoltan2~amesos+amesos2~anasazi~ifpack+ifpack2+muelu~fortran~ml+gtest~aztec~sacado~x11+instantiate~instantiate_cmplx~dtk~fortrilinos+openmp~rol~nox+shards~intrepid~intrepid2~cgns

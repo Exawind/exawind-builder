@@ -2,8 +2,6 @@ packages:
   all:
     compiler:
       - intel
-    modules: {}
-    paths: {}
     providers:
       mpi:
         - mpich
@@ -60,32 +58,3 @@ packages:
     buildable: false
     paths:
       m4@1.4.16: /usr
-  boost:
-    version: [1.67.0]
-  hdf5:
-    version: [1.10.1]
-    variants: +mpi+cxx+hl
-  netcdf:
-    version: [4.4.1.1]
-    variants: +parallel-netcdf maxdims=65536 maxvars=524288
-  parallel-netcdf:
-    version: [1.8.0]
-  superlu:
-    version: [4.3]
-  netlib-lapack:
-    version: [3.8.0]
-  yaml-cpp:
-    version: [develop]
-    variants: ~shared
-  openfast:
-    version: [develop]
-    variants: +cxx
-  hypre:
-    version: [develop]
-    variants: +int64~superlu-dist~shared
-  tioga:
-    version: [develop]
-    variants: ~shared
-  trilinos:
-    version: [develop]
-    variants: ~alloptpkgs~xsdkflags~metis~mumps~superlu-dist+superlu~hypre+hdf5~suite-sparse~python~shared+boost+tpetra~epetra~epetraext+exodus+pnetcdf+zlib+stk+teuchos+belos+zoltan+zoltan2~amesos+amesos2~anasazi~ifpack+ifpack2+muelu~fortran~ml+gtest~aztec~sacado~x11+instantiate~instantiate_cmplx~dtk~fortrilinos+openmp~rol~nox+shards~intrepid~intrepid2~cgns

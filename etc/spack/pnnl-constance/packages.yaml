@@ -2,15 +2,9 @@ packages:
   all:
     compiler:
       - gcc@7.3.0
-    modules: {}
-    paths: {}
     providers:
       mpi:
         - openmpi
-      blas:
-        - netlib-lapack
-      lapack:
-        - netlib-lapack
     variants: +mpi build_type=Release ~shared
   openmpi:
     version: [1.10.1]
@@ -23,46 +17,3 @@ packages:
     paths:
       cmake@3.12.3: /share/apps/cmake/3.12.3
     #variants: +ownlibs
-  openssl:
-    version: [1.1.0]
-  zlib:
-    version: [1.2.8]
-  libxml2:
-    version: [2.9.3]
-  fftw:
-    version: [3.3.8.1]
-  ncurses:
-    version: [6.0]
-  bzip2:
-    version: [1.0.6]
-  m4:
-    version: [1.4.16]
-  boost:
-    version: [1.68.0]
-  hdf5:
-    version: [1.10.1]
-    variants: +mpi+cxx+hl
-  netcdf:
-    version: [4.4.1.1]
-    variants: +parallel-netcdf maxdims=65536 maxvars=524288
-  parallel-netcdf:
-    version: [1.8.0]
-  superlu:
-    version: [4.3]
-  netlib-lapack:
-    version: [3.8.0]
-  yaml-cpp:
-    version: [develop]
-    variants: ~shared
-  openfast:
-    version: [develop]
-    variants: +cxx
-  hypre:
-    version: [develop]
-    variants: +int64~superlu-dist~shared
-  tioga:
-    version: [develop]
-    variants: ~shared
-  trilinos:
-    version: [develop]
-    variants: ~alloptpkgs~xsdkflags~metis~mumps~superlu-dist+superlu~hypre+hdf5~suite-sparse~python~shared+boost+tpetra~epetra~epetraext+exodus+pnetcdf+zlib+stk+teuchos+belos+zoltan+zoltan2~amesos+amesos2~anasazi~ifpack+ifpack2+muelu~fortran~ml+gtest~aztec~sacado~x11+instantiate~instantiate_cmplx~dtk~fortrilinos+openmp~rol~nox+shards~intrepid~intrepid2~cgns
