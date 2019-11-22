@@ -68,6 +68,7 @@ configuration variables availble to customize configuration of each project.
   TIOGA Utilities      https://github.com/sayerhs/tioga_utils.git
   HYPRE                https://github.com/LLNL/hypre.git
   hypre-mini-app       https://github.com/exawind/hypre-mini-app.git
+  ArborX               https://github.com/arborx/ArborX.git
   ==================== =================================================
 
 
