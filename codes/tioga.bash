@@ -24,6 +24,7 @@ exawind_cmake_base ()
 
     local cmake_cmd=(
         cmake
+        -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         ${install_dir}
         ${extra_args}
