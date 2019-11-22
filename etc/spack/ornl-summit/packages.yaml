@@ -18,7 +18,7 @@ packages:
     version: [10.3.0]
     buildable: false
     modules:
-      spectrum-mpi@10.3.0: spectrum-mpi/10.3.0.0-20190419
+      spectrum-mpi@10.3.0: spectrum-mpi/10.3.0.1-20190611
     paths: {}
     providers: {}
     compiler: []
