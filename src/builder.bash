@@ -108,7 +108,7 @@ exawind_make ()
     if [ "$#" == "0" ] ; then
         extra_args="-j ${num_tasks}"
     else
-        extra_args=$(exawind_num_parjobs "$*")
+        extra_args=$(exawind_num_parjobs "$@")
     fi
 
     local nice_args="nice -n${EXAWIND_NICE_PRIORITY} "

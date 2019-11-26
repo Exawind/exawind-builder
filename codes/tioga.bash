@@ -11,7 +11,19 @@ _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
 
 exawind_proj_env ()
 {
-    echo "==> TIOGA: No additional dependencies"
+    local opt_packages=(
+        arborx
+    )
+
+    echo "==> Loading dependencies for TIOGA..."
+
+    for pkg in ${opt_packages[@]} ; do
+        local pkg_flag="ENABLE_${pkg^^}"
+        if [ "${!pkg_flag:-ON}" = "ON" ] ; then
+            exawind_load_deps $pkg
+        fi
+    done
+
 }
 
 exawind_cmake_base ()
@@ -24,7 +36,10 @@ exawind_cmake_base ()
 
     local cmake_cmd=(
         cmake
+        -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
+        -DTIOGA_ENABLE_ARBORX:BOOL=${ENABLE_ARBORX:-ON}
+        -DCMAKE_PREFIX_PATH="$ARBORX_ROOT_DIR\\;$TRILINOS_ROOT_DIR"
         ${install_dir}
         ${extra_args}
         ${TIOGA_SOURCE_DIR:-..}

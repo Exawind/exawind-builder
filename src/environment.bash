@@ -74,6 +74,7 @@ exawind_load_spack ()
 
         local depname=${EXAWIND_MODMAP[$dep]:-$dep}
         if [ -z ${!root_dir_var} ] ; then
+            echo "==> spack: locating $depname%${SPACK_COMPILER}"
             ${SPACK_EXE} module tcl find $depname %${SPACK_COMPILER} &>/dev/null &&
             {
                 module load $(${SPACK_EXE} module tcl find $depname %${SPACK_COMPILER})
