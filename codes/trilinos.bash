@@ -91,7 +91,6 @@ exawind_cmake_base ()
             -DTrilinos_ENABLE_CXX11:BOOL=ON
             -DTrilinos_ENABLE_EXPLICIT_INSTANTIATION:BOOL=ON
             -DTpetra_INST_DOUBLE:BOOL=ON
-            -DTpetra_INST_INT_LONG:BOOL=ON
             -DTpetra_INST_COMPLEX_DOUBLE:BOOL=OFF
             -DTrilinos_ENABLE_TESTS:BOOL=OFF
             -DTrilinos_ENABLE_ALL_OPTIONAL_PACKAGES:BOOL=OFF
