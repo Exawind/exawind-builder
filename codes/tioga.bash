@@ -19,7 +19,7 @@ exawind_proj_env ()
 
     for pkg in ${opt_packages[@]} ; do
         local pkg_flag="ENABLE_${pkg^^}"
-        if [ "${!pkg_flag:-ON}" = "ON" ] ; then
+        if [ "${!pkg_flag:-OFF}" = "ON" ] ; then
             exawind_load_deps $pkg
         fi
     done
@@ -38,7 +38,7 @@ exawind_cmake_base ()
         cmake
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
-        -DTIOGA_ENABLE_ARBORX:BOOL=${ENABLE_ARBORX:-ON}
+        -DTIOGA_ENABLE_ARBORX:BOOL=${ENABLE_ARBORX:-OFF}
         -DCMAKE_PREFIX_PATH="$ARBORX_ROOT_DIR\\;$TRILINOS_ROOT_DIR"
         ${install_dir}
         ${extra_args}
