@@ -27,8 +27,6 @@ exawind_spack_env ()
 exawind_env_gcc ()
 {
     exawind_spack_env gcc
-
-    exawind_load_deps mpi netlib-lapack
 }
 
 exawind_env_intel ()
@@ -38,13 +36,10 @@ exawind_env_intel ()
         exit 1
     else
         exawind_spack_env intel
-        exawind_load_deps mpi
     fi
 }
 
 exawind_env_clang ()
 {
     exawind_spack_env clang
-
-    exawind_load_deps mpi netlib-lapack
 }
