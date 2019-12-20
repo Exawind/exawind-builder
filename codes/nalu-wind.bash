@@ -18,7 +18,7 @@ exawind_proj_env ()
     )
 
     echo "==> Loading dependencies for nalu-wind... "
-    exawind_load_deps trilinos yaml-cpp
+    exawind_load_deps trilinos yaml-cpp boost
 
     for pkg in ${opt_packages[@]} ; do
         local pkg_flag="ENABLE_${pkg^^}"
