@@ -23,7 +23,6 @@ exawind_summit_gpu ()
     export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_CUDA_WRAPPER_DEFAULT}}
     export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
     export CUDA_MANAGED_FORCE_DEVICE_ALLOC=${CUDA_MANAGED_FORCE_DEVICE_ALLOC:-1}
-    export ENABLE_CUDA=${ENABLE_CUDA:-ON}
     export KOKKOS_ARCH=${KOKKOS_ARCH:-Volta70}
     export EXAWIND_CUDA_SM=${EXAWIND_CUDA_SM:-70}
 
@@ -43,7 +42,6 @@ exawind_env_gcc ()
     exawind_summit_common
     exawind_spack_env gcc
     module load ${EXAWIND_MODMAP[gcc]}
-    module load ${EXAWIND_MODMAP[cuda]}
     module load git
 
     exawind_load_deps cmake netlib-lapack
@@ -51,7 +49,12 @@ exawind_env_gcc ()
     export CC=$(which mpicc)
     export FC=$(which mpifort)
     export CXX=$(which g++)
-    exawind_summit_gpu
+
+    export ENABLE_CUDA=${ENABLE_CUDA:-ON}
+    if [ "$ENABLE_CUDA" == "ON" ]; then
+        module load ${EXAWIND_MODMAP[cuda]}
+        exawind_summit_gpu
+    fi
 }
 
 exawind_env_intel ()
