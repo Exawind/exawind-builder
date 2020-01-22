@@ -16,8 +16,8 @@ exawind_env_common ()
     export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
     export CUDA_MANAGED_FORCE_DEVICE_ALLOC=${CUDA_MANAGED_FORCE_DEVICE_ALLOC:-1}
     export ENABLE_CUDA=${ENABLE_CUDA:-ON}
-    export KOKKOS_ARCH=${KOKKOS_ARCH:-Pascal60}
-    export EXAWIND_CUDA_SM=${EXAWIND_CUDA_SM:-60}
+    export KOKKOS_ARCH=${KOKKOS_ARCH:-Volta70}
+    export EXAWIND_CUDA_SM=${EXAWIND_CUDA_SM:-70}
 }
 
 exawind_env_gcc ()
