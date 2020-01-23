@@ -1,0 +1,7 @@
+packages:
+  all:
+    compiler: [gcc@7.4.0]
+    providers:
+      mpi:
+        - openmpi
+    variants: +mpi build_type=Release
