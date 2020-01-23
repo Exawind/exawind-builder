@@ -21,12 +21,7 @@ exawind_anl_jlse_common_env ()
     export EXAWIND_MODULES=${SPACK_ROOT}/share/spack/modules/$(${SPACK_EXE} arch)
     module use ${EXAWIND_MODULES}
 
-    exawind_load_deps openmpi cmake netlib-lapack
-
-    export CC=$(which mpicc)
-    export CXX=$(which mpicxx) 
-    export F77=$(which mpif90)
-    export FC=$(which mpif90)
+    EXAWIND_MODMAP[netcdf]=netcdf-c
 
     echo "==> Using modules: ${EXAWIND_MODULES}"
 }
@@ -34,6 +29,13 @@ exawind_anl_jlse_common_env ()
 exawind_env_gcc ()
 {
     exawind_anl_jlse_common_env gcc
+
+    exawind_load_deps openmpi cmake netlib-lapack
+
+    export CC=$(which mpicc)
+    export CXX=$(which mpicxx) 
+    export F77=$(which mpif90)
+    export FC=$(which mpif90)
 }
 
 exawind_env_intel ()
