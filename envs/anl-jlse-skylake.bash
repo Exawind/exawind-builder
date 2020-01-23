@@ -3,6 +3,7 @@
 source ${__EXAWIND_CORE_DIR}/envs/spack.bash
 
 export EXAWIND_NUM_JOBS_DEFAULT=32
+EXAWIND_MODMAP[netcdf]=netcdf-c
 
 exawind_anl_jlse_common_env ()
 {
@@ -19,9 +20,13 @@ exawind_anl_jlse_common_env ()
     export SPACK_COMPILER=${SPACK_COMPILER:-${EXAWIND_COMPILER}}
 
     export EXAWIND_MODULES=${SPACK_ROOT}/share/spack/modules/$(${SPACK_EXE} arch)
-    module use ${EXAWIND_MODULES}
 
-    EXAWIND_MODMAP[netcdf]=netcdf-c
+    if [ ! -z "$MODULEPATH" ] ; then
+        module unuse $MODULEPATH
+    fi
+
+    module use ${EXAWIND_MODULES}
+    module purge
 
     echo "==> Using modules: ${EXAWIND_MODULES}"
 }
