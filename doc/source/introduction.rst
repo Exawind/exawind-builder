@@ -18,6 +18,7 @@ particular system.
   System Name          Description
   ==================== ============================================================================================
   ``spack``             `Spack <https:://github.com/spack/spack>`_ (system agnostic)
+  ``anl-jlse-skylake``  `ANL JLSE Skylake <https://www.jlse.anl.gov>`_
   ``ornl-summit``       `OLCF Summit <https://www.olcf.ornl.gov/summit/>`_
   ``eagle``             `NREL Eagle <https://www.nrel.gov/hpc/eagle-system.html>`_
   ``cori``              `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_
@@ -39,6 +40,7 @@ particular system.
   ================== ========================
   Environment        Compilers
   ================== ========================
+  anl-jlse-skylake   gcc
   ornl-summit        gcc, cuda
   eagle              gcc
   cori               intel

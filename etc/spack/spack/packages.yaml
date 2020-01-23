@@ -7,17 +7,17 @@ packages:
         - netlib-lapack
     variants: +mpi build_type=Release
   openmpi:
-    version: [3.1.4]
+    version: [3.1.5]
   mpich:
     version: [3.3.1]
   cmake:
-    version: [3.13.0]
+    version: [3.16.2]
   binutils:
-    version: [2.29.1]
+    version: [2.32]
   perl:
-    version: [5.26.2]
+    version: [5.30.1]
   openssl:
-    version: [1.1.0]
+    version: [1.1.1d]
   ncurses:
     version: [6.0]
   zlib:
