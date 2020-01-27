@@ -59,7 +59,8 @@ exawind_env_gcc_test ()
     # Force loading test spack project
     source /projects/ecp/exawind/nalu-wind-testing/spack/share/spack/setup-env.sh
     export SPACK_EXE=${SPACK_ROOT}/bin/spack
-    exawind_load_deps cmake 
+    exawind_load_deps binutils
+    exawind_load_deps cmake
     exawind_load_deps openmpi@3.1.4
 
     export CC=$(which mpicc)
