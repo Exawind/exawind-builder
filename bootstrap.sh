@@ -151,6 +151,9 @@ exw_install_deps ()
     spack install yaml-cpp %${spack_compiler}
     spack install hypre %${spack_compiler}
     #spack install fftw %${spack_compiler}
+    if [ "$ENABLE_CUDA" == "ON" ]; then
+        spack install cuda %${spack_compiler}
+    fi
 }
 
 exw_create_scripts ()

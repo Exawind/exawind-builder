@@ -1,0 +1,17 @@
+packages:
+  all:
+    compiler: [gcc@7.4.0]
+    providers:
+      mpi:
+        - openmpi
+    variants: +mpi build_type=Release
+  cuda:
+    version: [10.0.130]
+    paths:
+      cuda@10.0.130: /soft/compilers/cuda/cuda-10.0.130
+    buildable: false
+  cmake:
+    version: [3.16.3]
+    paths:
+      cmake@3.16.3: /soft/buildtools/cmake-3.16.3
+    buildable: false

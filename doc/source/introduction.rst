@@ -14,47 +14,49 @@ Pre-built configurations exist for the following systems. Use the ``system
 name`` shown on the following table when generating scripts targeting that
 particular system.
 
-  ==================== ============================================================================================
-  System Name          Description
-  ==================== ============================================================================================
-  ``spack``             `Spack <https:://github.com/spack/spack>`_ (system agnostic)
-  ``anl-jlse-skylake``  `ANL JLSE Skylake <https://www.jlse.anl.gov>`_
-  ``ornl-summit``       `OLCF Summit <https://www.olcf.ornl.gov/summit/>`_
-  ``eagle``             `NREL Eagle <https://www.nrel.gov/hpc/eagle-system.html>`_
-  ``cori``              `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_
-  ``summitdev``         `OLCF SummitDev <https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/>`_
-  ``snl-waterman``.     Sandia waterman cluster (also ``snl-waterman-atdm``)
-  ``snl-ghost``         Sandia Ghost cluster
-  ``snl-skybridge``     Sandia Skybridge cluster
-  ``snl-ascicgpu``      Sandia ASC GPU development machines
-  ``snl-ceerws``        Sandia blade workstations
-  ``pnnl-constance``    PNNL Constance system
-  ``rhodes``            NREL nightly build and test system
-  ``peregrine``         `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
-  ==================== ============================================================================================
+  ==========================  ============================================================================================
+  System Name                 Description
+  ==========================  ============================================================================================
+  ``spack``                   `Spack <https:://github.com/spack/spack>`_ (system agnostic)
+  ``anl-jlse-skylake``        `ANL JLSE Skylake <https://www.jlse.anl.gov>`_
+  ``anl-jlse-gpu_v100_smx2``  `ANL JLSE V100 nodes <https://www.jlse.anl.gov>`_
+  ``ornl-summit``             `OLCF Summit <https://www.olcf.ornl.gov/summit/>`_
+  ``eagle``                   `NREL Eagle <https://www.nrel.gov/hpc/eagle-system.html>`_
+  ``cori``                    `NERSC Cori <http://www.nersc.gov/users/computational-systems/cori/>`_
+  ``summitdev``               `OLCF SummitDev <https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/>`_
+  ``snl-waterman``.           Sandia waterman cluster (also ``snl-waterman-atdm``)
+  ``snl-ghost``               Sandia Ghost cluster
+  ``snl-skybridge``           Sandia Skybridge cluster
+  ``snl-ascicgpu``            Sandia ASC GPU development machines
+  ``snl-ceerws``              Sandia blade workstations
+  ``pnnl-constance``          PNNL Constance system
+  ``rhodes``                  NREL nightly build and test system
+  ``peregrine``               `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
+  ==========================  ============================================================================================
 
   The following compilers are configured for each machine. In situations where
   multiple compilers are present, we recommend that the users use the first one.
   The latter ones have not received enough testing and might have issues.
 
-  ================== ========================
-  Environment        Compilers
-  ================== ========================
-  anl-jlse-skylake   gcc
-  ornl-summit        gcc, cuda
-  eagle              gcc
-  cori               intel
-  summitdev          gcc, xl, cuda
-  snl-waterman.      gcc, cuda
-  snl-ghost          intel
-  snl-skybridge      intel
-  snl-ascicgpu       gcc, cuda
-  snl-ceerws         gcc
-  pnnl-constance     gcc
-  rhodes             gcc, intel
-  Mac OSX            clang, gcc
-  peregrine          gcc, intel
-  ================== ========================
+  ====================== ========================
+  Environment            Compilers
+  ====================== ========================
+  anl-jlse-skylake       gcc
+  anl-jlse-gpu_v100_smx2 gcc, cuda
+  ornl-summit            gcc, cuda
+  eagle                  gcc
+  cori                   intel
+  summitdev              gcc, xl, cuda
+  snl-waterman.          gcc, cuda
+  snl-ghost              intel
+  snl-skybridge          intel
+  snl-ascicgpu           gcc, cuda
+  snl-ceerws             gcc
+  pnnl-constance         gcc
+  rhodes                 gcc, intel
+  Mac OSX                clang, gcc
+  peregrine              gcc, intel
+  ====================== ========================
 
 
 Exawind-builder provides CMake configurations for the following codes used

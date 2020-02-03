@@ -1,0 +1,20 @@
+compilers:
+- compiler:
+    environment: {}
+    extra_rpaths:
+    - /soft/compilers/gcc/7.4.0/linux-rhel7-x86_64/lib64
+    - /soft/compilers/gcc/7.4.0/linux-rhel7-x86_64/lib
+    - /soft/compilers/gcc/7.4.0/linux-rhel7-x86_64/libexec
+    flags:
+      cflags: -O2 -march=native -mtune=native
+      cxxflags: -O2 -march=native -mtune=native
+      fflags: -O2 -march=native -mtune=native
+    modules: []
+    operating_system: rhel7
+    paths:
+      cc: /soft/compilers/gcc/7.4.0/linux-rhel7-x86_64/bin/gcc
+      cxx: /soft/compilers/gcc/7.4.0/linux-rhel7-x86_64/bin/g++
+      f77: /soft/compilers/gcc/7.4.0/linux-rhel7-x86_64/bin/gfortran
+      fc: /soft/compilers/gcc/7.4.0/linux-rhel7-x86_64/bin/gfortran
+    spec: gcc@7.4.0
+    target: x86_64
