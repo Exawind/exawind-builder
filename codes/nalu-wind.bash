@@ -110,3 +110,14 @@ exawind_cmake_eagle ()
         -DMPIEXEC_PREFLAGS='"--cpu-bind=cores --exclusive"' \
         ${extra_args}
 }
+
+exawind_cmake_ornl-summit ()
+{
+    local extra_args="$@"
+
+    exawind_cmake_base \
+        -DMPIEXEC_EXECUTABLE=jsrun \
+        -DMPIEXEC_NUMPROC_FLAG="-n" \
+        -DMPIEXEC_PREFLAGS='"-a 1 -c 1 -g 1"'
+        ${extra_args}
+}
