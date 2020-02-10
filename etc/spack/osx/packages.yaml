@@ -5,42 +5,14 @@ packages:
       - gcc
     providers:
       mpi:
-        - openmpi
+        - mpich
       blas:
         - netlib-lapack
       lapack:
         - netlib-lapack
     variants: build_type=Release ~shared
-  openmpi:
-    version: [brew-latest]
-    buildable: false
-    paths:
-      openmpi@brew-latest: /usr/local
   cmake:
     version: [brew-latest]
     buildable: false
     paths:
       cmake@brew-latest: /usr/local
-  zlib:
-    version: [1.2.8]
-    buildable: false
-    paths:
-      zlib@1.2.8: /usr
-  libxml2:
-    version: [2.2]
-    buildable: false
-    paths:
-      libxml2@2.2: /usr
-  bzip2:
-    version: [2.1.0]
-    buildable: false
-    paths:
-      bzip2@2.1.0: /usr
-  pkg-config:
-    paths:
-      pkg-config@0.29.2: /usr/local/Cellar/pkg-config/0.29.2
-    buildable: false
-  m4:
-    paths:
-      m4@1.4.6: /usr
-    buildable: false
