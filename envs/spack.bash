@@ -12,8 +12,9 @@ exawind_spack_env ()
     export SPACK_COMPILER=${SPACK_COMPILER:-${EXAWIND_COMPILER}}
 
     if [[ $OSTYPE = "darwin"* ]] ; then
-        if [ -f /usr/local/opt/modules/init/bash ]; then
-            source /usr/local/opt/modules/init/bash
+        local brew_prefix=$(brew config | awk -F: '/HOMEBREW_PREFIX/ {print $2;}')
+        if [ -f ${brew_prefix}/opt/modules/init/bash ]; then
+            source ${brew_prefix}/opt/modules/init/bash
         else
             echo "ERROR: Cannot find module command. brew install modules"
         fi

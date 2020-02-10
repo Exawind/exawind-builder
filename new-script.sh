@@ -93,7 +93,8 @@ ecp_prj_dir=${EXAWIND_PROJECT_DIR:-$(dirname ${EXAWIND_SRCDIR})}
 # Setup bash shebang for OSX
 bash_shebang="/bin/bash"
 if [ "$(uname)" = "Darwin" ] ; then
-    bash_shebang='/usr/local/bin/bash'
+    local brew_prefix=$(brew config | awk -F: '/HOMEBREW_PREFIX/ {print $2;}')
+    bash_shebang='${brew_prefix}/bin/bash'
 fi
 
 # Output and template file
