@@ -8,8 +8,9 @@
 brew "bash"
 brew "cmake"
 brew "gcc"
-brew "boost"
-brew "libxml2"
+brew "autoconf"
+brew "automake"
 brew "fftw"
 brew "pkg-config"
 brew "modules"
+
