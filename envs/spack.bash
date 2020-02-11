@@ -2,6 +2,9 @@
 
 export EXAWIND_NUM_JOBS_DEFAULT=8
 
+# Handle name change for netcdf
+EXAWIND_MODMAP[netcdf]=netcdf-c
+
 exawind_spack_env ()
 {
     export SPACK_ROOT=${SPACK_ROOT:-${EXAWIND_PROJECT_DIR}/spack}
@@ -28,6 +31,10 @@ exawind_spack_env ()
 exawind_env_gcc ()
 {
     exawind_spack_env gcc
+
+    if [[ $OSTYPE = "darwin"* ]] ; then
+        exawind_load_deps mpi cmake netlib-lapack
+    fi
 }
 
 exawind_env_intel ()
@@ -43,4 +50,8 @@ exawind_env_intel ()
 exawind_env_clang ()
 {
     exawind_spack_env clang
+
+    if [[ $OSTYPE = "darwin"* ]] ; then
+        exawind_load_deps mpi cmake netlib-lapack
+    fi
 }
