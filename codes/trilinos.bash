@@ -58,6 +58,12 @@ exawind_cmake_base ()
         echo "==> Trilinos: disabling SuperLU"
     fi
 
+    local ccache_args=""
+    if [ "${ENABLE_CCACHE:-OFF}" = "ON" ] ; then
+        ccache_args="-DCMAKE_CXX_COMPILER_LAUNCHER:STRING=$(which ccache)"
+    fi
+
+
     if [ "${EXAWIND_UNSET_LIBRARY_PATH:-ON}" = "ON" ] ; then
         # Force CMake to use absolute paths for the libraries so that it doesn't
         # pick up versions installed in `/usr/lib64` on peregrine
@@ -146,6 +152,7 @@ exawind_cmake_base ()
             -DZlib_LIBRARY_DIRS:PATH=${ZLIB_ROOT_DIR}/lib
             -DTPL_ENABLE_BLAS:BOOL=ON
             ${blas_lapack}
+            ${ccache_args}
             ${compiler_flags}
             ${extra_args}
             ${TRILINOS_SOURCE_DIR:-..}

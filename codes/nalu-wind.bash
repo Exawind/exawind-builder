@@ -36,6 +36,7 @@ exawind_cmake_base ()
 {
     local extra_args="$@"
     local install_dir=""
+    local ccache_args=""
     if [ -n "$NALU_WIND_INSTALL_PREFIX" ] ; then
         install_dir="-DCMAKE_INSTALL_PREFIX=$NALU_WIND_INSTALL_PREFIX"
     fi
@@ -47,6 +48,10 @@ exawind_cmake_base ()
         # pick up versions installed in `/usr/lib64` on peregrine
         local lib_path_save=${LIBRARY_PATH}
         unset LIBRARY_PATH
+    fi
+
+    if [ "${ENABLE_CCACHE:-OFF}" = "ON" ] ; then
+        ccache_args="-DCMAKE_CXX_COMPILER_LAUNCHER:STRING=$(which ccache)"
     fi
 
     local cmake_cmd=(
@@ -69,6 +74,7 @@ exawind_cmake_base ()
         -DENABLE_TESTS:BOOL=${ENABLE_TESTS:-ON}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON
+        ${ccache_args}
         ${compiler_flags}
         ${install_dir}
         ${extra_args}
