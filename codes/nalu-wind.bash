@@ -83,13 +83,13 @@ exawind_cmake_base ()
     fi
 }
 
-exawind_cmake_osx ()
-{
-    local extra_args="$@"
-    exawind_cmake_base \
-        -DMPIEXEC_PREFLAGS:STRING='"--use-hwthread-cpus --oversubscribe"' \
-        ${extra_args}
-}
+#exawind_cmake_osx ()
+#{
+#    local extra_args="$@"
+#    exawind_cmake_base \
+#        -DMPIEXEC_PREFLAGS:STRING='"--use-hwthread-cpus --oversubscribe"' \
+#        ${extra_args}
+#}
 
 exawind_cmake_cori ()
 {
