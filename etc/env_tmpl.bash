@@ -21,6 +21,8 @@ export EXAWIND_PROJECT_DIR=${EXAWIND_PROJECT_DIR:-$(dirname ${EXAWIND_SRCDIR})}
 source ${EXAWIND_SRCDIR}/src/environment.bash
 source ${EXAWIND_SRCDIR}/envs/${EXAWIND_SYSTEM}.bash
 
+export EXAWIND_INSTALL_DIR=${EXAWIND_INSTALL_DIR:-${EXAWIND_PROJECT_DIR}/install/${EXAWIND_COMPILER}}
+
 # Source any user specific configuration
 exawind_load_user_configs
 
