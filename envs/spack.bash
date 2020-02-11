@@ -15,12 +15,21 @@ exawind_spack_env ()
     export SPACK_COMPILER=${SPACK_COMPILER:-${EXAWIND_COMPILER}}
 
     if [[ $OSTYPE = "darwin"* ]] ; then
-        local brew_prefix=$(brew config | awk -F: '/HOMEBREW_PREFIX/ {print $2;}')
-        if [ -f ${brew_prefix}/opt/modules/init/bash ]; then
-            source ${brew_prefix}/opt/modules/init/bash
-        else
-            echo "ERROR: Cannot find module command. brew install modules"
+        local brew_prefix=$(brew config | awk -F: '/HOMEBREW_PREFIX/ {gsub("^ *", "", $2); print $2;}')
+
+        # Exit early if we cannot find the right module command
+        if [ ! -d ${brew_prefix}/opt/modules/init ] ; then
+          echo "ERROR: Cannot find module command. 'brew install modules'"
+          exit 1
         fi
+
+        # Source based on bash or zsh (Catalina defaults)
+        if [ -n "${ZSH_NAME}" ] ; then
+          . /usr/local/opt/modules/init/zsh
+        else
+          source /usr/local/opt/modules/init/bash
+        fi
+
         export EXAWIND_NUM_JOBS_DEFAULT=4
     fi
     module use ${SPACK_ROOT}/share/spack/modules/$(${SPACK_EXE} arch)

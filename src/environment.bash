@@ -72,16 +72,18 @@ exawind_load_spack ()
     for dep in $@ ; do
         root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
 
+        eval "export root_dir_value=\"\${$root_dir_var}\""
         local depname=${EXAWIND_MODMAP[$dep]:-$dep}
-        if [ -z ${!root_dir_var} ] ; then
+        if [ -z ${root_dir_value} ] ; then
             echo "==> spack: locating $depname%${SPACK_COMPILER}"
             ${SPACK_EXE} module tcl find $depname %${SPACK_COMPILER} &>/dev/null &&
             {
                 module load $(${SPACK_EXE} module tcl find $depname %${SPACK_COMPILER})
                 eval "export $root_dir_var=$(${SPACK_EXE} location -i $depname %${SPACK_COMPILER})"
+                eval "export root_dir_value=\"\${$root_dir_var}\""
             } || exawind_default_install_dir $dep
         fi
-        echo "==> ${depname} = ${!root_dir_var}"
+        echo "==> ${depname} = ${root_dir_value}"
     done
 }
 
