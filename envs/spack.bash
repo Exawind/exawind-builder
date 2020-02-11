@@ -37,12 +37,21 @@ exawind_spack_env ()
     echo "==> Using spack configuration: ${SPACK_ROOT}"
 }
 
+exawind_spack_init_compiler_vars ()
+{
+    local mpi_path=$(${SPACK_EXE} location -i mpi %${SPACK_COMPILER})/bin
+    export CXX=${mpi_path}/mpic++
+    export CC=${mpi_path}/mpicc
+    export FC=${mpi_path}/mpifort
+}
+
 exawind_env_gcc ()
 {
     exawind_spack_env gcc
 
     if [[ $OSTYPE = "darwin"* ]] ; then
         exawind_load_deps mpi cmake netlib-lapack
+        exawind_spack_init_compiler_vars
     fi
 }
 
@@ -62,5 +71,6 @@ exawind_env_clang ()
 
     if [[ $OSTYPE = "darwin"* ]] ; then
         exawind_load_deps mpi cmake netlib-lapack
+        exawind_spack_init_compiler_vars
     fi
 }
