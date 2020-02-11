@@ -37,10 +37,10 @@ packages:
     version: [4.7.1]
     variants: +parallel-netcdf maxdims=65536 maxvars=524288
   netcdf-c:
-    version: [4.7.1]
+    version: [4.7.3]
     variants: +parallel-netcdf maxdims=65536 maxvars=524288
   parallel-netcdf:
-    version: [1.11.2]
+    version: [1.12.1]
   superlu:
     version: [4.3]
   netlib-lapack:
