@@ -80,13 +80,8 @@ _exw_py_conda_init ()
         shell_name="zsh"
     fi
 
-    if [ -z "${CONDA_EXE}" ] ; then
-        eval "$(${CONDA_ROOT_DIR}/bin/conda shell.${shell_name} hook)"
-        echo "==> Initialized conda in ${CONDA_ROOT_DIR}"
-    else
-        echo "==> Detected active conda in ${CONDA_ROOT_DIR}"
-    fi
-
+    eval "$(${CONDA_ROOT_DIR}/bin/conda shell.${shell_name} hook)"
+    echo "==> Initialized conda in ${CONDA_ROOT_DIR}"
 }
 
 _exw_py_conda_deactivate_all ()
