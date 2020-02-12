@@ -44,9 +44,11 @@ main ()
     # Define defaults
     export EXAWIND_SYSTEM=${EXAWIND_SYSTEM:-spack}
     export EXAWIND_COMPILER=${EXAWIND_COMPILER:-gcc}
+    export EXAWIND_CFGFILE=exawind-config
     export EXAWIND_PROJECT_DIR=${EXAWIND_PROJECT_DIR:-$(dirname ${EXAWIND_SRCDIR})}
     local env_name=""
     local env_file=""
+    local conda_root=""
 
     # Parse user options
     OPTIND=1
@@ -69,7 +71,7 @@ main ()
                 env_file=$OPTARG
                 ;;
             r)
-                export CONDA_ROOT_DIR=$OPTARG
+                conda_root=$OPTARG
                 ;;
             \?)
                 echo "ERROR: Invalid argument provided"
@@ -101,6 +103,9 @@ main ()
     fi
     if [ ! -z ${env_file} ] ; then
         export EXAWIND_CONDA_ENV_SPEC=${env_file}
+    fi
+    if [ ! -z ${conda_root} ] ; then
+        export CONDA_ROOT_DIR=${conda_root}
     fi
 
     exawind_env
