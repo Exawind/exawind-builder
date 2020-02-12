@@ -104,9 +104,9 @@ main ()
     fi
 
     exawind_env
-    # exawind_py_conda_env_create
+    exawind_py_conda_env_create
 
-    output_file=${1:-${EXAWIND_PROJECT_DIR}/scripts/exawind-env-python-${EXAWIND_COMPILER}.sh}
+    output_file=${1:-exawind-env-python-${EXAWIND_COMPILER}.sh}
     tmpl_file=${EXAWIND_SRCDIR}/etc/pyenv_tmpl.bash
 
     sed -e "s#%%SRCDIR%%#${EXAWIND_SRCDIR}#g;s#%%COMPILER%%#${EXAWIND_COMPILER}#g;s#%%SYSTEM%%#${EXAWIND_SYSTEM}#g;s#%%CONDA_ROOT%%#${CONDA_ROOT_DIR}#;s#%%CONDA_ENV%%#${EXAWIND_CONDA_ENV}#" $tmpl_file > $output_file
