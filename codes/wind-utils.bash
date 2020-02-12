@@ -38,6 +38,12 @@ exawind_cmake_base ()
     local lib_path_save=${LIBRARY_PATH}
     unset LIBRARY_PATH
 
+    local ccache_args=""
+    if [ "${ENABLE_CCACHE:-OFF}" = "ON" ] ; then
+        ccache_args="-DCMAKE_CXX_COMPILER_LAUNCHER:STRING=$(which ccache)"
+    fi
+
+
     local cmake_cmd=(
         cmake
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
@@ -47,6 +53,7 @@ exawind_cmake_base ()
         -DHYPRE_DIR=${HYPRE_ROOT_DIR}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=TRUE
+        ${ccache_args}
         ${compiler_flags}
         ${install_dir}
         ${extra_args}
