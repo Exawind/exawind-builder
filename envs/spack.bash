@@ -51,7 +51,6 @@ exawind_env_gcc ()
 
     if [[ $OSTYPE = "darwin"* ]] ; then
         exawind_load_deps mpi cmake netlib-lapack
-        exawind_spack_init_compiler_vars
     fi
 }
 
@@ -71,6 +70,5 @@ exawind_env_clang ()
 
     if [[ $OSTYPE = "darwin"* ]] ; then
         exawind_load_deps mpi cmake netlib-lapack
-        exawind_spack_init_compiler_vars
     fi
 }
