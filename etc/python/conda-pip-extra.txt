@@ -1,0 +1,5 @@
+# Extra pip directives for conda environment
+--no-binary mpi4py,netCDF4
+scikit-build
+mpi4py
+netCDF4

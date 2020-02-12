@@ -92,6 +92,28 @@ Nalu-Wind.
      you have already executed bootstrap and forgot to add the ``-n`` flag, then
      use :ref:`get-ninja` to install Ninja for your use.
 
+Setting up custom ExaWind python environment
+--------------------------------------------
+
+``exawind-builder`` now supports building certain Python packages (e.g., `pySTK
+<https://sayerhs.github.io/pystk/index.html>`_. To enable this capability,
+you'll need to set up a custom virtual environment with the necessary python
+modules. Currently, ``exawind-builder`` only supports the `Conda
+<https://docs.conda.io/en/latest/index.html>`_ python package manager. To enable this capability:
+
+1. Install `Conda <https://docs.conda.io/en/latest/miniconda.html>`_ if you
+   don't have an existing conda installation.
+
+2. Create a new virtual environment using the `create-pyenv.sh` utility
+
+.. code-block:: console
+
+   cd ${EXAWIND_PROJECT_DIR}
+   ./exawind-builder/create-pyenv.sh -s <system> -c <compiler> -r ${CONDA_ROOT_DIR}
+
+Upon successful installation, this creates a new virtual environment ``exawind``
+with all the necessary Python modules to build and use ExaWind python libraries.
+
 .. _homebrew-setup:
 
 Initial Homebrew Setup for Mac OS-X Users

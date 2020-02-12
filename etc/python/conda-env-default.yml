@@ -1,0 +1,26 @@
+# -*- mode: yaml -*-
+#
+# Conda environment for ExaWind project
+#
+
+name: exawind
+
+dependencies:
+  - python>=3.6
+  - pip
+  - numpy
+  - scipy
+  - cython>=0.25.1
+  - pandas
+  - matplotlib
+  - ipython
+  - pyyaml
+  - ruamel_yaml
+  - ply
+  - pytz
+  - jinja2
+  - pytest
+  - pylint
+  - sphinx
+  - pip:
+    - -r file:conda-pip-extra.txt

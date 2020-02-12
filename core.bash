@@ -4,6 +4,7 @@ __EXAWIND_CORE_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
 source ${__EXAWIND_CORE_DIR}/src/environment.bash
 source ${__EXAWIND_CORE_DIR}/src/builder.bash
+source ${__EXAWIND_CORE_DIR}/src/python-env.bash
 
 exawind_help ()
 {
@@ -21,6 +22,8 @@ Available tasks:
     make        - compile the code
     ctest       - run tests (if available)
     run         - run arbitrary command using the environment used to compile the code
+    py_build    - build a python library
+    py_install  - install a python library (in development mode)
 EOF
 }
 
@@ -34,7 +37,7 @@ exawind_save_func ()
 exawind_main ()
 {
     if [ "$#" == "0" ] ; then
-        exawind_env && exawind_proj_env && exawind_cmake && exawind_make
+        exawind_env && exawind_proj_env && exawind_default_cmd
     else
         subcmd=$1
 

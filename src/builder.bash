@@ -152,6 +152,11 @@ exawind_run ()
     eval "$@"
 }
 
+exawind_default_cmd ()
+{
+    exawind_cmake "$@" && exawind_make
+}
+
 exawind_rpath_dirs ()
 {
     local rpath_dirs=""

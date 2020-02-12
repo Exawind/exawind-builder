@@ -70,6 +70,7 @@ configuration variables availble to customize configuration of each project.
   Nalu Wind Utilities  https://github.com/exawind/wind-utils.git
   TIOGA                https://github.com/jsitaraman/tioga.git
   TIOGA Utilities      https://github.com/sayerhs/tioga_utils.git
+  pySTK                https://github.com/sayerhs/pystk.git
   HYPRE                https://github.com/LLNL/hypre.git
   hypre-mini-app       https://github.com/exawind/hypre-mini-app.git
   ArborX               https://github.com/arborx/ArborX.git
