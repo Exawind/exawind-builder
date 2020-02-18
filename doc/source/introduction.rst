@@ -29,6 +29,7 @@ particular system.
   ``snl-skybridge``           Sandia Skybridge cluster
   ``snl-ascicgpu``            Sandia ASC GPU development machines
   ``snl-ceerws``              Sandia blade workstations
+  ``snl-ews``                 Sandia engineering workstations
   ``pnnl-constance``          PNNL Constance system
   ``rhodes``                  NREL nightly build and test system
   ``peregrine``               `NREL Peregrine <https://www.nrel.gov/hpc/peregrine-system.html>`_
@@ -52,6 +53,7 @@ particular system.
   snl-skybridge          intel
   snl-ascicgpu           gcc, cuda
   snl-ceerws             gcc
+  snl-ews                gcc
   pnnl-constance         gcc
   rhodes                 gcc, intel
   Mac OSX                clang, gcc
