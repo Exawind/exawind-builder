@@ -10,7 +10,7 @@ exawind_env_common ()
     module load sierra-devel/nvidia
     # Spack has issues with the default 2.7 python from sierra-devel
     module unload sierra-python/2.7
-    module load sierra-python/3.6.3
+    module load sierra-python/3.6.10
 
     export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_CUDA_WRAPPER_DEFAULT}}
     export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}

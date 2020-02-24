@@ -13,4 +13,4 @@ case "${EXAWIND_COMPILER:-gcc}" in
 esac
 
 module unload sierra-python/2.7
-module load sierra-python/3.6.3
+module load sierra-python/3.6.10
