@@ -56,11 +56,12 @@ exawind_cmake_base ()
 
     local cmake_cmd=(
         cmake
-        -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
-        -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR}
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
         -DENABLE_OPENMP=${ENABLE_OPENMP:-OFF}
         -DENABLE_CUDA=${ENABLE_CUDA:-OFF}
+        -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
+        -DBOOST_DIR=${BOOST_ROOT_DIR}
+        -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR}
         -DENABLE_FFTW=${ENABLE_FFTW:-OFF}
         -DFFTW_DIR:PATH=${FFTW_ROOT_DIR}
         -DENABLE_HYPRE:BOOL=${ENABLE_HYPRE:-ON}
