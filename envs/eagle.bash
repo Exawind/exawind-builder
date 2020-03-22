@@ -36,19 +36,16 @@ exawind_eagle_common ()
 
 exawind_eagle_gpu ()
 {
-    # Enable CUDA support in OpenMPI
-    export OMPI_MCA_opal_cuda_support=1
-
-    export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_CUDA_WRAPPER_DEFAULT}}
-    export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
-    export CUDA_MANAGED_FORCE_DEVICE_ALLOC=${CUDA_MANAGED_FORCE_DEVICE_ALLOC:-1}
     export ENABLE_CUDA=${ENABLE_CUDA:-ON}
     export KOKKOS_ARCH=${KOKKOS_ARCH:-"'SKX;Volta70'"}
     export EXAWIND_CUDA_SM=${EXAWIND_CUDA_SM:-70}
 
-    export NVCC_WRAPPER_DEFAULT_COMPILER=${CXX}
-    export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
-    export MPICH_CXX=${EXAWIND_CUDA_WRAPPER}
+    if [ "${EXAWIND_GPU_KOKKOS_ENV:-ON}" = ON ] ; then
+        # Set CXX so that NVCC can pick up host compiler
+        export CXX=$(which g++)
+        exawind_kokkos_cuda_env
+    fi
+
     export CXX=$(which mpic++)
     export CUDACXX=$(which nvcc)
 

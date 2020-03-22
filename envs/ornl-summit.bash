@@ -17,18 +17,19 @@ exawind_summit_common ()
 
 exawind_summit_gpu ()
 {
-    # Enable CUDA support in OpenMPI
-    export OMPI_MCA_opal_cuda_support=1
-
-    export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_CUDA_WRAPPER_DEFAULT}}
-    export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
-    export CUDA_MANAGED_FORCE_DEVICE_ALLOC=${CUDA_MANAGED_FORCE_DEVICE_ALLOC:-1}
     export KOKKOS_ARCH=${KOKKOS_ARCH:-Volta70}
     export EXAWIND_CUDA_SM=${EXAWIND_CUDA_SM:-70}
 
-    export NVCC_WRAPPER_DEFAULT_COMPILER=${CXX}
-    export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
-    export MPICH_CXX=${EXAWIND_CUDA_WRAPPER}
+    # Enable CUDA support in OpenMPI
+    export OMPI_MCA_opal_cuda_support=1
+
+    if [ "${EXAWIND_GPU_KOKKOS_ENV:-ON}" = ON ] ; then
+        # Set CXX so that NVCC can pick up host compiler
+        export CXX=$(which g++)
+        exawind_kokkos_cuda_env
+    fi
+
+    # Reset CXX back to mpic++ for builds
     export CXX=$(which mpic++)
     export CUDACXX=$(which nvcc)
 
@@ -48,7 +49,7 @@ exawind_env_gcc ()
 
     export CC=$(which mpicc)
     export FC=$(which mpifort)
-    export CXX=$(which g++)
+    export CXX=$(which mpic++)
 
     export ENABLE_CUDA=${ENABLE_CUDA:-ON}
     if [ "$ENABLE_CUDA" == "ON" ]; then

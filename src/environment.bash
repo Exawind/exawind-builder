@@ -162,3 +162,14 @@ exawind_purge_env ()
         unset -f ${exfunc}
     done
 }
+
+exawind_kokkos_cuda_env ()
+{
+    export EXAWIND_CUDA_WRAPPER=${EXAWIND_CUDA_WRAPPER:-${EXAWIND_CUDA_WRAPPER_DEFAULT}}
+    export CUDA_LAUNCH_BLOCKING=${CUDA_LAUNCH_BLOCKING:-1}
+    export CUDA_MANAGED_FORCE_DEVICE_ALLOC=${CUDA_MANAGED_FORCE_DEVICE_ALLOC:-1}
+
+    export NVCC_WRAPPER_DEFAULT_COMPILER=${CXX}
+    export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
+    export MPICH_CXX=${EXAWIND_CUDA_WRAPPER}
+}
