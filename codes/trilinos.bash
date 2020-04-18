@@ -86,6 +86,7 @@ exawind_cmake_base ()
             -DTpetra_INST_OPENMP:BOOL=${enable_openmp}
             -DTrilinos_ENABLE_CUDA:BOOL=${enable_cuda}
             -DTPL_ENABLE_CUDA:BOOL=${enable_cuda}
+            -DTPL_ENABLE_CUSPARSE:BOOL=${enable_cuda}
             -DKokkos_ENABLE_CUDA:BOOL=${enable_cuda}
             -DKokkos_ENABLE_CUDA_UVM:BOOL=${enable_cuda}
             -DTpetra_ENABLE_CUDA:BOOL=${enable_cuda}
