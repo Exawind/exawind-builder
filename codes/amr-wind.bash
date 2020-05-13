@@ -11,6 +11,7 @@ exawind_proj_env ()
 {
     local opt_packages=(
         python
+        masa
     )
 
     echo "==> Loading dependencies for amr-wind ... "
@@ -48,6 +49,8 @@ exawind_cmake_base ()
         -DCUDA_ARCH=${EXAWIND_AMR_WIND_CUDA_MAP[${EXAWIND_CUDA_SM:-70}]}
         -DAMR_WIND_ENABLE_MPI:BOOL=${AMR_WIND_ENABLE_MPI:-ON}
         -DAMR_WIND_ENABLE_OPENMP:BOOL=${ENABLE_OPENMP:-OFF}
+        -DAMR_WIND_ENABLE_MASA:BOOL=${ENABLE_MASA:-OFF}
+        -DMASA_DIR:PATH=${MASA_ROOT_DIR}
         -DAMR_WIND_ENABLE_ALL_WARNINGS:BOOL=ON
         -DAMR_WIND_ENABLE_FCOMPARE:BOOL=${AMR_WIND_ENABLE_FCOMPARE:-ON}
         -DAMR_WIND_ENABLE_TESTS:BOOL=ON
