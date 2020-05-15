@@ -189,9 +189,9 @@ exw_get_ninja ()
 exw_create_config ()
 {
     local cfgprefix=${EXAWIND_CFGFILE:-exawind-config}
-    local cfgfile=${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh
-    if [ -f ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh ] ; then
-        echo "==> Found previous configuration: ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh"
+    local cfgfile=${EXAWIND_PROJECT_DIR}/${cfgprefix}-${EXAWIND_SYSTEM}.sh
+    if [ -f ${cfgfile} ] ; then
+        echo "==> Found previous configuration: ${cfgfile}"
         return
     fi
 
@@ -201,7 +201,7 @@ exw_create_config ()
         ninja_enable=""
     fi
 
-    echo "==> Creating default config file: ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh"
+    echo "==> Creating default config file: ${cfgfile}"
     cat <<EOF > ${EXAWIND_PROJECT_DIR}/${cfgprefix}.sh
 #!/bin/bash
 #
@@ -219,31 +219,14 @@ ${ninja_enable}EXAWIND_MAKE_TYPE=ninja
 ${ninja_enable}export PATH=${EXAWIND_PROJECT_DIR}/source/ninja:\${PATH}
 
 BUILD_TYPE=RELEASE     # [RELEASE, DEBUG, RELWITHDEBINFO]
-ENABLE_OPENMP=ON       # [ON, OFF]
+ENABLE_OPENMP=OFF      # [ON, OFF]
+ENABLE_CUDA=OFF        # [ON, OFF]
+BUILD_SHARED_LIBS=OFF  # Shared libraries
 
 ENABLE_OPENFAST=OFF    # Enable OpenFAST TPL with Nalu-Wind
 ENABLE_TIOGA=OFF       # Enable TIOGA for overset connectivity
 ENABLE_HYPRE=ON        # Enable HYPRE linear solvers with Nalu-Wind
 ENABLE_FFTW=OFF        # Enable FFTW for ABL simulations
-
-#
-# CUDA builds using Kokkos wrappers
-#
-#ENABLE_CUDA=OFF
-#EXAWIND_CUDA_WRAPPER=\${EXAWIND_PROJECT_DIR}/source/trilinos/packages/kokkos/bin/nvcc_wrapper
-
-# Customize module loads (when choosing from multiple options)
-# EXAWIND_MODMAP[trilinos]=trilinos/develop-omp
-# EXAWIND_MODMAP[hypre]=hypre/2.15.0
-
-#
-# Uncomment these lines to use custom builds of these packages
-#
-#TRILINOS_ROOT_DIR=\${EXAWIND_INSTALL_DIR}/trilinos
-#HYPRE_ROOT_DIR=\${EXAWIND_INSTALL_DIR}/hypre
-#TIOGA_ROOT_DIR=\${EXAWIND_INSTALL_DIR}/tioga
-#OPENFAST_ROOT_DIR=\${EXAWIND_INSTALL_DIR}/openfast
-#NALU_WIND_ROOT_DIR=\${EXAWIND_INSTALL_DIR}/nalu-wind
 
 EOF
 

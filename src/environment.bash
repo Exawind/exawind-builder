@@ -112,7 +112,7 @@ exawind_load_user_configs ()
     local cfgfiles=(
         ${HOME}/.${cfgname}
         ${HOME}/.${cfgname}-${EXAWIND_COMPILER}
-        ${EXAWIND_PROJECT_DIR}/${EXAWIND_CFGFILE}.sh
+        ${EXAWIND_PROJECT_DIR}/${EXAWIND_CFGFILE}-${EXAWIND_SYSTEM}.sh
         ${EXAWIND_PROJECT_DIR}/${EXAWIND_CFGFILE}-${EXAWIND_COMPILER}.sh
         ${EXAWIND_CONFIG}
         $(pwd)/${cfgname}.sh
