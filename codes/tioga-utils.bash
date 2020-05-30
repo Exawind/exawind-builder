@@ -37,7 +37,7 @@ exawind_cmake_base ()
         ${compiler_flags}
         ${install_dir}
         ${extra_args}
-        ${TIOGA_UTILS_SOURCE_DIR:-..}/src
+        ${TIOGA_UTILS_SOURCE_DIR:-..}
     )
 
     echo "${cmake_cmd[@]}" > cmake_output.log
