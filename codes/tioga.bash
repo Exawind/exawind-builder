@@ -37,6 +37,7 @@ exawind_cmake_base ()
     local cmake_cmd=(
         cmake
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
+        -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS:-OFF}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         -DTIOGA_ENABLE_CUDA=${ENABLE_CUDA:-OFF}
         -DTIOGA_CUDA_SM=${EXAWIND_CUDA_SM:-70}
