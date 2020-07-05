@@ -15,6 +15,7 @@ exawind_proj_env ()
     )
 
     echo "==> Loading dependencies for amr-wind ... "
+    exawind_load_deps netcdf
     for pkg in ${opt_packages[@]} ; do
         local pkg_flag="ENABLE_${pkg^^}"
         if [ "${!pkg_flag:-OFF}" = "ON" ] ; then
@@ -49,6 +50,8 @@ exawind_cmake_base ()
         -DCUDA_ARCH=${EXAWIND_AMR_WIND_CUDA_MAP[${EXAWIND_CUDA_SM:-70}]}
         -DAMR_WIND_ENABLE_MPI:BOOL=${AMR_WIND_ENABLE_MPI:-ON}
         -DAMR_WIND_ENABLE_OPENMP:BOOL=${ENABLE_OPENMP:-OFF}
+        -DAMR_WIND_ENABLE_NETCDF:BOOL=ON
+        -DNETCDF_DIR:PATH=${NETCDF_ROOT_DIR}
         -DAMR_WIND_ENABLE_MASA:BOOL=${ENABLE_MASA:-OFF}
         -DMASA_DIR:PATH=${MASA_ROOT_DIR}
         -DAMR_WIND_ENABLE_ALL_WARNINGS:BOOL=ON
