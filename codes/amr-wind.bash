@@ -15,7 +15,7 @@ exawind_proj_env ()
     )
 
     echo "==> Loading dependencies for amr-wind ... "
-    exawind_load_deps netcdf
+    exawind_load_deps netcdf-c
     for pkg in ${opt_packages[@]} ; do
         local pkg_flag="ENABLE_${pkg^^}"
         if [ "${!pkg_flag:-OFF}" = "ON" ] ; then
