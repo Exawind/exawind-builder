@@ -9,7 +9,7 @@ _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
 exawind_proj_env ()
 {
     echo "==> Loading dependencies for Trilinos..."
-    exawind_load_deps zlib libxml2 hdf5 netcdf parallel-netcdf superlu boost
+    exawind_load_deps zlib libxml2 hdf5 netcdf-c parallel-netcdf superlu boost
 
     export EXAWIND_NVCC_FLAGS=${EXAWIND_NVCC_FLAGS:-"--remove-duplicate-link-files"}
 }
@@ -97,6 +97,8 @@ exawind_cmake_base ()
             -DTpetra_INST_SERIAL:BOOL=ON
             -DTrilinos_ENABLE_CXX11:BOOL=ON
             -DTrilinos_ENABLE_EXPLICIT_INSTANTIATION:BOOL=ON
+            -DTpetra_INST_INT_LONG:BOOL=ON
+            -DTpetra_INST_INT_LONG_LONG:BOOL=OFF
             -DTpetra_INST_DOUBLE:BOOL=ON
             -DTpetra_INST_COMPLEX_DOUBLE:BOOL=OFF
             -DTrilinos_ENABLE_TESTS:BOOL=OFF
