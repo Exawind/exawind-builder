@@ -4,10 +4,11 @@ export EXAWIND_NUM_JOBS_DEFAULT=18
 
 declare -A EXAWIND_MODMAP
 EXAWIND_MODMAP[trilinos]=trilinos/develop
-EXAWIND_MODMAP[cuda]=cuda/10.0.130
-EXAWIND_MODMAP[mpi]=mpich/3.3.1
-EXAWIND_MODMAP[gcc]=gcc/7.4.0
+EXAWIND_MODMAP[cuda]=cuda/10.2.89
+EXAWIND_MODMAP[mpi]=mpt/2.22
+EXAWIND_MODMAP[gcc]=gcc/8.4.0
 EXAWIND_MODMAP[netlib-lapack]=netlib-lapack/3.8.0
+EXAWIND_MODMAP[netcdf]=netcdf-c
 
 EXAWIND_DEP_LOADER=module
 
@@ -16,7 +17,7 @@ exawind_eagle_common ()
     local compiler_arg=$1
 
     export EXAWIND_MODULES_DIR=/nopt/nrel/ecom/hpacf
-    local moddate=${EXAWIND_MODULES_SNAPSHOT:-modules}
+    local moddate=${EXAWIND_MODULES_SNAPSHOT:-modules-2020-07}
 
     if [ ! -z "$MODULEPATH" ] ; then
         module unuse $MODULEPATH
@@ -46,7 +47,7 @@ exawind_eagle_gpu ()
         exawind_kokkos_cuda_env
     fi
 
-    export CXX=$(which mpic++)
+    export CXX=$(which mpicxx)
     export CUDACXX=$(which nvcc)
 
     echo "==> Activated Eagle CUDA programming environment"
@@ -55,16 +56,16 @@ exawind_eagle_gpu ()
 exawind_env_gcc ()
 {
     module purge
-    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-7.4.0}
+    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-8.4.0}
     exawind_eagle_common gcc-${EXAWIND_GCC_VERSION}
 
     exawind_load_deps gcc git binutils ${EXAWIND_MODMAP[mpi]} cmake netlib-lapack/3.8.0
 
-    export F77=$(which mpifort)
-    export FC=$(which mpifort)
+    export F77=$(which mpif77)
+    export FC=$(which mpif90)
     export CC=$(which mpicc)
     if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
-        export CXX=$(which mpic++)
+        export CXX=$(which mpicxx)
 
         # Suppress warnings about CUDA when running on standard nodes
         export OMPI_MCA_opal_cuda_support=0
@@ -88,10 +89,10 @@ exawind_env_intel ()
     module purge
     exawind_eagle_common intel-18.0.4
 
-    module load gcc/7.4.0
+    module load ${EXAWIND_MODMAP[gcc]}
     module load intel-parallel-studio
     module load git
-    exawind_load_deps binutils cmake intel-mpi intel-mkl
+    exawind_load_deps binutils cmake intel-mpi
 
     export F77=$(which mpiifort)
     export FC=$(which mpiifort)

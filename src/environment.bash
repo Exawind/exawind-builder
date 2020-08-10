@@ -172,4 +172,5 @@ exawind_kokkos_cuda_env ()
     export NVCC_WRAPPER_DEFAULT_COMPILER=${CXX}
     export OMPI_CXX=${EXAWIND_CUDA_WRAPPER}
     export MPICH_CXX=${EXAWIND_CUDA_WRAPPER}
+    export MPICXX_CXX=${EXAWIND_CUDA_WRAPPER}
 }
