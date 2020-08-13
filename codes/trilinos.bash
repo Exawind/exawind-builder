@@ -12,6 +12,7 @@ exawind_proj_env ()
     exawind_load_deps zlib libxml2 hdf5 netcdf-c parallel-netcdf superlu boost
 
     export EXAWIND_NVCC_FLAGS=${EXAWIND_NVCC_FLAGS:-"--remove-duplicate-link-files"}
+    export NETCDF_ROOT_DIR=${NETCDF_ROOT_DIR:-${NETCDF_C_ROOT_DIR}}
 }
 
 exawind_cmake_base ()

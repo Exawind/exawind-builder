@@ -22,6 +22,7 @@ exawind_proj_env ()
             exawind_load_deps $pkg
         fi
     done
+    export NETCDF_ROOT_DIR=${NETCDF_ROOT_DIR:-${NETCDF_C_ROOT_DIR}}
 }
 
 exawind_cmake_base ()
