@@ -12,6 +12,7 @@ exawind_hypre_fix_gpu ()
     unset NVCC_WRAPPER_DEFAULT_COMPILER
 
     export CUDA_HOME=${CUDA_HOME:-$(dirname $(dirname $(which nvcc)))}
+    export CXX=$(which g++)
 }
 
 exawind_cmake_base ()
@@ -24,7 +25,7 @@ exawind_cmake_base ()
     local enable_openmp=${ENABLE_OPENMP:-OFF}
     local enable_bigint=${ENABLE_BIGINT:-ON}
     local enable_cuda=${ENABLE_CUDA:-OFF}
-    local enable_uvm=${HYPRE_ENABLE_UVM:-OFF}
+    local enable_uvm=${HYPRE_ENABLE_UVM:-ON}
     local openmp_args=" --without-openmp "
     local bigint_args=""
     local cuda_args=" --without-cuda "
