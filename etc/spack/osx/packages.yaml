@@ -1,7 +1,8 @@
 packages:
   all:
+    target: [x86_64]
     compiler:
-      - clang
+      - apple-clang
       - gcc
     providers:
       mpi:
@@ -10,49 +11,53 @@ packages:
         - netlib-lapack
       lapack:
         - netlib-lapack
-    variants: build_type=Release ~shared
+    variants: build_type=Release
   cmake:
-    version: [brew-latest]
+    version: [3.17.1]
     buildable: false
-    paths:
-      cmake@brew-latest: /usr/local
+    externals:
+      - spec: "cmake@3.17.1%apple-clang@11.0.0 arch=darwin-catalina-x86_64"
+        prefix: /usr/local
   automake:
-    version: [brew-latest]
     buildable: false
-    paths:
-      automake@brew-latest: /usr/local
+    externals:
+      - spec: "automake@1.16.2%apple-clang@11.0.0 arch=darwin-catalina-x86_64"
+        prefix: /usr/local
   autoconf:
-    version: [brew-latest]
     buildable: false
-    paths:
-      autoconf@brew-latest: /usr/local
+    externals:
+      - spec: "autoconf@2.69%apple-clang@11.0.0 arch=darwin-catalina-x86_64"
+        prefix: /usr/local
   perl:
-    version: [5.18.4]
     buildable: false
-    paths:
-      perl@5.18.4: /usr
+    externals:
+      - spec: "perl@5.18.4%apple-clang@11.0.0 arch=darwin-catalina-x86_64"
+        prefix: /usr
   zlib:
-    version: [1.2.11]
     buildable: false
-    paths:
-      zlib@1.2.11: /usr
+    externals:
+      - spec: "zlib@1.2.11%apple-clang@11.0.0 arch=darwin-catalina-x86_64"
+        prefix: /usr
   bzip2:
-    version: [1.0.5]
     buildable: false
-    paths:
-      bzip2@1.0.5: /usr
-  libxml2:
-    version: [2.2]
-    buildable: false
-    paths:
-      libxml2@2.2: /usr
+    externals:
+      - spec: "bzip2@1.0.5%apple-clang@11.0.0 arch=darwin-catalina-x86_64"
+        prefix: /usr
+  # libxml2:
+  #   buildable: false
+  #   externals:
+  #     - spec: "libxml2@2.2%apple-clang@11.0.0 arch=darwin-catalina-x86_64"
+  #       prefix: /usr
   m4:
-    version: [1.4.6]
     buildable: false
-    paths:
-      m4@1.4.6: /usr
+    externals:
+      - spec: "m4@1.4.6%apple-clang@11.0.0 arch=darwin-catalina-x86_64"
+        prefix: /usr
   libtool:
-    version: [catalina-default]
     buildable: false
-    paths:
-      libtool@catalina-default: /usr
+    externals:
+      - spec: "libtool@2.4.6%apple-clang@11.0.0 arch=darwin-catalina-x86_64"
+        prefix: /usr
+  trilinos:
+    version: [develop]
+    variants: ~adios2~alloptpkgs~amesos+amesos2~anasazi~aztec+belos+boost~cgns~chaco~complex~debug~dtk~epetra~epetraext+exodus+explicit_template_instantiation~float~fortran~fortrilinos+glm+gtest+hdf5~hypre~ifpack+ifpack2~intrepid~intrepid2~isorropia+kokkos~matio~mesquite~metis~minitensor~ml+mpi+muelu~mumps+netcdf~nox~openmp~phalanx~piro+pnetcdf~python~rol~rythmos~sacado+shards~shared~shylu+stk~stratimikos~suite-sparse+superlu~superlu-dist~teko~tempus+teuchos+tpetra~x11~xsdkflags+zlib+zoltan+zoltan2
