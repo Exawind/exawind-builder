@@ -28,6 +28,7 @@ exawind_proj_env ()
 exawind_cmake_base ()
 {
     local extra_args="$@"
+    local ccache_args=""
     AMR_WIND_INSTALL_PREFIX=${AMR_WIND_INSTALL_PREFIX:-${EXAWIND_INSTALL_DIR}/amr-wind}
 
     local compiler_flags=$(exawind_get_compiler_flags)
@@ -42,6 +43,11 @@ exawind_cmake_base ()
         local lib_path_save=${LIBRARY_PATH}
         unset LIBRARY_PATH
     fi
+
+    if [ "${ENABLE_CCACHE:-OFF}" = "ON" ] ; then
+        ccache_args="-DCMAKE_CXX_COMPILER_LAUNCHER:STRING=$(which ccache)"
+    fi
+
 
     local cmake_cmd=(
         cmake
@@ -61,6 +67,7 @@ exawind_cmake_base ()
         -DAMR_WIND_TEST_WITH_FCOMPARE:BOOL=${AMR_WIND_TEST_WITH_FCOMPARE:-ON}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         ${python_exec}
+        ${ccache_args}
         ${compiler_flags}
         ${extra_args}
         ${AMR_WIND_SOURCE_DIR:-..}
