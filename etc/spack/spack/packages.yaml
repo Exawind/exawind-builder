@@ -5,7 +5,7 @@ packages:
         - netlib-lapack
       lapack:
         - netlib-lapack
-    variants: +mpi build_type=Release
+    variants: +mpi+pic build_type=Release
   openmpi:
     version: [3.1.5]
   mpich:
@@ -13,7 +13,7 @@ packages:
   cmake:
     version: [3.16.2]
   binutils:
-    version: [2.32]
+    version: [2.34]
   perl:
     version: [5.30.1]
   openssl:
@@ -32,10 +32,7 @@ packages:
     version: [1.68.0]
   hdf5:
     version: [1.10.4]
-    variants: +mpi+cxx+hl
-  netcdf:
-    version: [4.7.1]
-    variants: +parallel-netcdf maxdims=65536 maxvars=524288
+    variants: +mpi+cxx+hl~fortran
   netcdf-c:
     version: [4.7.3]
     variants: +parallel-netcdf maxdims=65536 maxvars=524288
@@ -57,6 +54,8 @@ packages:
     variants: +int64~superlu-dist
   tioga:
     version: [develop]
+  nalu-wind:
+    variants: +fftw+hypre+openfast+tioga
   trilinos:
     version: [develop]
-    variants: ~python~complex+explicit_template_instantiation~float~fortran~openmp~xsdkflags+boost~cgns+exodus+gtest+hdf5~hypre~metis~mumps+pnetcdf~suite-sparse~superlu-dist+superlu~x11+zlib~alloptpkgs~amesos+amesos2~anasazi~aztec+belos~epetra~epetraext~ifpack+ifpack2~intrepid~intrepid2~isorropia+kokkos~ml~minitensor+muelu~nox~piro~phalanx~rol~rythmos~sacado~shylu+stk+shards~teko~tempus+teuchos+tpetra+zoltan+zoltan2~dtk~fortrilinos
+    variants: ~adios2~alloptpkgs~amesos+amesos2~anasazi~aztec+belos+boost~cgns~chaco~complex~debug~dtk~epetra~epetraext+exodus+explicit_template_instantiation~float~fortran~fortrilinos+glm+gtest+hdf5~hypre~ifpack+ifpack2~intrepid~intrepid2~isorropia+kokkos~matio~mesquite~metis~minitensor~ml+mpi+muelu~mumps+netcdf~nox~openmp~phalanx~piro+pnetcdf~python~rol~rythmos~sacado+shards~shylu+stk~stratimikos~suite-sparse+superlu~superlu-dist~teko~tempus+teuchos+tpetra~x11~xsdkflags+zlib+zoltan+zoltan2
