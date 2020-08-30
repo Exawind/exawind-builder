@@ -55,3 +55,38 @@ packages:
       - spec: "m4@1.4.18%gcc"
         modules:
           - m4/1.4.18
+  perl:
+    version: [5.26.2]
+    buildable: false
+    externals:
+      - spec: "perl@5.26.2%gcc"
+        modules:
+          - perl/5.26.2
+  libtool:
+    version: [2.4.2]
+    buildable: false
+    externals:
+      - spec: "libtool@2.4.2%gcc"
+        modules:
+          - libtool/2.4.2
+  autoconf:
+    version: [2.69]
+    buildable: false
+    externals:
+      - spec: "autoconf@2.69%gcc"
+        modules:
+          - autoconf/2.69
+  automake:
+    version: [1.16.1]
+    buildable: false
+    externals:
+      - spec: "automake@1.16.1%gcc"
+        modules:
+          - automake/1.16.1
+  pkgconf:
+    version: [1.5.4]
+    buildable: false
+    externals:
+      - spec: "pkgconf@1.5.4%gcc"
+        modules:
+          - pkgconf/1.5.4
