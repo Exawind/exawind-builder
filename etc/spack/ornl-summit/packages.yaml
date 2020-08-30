@@ -1,46 +1,57 @@
 packages:
   all:
     compiler:
-      - gcc@7.4.0
-      - xl@16.1
+      - gcc
     providers:
       mpi:
         - spectrum-mpi
   spectrum-mpi:
-    version: [10.3.0]
     buildable: false
-    modules:
-      spectrum-mpi@10.3.0: spectrum-mpi/10.3.0.1-20190611
-    paths: {}
-    providers: {}
-    compiler: []
+    externals:
+      - spec: "spectrum-mpi@10.3%gcc"
+        modules:
+          - spectrum-mpi/10.3.1.2-20200121
   cuda:
     version: [9.2.148]
     buildable: false
-    modules:
-      cuda@9.2.148: cuda/9.2.148
+    externals:
+      - spec: "cuda@9.2.148%gcc"
+        modules:
+          - cuda/9.2.148
+      - spec: "cuda@10.1.243%gcc"
+        modules:
+          - cuda/10.1.243
   cmake:
-    version: [3.15.2]
     buildable: false
-    modules:
-      cmake@3.15.2: cmake/3.15.2
+    externals:
+      - spec: "cmake@3.15.2%gcc"
+        modules:
+          - cmake/3.15.2
   zlib:
     version: [1.2.11]
     buildable: false
-    modules:
-      zlib@1.2.11: zlib/1.2.11
+    externals:
+      - spec: "zlib@1.2.11%gcc"
+        modules:
+          - zlib/1.2.11
   bzip2:
     version: [1.0.6]
     buildable: false
-    modules:
-      bzip2@1.0.6: bzip2/1.0.6
+    externals:
+      - spec: "bzip2@1.0.6%gcc"
+        modules:
+          - bzip2/1.0.6
   libxml2:
     version: [2.9.8]
     buildable: false
-    modules:
-      libxml2@2.9.8: libxml2/2.9.8
+    externals:
+      - spec: "libxml2@2.9.8%gcc"
+        modules:
+          - libxml2/2.9.8
   m4:
     version: [1.4.18]
     buildable: false
-    modules:
-      m4@1.4.18: m4/1.4.18
+    externals:
+      - spec: "m4@1.4.18%gcc"
+        modules:
+          - m4/1.4.18
