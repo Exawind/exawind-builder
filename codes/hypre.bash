@@ -12,6 +12,7 @@ exawind_hypre_fix_gpu ()
     unset NVCC_WRAPPER_DEFAULT_COMPILER
 
     export CUDA_HOME=${CUDA_HOME:-$(dirname $(dirname $(which nvcc)))}
+    export CC=$(which gcc)
     export CXX=$(which g++)
 }
 
