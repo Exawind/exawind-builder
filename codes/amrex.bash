@@ -10,7 +10,18 @@ EXAWIND_AMREX_CUDA_MAP[70]=Volta
 
 exawind_proj_env ()
 {
-    echo "==> No additional dependencies supported for AMReX"
+    local opt_packages=(
+        python
+        hypre
+    )
+
+    echo "==> Loading dependencies for AMReX ... "
+    for pkg in ${opt_packages[@]} ; do
+        local pkg_flag="ENABLE_${pkg^^}"
+        if [ "${!pkg_flag:-OFF}" = "ON" ] ; then
+            exawind_load_deps $pkg
+        fi
+    done
 }
 
 exawind_cmake_base ()
@@ -49,6 +60,8 @@ exawind_cmake_base ()
         -DENABLE_FORTRAN=${AMREX_ENABLE_FORTRAN:-OFF}
         -DENABLE_FORTRAN_INTERFACES=${AMREX_ENABLE_FORTRAN:-OFF}
         -DENABLE_FPE=OFF
+        -DENABLE_HYPRE=${ENABLE_HYPRE}
+        -DHYPRE_ROOT=${HYPRE_ROOT_DIR}
         -DENABLE_LINEAR_SOLVERS=ON
         -DENABLE_MEM_PROFILE=OFF
         -DENABLE_MPI=${AMREX_ENABLE_MPI:-ON}
