@@ -28,6 +28,8 @@ exawind_cmake_base ()
     local cmake_cmd=(
         cmake
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
+        -DTU_ENABLE_CUDA=${ENABLE_CUDA:-OFF}
+        -DTU_CUDA_ARCH=${EXAWIND_CUDA_SM:-70}
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
         -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR}
         -DYAML_DIR:PATH=${YAML_CPP_ROOT_DIR}
