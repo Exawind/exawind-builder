@@ -29,7 +29,7 @@ exawind_cmake_base ()
         cmake
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
         -DTU_ENABLE_CUDA=${ENABLE_CUDA:-OFF}
-        -DTU_CUDA_ARCH=${EXAWIND_CUDA_SM:-70}
+        -DTU_CUDA_SM=${EXAWIND_CUDA_SM:-70}
         -DCUDA_ARCH=${EXAWIND_CUDA_ARCH:-Volta}
         -DTrilinos_DIR:PATH=${TRILINOS_ROOT_DIR}
         -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR}
