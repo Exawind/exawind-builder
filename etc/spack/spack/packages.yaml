@@ -26,6 +26,7 @@ packages:
     version: [1.4.18]
   boost:
     version: [1.68.0]
+    variants: cxxstd=14
   hdf5:
     version: [1.10.4]
     variants: +mpi+cxx+hl~fortran
