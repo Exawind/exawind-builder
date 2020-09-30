@@ -7,6 +7,8 @@ _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
 declare -A EXAWIND_AMR_WIND_CUDA_MAP
 EXAWIND_AMR_WIND_CUDA_MAP[70]=Volta
 
+export EXAWIND_GPU_KOKKOS_ENV=OFF
+
 exawind_proj_env ()
 {
     local opt_packages=(
