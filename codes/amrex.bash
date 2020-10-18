@@ -50,6 +50,7 @@ exawind_cmake_base ()
         -DDIM=3
         -DENABLE_ACC=OFF
         -DENABLE_AMRDATA=OFF
+        -DENABLE_ASCENT=OFF
         -DENABLE_ASSERTIONS=OFF
         -DENABLE_BACKTRACE=OFF
         -DENABLE_BASE_PROFILE=OFF
@@ -71,10 +72,11 @@ exawind_cmake_base ()
         -DENABLE_PIC=ON
         -DENABLE_PLOTFILE_TOOLS=ON
         -DENABLE_PROFPARSER=OFF
-        -DENABLE_SENSEI_INSITU=OFF
+        -DENABLE_SENSEI=OFF
         -DENABLE_SUNDIALS=OFF
         -DENABLE_TINY_PROFILE=OFF
         -DUSE_XSDK_DEFAULTS=OFF
+        -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
         ${python_exec}
         ${compiler_flags}
         ${extra_args}
