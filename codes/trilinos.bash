@@ -126,12 +126,9 @@ exawind_cmake_base ()
             -DTrilinos_ENABLE_Zoltan:BOOL=ON
             -DTrilinos_ENABLE_STK:BOOL=ON
             -DTrilinos_ENABLE_Gtest:BOOL=ON
-            -DTrilinos_ENABLE_SEACASExodus:BOOL=ON
-            -DTrilinos_ENABLE_SEACASEpu:BOOL=ON
-            -DTrilinos_ENABLE_SEACASExodiff:BOOL=ON
-            -DTrilinos_ENABLE_SEACASNemspread:BOOL=ON
-            -DTrilinos_ENABLE_SEACASNemslice:BOOL=ON
-            -DTrilinos_ENABLE_SEACASIoss:BOOL=ON
+            -DTrilinos_ENABLE_SEACAS:BOOL=ON
+            -DTrilinos_ENABLE_SEACASExo2mat:BOOL=OFF
+            -DTrilinos_ENABLE_SEACASMat2exo:BOOL=OFF
             -DTPL_ENABLE_MPI:BOOL=ON
             -DTPL_ENABLE_Boost:BOOL=ON
             -DBoostLib_INCLUDE_DIRS:PATH=${BOOST_ROOT_DIR}/include
