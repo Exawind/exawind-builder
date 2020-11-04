@@ -123,7 +123,7 @@ exawind_env_clang ()
     module purge
     export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-8.4.0}
     exawind_eagle_common gcc-${EXAWIND_GCC_VERSION}
-    export EXAWIND_CLANG_VERSION=${EXAWIND_CLANG_VERSION:-7.0.1}
+    export EXAWIND_CLANG_VERSION=${EXAWIND_CLANG_VERSION:-10.0.0}
     local moddate=${EXAWIND_MODULES_SNAPSHOT:-modules-2020-07}
     module use ${EXAWIND_MODULES_DIR}/software/${moddate}/clang-${EXAWIND_CLANG_VERSION}
 
