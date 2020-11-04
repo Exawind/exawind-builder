@@ -121,14 +121,17 @@ exawind_env_intel ()
 exawind_env_clang ()
 {
     module purge
+    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-8.4.0}
+    exawind_eagle_common gcc-${EXAWIND_GCC_VERSION}
     export EXAWIND_CLANG_VERSION=${EXAWIND_CLANG_VERSION:-7.0.1}
-    exawind_eagle_common clang-${EXAWIND_CLANG_VERSION}
+    local moddate=${EXAWIND_MODULES_SNAPSHOT:-modules-2020-07}
+    module use ${EXAWIND_MODULES_DIR}/software/${moddate}/clang-${EXAWIND_CLANG_VERSION}
 
     exawind_load_deps gcc llvm ${EXAWIND_MODMAP[mpi]}
     exawind_load_deps cmake git binutils netlib-lapack
 
-    export F77=$(which mpifort)
-    export FC=$(which mpifort)
+    export F77=$(which mpif77)
+    export FC=$(which mpif90)
     export CC=$(which mpicc)
 
     # Override C/C++ compilers with LLVM
@@ -136,8 +139,10 @@ exawind_env_clang ()
     export OMPI_CC=$(which clang)
     export MPICH_CXX=$(which clang++)
     export MPICH_CC=$(which clang)
+    export MPICC_CC=$(which clang)
+    export MPICXX_CXX=$(which clang++)
     if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
-        export CXX=$(which mpic++)
+        export CXX=$(which mpicxx)
 
         # Suppress warnings about CUDA when running on standard nodes
         export OMPI_MCA_opal_cuda_support=0
