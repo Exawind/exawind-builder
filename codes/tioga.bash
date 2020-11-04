@@ -34,6 +34,13 @@ exawind_cmake_base ()
         install_dir="-DCMAKE_INSTALL_PREFIX=$TIOGA_INSTALL_PREFIX"
     fi
 
+    local compiler_flags=$(exawind_get_compiler_flags)
+
+    cmake_prefix_path=""
+    if [ "${ENABLE_ARBORX}" == "ON" ]; then
+        cmake_prefix_path="-DCMAKE_PREFIX_PATH=\"$ARBORX_ROOT_DIR\""
+    fi
+
     local cmake_cmd=(
         cmake
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE:-RELEASE}
@@ -42,11 +49,12 @@ exawind_cmake_base ()
         -DTIOGA_ENABLE_CUDA=${ENABLE_CUDA:-OFF}
         -DTIOGA_CUDA_SM=${EXAWIND_CUDA_SM:-70}
         -DTIOGA_ENABLE_ARBORX:BOOL=${ENABLE_ARBORX:-OFF}
-        -DCMAKE_PREFIX_PATH="$ARBORX_ROOT_DIR\\;$TRILINOS_ROOT_DIR"
+        ${cmake_prefix_path}
         -DTIOGA_HAS_NODEGID=${TIOGA_HAS_NODEGID:-OFF}
         -DTIOGA_ENABLE_TIMERS=${TIOGA_ENABLE_TIMERS:-OFF}
         -DTIOGA_OUTPUT_STATS=${TIOGA_OUTPUT_STATS:-OFF}
         ${install_dir}
+        ${compiler_flags}
         ${extra_args}
         ${TIOGA_SOURCE_DIR:-..}
     )
