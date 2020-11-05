@@ -125,6 +125,7 @@ exawind_cmake_base ()
             -DTrilinos_ENABLE_Amesos:BOOL=OFF
             -DTrilinos_ENABLE_Zoltan:BOOL=ON
             -DTrilinos_ENABLE_STK:BOOL=ON
+            -DSTK_ENABLE_UnitMain:BOOL=OFF
             -DTrilinos_ENABLE_Gtest:BOOL=ON
             -DTrilinos_ENABLE_SEACAS:BOOL=ON
             -DTrilinos_ENABLE_SEACASExo2mat:BOOL=OFF
