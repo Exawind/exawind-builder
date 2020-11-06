@@ -4,8 +4,7 @@
 export EXAWIND_NUM_JOBS_DEFAULT=8
 
 _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
-    modules-local
-    modules-ext
+    modules
     glue-codes
     ftnmods
 )
@@ -65,7 +64,6 @@ exawind_cmake_base ()
         -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS:-OFF}
         -DFPE_TRAP_ENABLED:BOOL=ON
         -DUSE_DLL_INTERFACE:BOOL=ON
-        -DBUILD_FAST_CPP_API:BOOL=${FAST_CPP_API:-ON}
         -DBUILD_OPENFAST_CPP_API:BOOL=${FAST_CPP_API:-ON}
         -DYAML_ROOT:PATH=${YAML_CPP_ROOT_DIR}
         -DHDF5_ROOT:PATH=${HDF5_ROOT_DIR}
