@@ -59,7 +59,7 @@ exawind_env_gcc ()
     export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-8.4.0}
     exawind_eagle_common gcc-${EXAWIND_GCC_VERSION}
 
-    exawind_load_deps gcc git binutils python ${EXAWIND_MODMAP[mpi]} cmake netlib-lapack/3.8.0
+    exawind_load_deps gcc git binutils ${EXAWIND_MODMAP[mpi]} cmake netlib-lapack/3.8.0
 
     export F77=$(which mpif77)
     export FC=$(which mpif90)
@@ -92,7 +92,7 @@ exawind_env_intel ()
     module load ${EXAWIND_MODMAP[gcc]}
     module load intel-parallel-studio
     module load git
-    exawind_load_deps binutils python cmake intel-mpi
+    exawind_load_deps binutils cmake intel-mpi
 
     export F77=$(which mpiifort)
     export FC=$(which mpiifort)
@@ -128,7 +128,7 @@ exawind_env_clang ()
     module use ${EXAWIND_MODULES_DIR}/software/${moddate}/clang-${EXAWIND_CLANG_VERSION}
 
     exawind_load_deps gcc llvm ${EXAWIND_MODMAP[mpi]}
-    exawind_load_deps cmake git python binutils netlib-lapack
+    exawind_load_deps cmake git binutils netlib-lapack
 
     export F77=$(which mpif77)
     export FC=$(which mpif90)
