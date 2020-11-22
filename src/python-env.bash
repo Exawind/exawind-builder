@@ -47,6 +47,7 @@ exawind_pyvenv_env ()
     _exw_pyvenv_init
     source ${EXAWIND_PYVENV_ROOT}/${EXAWIND_PYVENV}/bin/activate
     echo "==> Activated virtual python environment = ${EXAWIND_PYVENV}"
+    echo "==> pyvenv path: ${EXAWIND_PYVENV_ROOT}"
 }
 
 exawind_pyvenv_create ()
@@ -131,3 +132,11 @@ _exw_py_conda_deactivate_all ()
     done
 }
 
+exawind_py_build_full ()
+{
+    if [ "${#_EXAWIND_PROJECT_CMAKE_RMEXTRA_[@]}" -gt 0 ] ; then
+        echo "==> Removing skbuild artifacts"
+        rm -rf "${_EXAWIND_PROJECT_CMAKE_RMEXTRA_[@]}"
+    fi
+    exawind_py_build "$@"
+}

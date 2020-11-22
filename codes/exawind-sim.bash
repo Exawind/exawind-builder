@@ -2,16 +2,28 @@
 
 _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
     _skbuild
-    pySTK.egg-info
+    exawind_sim.egg-info
 )
 
 exawind_proj_env ()
 {
-    echo "==> Initializing python environment for pySTK"
-    exawind_py_env
+    local opt_packages=(
+        hypre
+        openfast
+    )
 
-    echo "==> Loading dependencies for pySTK ... "
-    exawind_load_deps trilinos
+    echo "==> Loading dependencies for exawind-sim ..."
+    exawind_load_deps netcdf-c yaml-cpp trilinos amrex tioga nalu-wind amr-wind
+
+    for pkg in ${opt_packages[@]} ; do
+        local pkg_flag="ENABLE_${pkg^^}"
+        if [ "${!pkg_flag:-ON}" = "ON" ] ; then
+            exawind_load_deps $pkg
+        fi
+    done
+
+    echo "==> Initializing python environment for exawind-sim"
+    exawind_py_env
 }
 
 exawind_cmake_base ()
@@ -26,7 +38,6 @@ exawind_make ()
     exawind_py_build "$@"
 }
 
-
 exawind_py_build ()
 {
     local num_tasks=${EXAWIND_NUM_JOBS:-$EXAWIND_NUM_JOBS_DEFAULT}
@@ -36,7 +47,7 @@ exawind_py_build ()
         -G Ninja
         -j ${num_tasks}
         --inplace --
-        -DCMAKE_PREFIX_PATH="${TRILINOS_ROOT_DIR}" "$@"
+        "$@"
     )
 
     echo "${pycmd[@]}" > pybuild_output.log
