@@ -102,7 +102,7 @@ main ()
         export EXAWIND_PYVENV=${env_name}
     fi
     if [ ! -z ${env_file} ] ; then
-        export EXAWIND_PYENV_SPEC=${env_file}
+        export EXAWIND_PYVENV_SPEC=${env_file}
     fi
     if [ ! -z ${pyvenv_root} ] ; then
         export EXAWIND_PYVENV_ROOT=${pyvenv_root}
