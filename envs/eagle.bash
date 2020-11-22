@@ -11,6 +11,7 @@ EXAWIND_MODMAP[netlib-lapack]=netlib-lapack/3.8.0
 EXAWIND_MODMAP[netcdf]=netcdf-c
 
 EXAWIND_DEP_LOADER=module
+export EXAWIND_PYVENV_SPEC_DEFAULT=${__EXAWIND_CORE_DIR}/etc/python/eagle/requirements.txt
 
 exawind_eagle_common ()
 {
@@ -159,4 +160,10 @@ exawind_env_clang ()
 
     # Supress warnings issued because of ulimit issues on Eagle when using MPICH
     export MXM_LOG_LEVEL=error
+}
+
+_exw_pyvenv_init ()
+{
+    export PATH=${EXAWIND_PROJECT_DIR}/python/${EXAWIND_COMPILER}/exw-base/bin:${PATH}
+    exawind_load_deps texlive
 }

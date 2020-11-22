@@ -1,0 +1,14 @@
+# Exawind pip requirements file
+--no-binary mpi4py,netCDF4
+cython
+scikit-build
+ipython
+pyyaml
+ruamel.yaml
+pandas
+ply
+pytz
+jinja2
+pytest
+pylint
+sphinx
