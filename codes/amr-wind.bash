@@ -17,6 +17,9 @@ exawind_proj_env ()
         hypre
     )
 
+    if [ "${ENABLE_EXTERNAL_AMREX:-OFF}" = "ON" ] ; then
+        exawind_load_deps amrex
+    fi
     echo "==> Loading dependencies for amr-wind ... "
     exawind_load_deps netcdf-c
     for pkg in ${opt_packages[@]} ; do
@@ -51,6 +54,10 @@ exawind_cmake_base ()
         ccache_args="-DCMAKE_CXX_COMPILER_LAUNCHER:STRING=$(which ccache)"
     fi
 
+    local internal_amrex="-DAMR_WIND_USE_INTERNAL_AMREX=ON"
+    if [ "${ENABLE_EXTERNAL_AMREX:-OFF}" = "ON" ] ; then
+        internal_amrex="-DAMR_WIND_USE_INTERNAL_AMREX=OFF -DAMReX_ROOT=${AMREX_ROOT_DIR}"
+    fi
 
     local cmake_cmd=(
         cmake
@@ -71,6 +78,7 @@ exawind_cmake_base ()
         -DAMR_WIND_ENABLE_TESTS:BOOL=ON
         -DAMR_WIND_TEST_WITH_FCOMPARE:BOOL=${AMR_WIND_TEST_WITH_FCOMPARE:-ON}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
+        ${internal_amrex}
         ${python_exec}
         ${ccache_args}
         ${compiler_flags}
