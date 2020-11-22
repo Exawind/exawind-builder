@@ -5,7 +5,7 @@ __EXAWIND_CORE_DIR=${__EXAWIND_CORE_DIR:-$(dirname ${__EXAWIND_CORESRC_DIR})}
 
 export EXAWIND_PYENV_TYPE_DEFAULT=conda
 export EXAWIND_CONDA_ENV_DEFAULT=exawind
-export EXAWIND_CONDA_ENV_SPEC_DEFAULT=${__EXAWIND_CORE_DIR}/etc/python/conda-env-default.yml
+export EXAWIND_CONDA_ENV_SPEC_DEFAULT=${__EXAWIND_CORE_DIR}/etc/python/conda/conda-env-default.yml
 
 exawind_py_env ()
 {
