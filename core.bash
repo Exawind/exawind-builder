@@ -36,6 +36,7 @@ exawind_save_func ()
 
 exawind_main ()
 {
+    set -eo pipefail
     if [ "$#" == "0" ] ; then
         exawind_env && exawind_proj_env && exawind_default_cmd
     else
