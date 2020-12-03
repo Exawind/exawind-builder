@@ -49,7 +49,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'exawind-builder'
-copyright = u'2018, Shreyas Ananthan'
+copyright = u'2020, ExaWind Project'
 author = u'Shreyas Ananthan'
 
 # The version info for the project you're documenting, acts as replacement for
