@@ -24,7 +24,7 @@ The build scripts are intended for developers who might want to compile the
 codes with different configuration options, build different branches during
 their development cycle, or link to a different development version of a library
 that is currently not available in the standard installation on the system. Please see the
-[documentation](https://exawind-builder.readthedocs.io/en/latest/index.html) for
+[documentation](https://exawind.github.io/exawind-builder) for
 details on how to use this to build ExaWind software.
 
 **Pre-configured systems**
