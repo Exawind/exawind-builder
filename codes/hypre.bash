@@ -1,5 +1,7 @@
 #!bin/bash
 
+export EXAWIND_GPU_KOKKOS_ENV=OFF
+
 exawind_proj_env ()
 {
     echo "==> HYPRE: No additional dependencies"
@@ -7,13 +9,16 @@ exawind_proj_env ()
 
 exawind_hypre_fix_gpu ()
 {
-    unset OMPI_CXX
+    if [ "${EXAWIND_GPU_KOKKOS_ENV:-OFF}" = "ON" ] ; then
+      echo "ERROR: Cannot build hypre with Kokkos nvcc_wrapper"
+      exit 1
+    fi
     unset EXAWIND_CUDA_WRAPPER
     unset NVCC_WRAPPER_DEFAULT_COMPILER
 
     export CUDA_HOME=${CUDA_HOME:-$(dirname $(dirname $(which nvcc)))}
-    export CC=$(which gcc)
-    export CXX=$(which g++)
+    export CXXFLAGS=${CXXFLAGS:-"-O2"}
+    export CFLAGS=${CXXFLAGS:-"-O2"}
 }
 
 exawind_cmake_base ()
@@ -21,30 +26,27 @@ exawind_cmake_base ()
     # Not exactly CMake, but we use this function anyway. Must be executed from
     # `hypre/src` directory
 
-    local extra_args_inp=( "$@" )
     local install_dir=""
     local enable_openmp=${ENABLE_OPENMP:-OFF}
     local enable_bigint=${ENABLE_BIGINT:-ON}
-    local enable_cuda=${ENABLE_CUDA:-OFF}
-    local enable_uvm=${HYPRE_ENABLE_UVM:-ON}
+    local shared_args=" --disable-shared "
     local openmp_args=" --without-openmp "
     local bigint_args=""
     local cuda_args=" --without-cuda "
     local uvm_args=""
-    local extra_args=""
-
-    # HYPRE configure cannot handle Ninja builds, so disable any CMake
-    # directives that got added
-    if [[ $extra_args_inp[0] = -G* ]] ; then
-        extra_args=${extra_args_inp[@]:1}
-    else
-        extra_args=${extra_args_inp}
-    fi
+    local extra_args=( "$@" )
 
     if [ -n "$HYPRE_INSTALL_PREFIX" ] ; then
         install_dir="$HYPRE_INSTALL_PREFIX"
     else
         install_dir="$(cd .. && pwd)/install"
+    fi
+
+    if [ "${BUILD_SHARED_LIBS:-OFF}" = "ON" ] ; then
+        echo "==> HYPRE: Enabling shared library build"
+        shared_args=" --enable-shared "
+    else
+        shared_args=" --disable-shared "
     fi
 
     if [ "${enable_openmp}" = "ON" ] ; then
@@ -53,16 +55,34 @@ exawind_cmake_base ()
     else
         echo "==> HYPRE: Disabling OpenMP"
     fi
-    if [ "${enable_cuda}" = "ON" ] ; then
+    if [ "${ENABLE_CUDA:-OFF}" = "ON" ] ; then
         echo "==> HYPRE: Enabling CUDA"
         cuda_args=" --with-cuda "
-        export HYPRE_CUDA_SM=${EXAWIND_CUDA_SM:-60}
+        export HYPRE_CUDA_SM=${HYPRE_CUDA_SM:-${EXAWIND_CUDA_SM:-70}}
         exawind_hypre_fix_gpu
 
-        if [ "${enable_uvm}" = "ON" ] ; then
-            uvm_args=" --enable-unified-memory "
+        if [ "${HYPRE_ENABLE_UVM:-ON}" = "ON" ] ; then
+            echo "==> HYPRE: Enabling CUDA unified memory"
+            cuda_args="${cuda_args} --enable-unified-memory "
         else
-            uvm_args=" --disable-unified-memory "
+            echo "==> HYPRE: Disabling CUDA unified memory"
+            cuda_args="${cuda_args} --disable-unified-memory "
+        fi
+
+        if [ "${HYPRE_ENABLE_CURAND:-ON}" = "ON" ] ; then
+            echo "==> HYPRE: Enabling CUDA curand"
+            cuda_args="${cuda_args} --enable-curand "
+        else
+            echo "==> HYPRE: Disabling CUDA curand"
+            cuda_args="${cuda_args} --disable-curand "
+        fi
+
+        if [ "${HYPRE_ENABLE_CUB:-OFF}" = "ON" ] ; then
+            echo "==> HYPRE: Enabling CUDA cub"
+            cuda_args="${cuda_args} --enable-cub "
+        else
+            echo "==> HYPRE: Disabling CUDA cub"
+            cuda_args="${cuda_args} --disable-cub "
         fi
 
         # Disable BIGINT as it doesn't work with CUDA
@@ -81,12 +101,11 @@ exawind_cmake_base ()
 
     local config_cmd=(
         ./configure
-        --prefix=${HYPRE_INSTALL_PREFIX}
+        --prefix=${install_dir}
         --without-superlu
         ${bigint_args}
         ${openmp_args}
         ${cuda_args}
-        ${uvm_args}
         ${extra_args[@]}
     )
 
@@ -94,6 +113,17 @@ exawind_cmake_base ()
     eval "${config_cmd[@]}"
     echo "==> Executing make clean to force full recompile"
     command make clean > /dev/null
+}
+
+exawind_cmake ()
+{
+    if [ "$(uname)" = "Darwin" -a "$(type -t exawind_cmake_osx)" = "function" ] ; then
+        exawind_cmake_osx "$@"
+    elif [ "$(type -t exawind_cmake_${EXAWIND_SYSTEM})" = "function" ] ; then
+        exawind_cmake_${EXAWIND_SYSTEM} "$@"
+    else
+        exawind_cmake_base "$@"
+    fi
 }
 
 exawind_make ()
@@ -110,5 +140,5 @@ exawind_make ()
        exawind_hypre_fix_gpu
     fi
 
-    command make ${extra_args} 2>&1 | tee make_output.log
+    command make ${extra_args} |& tee make_output.log
 }
