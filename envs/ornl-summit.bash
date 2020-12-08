@@ -5,6 +5,7 @@ source ${__EXAWIND_CORE_DIR}/envs/spack.bash
 export EXAWIND_NUM_JOBS_DEFAULT=16
 
 declare -A EXAWIND_MODMAP
+EXAWIND_MODMAP[xl]=xl/16.1.1-5
 EXAWIND_MODMAP[gcc]=gcc/7.4.0
 EXAWIND_MODMAP[cuda]=cuda/9.2.148
 
@@ -25,7 +26,7 @@ exawind_summit_gpu ()
 
     if [ "${EXAWIND_GPU_KOKKOS_ENV:-ON}" = ON ] ; then
         # Set CXX so that NVCC can pick up host compiler
-        export CXX=$(which g++)
+        export CXX=${OMPI_CXX}
         exawind_kokkos_cuda_env
     fi
 
@@ -61,14 +62,30 @@ exawind_env_gcc ()
 exawind_env_intel ()
 {
     echo "ERROR: No intel environment setup for ORNL Summit"
+    exit 1
 }
 
 exawind_env_clang ()
 {
     echo "ERROR: No clang environment setup for ORNL Summit"
+    exit 1
 }
 
 exawind_env_xl ()
 {
-    echo "ERROR: No xl environment setup for ORNL Summit"
+    module purge
+    exawind_summit_common
+    module load ${EXAWIND_MODMAP[xl]}
+
+    module load git cmake
+
+    export CC=$(which mpicc)
+    export FC=$(which mpifort)
+    export CXX=$(which mpic++)
+
+    export ENABLE_CUDA=${ENABLE_CUDA:-ON}
+    if [ "$ENABLE_CUDA" == "ON" ]; then
+        module load ${EXAWIND_MODMAP[cuda]}
+        exawind_summit_gpu
+    fi
 }
