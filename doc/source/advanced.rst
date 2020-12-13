@@ -17,7 +17,7 @@ home directory. Modify this appropriately.
 
    # Clone exawind-builder repo
    cd exawind
-   git clone https://github.com/sayerhs/exawind-builder.git
+   git clone https://github.com/exawind/exawind-builder.git
 
    # Clone nalu-wind that we will use as an example later
    cd ../source

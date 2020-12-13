@@ -35,7 +35,7 @@ To install using *bootstrap* script please follow these steps.
    .. code-block:: console
 
       # Download bootstrap script
-      curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/sayerhs/exawind-builder/master/bootstrap.sh
+      curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/exawind/exawind-builder/master/bootstrap.sh
       chmod a+x bootstrap.sh
 
 #. Execute the script by providing a target system and compiler -- see
@@ -140,7 +140,7 @@ one-time installation process to set up your Homebrew environment.
    brew tap Homebrew/brewdler
 
    # Fetch the exawind Brewfile
-   curl -fsSL -o Brewfile https://raw.githubusercontent.com/sayerhs/exawind-builder/master/etc/spack/osx/Brewfile
+   curl -fsSL -o Brewfile https://raw.githubusercontent.com/exawind/exawind-builder/master/etc/spack/osx/Brewfile
 
    # Install brew packages
    brew bundle --file=Brewfile

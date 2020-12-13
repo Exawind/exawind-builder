@@ -1,5 +1,7 @@
 # ExaWind Code Builder
 
+[Documentation](https://exawind.github.io/exawind-builder)
+
 ExaWind Builder is a collection of bash scripts to configure and compile the
 codes used within the [ExaWind](https://github.com/exawind) project on various
 high-performance computing (HPC) systems. The builder provides the following
@@ -45,13 +47,12 @@ details on how to use this to build ExaWind software.
 | `snl-ews`           | Sandia engineering workstations                                                    |
 | `rhodes`            | NREL nightly build and test system                                                 |
 | `pnnl-constance`    | PNNL Constance system                                                              |
-| `peregrine`         | [NREL Peregrine](https://www.nrel.gov/hpc/peregrine-system.html)                   |
 
 ## Quick installation 
 
 ```bash
 # Download bootstrap script
-curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/sayerhs/exawind-builder/master/bootstrap.sh
+curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/exawind/exawind-builder/master/bootstrap.sh
 
 # Make it executable
 chmod a+x bootstrap.sh
@@ -61,7 +62,7 @@ chmod a+x bootstrap.sh
 
 # Examples
 ./bootstrap.sh -s spack -c clang       # On OS X with homebrew
-./bootstrap.sh -s peregrine -c gcc     # NREL Peregrine
+./bootstrap.sh -s ornl-summit -c gcc   $ Oakridge Summit system
 ./bootstrap.sh -s eagle -c gcc         # NREL Eagle
 ./bootstrap.sh -s cori -c intel        # NERSC Cori
 ./bootstrap.sh -s snl-ascicgpu -c gcc  # SNL GPU development machine

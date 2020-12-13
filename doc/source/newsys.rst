@@ -104,7 +104,7 @@ the necessary system files.
    # Create top-level exawind directory structure
    mkdir -p ${HOME}/exawind/{scripts,install,source}
    cd ${HOME}/exawind
-   git clone git@github.com:sayerhs/exawind-builder.git
+   git clone git@github.com:exawind/exawind-builder.git
 
 Change the protocol from ``git`` to `https://`` if you have issues cloning using
 ``git`` transport over SSH. For the rest of this documentation,
@@ -301,7 +301,7 @@ is shown here:
 
    - For more complicated build environment support, take a look at the `NREL
      Eagle
-     <https://github.com/sayerhs/exawind-builder/blob/master/envs/eagle.bash>`_
+     <https://github.com/exawind/exawind-builder/blob/master/envs/eagle.bash>`_
      environment file.
 
 

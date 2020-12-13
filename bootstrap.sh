@@ -59,7 +59,7 @@ exw_init ()
 
     cd ${basedir}
     if [ ! -d exawind-builder ] ; then
-        git clone https://github.com/sayerhs/exawind-builder.git
+        git clone https://github.com/exawind/exawind-builder.git
     fi
 }
 
