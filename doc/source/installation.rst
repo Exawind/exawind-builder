@@ -1,6 +1,6 @@
 .. _installation:
 
-Setting up exawind-builder
+Installing exawind-builder
 ==========================
 
 Exawind-builder provides a *bootstrap* script that will create the exawind
@@ -8,16 +8,17 @@ directory structure, fetch necessary repositories, install dependencies, and
 perform initial setup and configuration. Note that this step is just preparation
 for being able to build ``nalu-wind`` and doesn't install ``nalu-wind`` itself.
 You will need to follow the additional steps mentioned in
-:ref:`compiling-software`.
+:ref:`tut-basic-compilation`.
 
 .. note::
 
-   On NREL Peregrine, Eagle, and Rhodes, and NERSC Cori systems, the build
+   On OLCF Summit, NREL Eagle and Rhodes, and NERSC Cori systems, the build
    scripts are pre-installed and configured in the project directory. Users do
-   not have to install their own exawind-builder on these systems. On these NREL
+   not have to install their own exawind-builder on these systems. On these
    systems, you can skip the installation steps and proceed to the
-   :ref:`compiling-software` section. Please consult the Exawind team if you are
-   unsure where the build scripts are located on these systems.
+   :ref:`tut-basic-compilation` section. Please consult the Exawind team if you
+   are unsure where the build scripts are located on these systems. Please refer
+   to :ref:`how_to_use` for more details.
 
 For fine control of the installation process please refer to the
 :ref:`manual_installation` section.
@@ -72,7 +73,7 @@ exawind environment file (:file:`scripts/exawind-env-COMPILER.sh`). Please
 verify the default values provided in :file:`exawind-config.sh` and adjust them
 if necessary. By default, the *bootstrap* script will not install Trilinos or
 Nalu-Wind, these need to be manually installed by the user. Please proceed to
-:ref:`compiling-software` for instructions on how to compile Trilinos and
+:ref:`tut-basic-compilation` for instructions on how to compile Trilinos and
 Nalu-Wind.
 
 .. note::
@@ -99,9 +100,9 @@ Setting up custom ExaWind python environment
 <https://sayerhs.github.io/pystk/index.html>`_. To enable this capability,
 you'll need to set up a custom virtual environment with the necessary python
 modules. Currently, ``exawind-builder`` only supports the `Conda
-<https://docs.conda.io/en/latest/index.html>`_ python package manager. To enable this capability:
+<https://docs.conda.io/en/latest/index.html>`__ python package manager. To enable this capability:
 
-1. Install `Conda <https://docs.conda.io/en/latest/miniconda.html>`_ if you
+1. Install `Conda <https://docs.conda.io/en/latest/miniconda.html>`__ if you
    don't have an existing conda installation.
 
 2. Create a new virtual environment using the `create-pyenv.sh` utility

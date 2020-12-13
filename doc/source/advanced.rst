@@ -311,5 +311,5 @@ Compiling Nalu-Wind
 -------------------
 
 At this point you have manually recreated all the steps performed by the
-*bootstrap* process. Please follow :ref:`compiling-software` to build Trilinos
+*bootstrap* process. Please follow :ref:`tut-basic-compilation` to build Trilinos
 and Nalu-Wind

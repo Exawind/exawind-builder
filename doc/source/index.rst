@@ -9,7 +9,7 @@ ExaWind Build Scripts User Manual
 
 .. only:: html
 
-   :Version: |version|
+   :Version: |release|
    :Date: |today|
 
 `ExaWind Builder <https://github.com/exawind/exawind-builder>`_ is a collection
@@ -44,8 +44,8 @@ that is currently not available in the standard installation on the system.
    :maxdepth: 4
 
    introduction
-   installation
    basic
+   installation
    newsys
    advanced
    reference

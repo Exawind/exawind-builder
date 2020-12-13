@@ -118,24 +118,29 @@ ExaWind Builder configuration
    desired ``nvcc`` option is ``-arch=sm_70``, then set this variable to ``70``.
    Currently, used by non-Trilinos codes like HYPRE, PIFUS, and TIOGA.
 
+.. envvar:: EXAWIND_ARCH_FLAGS
+
+   Additional architecture specific optimization flags, e.g., to enable SIMD
+   optimizations.
+
 .. envvar:: KOKKOS_ARCH
 
    The architectures for which Kokkos builds are optimized. See `Kokkos Wiki
-   <https://github.com/kokkos/kokkos/wiki/Compiling#table-43-architecture-variables>`_
+   <https://github.com/kokkos/kokkos/wiki/Compiling#table-43-architecture-variables>`__
    for further information. Multiple architectures can be separated by commas.
 
 .. envvar:: CUDA_LAUNCH_BLOCKING
 
    Variable set to control Kokkos configuration. Defaults to 1.
 
-   See `Kokkos Wiki <https://github.com/kokkos/kokkos/wiki/Compiling#43-using-trilinos-cmake-build-system>`_ for more details.
+   See `Kokkos Wiki <https://github.com/kokkos/kokkos/wiki/Compiling#43-using-trilinos-cmake-build-system>`__ for more details.
 
 .. envvar:: CUDA_MANAGED_FORCE_DEVICE_ALLOC
 
    Variable necessary when CUDA UVM is enabled (currently required for certain
    Trilinos packages) that manages device allocation.  Default value is 1.
 
-   See `Kokkos Wiki <https://github.com/kokkos/kokkos/wiki/Compiling#43-using-trilinos-cmake-build-system>`_ for more details.
+   See `Kokkos Wiki <https://github.com/kokkos/kokkos/wiki/Compiling#43-using-trilinos-cmake-build-system>`__ for more details.
 
 .. envvar:: SPACK_ROOT
 
@@ -174,10 +179,13 @@ underscores. For example, ``parallel-netcdf`` becomes
 
    Currently the following ``ROOT_DIR`` variables are used within the scripts::
 
+     AMREX_ROOT_DIR
+     AMR_WIND_ROOT_DIR
      BOOST_ROOT_DIR
      FFTW_ROOT_DIR
      HDF5_ROOT_DIR
      HYPRE_ROOT_DIR
+     MASA_ROOT_DIR
      NALU_WIND_ROOT_DIR
      NETCDF_ROOT_DIR
      OPENFAST_ROOT_DIR
@@ -238,7 +246,44 @@ Common build variables
 .. envvar:: ENABLE_CUDA
 
    Boolean flag indicating whether CUDA is enabled. The default value is OFF on
-   most architectures. Exceptions are: ORNL SummitDev, SNL ascicgpu.
+   most architectures. Exceptions are: ORNL Summit, SNL ascicgpu.
+
+.. envvar:: ENABLE_HIP
+
+   Boolean flag indicating whether AMD/HIP is enabled. Default is OFF on most
+   architectures.
+
+.. envvar:: ENABLE_DPCPP
+
+   Boolean flag indicating whether Intel OneAPI/DPC++ support is enabled.
+   Default is OFF on most architectures.
+
+AMR-Wind
+~~~~~~~~~
+
+.. envvar:: ENABLE_HYPRE
+
+   Build with HYPRE support
+
+.. envvar:: ENABLE_MASA
+
+   Build with MASA support
+
+.. envvar:: ENABLE_NETCDF
+
+   Build with NetCDF support
+
+.. envvar:: AMR_WIND_ENABLE_MPI
+
+   Boolean flag indicating whether MPI support is enabled when building AMR-Wind.
+
+.. envvar:: AMR_WIND_ENABLE_FCOMPARE
+
+   Boolean flag indicating whether ``fcompare`` is used with tests.
+
+.. envvar:: AMR_WIND_TEST_WITH_FCOMPARE
+
+   Boolean flag indicating whether regresstion tests check against gold files.
 
 Nalu-Wind
 ~~~~~~~~~
@@ -267,11 +312,6 @@ Nalu-Wind
 
    Boolean flag indicating whether tests are enabled when building Nalu-Wind.
    (default: ON)
-
-.. envvar:: EXAWIND_ARCH_FLAGS
-
-   Additional architecture specific optimization flags, e.g., to enable SIMD
-   optimizations.
 
 OpenFAST
 ~~~~~~~~

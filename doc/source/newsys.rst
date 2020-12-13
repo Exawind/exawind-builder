@@ -326,7 +326,7 @@ execute without any errors for other users.
 
 If *bootstrap* succeeds, you should have build scripts in
 :file:`${HOME}/exawind/scripts` for the compiler of your choice. Proceed to
-:ref:`compiling-software` to build Trilinos and Nalu-Wind.
+:ref:`tut-basic-compilation` to build Trilinos and Nalu-Wind.
 
 Once you have successfully built Nalu-Wind and executed regression tests on the
 new system, please consider submitting a pull request to allow other users to
