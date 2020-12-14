@@ -3,12 +3,12 @@
 Introduction
 ============
 
-Exawind-builder is a set of bash functions that can be compiled to generate
-build scripts for the software used in `ExaWind <https://www.exawind.org>`_
-project on the different systems of interest. It separates machine-specific
-configuration from the software-specific configuration (tracking library
-dependencies and CMake configuration) so that they can be modularized and
-combined for different systems and compilers.
+`Exawind-builder <https://github.com/exawind/exawind-builder>`_ is a set of bash
+functions that can be compiled to generate build scripts for the software used
+in `ExaWind <https://www.exawind.org>`_ project on the different systems of
+interest. It separates machine-specific configuration from the software-specific
+configuration (tracking library dependencies and CMake configuration) so that
+they can be modularized and combined for different systems and compilers.
 
 Pre-configured systems
 ----------------------

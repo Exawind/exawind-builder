@@ -87,15 +87,13 @@ installation exists or if you need to install one yourself please refer to
 Compiling executables using build scripts
 -----------------------------------------
 
-This simple tutorial describes building your own executable of `Nalu-Wind
-<https://github.com/exawind/nalu-wind>`__ using exawind-builder scripts and TPLs
-maintained by the ExaWind team. This tutorial outlines the basic steps involved
-in building code using exawind-builder scripts. You can replace ``nalu-wind``
-with any of the other codes in :ref:`exawind_codes` and follow the same steps to
-build code. Tutorials on complex workflows will refer back to this tutorial.
-
-This tutorial will assume that the path to the pre-installed exawind project
-directory is :file:`/projects/exawind/`.
+This tutorial describes the steps involved in biulding your own executable of
+`Nalu-Wind <https://github.com/exawind/nalu-wind>`__ using exawind-builder
+scripts. You can replace ``nalu-wind`` with any of the other codes in
+:ref:`exawind_codes` and follow the same steps to build code. Tutorials on
+complex workflows will refer back to this tutorial. This tutorial will assume
+that the path to the pre-installed exawind project directory is
+:file:`/projects/exawind/`.
 
 One time setup
 ~~~~~~~~~~~~~~~~
@@ -108,11 +106,21 @@ to do development builds.
 
    .. code-block:: bash
 
-      # Choose directory where you want to manage exawind project
+      # Path to exawind installation
+      export EXAWIND_DIR=/projects/exawind
+
+      # Choose directory where you want to work on exawind codes
       export MY_EXAWIND_DIR=${HOME}/exawind
 
       # Create directory structure if you haven't done this previously
       mkdir -p ${HOME}/exawind/source
+
+   .. note::
+
+      If you installed your own exawind (see :ref:`installation`) and are not
+      using a central installation, then ``${EXAWIND_DIR}`` and
+      ``${MY_EXAWIND_DIR}`` would point to the same location and you can skip
+      this step.
 
 #. Clone desired code repository if you do not have a previously checked out
    version. In this example, we will use nalu-wind. Please replace ``nalu-wind``
@@ -125,6 +133,8 @@ to do development builds.
 
       # Clone the repository
       git clone --recurse-submodules https://github.com/exawind/nalu-wind.git
+
+      # Switch to a different branch if necessary
 
 #. Create build directory and link build script. In this tutorial, we will use
    the ``gcc`` compiler. Replace ``gcc`` with ``clang`` or ``intel`` to switch
@@ -168,6 +178,8 @@ When invoked without any arguments, the script will first execute ``cmake`` with
 appropriate arguments to configure the project and then call ``make`` to compile
 the project. On successful compilation, you will have executables in the build
 directory.
+
+.. _build-output:
 
 Understanding exawind-builder output
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -449,6 +461,7 @@ invoked. Some examples are shown below
    - The :file:`make_output.log` contains the output from the last invocation of
      ``make``. This output is also simultaneously echoed to the screen.
 
+
 .. _build-custom:
 
 Customizing exawind-builder
@@ -468,7 +481,7 @@ described below. The code examples shown below must be added to
 :file:`exawind-config.sh` within the current working directory (either the build
 directory or the directory from which an HPC job is executed).
 
-Selecting options
+Customizing build options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 See project-specific documentation in :ref:`reference` to see what variables can
@@ -496,7 +509,33 @@ be used to enable/disable various options for different projects.
    # Set number of parallel jobs to execute during make step
    EXAWIND_NUM_JOBS=18
 
-Using custom builds of libraries
+Customizing installation location
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, exawind-builder will setup ``CMAKE_INSTALL_PREFIX`` such that ``make
+install`` step will install at
+:file:`${EXAWIND_PROJECT_DIR}/${EXAWIND_EXEC_TARGET}/${EXAWIND_CODE}` directory.
+If you have installed exawind-builder yourself and are not using a shared
+installation you will not need to change this location. However, when using an
+upstream exawind-builder you might not have write permissions to that
+installation location. In this situation you can instruct exawind-builder to
+choose a custom installation location for when executing ``make install``.
+
+In this example we will assume that you are using an upstream exawind-builder
+installation at :file:`/projects/exawind` and you are building your development
+versions in :file:`${HOME}/exawind`. By default, :envvar:`EXAWIND_INSTALL_DIR`
+will point to a directory within :envvar:`EXAWIND_PROJECT_DIR` (which in this
+case is within :file:`/projects/exawind/`). To override this when building
+trilinos, for example, you can use the variable `TRILINOS_INSTALL_PREFIX` to
+provide the installation location. Next section shows how this installed
+trilinos libraries can be used to link against codes that depend on trilinos.
+
+.. code-block:: bash
+
+   # Custom install location for trilinos with date timestamp
+   export TRILINOS_INSTALL_PREFIX=${HOME}/exawind/install/gcc8-cuda10/trilinos-$(date %Y-%m-%d)
+
+Customizing dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 During development, the user might desire to use a different branch of a
@@ -516,8 +555,17 @@ customize the TPLs used for building nalu-wind
    # Example using trilinos from nightly-testing build
    export TRILINOS_ROOT_DIR=/projects/exawind-nightly-testing/install/trilinos
 
-Customizing initialization process
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   # Example using trilinos from custom install location (see previous section)
+   export TRILINOS_ROOT_DIR=${HOME}/exawind/install/gcc8-cuda10/trilinos-2020-10-08
+
+.. tip::
+
+   To specify the installation location use :envvar:`PROJECT_INSTALL_PREFIX` and
+   to use an installed version of the code as a depencency in another project
+   use :envvar:`PROJECTNAME_ROOT_DIR` variable.
+
+Customizing build environment init process
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The builder provides two options that allows the user to further configure the
 default environment that is enabled for a given system/compiler combination.
@@ -541,10 +589,18 @@ default environment that is enabled for a given system/compiler combination.
       # Load additional modules and print out some variables
       exawind_env_user_actions ()
       {
+        # You can inject additional module paths
+        module use /opt/hpc_system/modules
+
+        # load additional modules
         module load paraview
+
+        # manipulate environment variables seen by exawind-builder
         echo ${CXX}
         echo ${TRILINOS_ROOT_DIR}
       }
+
+.. _cfg-module-load:
 
 Customizing module load
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -560,6 +616,46 @@ might switch to a different versions of GCC, MPI, and CUDA modules for building 
    EXAWIND_MODMAP[gcc]=gcc/8.4.0
    EXAWIND_MODMAP[mpi]=mpich/3.3.1
    EXAWIND_MODMAP[cuda]=cuda/10.2.89
+
+Similarly, `EXAWIND_MODMAP` can also be used to select from multiple versions of
+software installed via spack. For example, if :envvar:`EXAWIND_DEP_LOADER` is
+set to ``spack`` then you can provide custom versions to load
+
+.. code-block:: bash
+
+   EXAWIND_MODMAP[trilinos]=trilinos@2020-12-01 +cuda
+   EXAWIND_MODMAP[hypre]=hypre@develop+mpi~int64+cuda+curand
+
+.. warning::
+
+   :envvar:`PROJECTNAME_ROOT_DIR` variables take precedence over modules/spack
+   packages listed in :envvar:`EXAWIND_MODMAP`. You should verify that the right
+   package is loaded. See :ref:`build-output` on more details on how to detect
+   the packages that are used during the build process.
+
+Swapping Spack installations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To aid testing/debugging, exawind-builder has the ability to switch to a
+different spack installation, e.g., nightly-testing spack installation, using
+the :envvar:`SPACK_ROOT` variable.
+
+.. code-block:: bash
+
+   # Switch spack installation to the one used for nightly-testing
+   SPACK_ROOT=/projects/exawind/nightly-testing/spack
+
+   # (Optional) customize spack packages in case there are multiple versions
+   EXAWIND_MODMAP[trilinos]=trilinos@develop%gcc@7.4.0 +cuda+cuda_rdc+wrapper
+   EXAWIND_MODMAP[hypre]=hypre@develop%gcc@7.4.0
+
+.. note::
+
+   When using a different spack installation, you should not attempt to link to
+   codes built against the old spack install that are in
+   :envvar:`EXAWIND_INSTALL_DIR`. You should unset all
+   :envvar:`PROJECTNAME_ROOT_DIR` and use packages from spack install, or
+   rebuild new versions of the packages.
 
 Customizing CMake configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -586,6 +682,147 @@ executing regression tests on ORNL Summit system.
            -DMPIEXEC_PREFLAGS='"-a 1 -c 1 -g 1"' \
            ${extra_args}
    }
+
+.. _exawind_config:
+
+Exawind-builder configuration files
+-----------------------------------
+
+During execution, exawind-builder reads configuration from various files that
+provide fine-grained control of the build process. The default name for the
+configuration file is ``exawind-config``, but this can be configured by
+modifying the :envvar:`EXAWIND_CFGFILE` variable. exawind-builder will load the
+following files in the specified order
+
+.. code-block:: bash
+
+   ${EXAWIND_PROJECT_DIR}/exawind-config-${EXAWIND_SYSTEM}      # Common system settings
+   ${EXAWIND_PROJECT_DIR}/exawind-config-${EXAWIND_EXEC_TARGET} # Execution target settings
+   ${EXAWIND_CONFIG}                                            # File pointed to by the variable
+   $(pwd)/exawind-config.sh                                     # File in the local working directory
+
+The configuration variables in the subsequent files will override the default
+values as well as configuration variables set in the previous files. Please
+replace the path appropriately (:envvar:`EXAWIND_PROJECT_DIR`), if you used a
+non-standard location for installation. See also :envvar:`EXAWIND_CONFIG`.
+
+On systems with a shared installation of exawind-builder, please look at the
+``exawind-config-*.sh`` files within :envvar:`EXAWIND_PROJECT_DIR`. The
+:envvar:`EXAWIND_EXEC_TARGET` is typically just the compiler name, e.g.,
+``gcc``. For CUDA builds, it is either ``cuda`` or ``gcc9-cuda11``.
+
+.. note::
+
+   #. It is recommended that the user use local configuration files within build
+      directories to set variables instead of modifying the build scripts within
+      the `exawind/scripts` directory.
+
+   #. If you are using a shared instance of exawind-builder (e.g., on NREL),
+      then please use :file:`exawind-config.sh` within your build directory to
+      override common configuration parameters.
+
+
+Tutorial: Custom build of Trilinos and Nalu-Wind
+------------------------------------------------
+
+This tutorial presents a complete walkthrough of the steps involved in building
+custom versions of trilinos and nalu-wind to target execution on NVIDIA GPUs. We
+will assume that the default system build targets host and doesn't activate CUDA
+support by default. In this tutorial we will activate CUDA within the
+exawind-builder environment, compile Trilinos first with CUDA support, and then
+build nalu-wind to link to this custom trilinos build.
+
+**Create ``exawind-config.sh``**
+
+#. (Option 1 -- the quick way): You can use this method on systems where Exawind
+   team has already created the necessary configuration for CUDA builds.
+
+   .. code-block:: bash
+
+      # Set the exawind build target type
+      EXAWIND_EXEC_TARGET=gcc8-cuda10
+
+      # Install path for trilinos
+      TRILINOS_INSTALL_PREFIX=${MY_EXAWIND_DIR}/install/gcc8-cuda10
+
+      # Trilinos lookup path for building Nalu-Wind
+      TRILINOS_ROOT_DIR=${TRILINOS_INSTALL_PREFIX}
+
+   See :envvar:`EXAWIND_PROJECT_DIR` to see the available configurations.
+
+#. (Option 2 -- the hard way): Provides more control
+
+   .. code-block:: bash
+
+      ENABLE_CUDA=ON
+      EXAWIND_MODMAP[gcc]=gcc/8.4.0
+      EXAWIND_MODMAP[cuda]=cuda/10.2.89
+
+      # Install path for trilinos
+      TRILINOS_INSTALL_PREFIX=${MY_EXAWIND_DIR}/install/gcc8-cuda10/trilinos-2020-10-08
+
+      # Trilinos lookup path for building Nalu-Wind
+      TRILINOS_ROOT_DIR=${TRILINOS_INSTALL_PREFIX}
+
+Build Trilinos
+~~~~~~~~~~~~~~
+
+#. Build and install trilinos (see :ref:`tut-basic-compilation` for more details)
+
+   .. code-block:: bash
+
+      cd ${MY_EXAWIND_DIR}/source/trilinos/
+      mkdir build-gcc8-cuda10
+      cd build-gcc8-cuda10
+
+      # Copy exawind-config file
+      cp ${HOME}/exawind-config.sh .
+
+      # link build script
+      ln -s ${EXAWIND_PROJECT_DIR}/scripts/trilinos-gcc.sh
+
+      # Configure and build
+      ./trilinos-gcc.sh
+      # Install to destination directory
+      ./trilinos-gcc.sh make install
+
+If CUDA support was activated, the scripts will print out message similar to
+what is shown below. You can also look at :file:`cmake_output.log` to make sure
+that Trilinos/Kokkos CUDA support was activated.
+
+::
+
+  ==> cuda/10.2.89 = /nopt/nrel/ecom/hpacf/compilers/2020-07/spack/opt/spack/linux-centos7-skylake_avx512/gcc-8.4.0/cuda-10.2.89-rmccd4tpc5gxbbrjeeohphuuujb4cz2o
+  ==> Activated Eagle CUDA programming environment
+
+Build Nalu-Wind
+~~~~~~~~~~~~~~~
+
+#. Build nalu-wind (see :ref:`tut-basic-compilation` for more details)
+
+   .. code-block:: bash
+
+      cd ${MY_EXAWIND_DIR}/source/nalu-wind/
+      mkdir build-gcc8-cuda10
+      cd build-gcc8-cuda10
+
+      # Copy exawind-config file
+      cp ${HOME}/exawind-config.sh .
+
+      # link build script
+      ln -s ${EXAWIND_PROJECT_DIR}/scripts/nalu-wind-gcc.sh
+
+      # Configure and build
+      ./nalu-wind-gcc.sh
+      # Install to destination directory
+      ./nalu-wind-gcc.sh make install
+
+The script should output the expected path of the tilinos build that is being used
+
+::
+
+  ==> trilinos = ${HOME}/install/gcc8-cuda10/trilinos-2020-10-08
+
 
 ..
   Overriding default behavior
@@ -743,40 +980,4 @@ executing regression tests on ORNL Summit system.
      ./nalu-wind-${COMPILER}.sh
      # Install on successful build
      ./nalu-wind-${COMPILER}.sh make install
-
-.. _exawind_config:
-
-Exawind-builder configuration files
------------------------------------
-
-During execution, exawind-builder reads configuration from various files that
-provide fine-grained control of the build process. The default name for the
-configuration file is ``exawind-config``, but this can be configured by
-modifying the :envvar:`EXAWIND_CFGFILE` variable. exawind-builder will load the
-following files in the specified order
-
-.. code-block:: bash
-
-   ${HOME}/.exawind-config   # User configuration file
-   ${HOME}/.exawind-config-${EXAWIND_EXEC_TARGET}
-   ${EXAWIND_PROJECT_DIR}/exawind-config-${EXAWIND_SYSTEM}
-   ${EXAWIND_PROJECT_DIR}/exawind-config-${EXAWIND_EXEC_TARGET}
-   ${EXAWIND_CONFIG}         # File pointed to by the variable ${EXAWIND_CONFIG}
-   $(pwd)/exawind-config.sh  # File in the local build directory
-
-The configuration variables in the subsequent files will override the default
-values as well as configuration variables set in the previous files. Please
-replace the path appropriately (:envvar:`EXAWIND_PROJECT_DIR`), if you used a
-non-standard location for installation. See also :envvar:`EXAWIND_CONFIG`.
-
-.. note::
-
-   #. It is recommended that the user use local configuration files within build
-      directories to set variables instead of modifying the build scripts within
-      the `exawind/scripts` directory.
-
-   #. If you are using a shared instance of exawind-builder (e.g., on NREL),
-      then please use :file:`exawind-config.sh` within your build directory to
-      override common configuration parameters.
-
 

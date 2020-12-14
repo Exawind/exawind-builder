@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 #################################
-ExaWind Build Scripts User Manual
+ExaWind Builder User Manual
 #################################
 
 .. only:: html
