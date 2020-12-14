@@ -23,6 +23,8 @@ Activating ExaWind environment
    # Purge all exawind variables/functions from environment
    exawind_purge_env
 
+Please refer to :ref:`tut-exawind-env` and :ref:`build-custom` for more details.
+
 Compiling codes
 ---------------
 
@@ -59,8 +61,11 @@ the ExaWind team, you can execute the following commands to quickly build code.
    ./${CODE}-${COMPILER} cmake_full -DENABLE_TESTS=ON
    ./${CODE}-${COMPILER}.sh make
 
-Please refer to :ref:`tut-build-script-tasks` for more details on *tasks* and
-arguments to build scripts.
+Detailed documentation sections:
+
+- :ref:`tut-basic-compilation`
+- :ref:`tut-build-script-tasks`
+- :ref:`build-custom`
 
 .. _basic_usage:
 
@@ -207,6 +212,8 @@ shown on screen as well as redirected to :file:`cmake_output.log`. Similarly,
 the output from ``make`` step is shown on screen as well as saved to file
 :file:`make_output.log`. Outputs stored in :file:`make_output.log` is useful
 when troubleshooting errors in parallel builds as it captures all messages.
+
+.. _tut-exawind-env:
 
 Running ExaWind executables
 --------------------------------------
@@ -442,7 +449,7 @@ invoked. Some examples are shown below
    - The :file:`make_output.log` contains the output from the last invocation of
      ``make``. This output is also simultaneously echoed to the screen.
 
-.. _build_custom:
+.. _build-custom:
 
 Customizing exawind-builder
 ---------------------------
