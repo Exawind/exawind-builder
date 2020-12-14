@@ -29,26 +29,23 @@ that is currently not available in the standard installation on the system. Plea
 [documentation](https://exawind.github.io/exawind-builder) for
 details on how to use this to build ExaWind software.
 
-**Pre-configured systems**
+## Installation and usage
 
-| System              | Description                                                                        |
-|---------------------|------------------------------------------------------------------------------------|
-| `spack`             | [Spack](https:://github.com/spack/spack) (system agnostic)                         |
-| `ornl-summit`       | [ORNL Summit](https://www.olcf.ornl.gov/summit/)                                   |
-| `eagle`             | [NREL Eagle](https://www.nrel.gov/hpc/eagle-system.html)                           |
-| `cori`              | [NERSC Cori](http://www.nersc.gov/users/computational-systems/cori/)               |
-| `summitdev`         | [OLCF SummitDev](https://www.olcf.ornl.gov/olcf-resources/compute-systems/summit/) |
-| `snl-waterman`.     | Sandia waterman computational cluster                                              |
-| `snl-waterman-atdm` | Sandia waterman cluster with system modules                                        |
-| `snl-ghost`         | Sandia Ghost computational cluster                                                 |
-| `snl-skybridge`     | Sandia Skybridge computational cluster                                             |
-| `snl-ascicgpu`      | Sandia ASC GPU development machines                                                |
-| `snl-ceerws`        | Sandia blade workstations                                                          |
-| `snl-ews`           | Sandia engineering workstations                                                    |
-| `rhodes`            | NREL nightly build and test system                                                 |
-| `pnnl-constance`    | PNNL Constance system                                                              |
+### Using exawind-builder with pre-installed ExaWind environment
 
-## Quick installation 
+ExaWind Builder is already installed and setup on OLCF Summit, NREL
+Eagle/Rhodes, and NERSC Cori systems. On these systems, you can proceed directly
+to using build scripts from the central installation. Please consult [user
+manual](https://exawind.github.io/exawind-builder/basic.html#basic-usage) to
+learn how to use the scripts.
+
+### Bootstrapping exawind-builder with pre-configured system definitions
+ExaWind builder has [pre-built
+configurations](https://exawind.github.io/exawind-builder/introduction.html#pre-configured-systems)
+for several systems. On these systems you can use the `bootstrap` script to
+quickly get up and running. Please consult [installation
+manual](https://exawind.github.io/exawind-builder/installation.html). The
+relevant steps are shown below.
 
 ```bash
 # Download bootstrap script
@@ -61,12 +58,20 @@ chmod a+x bootstrap.sh
 ./bootstrap.sh -s [SYSTEM] -c [COMPILER]
 
 # Examples
-./bootstrap.sh -s spack -c clang       # On OS X with homebrew
+./bootstrap.sh -s spack -c clang       # On MacOS with homebrew
 ./bootstrap.sh -s ornl-summit -c gcc   $ Oakridge Summit system
 ./bootstrap.sh -s eagle -c gcc         # NREL Eagle
 ./bootstrap.sh -s cori -c intel        # NERSC Cori
 ./bootstrap.sh -s snl-ascicgpu -c gcc  # SNL GPU development machine
 ```
+
+### Creating new system configuration
+
+You can add new system definitions to exawind-builder for use on new systems
+that are not used by ExaWind team. Please see [manual
+installation](https://exawind.github.io/exawind-builder/advanced.html) and
+[adding a new system](https://exawind.github.io/exawind-builder/newsys.html)
+sections in the user manual.
 
 ## Links 
 
