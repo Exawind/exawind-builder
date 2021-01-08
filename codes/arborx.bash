@@ -30,9 +30,9 @@ exawind_cmake_base ()
         -DARBORX_ENABLE_TESTS=OFF
         -DARBORX_ENABLE_EXAMPLES=OFF
         -DMPI_USE_COMPILER_WRAPPERS:BOOL=ON
-        -DMPI_CXX_COMPILER:FILEPATH=${CXX}
-        -DMPI_C_COMPILER:FILEPATH=${CC}
-        -DMPI_Fortran_COMPILER:FILEPATH=${FC}
+        -DMPI_CXX_COMPILER:FILEPATH=${MPICXX}
+        -DMPI_C_COMPILER:FILEPATH=${MPICC}
+        -DMPI_Fortran_COMPILER:FILEPATH=${MPIFC}
         ${compiler_flags}
         ${install_dir}
         ${extra_args}

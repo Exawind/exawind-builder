@@ -79,9 +79,9 @@ exawind_cmake_base ()
             -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS:-OFF}
             -DKOKKOS_ARCH:STRING=${KOKKOS_ARCH:-None}
             -DMPI_USE_COMPILER_WRAPPERS:BOOL=ON
-            -DMPI_CXX_COMPILER:FILEPATH=${CXX}
-            -DMPI_C_COMPILER:FILEPATH=${CC}
-            -DMPI_Fortran_COMPILER:FILEPATH=${FC}
+            -DMPI_CXX_COMPILER:FILEPATH=${MPICXX}
+            -DMPI_C_COMPILER:FILEPATH=${MPICC}
+            -DMPI_Fortran_COMPILER:FILEPATH=${MPIFC}
             -DTrilinos_ENABLE_OpenMP:BOOL=${enable_openmp}
             -DKokkos_ENABLE_OPENMP:BOOL=${enable_openmp}
             -DTpetra_INST_OPENMP:BOOL=${enable_openmp}

@@ -44,11 +44,12 @@ exawind_eagle_gpu ()
 
     if [ "${EXAWIND_GPU_KOKKOS_ENV:-ON}" = ON ] ; then
         # Set CXX so that NVCC can pick up host compiler
-        export CXX=$(which g++)
         exawind_kokkos_cuda_env
+
+        # Kokkos nvcc_wrapper wants MPI compiler
+        export CXX=${MPICXX}
     fi
 
-    export CXX=$(which mpicxx)
     export CUDACXX=$(which nvcc)
 
     echo "==> Activated Eagle CUDA programming environment"
@@ -62,12 +63,17 @@ exawind_env_gcc ()
 
     exawind_load_deps gcc git binutils ${EXAWIND_MODMAP[mpi]} cmake netlib-lapack/3.8.0
 
-    export F77=$(which mpif77)
-    export FC=$(which mpif90)
-    export CC=$(which mpicc)
-    if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
-        export CXX=$(which mpicxx)
+    export CXX=$(which g++)
+    export CC=$(which gcc)
+    export FC=$(which gfortran)
+    export F77=$(which gfortran)
 
+    export MPICXX=$(which mpicxx)
+    export MPICC=$(which mpicc)
+    export MPIFC=$(which mpif90)
+    export MPIF77=$(which mpif77)
+
+    if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
         # Suppress warnings about CUDA when running on standard nodes
         export OMPI_MCA_opal_cuda_support=0
 
@@ -77,7 +83,6 @@ exawind_env_gcc ()
         export KOKOS_ARCH=${KOKKOS_ARCH:-SKX}
     else
         exawind_load_deps cuda
-        export CXX=$(which g++)
         exawind_eagle_gpu
     fi
 
@@ -95,12 +100,17 @@ exawind_env_intel ()
     module load git
     exawind_load_deps binutils cmake intel-mpi
 
-    export F77=$(which mpiifort)
-    export FC=$(which mpiifort)
-    export CC=$(which mpiicc)
-    if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
-       export CXX=$(which mpiicpc)
+    export CXX=$(which icpc)
+    export CC=$(which icc)
+    export FC=$(which ifort)
+    export F77=$(which ifort)
 
+    export MPICXX=$(which mpiicpc)
+    export MPICC=$(which mpiicc)
+    export MPIF77=$(which mpiifort)
+    export MPIFC=$(which mpiifort)
+
+    if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
        # Suppress warnings about CUDA when running on standard nodes
        export OMPI_MCA_opal_cuda_support=0
 
@@ -110,7 +120,6 @@ exawind_env_intel ()
     else
         echo "==> WARNING: Support for CUDA with Intel compilers not tested"
         exawind_load_deps cuda
-        export CXX=$(which icpc)
         exawind_eagle_gpu
     fi
 
@@ -131,9 +140,15 @@ exawind_env_clang ()
     exawind_load_deps gcc llvm ${EXAWIND_MODMAP[mpi]}
     exawind_load_deps cmake git binutils netlib-lapack
 
-    export F77=$(which mpif77)
-    export FC=$(which mpif90)
-    export CC=$(which mpicc)
+    export CXX=$(which clang++)
+    export CC=$(which clang)
+    export FC=$(which gfortran)
+    export F77=$(which gfortran)
+
+    export MPICXX=$(which mpicxx)
+    export MPICC=$(which mpicc)
+    export MPIFC=$(which mpif90)
+    export MPIF77=$(which mpif77)
 
     # Override C/C++ compilers with LLVM
     export OMPI_CXX=$(which clang++)
@@ -142,9 +157,8 @@ exawind_env_clang ()
     export MPICH_CC=$(which clang)
     export MPICC_CC=$(which clang)
     export MPICXX_CXX=$(which clang++)
-    if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
-        export CXX=$(which mpicxx)
 
+    if [ "${ENABLE_CUDA:-OFF}" = "OFF" ] ; then
         # Suppress warnings about CUDA when running on standard nodes
         export OMPI_MCA_opal_cuda_support=0
 
@@ -154,7 +168,6 @@ exawind_env_clang ()
         export KOKOS_ARCH=${KOKKOS_ARCH:-SKX}
     else
         exawind_load_deps cuda
-        export CXX=$(which clang++)
         exawind_eagle_gpu
     fi
 

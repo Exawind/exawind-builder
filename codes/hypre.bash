@@ -101,6 +101,9 @@ exawind_cmake_base ()
 
     local config_cmd=(
         ./configure
+        CXX=${MPICXX}
+        CC=${MPICC}
+        FC=${MPIFC}
         --prefix=${install_dir}
         --without-superlu
         ${bigint_args}

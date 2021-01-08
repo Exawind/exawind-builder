@@ -28,10 +28,10 @@ exawind_summit_gpu ()
         # Set CXX so that NVCC can pick up host compiler
         export CXX=${OMPI_CXX}
         exawind_kokkos_cuda_env
+        # Reset CXX back to mpic++ for builds
+        export CXX=${MPICXX}
     fi
 
-    # Reset CXX back to mpic++ for builds
-    export CXX=$(which mpic++)
     export CUDACXX=$(which nvcc)
 
     echo "==> Activated Summit CUDA programming environment"
@@ -48,9 +48,14 @@ exawind_env_gcc ()
 
     exawind_load_deps cmake netlib-lapack
 
-    export CC=$(which mpicc)
-    export FC=$(which mpifort)
-    export CXX=$(which mpic++)
+    export CXX=$(which g++)
+    export CC=$(which gcc)
+    export FC=$(which gfortran)
+    export F77=$(which gfortran)
+
+    export MPICXX=$(which mpicxx)
+    export MPICC=$(which mpicc)
+    export MPIFC=$(which mpif90)
 
     export ENABLE_CUDA=${ENABLE_CUDA:-ON}
     if [ "$ENABLE_CUDA" == "ON" ]; then
@@ -79,9 +84,14 @@ exawind_env_xl ()
 
     module load git cmake
 
-    export CC=$(which mpicc)
-    export FC=$(which mpifort)
-    export CXX=$(which mpic++)
+    export CXX=$(which xlc++)
+    export CC=$(which xlc)
+    export FC=$(which xlf95)
+    export F77=$(which xlf)
+
+    export MPICXX=$(which mpic++)
+    export MPICC=$(which mpicc)
+    export MPIFC=$(which mpifort)
 
     export ENABLE_CUDA=${ENABLE_CUDA:-ON}
     if [ "$ENABLE_CUDA" == "ON" ]; then

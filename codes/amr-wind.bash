@@ -15,6 +15,7 @@ exawind_proj_env ()
         python
         masa
         hypre
+        openfast
     )
 
     if [ "${ENABLE_EXTERNAL_AMREX:-OFF}" = "ON" ] ; then
@@ -73,6 +74,8 @@ exawind_cmake_base ()
         -DMASA_DIR:PATH=${MASA_ROOT_DIR}
         -DAMR_WIND_ENABLE_HYPRE=${ENABLE_HYPRE}
         -DHYPRE_ROOT=${HYPRE_ROOT_DIR}
+        -DAMR_WIND_ENABLE_OPENFAST=${ENABLE_OPENFAST:-OFF}
+        -DOpenFAST_ROOT=${OPENFAST_ROOT_DIR}
         -DAMR_WIND_ENABLE_ALL_WARNINGS:BOOL=ON
         -DAMR_WIND_ENABLE_FCOMPARE:BOOL=${AMR_WIND_ENABLE_FCOMPARE:-ON}
         -DAMR_WIND_ENABLE_TESTS:BOOL=ON
