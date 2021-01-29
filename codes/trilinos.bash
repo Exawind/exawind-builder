@@ -8,8 +8,21 @@ _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
 
 exawind_proj_env ()
 {
+    local opt_packages=(
+        parmetis
+        metis
+        scotch
+    )
+
     echo "==> Loading dependencies for Trilinos..."
     exawind_load_deps zlib libxml2 hdf5 netcdf-c parallel-netcdf superlu boost
+
+    for pkg in ${opt_packages[@]} ; do
+        local pkg_flag="ENABLE_${pkg^^}"
+        if [ "${!pkg_flag:-OFF}" = "ON" ] ; then
+            exawind_load_deps $pkg
+        fi
+    done
 
     export EXAWIND_NVCC_FLAGS=${EXAWIND_NVCC_FLAGS:-"--remove-duplicate-link-files"}
     export NETCDF_ROOT_DIR=${NETCDF_ROOT_DIR:-${NETCDF_C_ROOT_DIR}}
@@ -153,6 +166,16 @@ exawind_cmake_base ()
             -DZlib_INCLUDE_DIRS:PATH=${ZLIB_ROOT_DIR}/include
             -DZlib_LIBRARY_DIRS:PATH=${ZLIB_ROOT_DIR}/lib
             -DTPL_ENABLE_BLAS:BOOL=ON
+            -DTPL_ENABLE_ParMETIS:BOOL=${ENABLE_PARMETIS:-OFF}
+            -DParMETIS_INCLUDE_DIRS:PATH=${PARMETIS_ROOT_DIR}/include
+            -DParMETIS_LIBRARY_DIRS:PATH=${PARMETIS_ROOT_DIR}/lib
+            -DTPL_ENABLE_Scotch:BOOL=${ENABLE_SCOTCH:-OFF}
+            -DScotch_INCLUDE_DIRS:PATH=${SCOTCH_ROOT_DIR}/include
+            -DScotch_LIBRARY_DIRS:PATH=${SCOTCH_ROOT_DIR}/lib
+            -DZoltan_ENABLE_ParMETIS:BOOL=${ENABLE_PARMETIS:-OFF}
+            -DZoltan_ENABLE_Scotch:BOOL=${ENABLE_SCOTCH:-OFF}
+            -DZoltan2_ENABLE_ParMETIS:BOOL=${ENABLE_PARMETIS:-OFF}
+            -DZoltan2_ENABLE_Scotch:BOOL=${ENABLE_SCOTCH:-OFF}
             ${blas_lapack}
             ${ccache_args}
             ${compiler_flags}
