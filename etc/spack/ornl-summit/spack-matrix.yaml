@@ -9,7 +9,7 @@ spack:
     - cuda@10.2.89
     - matrix:
         - [ cmake, ninja-fortran, mpi, m4, zlib, bzip2, libxml2, boost, superlu,
-            netlib-lapack, hdf5, netcdf-c, yaml-cpp, openfast ]
+            netlib-lapack, hdf5, netcdf-c, parmetis, yaml-cpp, openfast ]
         - [ $compilers ]
     - matrix:
         - [ trilinos ]
@@ -17,7 +17,11 @@ spack:
             '+cuda+cuda_rdc+wrapper~shared cuda_arch=70 ^cuda@10.2.89' ]
         - [ $compilers ]
     - matrix:
-        - [ tioga, hypre, amr-wind, nalu-wind ]
+        - [ hypre ]
+        - [ '~cuda+int64' , '+cuda~int64 cuda_arch=70 ^cuda@10.2.89' ]
+        - [ $compilers ]
+    - matrix:
+        - [ tioga~nodegid, amr-wind, nalu-wind ]
         - [ '~cuda', '+cuda~shared cuda_arch=70 ^cuda@10.2.89']
         - [ $compilers ]
     - matrix:

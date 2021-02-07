@@ -12,9 +12,9 @@ spack:
     - "trilinos %gcc@8.4.0 ~cuda~wrapper"
     - "trilinos %intel@18.0.4 ~cuda~wrapper"
     - "trilinos %gcc@8.4.0 +cuda+cuda_rdc+wrapper~shared cuda_arch=70 ^cuda@10.2.89"
-    - "hypre@2.20.0 %gcc@8.4.0 +mpi+int64~cuda"
-    - "hypre@2.20.0 %intel@18.0.4 +mpi+int64~cuda"
-    - "hypre@2.20.0 %gcc@8.4.0 +mpi+cuda~int64 cuda_arch=70 ^cuda@10.2.89"
+    - "hypre %gcc@8.4.0 +mpi+int64~cuda"
+    - "hypre %intel@18.0.4 +mpi+int64~cuda"
+    - "hypre %gcc@8.4.0 +mpi+cuda~int64 cuda_arch=70 ^cuda@10.2.89"
     - matrix:
         - [ tioga~nodegid ]
         - [ '%gcc@8.4.0 ~cuda', '%intel@18.0.4 ~cuda',
