@@ -33,6 +33,10 @@ class AmrWind(CMakePackage, CudaPackage):
                  if os.environ.get('EXAWIND_MAKE_TYPE','').lower() == 'ninja'
                  else 'Unix Makefiles')
 
+    # variant('cxxstd', default='14',
+    #         values=['11', '14', '17', '20'],
+    #         multi=False,
+    #         description="C++ standard")
     variant('shared', default=True,
             description="Build shared libs")
     variant('unit', default=True,
@@ -49,6 +53,8 @@ class AmrWind(CMakePackage, CudaPackage):
             description="Enable hypre integration")
     variant('masa', default=False,
             description="Enable MASA integration")
+    variant('openfast', default=False,
+            description="Enable OpenFAST integration")
     variant('internal-amrex', default=True,
             description="Use AMReX submodule to build")
 
@@ -59,15 +65,16 @@ class AmrWind(CMakePackage, CudaPackage):
     depends_on('mpi', when='+mpi')
     for opt in process_amrex_constraints():
         depends_on('amrex'+opt+'@20.12:', when='~internal-amrex'+opt)
-    depends_on('hypre+mpi+int64~cuda@2.18.2:', when='+mpi~cuda+hypre')
-    depends_on('hypre~mpi+int64~cuda@2.18.2:', when='~mpi~cuda+hypre')
+    depends_on('hypre+mpi+int64~cuda@2.20.0:', when='+mpi~cuda+hypre')
+    depends_on('hypre~mpi+int64~cuda@2.20.0:', when='~mpi~cuda+hypre')
     for arch in CudaPackage.cuda_arch_values:
-        depends_on('hypre+mpi~int64+cuda cuda_arch=%s @2.18.2:'%arch,
+        depends_on('hypre+mpi~int64+cuda cuda_arch=%s @2.20.0:'%arch,
                    when='+mpi+cuda+hypre cuda_arch=%s'%arch)
-        depends_on('hypre~mpi~int64+cuda cuda_arch=%s @2.18.2:'%arch,
+        depends_on('hypre~mpi~int64+cuda cuda_arch=%s @2.20.0:'%arch,
                    when='~mpi+cuda+hypre cuda_arch=%s'%arch)
     depends_on('netcdf-c', when='+netcdf')
     depends_on('masa', when='+masa')
+    depends_on('openfast+cpp', when='+openfast')
 
     def process_cuda_args(self):
         """Process CUDA arch spec and convert it to AMReX format"""
@@ -92,7 +99,7 @@ class AmrWind(CMakePackage, CudaPackage):
 
         args = [
             self.define_from_variant("AMR_WIND_ENABLE_%s"%v.upper(), v)
-            for v in "mpi cuda openmp netcdf hypre masa tests".split()
+            for v in "mpi cuda openmp netcdf hypre masa openfast tests".split()
         ]
 
         args += [
