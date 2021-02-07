@@ -43,6 +43,8 @@ packages:
     version: [0.6.2]
   fftw:
     variants: +mpi+fma
+  ninja-fortran:
+    version: [1.9.0.2.g99df1]
   openfast:
     version: [develop]
     variants: +cxx
@@ -52,7 +54,7 @@ packages:
   tioga:
     version: [develop]
   nalu-wind:
-    variants: +fftw+hypre+openfast+tioga
+    variants: +hypre+openfast+tioga build_type=Release
   trilinos:
     version: [develop]
-    variants: ~adios2~alloptpkgs~amesos+amesos2~anasazi~aztec+belos+boost~cgns~chaco~complex~debug~dtk~epetra~epetraext+exodus+explicit_template_instantiation~float~fortran~fortrilinos+glm+gtest+hdf5~hypre~ifpack+ifpack2~intrepid~intrepid2~isorropia+kokkos~matio~mesquite~metis~minitensor~ml+mpi+muelu~mumps+netcdf~nox~openmp~phalanx~piro+pnetcdf~python~rol~rythmos~sacado+shards~shylu+stk~stratimikos~suite-sparse+superlu~superlu-dist~teko~tempus+teuchos+tpetra~x11~xsdkflags+zlib+zoltan+zoltan2
+    variants: ~adios2~alloptpkgs~amesos+amesos2~anasazi~aztec+belos+boost~cgns~chaco~complex~debug~dtk~epetra~epetraext+exodus+explicit_template_instantiation~float~fortran~fortrilinos+glm+gtest+hdf5~hypre~ifpack+ifpack2~intrepid~intrepid2~isorropia+kokkos~matio~mesquite~metis~minitensor~ml+mpi+muelu~mumps+netcdf~nox~openmp~phalanx~piro+pnetcdf~python~rol~rythmos~sacado+shards~shylu+stk~stratimikos~suite-sparse+superlu~superlu-dist~teko~tempus+teuchos+tpetra~x11~xsdkflags+zlib+zoltan+zoltan2 build_type=Release

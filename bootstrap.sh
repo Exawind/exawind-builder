@@ -106,6 +106,8 @@ exw_init_spack ()
 
             # Copy the base packages.yaml common to all systems
             ln -s ${ewblddir}/etc/spack/spack/packages.yaml spack/etc/spack/packages.yaml
+            ln -s ${ewblddir}/etc/spack/spack/config.yaml spack/etc/spack/config.yaml
+            ln -s ${ewblddir}/etc/spack/spack/modules.yaml spack/etc/spack/modules.yaml
 
             if [ "${check_homebrew}" = "yes" ]; then
                 local brew_prefix=$(brew config | awk -F: '/HOMEBREW_PREFIX/ {print $2;}')
@@ -120,7 +122,7 @@ exw_init_spack ()
             fi
 
             if [ -f ${cfgdir}/config.yaml ] ; then
-                ln -s ${cfgdir}/config.yaml spack/etc/spack
+                ln -s ${cfgdir}/config.yaml spack/etc/spack/${spackos}
             fi
         fi
     fi

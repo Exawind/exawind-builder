@@ -1,0 +1,181 @@
+packages:
+  all:
+    compiler:
+      - gcc@8.4.0
+      - intel@18.0.4
+    providers:
+      mpi:
+        - mpt@2.22%gcc
+        - intel-mpi@2020.1%gcc
+      blas:
+        - netlib-lapack@3.8.0
+      lapack:
+        - netlib-lapack@3.8.0
+    variants: +mpi+pic build_type=Release
+  mpt:
+    version: [2.22]
+    buildable: false
+    externals:
+      - spec: "mpt@2.2%gcc"
+        modules:
+          - gcc-8.4.0/mpt/2.22
+  intel-mpi:
+    version: [2018.4]
+    buildable: false
+    externals:
+      - spec: "intel-mpi@2018.4%intel"
+        modules:
+          - intel-18.0.4/intel-mpi/2018.4.274
+  cuda:
+    version: [10.2.89]
+    buildable: false
+    externals:
+      - spec: "cuda@9.2.148"
+        modules:
+          - cuda/9.2.148
+      - spec: "cuda@10.2.89"
+        modules:
+          - cuda/10.2.89
+      - spec: "cuda@11.0.2"
+        modules:
+          - cuda/11.0.2
+  cmake:
+    version: [3.17.3]
+    buildable: false
+    externals:
+      - spec: "cmake@3.17.3%gcc@8.4.0"
+        modules:
+          - cmake/3.17.3
+      - spec: "cmake@3.17.3%intel@18.0.4"
+        modules:
+          - intel-18.0.4/cmake/3.17.3
+  netlib-lapack:
+    version: [3.8.0]
+    buildable: false
+    externals:
+      - spec: "netlib-lapack@3.8.0%gcc@8.4.0"
+        modules:
+          - gcc-8.4.0/netlib-lapack/3.8.0
+      - spec: "netlib-lapack@3.8.0%intel@18.0.4"
+        modules:
+          - intel-18.0.4/netlib-lapack/3.8.0
+  hdf5:
+    version: [1.10.4]
+    buildable: false
+    externals:
+      - spec: "hdf5@1.10.4%gcc@8.4.0+mpi+cxx+hl~fortran"
+        modules:
+          - gcc-8.4.0/hdf5/1.10.4
+      - spec: "hdf5@1.10.4%intel@18.0.4+mpi+cxx+hl~fortran"
+        modules:
+          - intel-18.0.4/hdf5/1.10.4
+  netcdf-c:
+    version: [4.7.3]
+    buildable: false
+    externals:
+      - spec: "netcdf-c@4.7.3%gcc@8.4.0+parallel-netcdf"
+        modules:
+          - gcc-8.4.0/netcdf-c/4.7.3
+      - spec: "netcdf-c@4.7.3%intel@18.0.4+parallel-netcdf"
+        modules:
+          - intel-18.0.4/netcdf-c/4.7.3
+  parallel-netcdf:
+    version: [1.12.1]
+    buildable: false
+    externals:
+      - spec: "parallel-netcdf@1.12.1%gcc@8.4.0"
+        modules:
+          - gcc-8.4.0/parallel-netcdf/1.12.1
+      - spec: "parallel-netcdf@1.12.1%intel@18.0.4"
+        modules:
+          - intel-18.0.4/parallel-netcdf/1.12.1
+  glm:
+    version: [0.9.7.1]
+    buildable: false
+    externals:
+      - spec: "glm@0.9.7.1%gcc@8.4.0"
+        modules:
+          - gcc-8.4.0/glm/0.9.7.1
+      - spec: "glm@0.9.7.1%intel@18.0.4"
+        modules:
+          - intel-18.0.4/glm/0.9.7.1
+  boost:
+    version: [1.68.0]
+    buildable: false
+    externals:
+      - spec: "boost@1.68.0%gcc@8.4.0"
+        modules:
+          - gcc-8.4.0/boost/1.68.0
+      - spec: "boost@1.68.0%intel@18.0.4"
+        modules:
+          - intel-18.0.4/boost/1.68.0
+  m4:
+    version: [1.4.18]
+    buildable: false
+    externals:
+      - spec: "m4@1.4.18%gcc@8.4.0"
+        modules:
+          - m4/1.4.18
+      - spec: "m4@1.4.18%intel@18.0.4"
+        modules:
+          - intel-18.0.4/m4/1.4.18
+  bzip2:
+    version: [1.0.8]
+    buildable: false
+    externals:
+      - spec: "bzip2@1.0.8%gcc@8.4.0"
+        modules:
+          - bzip2/1.0.8
+      - spec: "bzip2@1.0.8%intel@18.0.4"
+        modules:
+          - intel-18.0.4/bzip2/1.0.8
+  libxml2:
+    version: [2.9.8]
+    buildable: false
+    externals:
+      - spec: "libxml2@2.9.8%gcc@8.4.0"
+        modules:
+          - libxml2/2.9.8/l3dl
+      - spec: "libxml2@2.9.8%intel@18.0.4"
+        modules:
+          - intel-18.0.4/libxml2/2.9.8
+  superlu:
+    version: [4.3]
+    buildable: false
+    externals:
+      - spec: "superlu@4.3%gcc@8.4.0"
+        modules:
+          - gcc-8.4.0/superlu/4.3
+      - spec: "superlu@4.3%intel@18.0.4"
+        modules:
+          - intel-18.0.4/superlu/4.3
+  yaml-cpp:
+    version: [0.6.3]
+    buildable: false
+    externals:
+      - spec: "yaml-cpp@0.6.3%gcc@8.4.0"
+        modules:
+          - gcc-8.4.0/yaml-cpp/0.6.3
+      - spec: "yaml-cpp@0.6.3%intel@18.0.4"
+        modules:
+          - intel-18.0.4/yaml-cpp/0.6.3
+  zlib:
+    version: [1.2.11]
+    buildable: false
+    externals:
+      - spec: "zlib@1.2.11%gcc@8.4.0"
+        modules:
+          - zlib/1.2.11
+      - spec: "zlib@1.2.11%intel@18.0.4"
+        modules:
+          - intel-18.0.4/zlib/1.2.11
+  python:
+    version: [3.7.7]
+    buildable: false
+    externals:
+      - spec: "python@3.7.7%gcc@8.4.0"
+        modules:
+          - python/3.7.7/fcjb
+      - spec: "python@3.7.7%intel@18.0.4"
+        modules:
+          - intel-18.0.4/python/3.7.7/mib4

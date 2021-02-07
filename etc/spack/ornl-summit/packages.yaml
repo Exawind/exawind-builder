@@ -1,29 +1,37 @@
 packages:
   all:
     compiler:
-      - gcc
+      - gcc@7.4.0
     providers:
       mpi:
         - spectrum-mpi
   spectrum-mpi:
     buildable: false
     externals:
-      - spec: "spectrum-mpi@10.3%gcc"
+      - spec: "spectrum-mpi@10.3%gcc@7.4.0"
         modules:
+          - gcc/7.4.0
           - spectrum-mpi/10.3.1.2-20200121
   cuda:
-    version: [9.2.148]
+    version: [10.2.89]
     buildable: false
     externals:
-      - spec: "cuda@9.2.148%gcc"
+      - spec: "cuda@9.2.148"
         modules:
           - cuda/9.2.148
-      - spec: "cuda@10.1.243%gcc"
+      - spec: "cuda@10.1.243"
         modules:
           - cuda/10.1.243
+      - spec: "cuda@10.2.89"
+        modules:
+          - cuda/10.2.89
   cmake:
+    version: [3.18.2]
     buildable: false
     externals:
+      - spec: "cmake@3.18.2%gcc"
+        modules:
+          - cmake/3.18.2
       - spec: "cmake@3.15.2%gcc"
         modules:
           - cmake/3.15.2
@@ -90,3 +98,10 @@ packages:
       - spec: "pkgconf@1.5.4%gcc"
         modules:
           - pkgconf/1.5.4
+  python:
+    version: [3.7.0]
+    buildable: false
+    externals:
+      - spec: "python@3.7.0"
+        modules:
+          - python/3.7.0
