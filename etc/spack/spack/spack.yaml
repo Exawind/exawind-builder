@@ -15,5 +15,6 @@ spack:
   specs:
     - matrix:
         - [ cmake, ninja-fortran, mpi, m4, zlib, bzip2, libxml2, boost, superlu,
-            netlib-lapack, hdf5, netcdf-c, yaml-cpp, hypre, tioga, openfast ]
+            netlib-lapack, hdf5, netcdf-c, parmetis,
+            yaml-cpp, hypre, tioga, openfast ]
         - [ $compilers ]
