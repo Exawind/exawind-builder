@@ -74,7 +74,7 @@ class AmrWind(CMakePackage, CudaPackage):
                    when='~mpi+cuda+hypre cuda_arch=%s'%arch)
     depends_on('netcdf-c', when='+netcdf')
     depends_on('masa', when='+masa')
-    depends_on('openfast+cpp', when='+openfast')
+    depends_on('openfast+cxx', when='+openfast')
 
     def process_cuda_args(self):
         """Process CUDA arch spec and convert it to AMReX format"""
