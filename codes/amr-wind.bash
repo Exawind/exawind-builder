@@ -1,7 +1,9 @@
 #!/bin/bash
 
 _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
-    src
+    amr-wind
+    unit_tests
+    submods/amrex
 )
 
 declare -A EXAWIND_AMR_WIND_CUDA_MAP
