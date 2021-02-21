@@ -109,6 +109,7 @@ exawind_cmake_base ()
         ${bigint_args}
         ${openmp_args}
         ${cuda_args}
+        ${shared_args}
         ${extra_args[@]}
     )
 
