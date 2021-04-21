@@ -4,7 +4,19 @@ export EXAWIND_GPU_KOKKOS_ENV=OFF
 
 exawind_proj_env ()
 {
-    echo "==> HYPRE: No additional dependencies"
+    local opt_packages=(
+        umpire
+    )
+
+    echo "==> Loading optional dependencies for Hypre ..."
+
+    for pkg in ${opt_packages[@]} ; do
+        local pkg_flag="ENABLE_${pkg^^}"
+        if [ "${!pkg_flag:-OFF}" = "ON" ] ; then
+            exawind_load_deps $pkg
+        fi
+    done
+
 }
 
 exawind_hypre_fix_gpu ()
@@ -34,6 +46,7 @@ exawind_cmake_base ()
     local bigint_args=""
     local cuda_args=" --without-cuda "
     local uvm_args=""
+    local umpire_args=""
     local extra_args=( "$@" )
 
     if [ -n "$HYPRE_INSTALL_PREFIX" ] ; then
@@ -99,6 +112,14 @@ exawind_cmake_base ()
         bigint_args=" --disable-bigint "
     fi
 
+    if [ "${ENABLE_UMPIRE:-OFF}" = "ON" ] ; then
+        echo "==> HYPRE: Enabling Umpire"
+        umpire_args=" --with-umpire "
+        umpire_args=" ${umpire_args} --with-umpire-include=$UMPIRE_ROOT_DIR/include/"
+        umpire_args=" ${umpire_args} --with-umpire-lib-dirs=$UMPIRE_ROOT_DIR/lib/"
+        umpire_args=" ${umpire_args} --with-umpire-libs=umpire"
+    fi
+
     local config_cmd=(
         ./configure
         CXX=${MPICXX}
@@ -110,6 +131,7 @@ exawind_cmake_base ()
         ${openmp_args}
         ${cuda_args}
         ${shared_args}
+        ${umpire_args}
         ${extra_args[@]}
     )
 

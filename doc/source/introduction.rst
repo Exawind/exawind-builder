@@ -92,6 +92,7 @@ using the environment variable :envvar:`EXAWIND_CODE`.
   HYPRE                https://github.com/LLNL/hypre.git
   hypre-mini-app       https://github.com/exawind/hypre-mini-app.git
   ArborX               https://github.com/arborx/ArborX.git
+  Umpire               https://github.com/LLNL/Umpire.git
   ==================== =================================================
 
 
@@ -150,6 +151,7 @@ are shown below:
   │   ├── exawind-sim-gcc.sh
   │   ├── hypre-gcc.sh
   │   ├── hypre-mini-app-gcc.sh
+  │   ├── umpire-gcc.sh
   │   ├── nalu-wind-gcc.sh
   │   ├── openfast-gcc.sh
   │   ├── pifus-gcc.sh

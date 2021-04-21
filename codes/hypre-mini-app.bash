@@ -7,7 +7,20 @@ _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
 
 exawind_proj_env ()
 {
-    exawind_load_deps hypre yaml-cpp
+    exawind_load_deps hypre yaml-cpp 
+
+    local opt_packages=(
+        umpire
+    )
+
+    echo "==> Loading optional dependencies for Hypre-mini-app..."
+
+    for pkg in ${opt_packages[@]} ; do
+        local pkg_flag="ENABLE_${pkg^^}"
+        if [ "${!pkg_flag:-OFF}" = "ON" ] ; then
+            exawind_load_deps $pkg
+        fi
+    done
 }
 
 exawind_cmake_base ()
@@ -25,6 +38,8 @@ exawind_cmake_base ()
         -DCMAKE_INSTALL_PREFIX=${install_dir}
         -DENABLE_CUDA=${ENABLE_CUDA:-OFF}
         -DHYPRE_DIR=${HYPRE_ROOT_DIR}
+        -DENABLE_UMPIRE=${ENABLE_UMPIRE:-OFF}
+        -DUMPIRE_DIR=${UMPIRE_ROOT_DIR}
         -DYAML_ROOT_DIR=${YAML_CPP_ROOT_DIR}
         ${extra_args}
         ${HYPRE_MINI_APP_SOURCE_DIR:-..}

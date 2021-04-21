@@ -15,6 +15,7 @@ exawind_proj_env ()
         hypre
         openfast
         tioga
+        umpire
     )
 
     echo "==> Loading dependencies for nalu-wind... "
@@ -67,6 +68,8 @@ exawind_cmake_base ()
         -DFFTW_DIR:PATH=${FFTW_ROOT_DIR}
         -DENABLE_HYPRE:BOOL=${ENABLE_HYPRE:-ON}
         -DHYPRE_DIR:PATH=${HYPRE_ROOT_DIR}
+        -DENABLE_UMPIRE:BOOL=${ENABLE_UMPIRE:-OFF}
+        -DUMPIRE_DIR:PATH=${UMPIRE_ROOT_DIR}
         -DENABLE_TIOGA:BOOL=${ENABLE_TIOGA:-ON}
         -DTIOGA_DIR:PATH=${TIOGA_ROOT_DIR}
         -DENABLE_OPENFAST:BOOL=${ENABLE_OPENFAST:-ON}
