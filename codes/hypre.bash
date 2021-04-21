@@ -34,6 +34,7 @@ exawind_cmake_base ()
     local bigint_args=""
     local cuda_args=" --without-cuda "
     local uvm_args=""
+    local umpire_args=""
     local extra_args=( "$@" )
 
     if [ -n "$HYPRE_INSTALL_PREFIX" ] ; then
@@ -99,6 +100,14 @@ exawind_cmake_base ()
         bigint_args=" --disable-bigint "
     fi
 
+    if [ "${ENABLE_UMPIRE:-OFF}" = "ON" ] ; then
+        echo "==> HYPRE: Enabling Umpire"
+        umpire_args=" --with-umpire "
+        umpire_args=" ${umpire_args} --with-umpire-include=$UMPIRE_ROOT_DIR/include/"
+        umpire_args=" ${umpire_args} --with-umpire-lib-dirs=$UMPIRE_ROOT_DIR/lib/"
+        umpire_args=" ${umpire_args} --with-umpire-libs=umpire"
+    fi
+
     local config_cmd=(
         ./configure
         CXX=${MPICXX}
@@ -110,6 +119,7 @@ exawind_cmake_base ()
         ${openmp_args}
         ${cuda_args}
         ${shared_args}
+        ${umpire_args}
         ${extra_args[@]}
     )
 

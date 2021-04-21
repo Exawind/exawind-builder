@@ -25,6 +25,8 @@ exawind_cmake_base ()
         -DCMAKE_INSTALL_PREFIX=${install_dir}
         -DENABLE_CUDA=${ENABLE_CUDA:-OFF}
         -DHYPRE_DIR=${HYPRE_ROOT_DIR}
+        -DENABLE_UMPIRE=${ENABLE_UMPIRE:-OFF}
+        -DUMPIRE_DIR=${UMPIRE_ROOT_DIR}
         -DYAML_ROOT_DIR=${YAML_CPP_ROOT_DIR}
         ${extra_args}
         ${HYPRE_MINI_APP_SOURCE_DIR:-..}
