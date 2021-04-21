@@ -1,0 +1,489 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Manual Installation &mdash; exawind-builder v0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference" href="reference.html" />
+    <link rel="prev" title="Adding new system configuration" href="newsys.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> exawind-builder
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">ExaWind-builder – Quick reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html#basic-usage">Basic usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing exawind-builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="newsys.html">Adding new system configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Manual Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-dependencies">Setting up dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-dependencies-via-spack-all-systems">Install dependencies via spack (all systems)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-builder-configuration">Generate builder configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-build-scripts">Generating Build Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-runtime-environment-script">Creating runtime environment script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-exawind-builder-to-use-ninja">Configuring exawind-builder to use Ninja</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-nalu-wind">Compiling Nalu-Wind</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">exawind-builder</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Manual Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/advanced.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="manual-installation">
+<span id="id1"></span><h1>Manual Installation<a class="headerlink" href="#manual-installation" title="Permalink to this headline">¶</a></h1>
+<p>This section will walk through the steps to creating a <a class="reference internal" href="introduction.html#exawind-dir-layout"><span class="std std-ref">basic directory
+layout</span></a>, cloning <code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code> repository. In this
+example, we will create the <code class="file docutils literal notranslate"><span class="pre">exawind</span></code> base directory within the user’s
+home directory. Modify this appropriately.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ${HOME}  # Change this to your preferred location</span>
+
+<span class="gp"># </span>Create the basic directory layout
+<span class="go">mkdir -p exawind/{source,install,scripts}</span>
+
+<span class="gp"># </span>Clone exawind-builder repo
+<span class="go">cd exawind</span>
+<span class="go">git clone https://github.com/exawind/exawind-builder.git</span>
+
+<span class="gp"># </span>Clone nalu-wind that we will use as an example later
+<span class="go">cd ../source</span>
+<span class="go">git clone https://github.com/exawind/nalu-wind.git</span>
+</pre></div>
+</div>
+<p>If you are working on a system where the dependencies are already installed in a
+shared project location, then you can skip the next location and go to
+<a class="reference internal" href="#new-script"><span class="std std-ref">Generating Build Scripts</span></a>.</p>
+<div class="section" id="setting-up-dependencies">
+<h2>Setting up dependencies<a class="headerlink" href="#setting-up-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>This section details basic steps to install all dependencies from scratch and
+have a fully independent installation of the ExaWind software ecosystem. This is
+a one-time setup step.</p>
+<p>Mac OS X users will need to setup Homebrew as described in <a class="reference internal" href="installation.html#homebrew-setup"><span class="std std-ref">Initial Homebrew Setup for Mac OS-X Users</span></a>
+before proceeding.</p>
+<div class="section" id="install-dependencies-via-spack-all-systems">
+<h3>Install dependencies via spack (all systems)<a class="headerlink" href="#install-dependencies-via-spack-all-systems" title="Permalink to this headline">¶</a></h3>
+<p>Setup ExaWind directory structure as described in <a class="reference internal" href="introduction.html#exawind-dir-layout"><span class="std std-ref">Exawind directory structure</span></a>.</p>
+<ol class="arabic">
+<li><p>Clone the spack repository</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ${HOME}/exawind</span>
+<span class="go">git clone https://github.com/spack/spack.git</span>
+
+<span class="gp"># </span>Activate spack <span class="o">(</span><span class="k">for</span> the remainder of the steps<span class="o">)</span>
+<span class="go">source ./spack/share/spack/setup-env.sh</span>
+</pre></div>
+</div>
+</li>
+<li><p>Copy package specifications for Spack. The file <code class="file docutils literal notranslate"><span class="pre">packages.yaml</span></code>
+instructs Spack to use the installed compilers and MPI packages thereby
+cutting down on build time. It also pins other packages to specific versions
+so that the build is consistent with other machines.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ${HOME}/exawind/exawind-builder/etc/spack/osx</span>
+<span class="go">cp packages.yaml ${HOME}/.spack/$(spack arch -p)/</span>
+</pre></div>
+</div>
+<p>The above example shows the configuration of OSX. Choose other appropriate
+directory within <code class="file docutils literal notranslate"><span class="pre">spack_cfg</span></code>. Spack configs for other systems can be
+adapted from the <a class="reference external" href="https://github.com/Exawind/build-test/tree/master/configs/machines">build-test</a>
+repository.</p>
+<p>Users can also copy <code class="file docutils literal notranslate"><span class="pre">compilers.yaml</span></code> if desired to override default
+compilers detected by spack.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For automatic updates, users can symlink the packages.yaml file within the
+spack configuration directory to the version in <code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ln -s ${HOME}/exawind/exawind-builder/etc/spack/${SYSTEM}/packages.yaml ${HOME}/.spack/$(spack arch -p)/</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Setup compilers to be used by spack. As with <code class="file docutils literal notranslate"><span class="pre">packages.yaml</span></code>, it is
+recommended that the users use the compiler configuration provided with
+<code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cp compilers.yaml ${HOME}/.spack/$(spack arch -p)/</span>
+</pre></div>
+</div>
+<p>For more flexibility, users can use <code class="docutils literal notranslate"><span class="pre">spack</span></code> to determine the compilers
+available on their system.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">spack compiler find</span>
+</pre></div>
+</div>
+<p>The command will detect all available compiler on users environment and
+create a <code class="file docutils literal notranslate"><span class="pre">compilers.yaml</span></code> in the <code class="file docutils literal notranslate"><span class="pre">$</span><em><span class="pre">HOME</span></em><span class="pre">/.spack/$(spack</span> <span class="pre">arch</span> <span class="pre">-p)</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have multiple <code class="file docutils literal notranslate"><span class="pre">compilers.yaml</span></code> in several locations, make
+sure that the specs are not conflicting. Also check <code class="file docutils literal notranslate"><span class="pre">packages.yaml</span></code>
+to make sure that the compilers are listed in the preferred order for
+spack to pick up the right compiler.</p>
+</div>
+</li>
+<li><p>Instruct spack to track packages installed via Homebrew. Note that on most
+systems the following commands will run very quickly and will not attempt to
+download and build packages.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">spack install cmake</span>
+<span class="go">spack install mpi</span>
+<span class="go">spack install m4</span>
+<span class="go">spack install zlib</span>
+<span class="go">spack install libxml2</span>
+<span class="go">spack install boost</span>
+</pre></div>
+</div>
+</li>
+<li><p>Install remaining dependencies via Spack. The following steps will download,
+configure, and compile packages.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>These dependencies must be installed <span class="o">(</span>mandatory<span class="o">)</span>
+<span class="go">spack install superlu</span>
+<span class="go">spack install hdf5</span>
+<span class="go">spack install netcdf</span>
+<span class="go">spack install yaml-cpp</span>
+
+<span class="gp"># </span>These are optional
+<span class="go">spack install openfast</span>
+<span class="go">spack install hypre</span>
+<span class="go">spack install tioga</span>
+</pre></div>
+</div>
+<p>It is recommended that you build/install Trilinos using the build scripts
+described in <a class="reference internal" href="basic.html#basic-usage"><span class="std std-ref">Basic usage</span></a> section. The <em>optional</em> dependencies could be
+installed via that method also.</p>
+</li>
+<li><p>Generate build scripts as described in <a class="reference internal" href="#new-script"><span class="std std-ref">Generating Build Scripts</span></a> section. On OS X,
+use <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">spack</span></code> for the system when generating the build scripts. For Cori
+and SummitDev, use the appropriate <span class="target" id="index-0"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_SYSTEM"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">system</span></code></a> which
+will initialize the compiler and MPI modules first and then activate Spack in
+the background. You will need to configure at least <span class="target" id="index-1"></span><a class="reference internal" href="reference.html#envvar-SPACK_ROOT"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SPACK_ROOT</span></code></a> if
+it was not installed in the default location suggested in the directory
+layout at the beginning of this section.</p></li>
+</ol>
+<p>Upon successful installation, executing <code class="docutils literal notranslate"><span class="pre">spack</span> <span class="pre">find</span></code> at the command line
+should show you the following packages (on Mac OSX)</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>spack find
+<span class="go">==&gt; 12 installed packages.</span>
+<span class="go">-- darwin-sierra-x86_64 / clang@9.0.0-apple ---------------------</span>
+<span class="go">boost@1.67.0  libxml2@2.2     netlib-lapack@3.8.0    superlu@4.3</span>
+<span class="go">cmake@3.12.0  m4@1.4.6        openmpi@3.1.1          yaml-cpp@develop</span>
+<span class="go">hdf5@1.10.1   netcdf@4.4.1.1  parallel-netcdf@1.8.0  zlib@1.2.8</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="generate-builder-configuration">
+<span id="builder-config"></span><h2>Generate builder configuration<a class="headerlink" href="#generate-builder-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Create your specific configuration in <code class="file docutils literal notranslate"><span class="pre">$</span><em><span class="pre">HOME</span></em><span class="pre">/exawind/exawind-config.sh</span></code>.
+A sample file is shown below</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="c1">## Example exawind-config.sh file</span>
+<span class="gp">#</span>
+<span class="gp"># </span>Note: these variables can be overridden through the script <span class="k">in</span> build directory
+<span class="gp">#</span>
+
+<span class="gp"># </span>Specify path to your own Spack install <span class="o">(</span><span class="k">if</span> not <span class="k">in</span> default location<span class="o">)</span>
+<span class="go">export SPACK_ROOT=${HOME}/spack</span>
+
+<span class="gp"># </span>Track trilinos builds by date
+<span class="gp"># </span><span class="nb">export</span> <span class="nv">TRILINOS_INSTALL_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">EXAWIND_INSTALL_DIR</span><span class="si">}</span>/trilinos-<span class="k">$(</span>date <span class="s2">&quot;+%Y-%m-%d&quot;</span><span class="k">)</span>
+
+<span class="gp">#</span><span class="c1">## Specify custom builds for certain packages. The following are only</span>
+<span class="gp">#</span><span class="c1">## necessary if you didn&#39;t install these packages via spack, but instead are</span>
+<span class="gp">#</span><span class="c1">## using your own development versions.</span>
+<span class="go">export TRILINOS_ROOT_DIR=${EXAWIND_INSTALL_DIR}/trilinos</span>
+<span class="go">export TIOGA_ROOT_DIR=${EXAWIND_INSTALL_DIR}/tioga</span>
+<span class="go">export HYPRE_ROOT_DIR=${EXAWIND_INSTALL_DIR}/hypre</span>
+<span class="go">export OPENFAST_ROOT_DIR=${EXAWIND_INSTALL_DIR}/openfast</span>
+
+<span class="gp"># </span>Turn on/off certain TPLs and options
+<span class="go">ENABLE_OPENMP=OFF</span>
+<span class="go">ENABLE_TIOGA=OFF</span>
+<span class="go">ENABLE_OPENFAST=OFF</span>
+<span class="go">ENABLE_HYPRE=OFF</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="reference.html#reference"><span class="std std-ref">Reference</span></a> for more details. Note that the default path for Spack
+install is <code class="file docutils literal notranslate"><span class="pre">$</span><em><span class="pre">EXAWIND_PROJECT_DIR</span></em><span class="pre">/spack</span></code>.</p>
+</div>
+<div class="section" id="generating-build-scripts">
+<span id="new-script"></span><h2>Generating Build Scripts<a class="headerlink" href="#generating-build-scripts" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code> provides a <code class="file docutils literal notranslate"><span class="pre">new-script.sh</span></code> command to generate build
+scripts for combination of system, project, and compiler. The basic usage is shown below</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">bash$ ./new-script.sh -h</span>
+<span class="go">new-script.sh [options] [output_file]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -h             - Show help message and exit</span>
+<span class="go">  -p &lt;project&gt;   - Select project (nalu-wind, openfast, etc)</span>
+<span class="go">  -s &lt;system&gt;    - Select system profile (spack, peregrine, cori, etc.)</span>
+<span class="go">  -c &lt;compiler&gt;  - Select compiler type (gcc, intel, clang)</span>
+
+<span class="go">Argument:</span>
+<span class="go">  output_file    - Name of the build script (default: &#39;$project-$compiler.sh&#39;)</span>
+</pre></div>
+</div>
+<p>So if the user desires to generate a build script for Trilinos on the NERSC Cori
+system using the Intel compiler, they would execute the following at the command line</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Switch to scripts directory
+<span class="go">cd ${HOME}/exawind/scripts</span>
+
+<span class="gp"># </span>Declare project directory variable <span class="o">(</span>default is parent directory of exawind-builder<span class="o">)</span>
+<span class="go">export EXAWIND_PROJECT_DIR=${HOME}/exawind</span>
+
+<span class="gp"># </span>Create the new script
+<span class="go">../exawind-builder/new-script.sh -s cori -c intel -p trilinos</span>
+
+<span class="gp"># </span>Create a script with a different name
+<span class="go">../exawind-builder/new-script.sh -s cori -c intel -p trilinos trilinos-haswell.sh</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-runtime-environment-script">
+<span id="create-env"></span><h2>Creating runtime environment script<a class="headerlink" href="#creating-runtime-environment-script" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code> provides a <code class="file docutils literal notranslate"><span class="pre">create-env.sh</span></code> command to generate a
+source-able script that can be used within job submission scripts as well as to
+recreate the environment used to build the code in interactive shells.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">create-env.sh [options] [output_file_name]</span>
+
+<span class="go">By default it will create a file called exawind-env-$COMPILER.sh</span>
+
+<span class="go">Options:</span>
+<span class="go">  -h             - Show help message and exit</span>
+<span class="go">  -s &lt;system&gt;    - Select system profile (spack, cori, summitdev, etc.)</span>
+<span class="go">  -c &lt;compiler&gt;  - Select compiler type (gcc, clang, intel, etc.)</span>
+</pre></div>
+</div>
+<p>Sample usage shown below</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Create a new environment file
+<span class="go">cd ${HOME}/exawind/scripts</span>
+
+<span class="go">../exawind-builder/create-env.sh -s eagle -c gcc</span>
+
+<span class="gp"># </span>Source the script within interactive shells
+<span class="go">source ./exawind-env-gcc.sh</span>
+
+<span class="gp"># </span>Load additional modules
+<span class="go">exawind_load_deps hdf5 netcdf</span>
+</pre></div>
+</div>
+<p>It is recommended that the user use <code class="xref py py-func docutils literal notranslate"><span class="pre">exawind_load_deps()</span></code> instead of
+<strong class="program">spack load</strong> or <strong class="program">module load</strong> as this has several advantages:
+<code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code> will automatically use spack/module to load depending on the
+system you are on, so you can use one command across different systems; this
+command will respect <span class="target" id="index-2"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_MODMAP"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_MODMAP</span></code></a> and load the appropriate module
+that you have configured instead of the defaults on the system; it will
+configure CUDA based on <span class="target" id="index-3"></span><a class="reference internal" href="reference.html#envvar-ENABLE_CUDA"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ENABLE_CUDA</span></code></a>.</p>
+</div>
+<div class="section" id="configuring-exawind-builder-to-use-ninja">
+<span id="get-ninja"></span><h2>Configuring exawind-builder to use Ninja<a class="headerlink" href="#configuring-exawind-builder-to-use-ninja" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://ninja-build.org">Ninja</a> is a build system that is an alternative to
+<strong class="program">make</strong>. It provides several features of <strong class="program">make</strong> but is
+considerably faster when building code. The speedup is particularly evident when
+compiling Trilinos. Since codes used in ExaWind project contain Fortran files,
+it requires a <a class="reference external" href="https://github.com/Kitware/ninja">special fork</a> of Ninja
+(maintained by Kitware). <code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code> provides a script
+<code class="file docutils literal notranslate"><span class="pre">get-ninja.sh</span></code> to fetch and configure Ninja for builds.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Get Ninja
+<span class="go">cd ${HOME}/exawind</span>
+<span class="go">./exawind-builder/utils/get-ninja.sh</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will need to execute <code class="docutils literal notranslate"><span class="pre">cmake_full</span></code> to force CMake to recreate build
+files using Ninja if they were previously configured to use
+<code class="file docutils literal notranslate"><span class="pre">Makefiles</span></code>.</p>
+</div>
+</div>
+<div class="section" id="compiling-nalu-wind">
+<span id="code-build-steps"></span><h2>Compiling Nalu-Wind<a class="headerlink" href="#compiling-nalu-wind" title="Permalink to this headline">¶</a></h2>
+<p>At this point you have manually recreated all the steps performed by the
+<em>bootstrap</em> process. Please follow <a class="reference internal" href="basic.html#tut-basic-compilation"><span class="std std-ref">Compiling executables using build scripts</span></a> to build Trilinos
+and Nalu-Wind</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="reference.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="newsys.html" class="btn btn-neutral float-left" title="Adding new system configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, ExaWind project.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

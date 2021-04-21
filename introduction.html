@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Introduction &mdash; exawind-builder v0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ExaWind-builder – Quick reference" href="basic.html" />
+    <link rel="prev" title="ExaWind Builder User Manual" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> exawind-builder
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pre-configured-systems">Pre-configured systems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#supported-compilers-for-pre-configured-systems">Supported compilers for pre-configured systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#exawind-software-suite">ExaWind software suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exawind-directory-structure">Exawind directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-use-exawind-builder">How to use ExaWind builder?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">ExaWind-builder – Quick reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html#basic-usage">Basic usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing exawind-builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="newsys.html">Adding new system configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Manual Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">exawind-builder</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<span id="id1"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/exawind/exawind-builder">Exawind-builder</a> is a set of bash
+functions that can be compiled to generate build scripts for the software used
+in <a class="reference external" href="https://www.exawind.org">ExaWind</a> project on the different systems of
+interest. It separates machine-specific configuration from the software-specific
+configuration (tracking library dependencies and CMake configuration) so that
+they can be modularized and combined for different systems and compilers.</p>
+<div class="section" id="pre-configured-systems">
+<h2>Pre-configured systems<a class="headerlink" href="#pre-configured-systems" title="Permalink to this headline">¶</a></h2>
+<p>Pre-built configurations exist for the following systems. Use the <code class="docutils literal notranslate"><span class="pre">system</span>
+<span class="pre">name</span></code> shown on the following table when generating scripts targeting that
+particular system. Within the build scripts the system is accessed using the
+environment variable <span class="target" id="index-0"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_SYSTEM"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_SYSTEM</span></code></a>.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>System Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">spack</span></code></p></td>
+<td><p><a class="reference external" href="https:://github.com/spack/spack">Spack</a> (system agnostic)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">anl-jlse-skylake</span></code></p></td>
+<td><p><a class="reference external" href="https://www.jlse.anl.gov">ANL JLSE Skylake</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">anl-jlse-gpu_v100_smx2</span></code></p></td>
+<td><p><a class="reference external" href="https://www.jlse.anl.gov">ANL JLSE V100 nodes</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ornl-summit</span></code></p></td>
+<td><p><a class="reference external" href="https://www.olcf.ornl.gov/summit/">OLCF Summit</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">eagle</span></code></p></td>
+<td><p><a class="reference external" href="https://www.nrel.gov/hpc/eagle-system.html">NREL Eagle</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cori</span></code></p></td>
+<td><p><a class="reference external" href="http://www.nersc.gov/users/computational-systems/cori/">NERSC Cori</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snl-waterman</span></code>.</p></td>
+<td><p>Sandia waterman cluster (also <code class="docutils literal notranslate"><span class="pre">snl-waterman-atdm</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snl-ghost</span></code></p></td>
+<td><p>Sandia Ghost cluster</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snl-skybridge</span></code></p></td>
+<td><p>Sandia Skybridge cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snl-ascicgpu</span></code></p></td>
+<td><p>Sandia ASC GPU development machines</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snl-ceerws</span></code></p></td>
+<td><p>Sandia blade workstations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snl-ews</span></code></p></td>
+<td><p>Sandia engineering workstations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pnnl-constance</span></code></p></td>
+<td><p>PNNL Constance system</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rhodes</span></code></p></td>
+<td><p>NREL nightly build and test system</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="section" id="supported-compilers-for-pre-configured-systems">
+<h3>Supported compilers for pre-configured systems<a class="headerlink" href="#supported-compilers-for-pre-configured-systems" title="Permalink to this headline">¶</a></h3>
+<p>The following compilers are configured for each machine. In situations where
+multiple compilers are present, we recommend that the users use the first one.
+The latter ones have not received enough testing and might have issues. Within
+the build scripts and elsewhere in the user manual the compiler suite is
+referred using the environment variable <span class="target" id="index-1"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_COMPILER"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_COMPILER</span></code></a>.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Environment</p></th>
+<th class="head"><p>Compilers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>anl-jlse-skylake</p></td>
+<td><p>gcc</p></td>
+</tr>
+<tr class="row-odd"><td><p>anl-jlse-gpu_v100_smx2</p></td>
+<td><p>gcc, cuda</p></td>
+</tr>
+<tr class="row-even"><td><p>ornl-summit</p></td>
+<td><p>gcc, cuda</p></td>
+</tr>
+<tr class="row-odd"><td><p>eagle</p></td>
+<td><p>gcc</p></td>
+</tr>
+<tr class="row-even"><td><p>cori</p></td>
+<td><p>intel</p></td>
+</tr>
+<tr class="row-odd"><td><p>snl-waterman</p></td>
+<td><p>gcc, cuda</p></td>
+</tr>
+<tr class="row-even"><td><p>snl-ghost</p></td>
+<td><p>intel</p></td>
+</tr>
+<tr class="row-odd"><td><p>snl-skybridge</p></td>
+<td><p>intel</p></td>
+</tr>
+<tr class="row-even"><td><p>snl-ascicgpu</p></td>
+<td><p>gcc, cuda</p></td>
+</tr>
+<tr class="row-odd"><td><p>snl-ceerws</p></td>
+<td><p>gcc</p></td>
+</tr>
+<tr class="row-even"><td><p>snl-ews</p></td>
+<td><p>gcc</p></td>
+</tr>
+<tr class="row-odd"><td><p>pnnl-constance</p></td>
+<td><p>gcc</p></td>
+</tr>
+<tr class="row-even"><td><p>rhodes</p></td>
+<td><p>gcc, intel</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mac OSX</p></td>
+<td><p>clang, gcc</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="exawind-software-suite">
+<span id="exawind-codes"></span><h2>ExaWind software suite<a class="headerlink" href="#exawind-software-suite" title="Permalink to this headline">¶</a></h2>
+<p>Exawind-builder provides CMake configurations for the following codes used
+within the ExaWind project. Please consult <a class="reference internal" href="reference.html#reference"><span class="std std-ref">Reference</span></a> section for
+configuration variables availble to customize configuration of each project.
+Within the build scripts, the code that is being configured/compiled is referred
+using the environment variable <span class="target" id="index-2"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_CODE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_CODE</span></code></a>.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 71%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Public Git repository</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Nalu-Wind</p></td>
+<td><p><a class="reference external" href="https://github.com/exawind/nalu-wind.git">https://github.com/exawind/nalu-wind.git</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>AMR-Wind</p></td>
+<td><p><a class="reference external" href="https://github.com/exawind/amr-wind.git">https://github.com/exawind/amr-wind.git</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Trilinos</p></td>
+<td><p><a class="reference external" href="https://github.com/trilinos/trilinos.git">https://github.com/trilinos/trilinos.git</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>OpenFAST</p></td>
+<td><p><a class="reference external" href="https://github.com/openfast/openfast.git">https://github.com/openfast/openfast.git</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Nalu Wind Utilities</p></td>
+<td><p><a class="reference external" href="https://github.com/exawind/wind-utils.git">https://github.com/exawind/wind-utils.git</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>TIOGA</p></td>
+<td><p><a class="reference external" href="https://github.com/jsitaraman/tioga.git">https://github.com/jsitaraman/tioga.git</a></p></td>
+</tr>
+<tr class="row-even"><td><p>TIOGA Utilities</p></td>
+<td><p><a class="reference external" href="https://github.com/sayerhs/tioga_utils.git">https://github.com/sayerhs/tioga_utils.git</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>pySTK</p></td>
+<td><p><a class="reference external" href="https://github.com/sayerhs/pystk.git">https://github.com/sayerhs/pystk.git</a></p></td>
+</tr>
+<tr class="row-even"><td><p>pyAMReX</p></td>
+<td><p><a class="reference external" href="https://github.com/sayerhs/pyamrex.git">https://github.com/sayerhs/pyamrex.git</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>ExaWind-Sim</p></td>
+<td><p><a class="reference external" href="https://github.com/sayerhs/exawind-sim.git">https://github.com/sayerhs/exawind-sim.git</a></p></td>
+</tr>
+<tr class="row-even"><td><p>HYPRE</p></td>
+<td><p><a class="reference external" href="https://github.com/LLNL/hypre.git">https://github.com/LLNL/hypre.git</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>hypre-mini-app</p></td>
+<td><p><a class="reference external" href="https://github.com/exawind/hypre-mini-app.git">https://github.com/exawind/hypre-mini-app.git</a></p></td>
+</tr>
+<tr class="row-even"><td><p>ArborX</p></td>
+<td><p><a class="reference external" href="https://github.com/arborx/ArborX.git">https://github.com/arborx/ArborX.git</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Umpire</p></td>
+<td><p><a class="reference external" href="https://github.com/LLNL/Umpire.git">https://github.com/LLNL/Umpire.git</a></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="exawind-directory-structure">
+<span id="exawind-dir-layout"></span><h2>Exawind directory structure<a class="headerlink" href="#exawind-directory-structure" title="Permalink to this headline">¶</a></h2>
+<p>Exawind-builder recommends the organizing code under a standard directory
+structure for ExaWind project. While it is not necessary to follow this
+directory structure, and the user is free to call the build scripts from any
+location, the standard directory structure will be used in the rest of the
+manual. A brief description of the standard layout is presented here.</p>
+<p>All source code, build directories, installation directories, and the
+<code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code> package itself is assumed to be located within
+<code class="file docutils literal notranslate"><span class="pre">exawind</span></code> base directory. Within this directory the main subdirectories
+are shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>exawind/
+├── exawind-builder
+├── exawind-config-ornl-summit.sh
+├── exawind-config-gcc7-cuda10.sh
+├── exawind-config.sh
+├── install
+│   └── gcc8
+│       ├── amr-wind
+│       ├── amrex
+│       ├── hypre
+│       ├── nalu-wind
+│       ├── openfast
+│       ├── tioga
+│       └── trilinos
+│   └── gcc8-cuda10
+│       ├── amr-wind
+│       ├── amrex
+│       ├── hypre
+│       ├── nalu-wind
+│       ├── openfast
+│       ├── tioga
+│       └── trilinos
+│   └── intel18
+│       ├── amr-wind
+│       ├── amrex
+│       ├── nalu-wind
+│       ├── openfast
+│       ├── tioga
+│       └── trilinos
+├── scripts
+│   ├── amr-wind-gcc.sh
+│   ├── amrex-gcc.sh
+│   ├── arborx-gcc.sh
+│   ├── exawind-env-gcc.sh
+│   ├── exawind-sim-gcc.sh
+│   ├── hypre-gcc.sh
+│   ├── hypre-mini-app-gcc.sh
+│   ├── umpire-gcc.sh
+│   ├── nalu-wind-gcc.sh
+│   ├── openfast-gcc.sh
+│   ├── pifus-gcc.sh
+│   ├── pyamrex-gcc.sh
+│   ├── pystk-gcc.sh
+│   ├── tioga-gcc.sh
+│   ├── tioga-utils-gcc.sh
+│   ├── trilinos-gcc.sh
+│   └── wind-utils-gcc.sh
+├── spack
+└── source
+    ├── amr-wind
+    ├── hypre
+    ├── nalu-wind
+    ├── openfast
+    ├── tioga
+    ├── trilinos
+    └── wind-utils
+</pre></div>
+</div>
+<p>The sub-directories are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code>: The build script package cloned from the git repository
+that contains scripts to configure and build codes on different systems. This
+directory must be considered read-only unless you are adding features to
+exawind-builder. This directory is not necessary if you are using one of the
+central installations of ExaWind that are maintained by the ExaWind team. To
+determine whether you need this directory please refer <a class="reference internal" href="#how-to-use"><span class="std std-ref">How to use ExaWind builder?</span></a>
+section.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spack</span></code>: Optional location for Spack if using Spack to manage dependencies.
+Like exawind-builder, this directory is not necessary if you are on a system
+where ExaWind suite is maintained by the ExaWind team.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code>: Local git repository checkouts of the ExaWind codes of interest to
+the user. This is the recommended location for all the development versions of
+the various codes (e.g., nalu-wind, openfast, etc.).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts</span></code>: On an existing exawind-builder installation, this directory
+contains the <em>driver</em> scripts that user will use on a daily basis. This
+directory contains two types of scripts:</p>
+<ul>
+<li><p><em>Build scripts</em> that are used to configure and compile local git checkouts
+of <a class="reference internal" href="#exawind-codes"><span class="std std-ref">ExaWind codes</span></a> that are checked out in the
+<code class="docutils literal notranslate"><span class="pre">source</span></code> directory. These scripts have a naming convention
+<code class="docutils literal notranslate"><span class="pre">project-compiler.sh</span></code> (in scripts
+<code class="docutils literal notranslate"><span class="pre">${EXAWIND_CODE}-${EXAWIND_COMPILER}.sh</span></code>). For example, the build script
+that is used to compile hypre using GCC compiler suite is named
+<code class="docutils literal notranslate"><span class="pre">hypre-gcc.sh</span></code>. Similarly the script that is used to compile <cite>nalu-wind`</cite>
+using <code class="docutils literal notranslate"><span class="pre">LLVM/Clang</span></code> suite is named <code class="docutils literal notranslate"><span class="pre">nalu-wind-clang.sh</span></code>.</p></li>
+<li><p><em>Environment scripts</em> that can be <em>sourced</em> to load all the necessary
+modules and update user paths to run the codes. These scripts are useful
+during interactive sessions or to source within job submission scripts.
+These scripts are named <code class="docutils literal notranslate"><span class="pre">exawind-env-${EXAWIND_COMPILER}.sh</span></code>. For example,
+to source the environment that was used to build the code using GCC compiler
+suite, the user would add</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> <span class="si">${</span><span class="nv">EXAWIND_POJECT_DIR</span><span class="si">}</span>/scripts/exawind-env-gcc.sh
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">install</span></code>: The default install location where <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> will install
+the headers, libraries, and executables.</p></li>
+</ul>
+<p>The ExaWind project directory also contains several <em>configuration files</em> that
+are used to customize the behavior on different systems and different execution
+types, e.g., compiling and executing codes on host using Intel compiler vs.
+compiling and executing codes on GPUs using GCC as host compiler and NVIDIA CUDA
+to compile device code.</p>
+</div>
+<div class="section" id="how-to-use-exawind-builder">
+<span id="how-to-use"></span><h2>How to use ExaWind builder?<a class="headerlink" href="#how-to-use-exawind-builder" title="Permalink to this headline">¶</a></h2>
+<p>Depending on the system on which you intend to use ExaWind software, there are
+two options for using exawind-builder.</p>
+<ol class="arabic">
+<li><p>If the desired system is one that is currently actively used by the ExaWind
+software team, then exawind-builder, as well as all necessary third-party
+libraries (TPLs), are already installe and configured on the system.
+Therefore, installation step is not required. Users can proceed directly to
+cloning and building the desired codes.</p>
+<p>Currently, ExaWind simulation environment, along with exawind-builder, is
+pre-installed and available on the following systems:</p>
+<ul class="simple">
+<li><p>OLCF Summit</p></li>
+<li><p>NREL Eagle</p></li>
+<li><p>NERSC Cori</p></li>
+</ul>
+<p>If you are on of the systems listed above, please proceed to <a class="reference internal" href="basic.html#basic-usage"><span class="std std-ref">Basic usage</span></a>
+section to learn how to use pre-built codes, or to build your own versions of
+the ExaWind codes using the TPLs pre-built by the ExaWind team.</p>
+</li>
+<li><p>If your system is not listed above, then you should first follow
+<a class="reference internal" href="installation.html#installation"><span class="std std-ref">installation instructions</span></a> and on successfull installation
+proceed to <a class="reference internal" href="basic.html#basic-usage"><span class="std std-ref">Basic usage</span></a>.</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="basic.html" class="btn btn-neutral float-right" title="ExaWind-builder – Quick reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="ExaWind Builder User Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, ExaWind project.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

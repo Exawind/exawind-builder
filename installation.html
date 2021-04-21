@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Installing exawind-builder &mdash; exawind-builder v0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Adding new system configuration" href="newsys.html" />
+    <link rel="prev" title="ExaWind-builder – Quick reference" href="basic.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> exawind-builder
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html">ExaWind-builder – Quick reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic.html#basic-usage">Basic usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing exawind-builder</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-installation-for-all-systems">Basic installation for all systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-custom-exawind-python-environment">Setting up custom ExaWind python environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initial-homebrew-setup-for-mac-os-x-users">Initial Homebrew Setup for Mac OS-X Users</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="newsys.html">Adding new system configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Manual Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">exawind-builder</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Installing exawind-builder</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-exawind-builder">
+<span id="installation"></span><h1>Installing exawind-builder<a class="headerlink" href="#installing-exawind-builder" title="Permalink to this headline">¶</a></h1>
+<p>Exawind-builder provides a <em>bootstrap</em> script that will create the exawind
+directory structure, fetch necessary repositories, install dependencies, and
+perform initial setup and configuration. Note that this step is just preparation
+for being able to build <code class="docutils literal notranslate"><span class="pre">nalu-wind</span></code> and doesn’t install <code class="docutils literal notranslate"><span class="pre">nalu-wind</span></code> itself.
+You will need to follow the additional steps mentioned in
+<a class="reference internal" href="basic.html#tut-basic-compilation"><span class="std std-ref">Compiling executables using build scripts</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On OLCF Summit, NREL Eagle and Rhodes, and NERSC Cori systems, the build
+scripts are pre-installed and configured in the project directory. Users do
+not have to install their own exawind-builder on these systems. On these
+systems, you can skip the installation steps and proceed to the
+<a class="reference internal" href="basic.html#tut-basic-compilation"><span class="std std-ref">Compiling executables using build scripts</span></a> section. Please consult the Exawind team if you
+are unsure where the build scripts are located on these systems. Please refer
+to <a class="reference internal" href="introduction.html#how-to-use"><span class="std std-ref">How to use ExaWind builder?</span></a> for more details.</p>
+</div>
+<p>For fine control of the installation process please refer to the
+<a class="reference internal" href="advanced.html#manual-installation"><span class="std std-ref">Manual Installation</span></a> section.</p>
+<div class="section" id="basic-installation-for-all-systems">
+<h2>Basic installation for all systems<a class="headerlink" href="#basic-installation-for-all-systems" title="Permalink to this headline">¶</a></h2>
+<p>To install using <em>bootstrap</em> script please follow these steps.</p>
+<ol class="arabic">
+<li><p>Mac OS X users will need to have Hombrew packages installed as documented in
+<a class="reference internal" href="#homebrew-setup"><span class="std std-ref">Initial Homebrew Setup for Mac OS-X Users</span></a>.</p></li>
+<li><p>Download the <em>bootstrap</em> script</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Download bootstrap script
+<span class="go">curl -fsSL -o bootstrap.sh https://raw.githubusercontent.com/exawind/exawind-builder/master/bootstrap.sh</span>
+<span class="go">chmod a+x bootstrap.sh</span>
+</pre></div>
+</div>
+</li>
+<li><p>Execute the script by providing a target system and compiler – see
+<a class="reference internal" href="introduction.html#introduction"><span class="std std-ref">available target systems</span></a>. If your target system is not
+available, you can use the generic <code class="docutils literal notranslate"><span class="pre">spack</span></code> system which will fetch and compile
+all necessary dependencies for you.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">bootstrap.sh [options]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -h             - Show help message and exit</span>
+<span class="go">  -s &lt;system&gt;    - Select system profile (spack, cori, summitdev, etc.)</span>
+<span class="go">  -c &lt;compiler&gt;  - Select compiler type (gcc, clang, intel, etc.)</span>
+<span class="go">  -p &lt;path&gt;      - Root path for exawind project (default: ${HOME}/exawind)</span>
+<span class="go">  -n             - Configure exawind-builder to use ninja build system</span>
+</pre></div>
+</div>
+<p>A few examples are shown below</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Invoke by providing the system specification
+<span class="go">./bootstrap.sh -s cori -c intel        # on NERSC Cori</span>
+<span class="go">./bootstrap.sh -s snl-ascicgpu -c gcc  # On SNL ASC GPU machine</span>
+<span class="go">./bootstrap.sh -s summitdev -c gcc     # On ORNL SummitDev</span>
+
+<span class="gp"># </span>Example with a custom path
+<span class="go">./bootstrap.sh -s cori -c intel -p ${HOME}/MyProjects/exawind</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Upon sucessful execution, the bootstrap process will have created default build
+scripts, an exawind configuration file (<code class="file docutils literal notranslate"><span class="pre">exawind-config.sh</span></code>), and an
+exawind environment file (<code class="file docutils literal notranslate"><span class="pre">scripts/exawind-env-COMPILER.sh</span></code>). Please
+verify the default values provided in <code class="file docutils literal notranslate"><span class="pre">exawind-config.sh</span></code> and adjust them
+if necessary. By default, the <em>bootstrap</em> script will not install Trilinos or
+Nalu-Wind, these need to be manually installed by the user. Please proceed to
+<a class="reference internal" href="basic.html#tut-basic-compilation"><span class="std std-ref">Compiling executables using build scripts</span></a> for instructions on how to compile Trilinos and
+Nalu-Wind.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>If you have multiple versions of the same compiler installed, then use
+<span class="target" id="index-0"></span><a class="reference internal" href="reference.html#envvar-SPACK_COMPILER"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SPACK_COMPILER</span></code></a> to set an exact specification that you will when
+installing packages. For example, to use GCC 7.2.0 version instead of older
+versions, it might be necessary to set <code class="docutils literal notranslate"><span class="pre">SPACK_COMPILER=gcc%7.2.0</span></code> before
+executing the bootstrap script.</p></li>
+<li><p><a class="reference external" href="https://ninja-build.org">Ninja</a> is a build system that is an alternative
+to <strong class="program">make</strong>. It provides several features of <strong class="program">make</strong> but is
+considerably faster when building code. The speedup is particularly evident
+when compiling Trilinos. Since codes used in ExaWind project contain
+Fortran files, it requires a <a class="reference external" href="https://github.com/Kitware/ninja">special fork</a> of Ninja (maintained by Kitware). If
+you have already executed bootstrap and forgot to add the <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag, then
+use <a class="reference internal" href="advanced.html#get-ninja"><span class="std std-ref">Configuring exawind-builder to use Ninja</span></a> to install Ninja for your use.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="setting-up-custom-exawind-python-environment">
+<h2>Setting up custom ExaWind python environment<a class="headerlink" href="#setting-up-custom-exawind-python-environment" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code> now supports building certain Python packages (e.g., <a class="reference external" href="https://sayerhs.github.io/pystk/index.html">pySTK</a>. To enable this capability,
+you’ll need to set up a custom virtual environment with the necessary python
+modules. Currently, <code class="docutils literal notranslate"><span class="pre">exawind-builder</span></code> only supports the <a class="reference external" href="https://docs.conda.io/en/latest/index.html">Conda</a> python package manager. To enable this capability:</p>
+<ol class="arabic simple">
+<li><p>Install <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Conda</a> if you
+don’t have an existing conda installation.</p></li>
+<li><p>Create a new virtual environment using the <cite>create-pyenv.sh</cite> utility</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd ${EXAWIND_PROJECT_DIR}</span>
+<span class="go">./exawind-builder/create-pyenv.sh -s &lt;system&gt; -c &lt;compiler&gt; -r ${CONDA_ROOT_DIR}</span>
+</pre></div>
+</div>
+<p>Upon successful installation, this creates a new virtual environment <code class="docutils literal notranslate"><span class="pre">exawind</span></code>
+with all the necessary Python modules to build and use ExaWind python libraries.</p>
+</div>
+<div class="section" id="initial-homebrew-setup-for-mac-os-x-users">
+<span id="homebrew-setup"></span><h2>Initial Homebrew Setup for Mac OS-X Users<a class="headerlink" href="#initial-homebrew-setup-for-mac-os-x-users" title="Permalink to this headline">¶</a></h2>
+<p>On Mac OS X, we will use a combination of <a class="reference external" href="https://brew.sh">Homebrew</a> and
+<a class="reference external" href="https://github.com/spack/spack">spack</a> to setup our dependencies. This
+setup will use Apple’s Clang compiler for C and C++ sources, and GNU GCC
+<code class="docutils literal notranslate"><span class="pre">gfortran</span></code> for Fortran sources. The dependency on Homebrew is to avoid the
+compilation time required for compiling OpenMPI on Mac. Please follow these
+one-time installation process to set up your Homebrew environment.</p>
+<ol class="arabic simple">
+<li><p>Setup homebrew if you don’t already have it installed on your machine. Follow
+the section <strong>Install Homebrew</strong> at the <a class="reference external" href="https://brew.sh">Homebrew website</a>.
+Note that you will need <code class="docutils literal notranslate"><span class="pre">sudo</span></code> access and will have to enter your password
+several times during the installation process.</p></li>
+<li><p>Once Homebrew has been installed execute the following commands to install
+packages necessary for exawind-builder from homebrew.</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Allow installation of brew bundles
+<span class="go">brew tap Homebrew/brewdler</span>
+
+<span class="gp"># </span>Fetch the exawind Brewfile
+<span class="go">curl -fsSL -o Brewfile https://raw.githubusercontent.com/exawind/exawind-builder/master/etc/spack/osx/Brewfile</span>
+
+<span class="gp"># </span>Install brew packages
+<span class="go">brew bundle --file=Brewfile</span>
+</pre></div>
+</div>
+<p>Upon successful installation, please proceed to the <a class="reference internal" href="#installation"><span class="std std-ref">Installing exawind-builder</span></a> section.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="newsys.html" class="btn btn-neutral float-right" title="Adding new system configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="basic.html" class="btn btn-neutral float-left" title="ExaWind-builder – Quick reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, ExaWind project.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

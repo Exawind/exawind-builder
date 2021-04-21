@@ -1,0 +1,980 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ExaWind-builder – Quick reference &mdash; exawind-builder v0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installing exawind-builder" href="installation.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> exawind-builder
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ExaWind-builder – Quick reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#activating-exawind-environment">Activating ExaWind environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-codes">Compiling codes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#basic-usage">Basic usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-executables-using-build-scripts">Compiling executables using build scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#one-time-setup">One time setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-and-compiling-software">Configuring and compiling software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#understanding-exawind-builder-output">Understanding exawind-builder output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-exawind-executables">Running ExaWind executables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-job-submission-script">Example job submission script</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-tasks-with-build-scripts">Specifying tasks with build scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-exawind-builder">Customizing exawind-builder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-build-options">Customizing build options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-installation-location">Customizing installation location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-dependencies">Customizing dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-build-environment-init-process">Customizing build environment init process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-module-load">Customizing module load</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#swapping-spack-installations">Swapping Spack installations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-cmake-configuration">Customizing CMake configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#exawind-builder-configuration-files">Exawind-builder configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-custom-build-of-trilinos-and-nalu-wind">Tutorial: Custom build of Trilinos and Nalu-Wind</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-trilinos">Build Trilinos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-nalu-wind">Build Nalu-Wind</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing exawind-builder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="newsys.html">Adding new system configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Manual Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">exawind-builder</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ExaWind-builder – Quick reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/basic.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="exawind-builder-quick-reference">
+<span id="usage-quickref"></span><h1>ExaWind-builder – Quick reference<a class="headerlink" href="#exawind-builder-quick-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="activating-exawind-environment">
+<h2>Activating ExaWind environment<a class="headerlink" href="#activating-exawind-environment" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust variables appropriately</span>
+<span class="nb">export</span> <span class="nv">EXWDIR</span><span class="o">=</span>/projects/exawind
+<span class="nb">export</span> <span class="nv">COMPILER</span><span class="o">=</span>gcc
+
+<span class="c1"># Source environment in an interactive shell or within a job submission script</span>
+<span class="si">${</span><span class="nv">EXWDIR</span><span class="si">}</span>/scripts/exawind-env-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span>.sh
+
+<span class="c1"># Activate additional modules (e.g., netcdf to use ncdump command)</span>
+exawind_load_deps netcdf-c
+<span class="c1"># Check whether ncdump is available</span>
+which ncdump
+
+<span class="c1"># Purge all exawind variables/functions from environment</span>
+exawind_purge_env
+</pre></div>
+</div>
+<p>Please refer to <a class="reference internal" href="#tut-exawind-env"><span class="std std-ref">Running ExaWind executables</span></a> and <a class="reference internal" href="#build-custom"><span class="std std-ref">Customizing exawind-builder</span></a> for more details.</p>
+</div>
+<div class="section" id="compiling-codes">
+<h2>Compiling codes<a class="headerlink" href="#compiling-codes" title="Permalink to this headline">¶</a></h2>
+<p>On systems where ExaWind software stack has been pre-installed and maintained by
+the ExaWind team, you can execute the following commands to quickly build code.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust variables appropriately</span>
+<span class="nb">export</span> <span class="nv">EXWDIR</span><span class="o">=</span>/projects/exawind
+<span class="nb">export</span> <span class="nv">CODE</span><span class="o">=</span>nalu-wind
+<span class="nb">export</span> <span class="nv">COMPILER</span><span class="o">=</span>gcc
+
+<span class="c1">#### One-time setup</span>
+mkdir -p <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind/source
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind/source
+git clone --recurse-submodules https://github.com/exawind/<span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>.git
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>
+mkdir build-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span>
+ln -s <span class="si">${</span><span class="nv">EXWDIR</span><span class="si">}</span>/scripts/<span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span>.sh
+
+<span class="c1">#### Build executables</span>
+<span class="c1"># Option 1 - Execute both configure and make steps</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind/source/<span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>/build-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span>
+./<span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span>.sh
+
+<span class="c1"># Option 2 - Execute steps sequentially with arguments</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind/source/<span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>/build-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span>
+./<span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span>.sh cmake -DENABLE_TESTS<span class="o">=</span>OFF
+./<span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span>.sh make -j <span class="m">12</span>
+
+<span class="c1"># Option 3 - Force full reconfigure</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind/source/<span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>/build-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span>
+./<span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span> cmake_full -DENABLE_TESTS<span class="o">=</span>ON
+./<span class="si">${</span><span class="nv">CODE</span><span class="si">}</span>-<span class="si">${</span><span class="nv">COMPILER</span><span class="si">}</span>.sh make
+</pre></div>
+</div>
+<p>Detailed documentation sections:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#tut-basic-compilation"><span class="std std-ref">Compiling executables using build scripts</span></a></p></li>
+<li><p><a class="reference internal" href="#tut-build-script-tasks"><span class="std std-ref">Specifying tasks with build scripts</span></a></p></li>
+<li><p><a class="reference internal" href="#build-custom"><span class="std std-ref">Customizing exawind-builder</span></a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="basic-usage">
+<span id="id1"></span><h1>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the basic steps to configure exawind-builder and use the
+scripts provided to build software used within the ExaWind project. We begin
+with the simplest example, building one of the ExaWind codes on a system with
+pre-installed dependencies, and then proceed with more complex workflows. These
+examples assume that the ExaWind simulation environment has been previously
+installed on the system you are working on. To determine if a previous
+installation exists or if you need to install one yourself please refer to
+<a class="reference internal" href="introduction.html#how-to-use"><span class="std std-ref">How to use ExaWind builder?</span></a>. To install exawind-builder and dependencies please refer to
+<a class="reference internal" href="installation.html#installation"><span class="std std-ref">installation guide</span></a>.</p>
+<div class="section" id="compiling-executables-using-build-scripts">
+<span id="tut-basic-compilation"></span><h2>Compiling executables using build scripts<a class="headerlink" href="#compiling-executables-using-build-scripts" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial describes the steps involved in biulding your own executable of
+<a class="reference external" href="https://github.com/exawind/nalu-wind">Nalu-Wind</a> using exawind-builder
+scripts. You can replace <code class="docutils literal notranslate"><span class="pre">nalu-wind</span></code> with any of the other codes in
+<a class="reference internal" href="introduction.html#exawind-codes"><span class="std std-ref">ExaWind software suite</span></a> and follow the same steps to build code. Tutorials on
+complex workflows will refer back to this tutorial. This tutorial will assume
+that the path to the pre-installed exawind project directory is
+<code class="file docutils literal notranslate"><span class="pre">/projects/exawind/</span></code>.</p>
+<div class="section" id="one-time-setup">
+<h3>One time setup<a class="headerlink" href="#one-time-setup" title="Permalink to this headline">¶</a></h3>
+<p>Assuming you have not setup your own local <a class="reference internal" href="introduction.html#exawind-dir-layout"><span class="std std-ref">directory structure</span></a> before, we will create a working setup that will be used
+to do development builds.</p>
+<ol class="arabic">
+<li><p>Create exawind directory layout</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path to exawind installation</span>
+<span class="nb">export</span> <span class="nv">EXAWIND_DIR</span><span class="o">=</span>/projects/exawind
+
+<span class="c1"># Choose directory where you want to work on exawind codes</span>
+<span class="nb">export</span> <span class="nv">MY_EXAWIND_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind
+
+<span class="c1"># Create directory structure if you haven&#39;t done this previously</span>
+mkdir -p <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind/source
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you installed your own exawind (see <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installing exawind-builder</span></a>) and are not
+using a central installation, then <code class="docutils literal notranslate"><span class="pre">${EXAWIND_DIR}</span></code> and
+<code class="docutils literal notranslate"><span class="pre">${MY_EXAWIND_DIR}</span></code> would point to the same location and you can skip
+this step.</p>
+</div>
+</li>
+<li><p>Clone desired code repository if you do not have a previously checked out
+version. In this example, we will use nalu-wind. Please replace <code class="docutils literal notranslate"><span class="pre">nalu-wind</span></code>
+with your desired code, e.g., <code class="docutils literal notranslate"><span class="pre">amr-wind</span></code> in the following steps.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Switch to source directory</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">MY_EXAWIND_DIR</span><span class="si">}</span>/source
+
+<span class="c1"># Clone the repository</span>
+git clone --recurse-submodules https://github.com/exawind/nalu-wind.git
+
+<span class="c1"># Switch to a different branch if necessary</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create build directory and link build script. In this tutorial, we will use
+the <code class="docutils literal notranslate"><span class="pre">gcc</span></code> compiler. Replace <code class="docutils literal notranslate"><span class="pre">gcc</span></code> with <code class="docutils literal notranslate"><span class="pre">clang</span></code> or <code class="docutils literal notranslate"><span class="pre">intel</span></code> to switch
+compiler.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Switch to previously cloned nalu-wind repository</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">MY_EXAWIND_DIR</span><span class="si">}</span>/source/nalu-wind
+
+<span class="c1"># Create a build directory if one doesn&#39;t exist</span>
+mkdir build-gcc
+<span class="nb">cd</span> build-gcc
+
+<span class="c1"># Create a symbolic link to the build script within the build directory</span>
+ln -s /projects/exawind/scripts/nalu-wind-gcc.sh
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this tutorial we assume that the path to the exawind project maintained by
+ExaWind team is <code class="file docutils literal notranslate"><span class="pre">/projects/exawind/</span></code>. Please change this appropriately
+based on your system.</p>
+</div>
+</div>
+<div class="section" id="configuring-and-compiling-software">
+<h3>Configuring and compiling software<a class="headerlink" href="#configuring-and-compiling-software" title="Permalink to this headline">¶</a></h3>
+<p>After following the one-time setup steps described above, you can modify the
+your local copy and compile code using the process described below.</p>
+<p>To build code, simply execute the following command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Switch to build directory if necessary (refer to one-time steps for details)</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">MY_EXAWIND_DIR</span><span class="si">}</span>/source/nalu-wind/build-gcc
+
+<span class="c1"># Execute script to compile nalu-wind</span>
+./nalu-wind-gcc.sh
+</pre></div>
+</div>
+<p>When invoked without any arguments, the script will first execute <code class="docutils literal notranslate"><span class="pre">cmake</span></code> with
+appropriate arguments to configure the project and then call <code class="docutils literal notranslate"><span class="pre">make</span></code> to compile
+the project. On successful compilation, you will have executables in the build
+directory.</p>
+</div>
+<div class="section" id="understanding-exawind-builder-output">
+<span id="build-output"></span><h3>Understanding exawind-builder output<a class="headerlink" href="#understanding-exawind-builder-output" title="Permalink to this headline">¶</a></h3>
+<p>When an exawind-builder script is executed, e.g., as described in previous
+section, it will output lots of informational messages to the screen. Under most
+situations, the build process would just work and you can ignore the output.
+However, in some circumstances, you might encounter errors. This section briefly
+describes the output from build script that can be used to troubleshoot the
+error, or submit bug reports to relevant ExaWind projects.</p>
+<p>When you execute a build script (e.g., <strong class="program">./nalu-wind-gcc.sh</strong>) you will
+see output as shown below. Note that the paths will be different depending on
+your system and directory layout.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==&gt;</span> <span class="n">Loading</span> <span class="n">options</span> <span class="kn">from</span> <span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">exawind</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">gcc</span><span class="o">.</span><span class="n">sh</span>
+<span class="o">==&gt;</span> <span class="n">Using</span> <span class="n">spack</span> <span class="n">configuration</span><span class="p">:</span> <span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">spack</span>
+<span class="o">==&gt;</span> <span class="n">spack</span><span class="p">:</span> <span class="n">locating</span> <span class="n">mpi</span><span class="o">%</span><span class="n">gcc</span>
+<span class="o">==&gt;</span> <span class="n">mpi</span> <span class="o">=</span> <span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">skylake</span><span class="o">/</span><span class="n">gcc</span><span class="o">-</span><span class="mf">8.4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">mpich</span><span class="o">-</span><span class="mf">3.3</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">dn34cqtj7tlnxzwamooud6rxbdbkro42</span>
+<span class="o">==&gt;</span> <span class="n">spack</span><span class="p">:</span> <span class="n">locating</span> <span class="n">cmake</span><span class="o">%</span><span class="n">gcc</span>
+<span class="o">==&gt;</span> <span class="n">cmake</span> <span class="o">=</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span>
+<span class="o">==&gt;</span> <span class="n">spack</span><span class="p">:</span> <span class="n">locating</span> <span class="n">netlib</span><span class="o">-</span><span class="n">lapack</span><span class="o">%</span><span class="n">gcc</span>
+<span class="o">==&gt;</span> <span class="n">netlib</span><span class="o">-</span><span class="n">lapack</span> <span class="o">=</span> <span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">skylake</span><span class="o">/</span><span class="n">gcc</span><span class="o">-</span><span class="mf">8.4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">netlib</span><span class="o">-</span><span class="n">lapack</span><span class="o">-</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">bmrqbsbwfqaqkjipdhbbm6t4eewxkvr4</span>
+<span class="o">==&gt;</span> <span class="n">No</span> <span class="n">user</span> <span class="n">environment</span> <span class="n">actions</span> <span class="n">defined</span>
+<span class="o">==&gt;</span> <span class="n">Loading</span> <span class="n">dependencies</span> <span class="k">for</span> <span class="n">nalu</span><span class="o">-</span><span class="n">wind</span><span class="o">...</span>
+<span class="o">==&gt;</span> <span class="n">trilinos</span> <span class="o">=</span> <span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">gcc</span><span class="o">/</span><span class="n">trilinos</span>
+<span class="o">==&gt;</span> <span class="n">spack</span><span class="p">:</span> <span class="n">locating</span> <span class="n">yaml</span><span class="o">-</span><span class="n">cpp</span><span class="o">%</span><span class="n">gcc</span>
+<span class="o">==&gt;</span> <span class="n">yaml</span><span class="o">-</span><span class="n">cpp</span> <span class="o">=</span> <span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">skylake</span><span class="o">/</span><span class="n">gcc</span><span class="o">-</span><span class="mf">8.4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">yaml</span><span class="o">-</span><span class="n">cpp</span><span class="o">-</span><span class="mf">0.6</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">k3me2qqeadfw3jzvgwkiagn3hhw23ekv</span>
+<span class="o">==&gt;</span> <span class="n">spack</span><span class="p">:</span> <span class="n">locating</span> <span class="n">boost</span><span class="o">%</span><span class="n">gcc</span>
+<span class="o">==&gt;</span> <span class="n">boost</span> <span class="o">=</span> <span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">skylake</span><span class="o">/</span><span class="n">gcc</span><span class="o">-</span><span class="mf">8.4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">boost</span><span class="o">-</span><span class="mf">1.68</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">ttkfazswxptatzfrohvpn7pjoz5ggqx6</span>
+<span class="o">==&gt;</span> <span class="n">spack</span><span class="p">:</span> <span class="n">locating</span> <span class="n">hypre</span><span class="o">%</span><span class="n">gcc</span>
+<span class="o">==&gt;</span> <span class="n">hypre</span> <span class="o">=</span> <span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">skylake</span><span class="o">/</span><span class="n">gcc</span><span class="o">-</span><span class="mf">8.4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">hypre</span><span class="o">-</span><span class="n">develop</span><span class="o">-</span><span class="n">crw7bxgflmfwoxkv52qqe5tulzqjvnwx</span>
+<span class="o">==&gt;</span> <span class="n">tioga</span> <span class="o">=</span> <span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">exawind</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="n">gcc</span><span class="o">/</span><span class="n">tioga</span>
+</pre></div>
+</div>
+<p>The messages with the <code class="docutils literal notranslate"><span class="pre">==&gt;</span></code> prefix are output from exawind-builder. These
+messages show the configuration files that are being loaded followed by the
+paths to the required dependencies that are loaded to enable configuring and
+building nalu-wind. The output from CMake configure process is simultaneously
+shown on screen as well as redirected to <code class="file docutils literal notranslate"><span class="pre">cmake_output.log</span></code>. Similarly,
+the output from <code class="docutils literal notranslate"><span class="pre">make</span></code> step is shown on screen as well as saved to file
+<code class="file docutils literal notranslate"><span class="pre">make_output.log</span></code>. Outputs stored in <code class="file docutils literal notranslate"><span class="pre">make_output.log</span></code> is useful
+when troubleshooting errors in parallel builds as it captures all messages.</p>
+</div>
+</div>
+<div class="section" id="running-exawind-executables">
+<span id="tut-exawind-env"></span><h2>Running ExaWind executables<a class="headerlink" href="#running-exawind-executables" title="Permalink to this headline">¶</a></h2>
+<p>Exawind-builder provides scripts that can be sourced to create appropriate
+execution environments for the codes either in an interactive console or within
+job submission scripts. These scripts recreate the exact environment that was
+used to build the codes. The environment scripts are stored in within the
+<code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory (see <a class="reference internal" href="introduction.html#exawind-dir-layout"><span class="std std-ref">Exawind directory structure</span></a> for more details) and are
+of the form <code class="file docutils literal notranslate"><span class="pre">exawind-env-$</span><em><span class="pre">COMPILER</span></em><span class="pre">.sh</span></code>. In the following examples,
+replace <code class="file docutils literal notranslate"><span class="pre">/projects/exawind</span></code> with the correct exawind installation path.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the environment corresponding to GCC compiler suite</span>
+<span class="nb">source</span> /projects/exawind/scripts/exawind-env-gcc.sh
+</pre></div>
+</div>
+<p>In addition to loading the default modules, sourcing this file will also
+introduce a bash command <code class="docutils literal notranslate"><span class="pre">exawind_load_deps</span></code> that can be used to load
+additional codes within the bash environment.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>exawind_load_deps nalu-wind amr-wind trilinos wind-utils
+<span class="nv">nalu_wind_exe</span><span class="o">=</span><span class="si">${</span><span class="nv">NALU_WIND_ROOT_DIR</span><span class="si">}</span>/bin/naluX
+<span class="nv">amr_wind_exe</span><span class="o">=</span><span class="si">${</span><span class="nv">AMR_WIND_ROOT_DIR</span><span class="si">}</span>/bin/amr_wind
+<span class="nv">epu_exe</span><span class="o">=</span><span class="si">${</span><span class="nv">TRILINOS_ROOT_DIR</span><span class="si">}</span>/bin/epu
+
+<span class="c1"># Generate an ABL mesh using wind utilities executable</span>
+<span class="si">${</span><span class="nv">EXAWIND_INSTALL_DIR</span><span class="si">}</span>/wind-utils/bin/abl_mesh -i abl_mesh.yaml
+</pre></div>
+</div>
+<p>For example, to access <code class="docutils literal notranslate"><span class="pre">ncdump</span></code> available in the <code class="docutils literal notranslate"><span class="pre">netcdf</span></code> module on any
+system, the user can execute the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate exawind environment</span>
+<span class="nb">source</span> /projects/exawind/scripts/exawind-env-gcc.sh
+<span class="c1"># load the NetCDF module or spack build</span>
+exawind_load_deps netcdf
+
+<span class="c1"># Now ncdump should be available in your PATH</span>
+ncdump -h &lt;exodus_file&gt;
+</pre></div>
+</div>
+<p>Within interactive sessions, you can <em>deactivate</em> the exawind environment that
+was created by sourcing the environment file by executing <code class="docutils literal notranslate"><span class="pre">exawind_purge_env</span></code>
+command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Deactivate exawind environment</span>
+exawind_purge_env
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that it is not necessary to source the environment for building
+software. The build scripts will automatically source the environment. We
+strongly discourage sourcing exawind environment within <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> and
+<code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> scripts. Loading default environment will not allow you to switch
+compilers or change build options to support different types of builds (e.g.,
+using a different hypre library to link against your nalu-wind build).</p>
+</div>
+<p>To ease the process of quickly activating the user environment, we recommend
+using functions within your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> scripts. An example is shown below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Helper function to load exawind environment in a bash shell</span>
+<span class="c1"># Execute `load_exawind_env intel` at prompt to load intel environment</span>
+<span class="k">function</span> load_exawind_env <span class="o">{</span>
+    <span class="c1"># Absolute path to exawind project directory</span>
+    <span class="nb">local</span> <span class="nv">exawind_project_dir</span><span class="o">=</span>/projects/exawind
+
+    <span class="c1"># Parse argument to determine compiler type, default is gcc if none provided</span>
+    <span class="nb">local</span> <span class="nv">compiler_type</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">gcc</span><span class="si">}</span>
+
+    <span class="nb">source</span> <span class="si">${</span><span class="nv">exawind_project_dir</span><span class="si">}</span>/scripts/exawind-env-<span class="si">${</span><span class="nv">compiler_type</span><span class="si">}</span>.sh
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="section" id="example-job-submission-script">
+<h3>Example job submission script<a class="headerlink" href="#example-job-submission-script" title="Permalink to this headline">¶</a></h3>
+<p>This section shows an example of using the newly built executables within a job
+script. The example assumes SLURM job manager.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># Example job submission script</span>
+<span class="c1">#SBATCH --job-name=nalu-wind-exe</span>
+<span class="c1">#SBATCH --account=exawind</span>
+<span class="c1">#SBATCH --nodes=30</span>
+<span class="c1">#SBATCH --time=48:00:00</span>
+<span class="c1">#SBATCH --output=out.%x_%j</span>
+
+<span class="c1"># Path to exawind installation</span>
+<span class="nv">exawind_dir</span><span class="o">=</span>/projects/exawind
+<span class="c1"># Compiler build used</span>
+<span class="nv">compiler</span><span class="o">=</span>gcc
+<span class="c1"># Nalu-Wind exe location</span>
+<span class="nv">nalu_dir</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind/source/nalu-wind/build-<span class="si">${</span><span class="nv">compiler</span><span class="si">}</span>
+<span class="nv">nalu_exec</span><span class="o">=</span><span class="si">${</span><span class="nv">nalu_dir</span><span class="si">}</span>/naluX
+
+<span class="c1"># Input and log files (assume current working directory)</span>
+<span class="nv">input_file</span><span class="o">=</span>abl_neutral.yaml
+<span class="nv">log_file</span><span class="o">=</span>abl_neutral.log
+
+<span class="c1"># Copy the exawind-config if present so that we recreate the exact environment</span>
+<span class="k">if</span> <span class="o">[</span> -f <span class="si">${</span><span class="nv">nalu_dir</span><span class="si">}</span>/exawind-config.sh <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+  cp <span class="si">${</span><span class="nv">nalu_dir</span><span class="si">}</span>/exawind-config.sh .
+<span class="k">fi</span>
+<span class="c1"># Purge all modules to ensure a clean environment</span>
+module purge
+<span class="c1"># Source exawind environment</span>
+<span class="nb">source</span> <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind/scripts/exawind-env-gcc.sh
+
+<span class="nv">ranks_per_node</span><span class="o">=</span><span class="m">36</span>
+<span class="nv">mpi_ranks</span><span class="o">=</span><span class="k">$(</span>expr <span class="nv">$SLURM_JOB_NUM_NODES</span> <span class="se">\*</span> <span class="nv">$ranks_per_node</span><span class="k">)</span>
+<span class="nb">export</span> <span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="m">1</span>  <span class="c1"># Max hardware threads = 4</span>
+<span class="nb">export</span> <span class="nv">OMP_PLACES</span><span class="o">=</span>threads
+<span class="nb">export</span> <span class="nv">OMP_PROC_BIND</span><span class="o">=</span>spread
+
+
+<span class="nb">echo</span> <span class="s2">&quot;Job name       = </span><span class="nv">$SLURM_JOB_NAME</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Num. nodes     = </span><span class="nv">$SLURM_JOB_NUM_NODES</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Num. MPI Ranks = </span><span class="nv">$mpi_ranks</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Num. threads   = </span><span class="nv">$OMP_NUM_THREADS</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Working dir    = </span><span class="nv">$PWD</span><span class="s2">&quot;</span>
+
+srun -n <span class="si">${</span><span class="nv">mpi_ranks</span><span class="si">}</span> -c <span class="m">1</span> --cpu-bind<span class="o">=</span>cores <span class="si">${</span><span class="nv">nalu_exec</span><span class="si">}</span> -i <span class="si">${</span><span class="nv">input_file</span><span class="si">}</span> -o <span class="si">${</span><span class="nv">log_file</span><span class="si">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="specifying-tasks-with-build-scripts">
+<span id="tut-build-script-tasks"></span><h2>Specifying tasks with build scripts<a class="headerlink" href="#specifying-tasks-with-build-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Often during code, commit, build, debug cycle, it is necessary to control the
+steps executed using the build scripts. For example, after fixing minor typos,
+it is not necessary to execute the CMake configure step and only <code class="docutils literal notranslate"><span class="pre">make</span></code> needs
+to be executed. Similarly, after changes to CMake configuration files, it might
+be desirable to purge the CMake cache and execute a fresh configure. Finally,
+the user might want to run the unit/regression tests and or execute the
+executable in the same environment that was used to build the code.
+Exawind-builder scripts take additional arguments that can be used to control
+the tasks executed as show below.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./nalu-wind-gcc.sh <span class="o">[</span>TASK<span class="o">]</span> <span class="o">[</span>ARGUMENTS<span class="o">]</span>
+</pre></div>
+</div>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">-h</span></code> flag to request a brief help message as shown below</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Exawind</span> <span class="n">build</span> <span class="n">script</span>
+
+<span class="n">Usage</span><span class="p">:</span>
+    <span class="o">./</span><span class="n">nalu</span><span class="o">-</span><span class="n">wind</span><span class="o">-</span><span class="n">gcc</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">task</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">arguments</span><span class="o">&gt;</span>
+
+<span class="n">With</span> <span class="n">no</span> <span class="n">tasks</span> <span class="n">provided</span><span class="p">,</span> <span class="n">the</span> <span class="n">script</span> <span class="n">will</span> <span class="n">configure</span> <span class="n">the</span> <span class="n">project</span> <span class="ow">and</span> <span class="nb">compile</span> <span class="n">the</span> <span class="n">code</span>
+
+<span class="n">Available</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="n">cmake</span>       <span class="o">-</span> <span class="n">configure</span> <span class="n">the</span> <span class="n">project</span>
+    <span class="n">cmake_full</span>  <span class="o">-</span> <span class="n">configure</span> <span class="n">project</span> <span class="n">after</span> <span class="n">removing</span> <span class="n">CMakeCache</span>
+    <span class="n">make</span>        <span class="o">-</span> <span class="nb">compile</span> <span class="n">the</span> <span class="n">code</span>
+    <span class="n">ctest</span>       <span class="o">-</span> <span class="n">run</span> <span class="n">tests</span> <span class="p">(</span><span class="k">if</span> <span class="n">available</span><span class="p">)</span>
+    <span class="n">run</span>         <span class="o">-</span> <span class="n">run</span> <span class="n">arbitrary</span> <span class="n">command</span> <span class="n">using</span> <span class="n">the</span> <span class="n">environment</span> <span class="n">used</span> <span class="n">to</span> <span class="nb">compile</span> <span class="n">the</span> <span class="n">code</span>
+</pre></div>
+</div>
+<p>The available <strong>tasks</strong> are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cmake</span></code>: Configure the project using CMake and generate build files.
+Exawind-builder can generate both GNU Makefiles as well as Ninja build
+scripts. This capability is controlled by the variable
+<span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_MAKE_TYPE</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cmake_full</span></code>: Remove <code class="file docutils literal notranslate"><span class="pre">CMakeCache.txt</span></code> and <code class="file docutils literal notranslate"><span class="pre">CMakeFiles</span></code> before
+executing CMake configuration step.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span></code>: Build the project libraries and executables. Note that <code class="docutils literal notranslate"><span class="pre">make</span></code> is
+used regardless of whether GNU Makefile or Ninja build system is used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ctest</span></code>: Execute CTest for this project, if available.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code>: Run arbitrary shell command within the same environment (modules and
+dependencies loaded) as when the project was compiled.</p></li>
+</ul>
+<p>User can control the behavior of these
+tasks by passing extra <code class="docutils literal notranslate"><span class="pre">[ARGUMENTS]</span></code> that are passed directly to the task
+invoked. Some examples are shown below</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change CMake build type to DEBUG and turn on shared library build</span>
+./nalu-wind-gcc.sh cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>DEBUG -DBUILD_SHARED_LIBS<span class="o">=</span>ON
+
+<span class="c1"># Turn on verbose output with make and only build naluX (and not unittestX)</span>
+./nalu-wind-gcc.sh make <span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span> naluX
+
+<span class="c1"># Only execute one regression test and enable output on failure</span>
+./nalu-wind-gcc.sh ctest --output-on-failure -R ablNeutralEdge
+
+<span class="c1"># Run the unit test executable from within exawind environment</span>
+./nalu-wind-gcc.sh run ./unittestX
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Even though Makefiles are present in the build directory and can be invoked
+through <code class="docutils literal notranslate"><span class="pre">make</span></code>, we recommend that you always execute the make step through
+the build script. This will avoid inconsistencies between the build and the
+configuration environment that could lead to build or runtime errors.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Replace <strong class="program">nalu-wind-gcc.sh</strong> with <strong class="program">amr-wind-gcc.sh</strong> when
+working on AMR-Wind. Similarly use <strong class="program">nalu-wind-intel.sh</strong> when
+building with Intel compiler suite.</p></li>
+<li><p>By default, <code class="docutils literal notranslate"><span class="pre">make</span></code> will execute several jobs in parallel. Users can
+control the maximum number of parallel jobs by either setting the
+environment variable <span class="target" id="index-1"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_NUM_JOBS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_NUM_JOBS</span></code></a>, or
+using <code class="docutils literal notranslate"><span class="pre">./nalu-wind-gcc.sh</span> <span class="pre">make</span> <span class="pre">-j</span> <span class="pre">12</span></code> to override the defaults.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cmake_full</span></code> accepts all valid CMake arguments that <code class="docutils literal notranslate"><span class="pre">cmake</span></code> command does.</p></li>
+<li><p>The <code class="file docutils literal notranslate"><span class="pre">cmake_output.log</span></code> within the build directory contains the output
+of the last <cite>cmake</cite> command that was executed. This output is also echoed
+to the screen.</p></li>
+<li><p>The <code class="file docutils literal notranslate"><span class="pre">make_output.log</span></code> contains the output from the last invocation of
+<code class="docutils literal notranslate"><span class="pre">make</span></code>. This output is also simultaneously echoed to the screen.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="customizing-exawind-builder">
+<span id="build-custom"></span><h2>Customizing exawind-builder<a class="headerlink" href="#customizing-exawind-builder" title="Permalink to this headline">¶</a></h2>
+<p>The previous section showed how the execution of CMake and Make can be
+customized to a limited extent by passing command line arguments with specific
+tasks. However, for more complex customizations it is recommended that the user
+use the <a class="reference internal" href="#exawind-config"><span class="std std-ref">configuration file</span></a> to control the build process.
+This approach allows the user to consolidate common build options, e.g.,
+enabling/disabling OpenMP/CUDA, release/debug builds across all projects
+consistently through the <code class="file docutils literal notranslate"><span class="pre">exawind-config.sh</span></code> and fine tuning options from
+the config file within the current working directory. This will allow the user
+to repeat the build process consistently during development and aid in debugging
+when things don’t work as expected. The various customizations possible are
+described below. The code examples shown below must be added to
+<code class="file docutils literal notranslate"><span class="pre">exawind-config.sh</span></code> within the current working directory (either the build
+directory or the directory from which an HPC job is executed).</p>
+<div class="section" id="customizing-build-options">
+<h3>Customizing build options<a class="headerlink" href="#customizing-build-options" title="Permalink to this headline">¶</a></h3>
+<p>See project-specific documentation in <a class="reference internal" href="reference.html#reference"><span class="std std-ref">Reference</span></a> to see what variables can
+be used to enable/disable various options for different projects.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Control accelerator device options</span>
+<span class="nv">ENABLE_OPENMP</span><span class="o">=</span>OFF
+<span class="nv">ENABLE_CUDA</span><span class="o">=</span>ON
+<span class="nv">ENABLE_HIP</span><span class="o">=</span>OFF
+<span class="nv">ENABLE_DPCPP</span><span class="o">=</span>OFF
+
+<span class="c1"># Set debug/release options</span>
+<span class="nv">BUILD_TYPE</span><span class="o">=</span>RELEASE
+
+<span class="c1"># Disable TIOGA and OpenFAST, but enable HYPRE as TPLs</span>
+<span class="nv">ENABLE_TIOGA</span><span class="o">=</span>OFF
+<span class="nv">ENABLE_OPENFAST</span><span class="o">=</span>OFF
+<span class="nv">ENABLE_HYPRE</span><span class="o">=</span>ON
+
+<span class="c1"># Switch build system</span>
+<span class="nv">EXAWIND_MAKE_TYPE</span><span class="o">=</span>ninja <span class="c1"># Valid options are auto, make, ninja</span>
+
+<span class="c1"># Set number of parallel jobs to execute during make step</span>
+<span class="nv">EXAWIND_NUM_JOBS</span><span class="o">=</span><span class="m">18</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customizing-installation-location">
+<h3>Customizing installation location<a class="headerlink" href="#customizing-installation-location" title="Permalink to this headline">¶</a></h3>
+<p>By default, exawind-builder will setup <code class="docutils literal notranslate"><span class="pre">CMAKE_INSTALL_PREFIX</span></code> such that <code class="docutils literal notranslate"><span class="pre">make</span>
+<span class="pre">install</span></code> step will install at
+<code class="file docutils literal notranslate"><span class="pre">$</span><em><span class="pre">EXAWIND_PROJECT_DIR</span></em><span class="pre">/$</span><em><span class="pre">EXAWIND_EXEC_TARGET</span></em><span class="pre">/$</span><em><span class="pre">EXAWIND_CODE</span></em></code> directory.
+If you have installed exawind-builder yourself and are not using a shared
+installation you will not need to change this location. However, when using an
+upstream exawind-builder you might not have write permissions to that
+installation location. In this situation you can instruct exawind-builder to
+choose a custom installation location for when executing <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code>.</p>
+<p>In this example we will assume that you are using an upstream exawind-builder
+installation at <code class="file docutils literal notranslate"><span class="pre">/projects/exawind</span></code> and you are building your development
+versions in <code class="file docutils literal notranslate"><span class="pre">$</span><em><span class="pre">HOME</span></em><span class="pre">/exawind</span></code>. By default, <span class="target" id="index-2"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_INSTALL_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_INSTALL_DIR</span></code></a>
+will point to a directory within <span class="target" id="index-3"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_PROJECT_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_PROJECT_DIR</span></code></a> (which in this
+case is within <code class="file docutils literal notranslate"><span class="pre">/projects/exawind/</span></code>). To override this when building
+trilinos, for example, you can use the variable <cite>TRILINOS_INSTALL_PREFIX</cite> to
+provide the installation location. Next section shows how this installed
+trilinos libraries can be used to link against codes that depend on trilinos.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom install location for trilinos with date timestamp</span>
+<span class="nb">export</span> <span class="nv">TRILINOS_INSTALL_PREFIX</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind/install/gcc8-cuda10/trilinos-<span class="k">$(</span>date %Y-%m-%d<span class="k">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customizing-dependencies">
+<h3>Customizing dependencies<a class="headerlink" href="#customizing-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>During development, the user might desire to use a different branch of a
+dependency than what the default system-wide installation provides. For example,
+the user might want to use a different branch of OpenFAST when developing
+advanced FSI capability within Nalu-Wind. The user can bypass the module
+search/load process by defining <span class="target" id="index-4"></span><a class="reference internal" href="reference.html#envvar-PROJECTNAME_ROOT_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ROOT_DIR</span></code></a>
+variable for the corresponding dependency. The following example shows how to
+customize the TPLs used for building nalu-wind</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Override TPLs used to build nalu-wind</span>
+<span class="nb">export</span> <span class="nv">OPENFAST_ROOT_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">EXAWIND_INSTALL_DIR</span><span class="si">}</span>/openfast-dbg
+<span class="nb">export</span> <span class="nv">HYPRE_ROOT_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">EXAWIND_INSTALL_DIR</span><span class="si">}</span>/hypre-cuda
+
+<span class="c1"># Example using trilinos from nightly-testing build</span>
+<span class="nb">export</span> <span class="nv">TRILINOS_ROOT_DIR</span><span class="o">=</span>/projects/exawind-nightly-testing/install/trilinos
+
+<span class="c1"># Example using trilinos from custom install location (see previous section)</span>
+<span class="nb">export</span> <span class="nv">TRILINOS_ROOT_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind/install/gcc8-cuda10/trilinos-2020-10-08
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To specify the installation location use <span class="target" id="index-5"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PROJECT_INSTALL_PREFIX</span></code> and
+to use an installed version of the code as a depencency in another project
+use <span class="target" id="index-6"></span><a class="reference internal" href="reference.html#envvar-PROJECTNAME_ROOT_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PROJECTNAME_ROOT_DIR</span></code></a> variable.</p>
+</div>
+</div>
+<div class="section" id="customizing-build-environment-init-process">
+<h3>Customizing build environment init process<a class="headerlink" href="#customizing-build-environment-init-process" title="Permalink to this headline">¶</a></h3>
+<p>The builder provides two options that allows the user to further configure the
+default environment that is enabled for a given system/compiler combination.</p>
+<ol class="arabic">
+<li><p>To load additional modules, the user can use
+<span class="target" id="index-7"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_EXTRA_USER_MODULES"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_EXTRA_USER_MODULES</span></code></a> variable to provide the list of modules
+(in module or spack syntax as appropriate) and have them loaded after the
+base modules have been loaded.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example showing how to always load HDF5 and NetCDF modules</span>
+<span class="nv">EXAWIND_EXTRA_USER_MODULES</span><span class="o">=(</span> hdf5 netcdf-c <span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Fine-grained customization is achieved by defining by overriding the function
+<a class="reference internal" href="reference.html#exawind_env_user_actions" title="exawind_env_user_actions"><code class="xref py py-func docutils literal notranslate"><span class="pre">exawind_env_user_actions()</span></code></a> in the <code class="file docutils literal notranslate"><span class="pre">exawind-config.sh</span></code> configuration
+file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load additional modules and print out some variables</span>
+exawind_env_user_actions <span class="o">()</span>
+<span class="o">{</span>
+  <span class="c1"># You can inject additional module paths</span>
+  module use /opt/hpc_system/modules
+
+  <span class="c1"># load additional modules</span>
+  module load paraview
+
+  <span class="c1"># manipulate environment variables seen by exawind-builder</span>
+  <span class="nb">echo</span> <span class="si">${</span><span class="nv">CXX</span><span class="si">}</span>
+  <span class="nb">echo</span> <span class="si">${</span><span class="nv">TRILINOS_ROOT_DIR</span><span class="si">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="customizing-module-load">
+<span id="cfg-module-load"></span><h3>Customizing module load<a class="headerlink" href="#customizing-module-load" title="Permalink to this headline">¶</a></h3>
+<p>exawind-builder provides a default list of modules on most systems that work for
+most use cases. However, the user might desire to use different modules for
+their custom builds. This is achieved by configuring the modules to be loaded in
+the <span class="target" id="index-8"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_MODMAP"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_MODMAP</span></code></a> variable. The following example shows how the user
+might switch to a different versions of GCC, MPI, and CUDA modules for building code</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>EXAWIND_MODMAP<span class="o">[</span>gcc<span class="o">]=</span>gcc/8.4.0
+EXAWIND_MODMAP<span class="o">[</span>mpi<span class="o">]=</span>mpich/3.3.1
+EXAWIND_MODMAP<span class="o">[</span>cuda<span class="o">]=</span>cuda/10.2.89
+</pre></div>
+</div>
+<p>Similarly, <cite>EXAWIND_MODMAP</cite> can also be used to select from multiple versions of
+software installed via spack. For example, if <span class="target" id="index-9"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_DEP_LOADER</span></code> is
+set to <code class="docutils literal notranslate"><span class="pre">spack</span></code> then you can provide custom versions to load</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>EXAWIND_MODMAP<span class="o">[</span>trilinos<span class="o">]=</span>trilinos@2020-12-01 +cuda
+EXAWIND_MODMAP<span class="o">[</span>hypre<span class="o">]=</span>hypre@develop+mpi~int64+cuda+curand
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><span class="target" id="index-10"></span><a class="reference internal" href="reference.html#envvar-PROJECTNAME_ROOT_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PROJECTNAME_ROOT_DIR</span></code></a> variables take precedence over modules/spack
+packages listed in <span class="target" id="index-11"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_MODMAP"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_MODMAP</span></code></a>. You should verify that the right
+package is loaded. See <a class="reference internal" href="#build-output"><span class="std std-ref">Understanding exawind-builder output</span></a> on more details on how to detect
+the packages that are used during the build process.</p>
+</div>
+</div>
+<div class="section" id="swapping-spack-installations">
+<h3>Swapping Spack installations<a class="headerlink" href="#swapping-spack-installations" title="Permalink to this headline">¶</a></h3>
+<p>To aid testing/debugging, exawind-builder has the ability to switch to a
+different spack installation, e.g., nightly-testing spack installation, using
+the <span class="target" id="index-12"></span><a class="reference internal" href="reference.html#envvar-SPACK_ROOT"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SPACK_ROOT</span></code></a> variable.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Switch spack installation to the one used for nightly-testing</span>
+<span class="nv">SPACK_ROOT</span><span class="o">=</span>/projects/exawind/nightly-testing/spack
+
+<span class="c1"># (Optional) customize spack packages in case there are multiple versions</span>
+EXAWIND_MODMAP<span class="o">[</span>trilinos<span class="o">]=</span>trilinos@develop%gcc@7.4.0 +cuda+cuda_rdc+wrapper
+EXAWIND_MODMAP<span class="o">[</span>hypre<span class="o">]=</span>hypre@develop%gcc@7.4.0
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using a different spack installation, you should not attempt to link to
+codes built against the old spack install that are in
+<span class="target" id="index-13"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_INSTALL_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_INSTALL_DIR</span></code></a>. You should unset all
+<span class="target" id="index-14"></span><a class="reference internal" href="reference.html#envvar-PROJECTNAME_ROOT_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PROJECTNAME_ROOT_DIR</span></code></a> and use packages from spack install, or
+rebuild new versions of the packages.</p>
+</div>
+</div>
+<div class="section" id="customizing-cmake-configuration">
+<h3>Customizing CMake configuration<a class="headerlink" href="#customizing-cmake-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Previously command line arguments were provided to <code class="docutils literal notranslate"><span class="pre">cmake</span></code> task to customize
+the CMake configuration step. While that is suitable for one off modifications,
+a more robust way to customize the configuration step is to provide a custom
+CMake function from within the <code class="docutils literal notranslate"><span class="pre">exawind-config.sh</span></code> script. The following
+example shows a real-world use case to pass <code class="docutils literal notranslate"><span class="pre">jsrun</span></code> arguments to CTest when
+executing regression tests on ORNL Summit system.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Customize CMake behavior by permanently passing extra arguments</span>
+<span class="k">function</span> exawind_cmake <span class="o">{</span>
+    <span class="c1"># Still allow user to pass arguments through command line</span>
+    <span class="nb">local</span> <span class="nv">extra_args</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+    <span class="c1"># Pass GPU arguments to CUDA-aware MPI</span>
+    <span class="nb">local</span> <span class="nv">jsrun_args</span><span class="o">=</span><span class="s1">$&#39;--smpiargs=\x22-gpu\x22&#39;</span>
+
+    exawind_cmake_base <span class="se">\</span>
+        -DMPIEXEC_EXECUTABLE<span class="o">=</span><span class="s1">&#39;&quot;$(which jsrun) ${jsrun_args}&quot;&#39;</span> <span class="se">\</span>
+        -DMPIEXEC_NUMPROC_FLAG<span class="o">=</span><span class="s2">&quot;-n&quot;</span> <span class="se">\</span>
+        -DMPIEXEC_PREFLAGS<span class="o">=</span><span class="s1">&#39;&quot;-a 1 -c 1 -g 1&quot;&#39;</span> <span class="se">\</span>
+        <span class="si">${</span><span class="nv">extra_args</span><span class="si">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="exawind-builder-configuration-files">
+<span id="exawind-config"></span><h2>Exawind-builder configuration files<a class="headerlink" href="#exawind-builder-configuration-files" title="Permalink to this headline">¶</a></h2>
+<p>During execution, exawind-builder reads configuration from various files that
+provide fine-grained control of the build process. The default name for the
+configuration file is <code class="docutils literal notranslate"><span class="pre">exawind-config</span></code>, but this can be configured by
+modifying the <span class="target" id="index-15"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_CFGFILE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_CFGFILE</span></code></a> variable. exawind-builder will load the
+following files in the specified order</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="si">${</span><span class="nv">EXAWIND_PROJECT_DIR</span><span class="si">}</span>/exawind-config-<span class="si">${</span><span class="nv">EXAWIND_SYSTEM</span><span class="si">}</span>      <span class="c1"># Common system settings</span>
+<span class="si">${</span><span class="nv">EXAWIND_PROJECT_DIR</span><span class="si">}</span>/exawind-config-<span class="si">${</span><span class="nv">EXAWIND_EXEC_TARGET</span><span class="si">}</span> <span class="c1"># Execution target settings</span>
+<span class="si">${</span><span class="nv">EXAWIND_CONFIG</span><span class="si">}</span>                                            <span class="c1"># File pointed to by the variable</span>
+<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/exawind-config.sh                                     <span class="c1"># File in the local working directory</span>
+</pre></div>
+</div>
+<p>The configuration variables in the subsequent files will override the default
+values as well as configuration variables set in the previous files. Please
+replace the path appropriately (<span class="target" id="index-16"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_PROJECT_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_PROJECT_DIR</span></code></a>), if you used a
+non-standard location for installation. See also <span class="target" id="index-17"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_CONFIG"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_CONFIG</span></code></a>.</p>
+<p>On systems with a shared installation of exawind-builder, please look at the
+<code class="docutils literal notranslate"><span class="pre">exawind-config-*.sh</span></code> files within <span class="target" id="index-18"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_PROJECT_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_PROJECT_DIR</span></code></a>. The
+<span class="target" id="index-19"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_EXEC_TARGET</span></code> is typically just the compiler name, e.g.,
+<code class="docutils literal notranslate"><span class="pre">gcc</span></code>. For CUDA builds, it is either <code class="docutils literal notranslate"><span class="pre">cuda</span></code> or <code class="docutils literal notranslate"><span class="pre">gcc9-cuda11</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>It is recommended that the user use local configuration files within build
+directories to set variables instead of modifying the build scripts within
+the <cite>exawind/scripts</cite> directory.</p></li>
+<li><p>If you are using a shared instance of exawind-builder (e.g., on NREL),
+then please use <code class="file docutils literal notranslate"><span class="pre">exawind-config.sh</span></code> within your build directory to
+override common configuration parameters.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="tutorial-custom-build-of-trilinos-and-nalu-wind">
+<h2>Tutorial: Custom build of Trilinos and Nalu-Wind<a class="headerlink" href="#tutorial-custom-build-of-trilinos-and-nalu-wind" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial presents a complete walkthrough of the steps involved in building
+custom versions of trilinos and nalu-wind to target execution on NVIDIA GPUs. We
+will assume that the default system build targets host and doesn’t activate CUDA
+support by default. In this tutorial we will activate CUDA within the
+exawind-builder environment, compile Trilinos first with CUDA support, and then
+build nalu-wind to link to this custom trilinos build.</p>
+<p><strong>Create ``exawind-config.sh``</strong></p>
+<ol class="arabic">
+<li><p>(Option 1 – the quick way): You can use this method on systems where Exawind
+team has already created the necessary configuration for CUDA builds.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the exawind build target type</span>
+<span class="nv">EXAWIND_EXEC_TARGET</span><span class="o">=</span>gcc8-cuda10
+
+<span class="c1"># Install path for trilinos</span>
+<span class="nv">TRILINOS_INSTALL_PREFIX</span><span class="o">=</span><span class="si">${</span><span class="nv">MY_EXAWIND_DIR</span><span class="si">}</span>/install/gcc8-cuda10
+
+<span class="c1"># Trilinos lookup path for building Nalu-Wind</span>
+<span class="nv">TRILINOS_ROOT_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">TRILINOS_INSTALL_PREFIX</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>See <span class="target" id="index-20"></span><a class="reference internal" href="reference.html#envvar-EXAWIND_PROJECT_DIR"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">EXAWIND_PROJECT_DIR</span></code></a> to see the available configurations.</p>
+</li>
+<li><p>(Option 2 – the hard way): Provides more control</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ENABLE_CUDA</span><span class="o">=</span>ON
+EXAWIND_MODMAP<span class="o">[</span>gcc<span class="o">]=</span>gcc/8.4.0
+EXAWIND_MODMAP<span class="o">[</span>cuda<span class="o">]=</span>cuda/10.2.89
+
+<span class="c1"># Install path for trilinos</span>
+<span class="nv">TRILINOS_INSTALL_PREFIX</span><span class="o">=</span><span class="si">${</span><span class="nv">MY_EXAWIND_DIR</span><span class="si">}</span>/install/gcc8-cuda10/trilinos-2020-10-08
+
+<span class="c1"># Trilinos lookup path for building Nalu-Wind</span>
+<span class="nv">TRILINOS_ROOT_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">TRILINOS_INSTALL_PREFIX</span><span class="si">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="section" id="build-trilinos">
+<h3>Build Trilinos<a class="headerlink" href="#build-trilinos" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Build and install trilinos (see <a class="reference internal" href="#tut-basic-compilation"><span class="std std-ref">Compiling executables using build scripts</span></a> for more details)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="si">${</span><span class="nv">MY_EXAWIND_DIR</span><span class="si">}</span>/source/trilinos/
+mkdir build-gcc8-cuda10
+<span class="nb">cd</span> build-gcc8-cuda10
+
+<span class="c1"># Copy exawind-config file</span>
+cp <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind-config.sh .
+
+<span class="c1"># link build script</span>
+ln -s <span class="si">${</span><span class="nv">EXAWIND_PROJECT_DIR</span><span class="si">}</span>/scripts/trilinos-gcc.sh
+
+<span class="c1"># Configure and build</span>
+./trilinos-gcc.sh
+<span class="c1"># Install to destination directory</span>
+./trilinos-gcc.sh make install
+</pre></div>
+</div>
+</li>
+</ol>
+<p>If CUDA support was activated, the scripts will print out message similar to
+what is shown below. You can also look at <code class="file docutils literal notranslate"><span class="pre">cmake_output.log</span></code> to make sure
+that Trilinos/Kokkos CUDA support was activated.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==&gt;</span> <span class="n">cuda</span><span class="o">/</span><span class="mf">10.2</span><span class="o">.</span><span class="mi">89</span> <span class="o">=</span> <span class="o">/</span><span class="n">nopt</span><span class="o">/</span><span class="n">nrel</span><span class="o">/</span><span class="n">ecom</span><span class="o">/</span><span class="n">hpacf</span><span class="o">/</span><span class="n">compilers</span><span class="o">/</span><span class="mi">2020</span><span class="o">-</span><span class="mi">07</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">skylake_avx512</span><span class="o">/</span><span class="n">gcc</span><span class="o">-</span><span class="mf">8.4</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">cuda</span><span class="o">-</span><span class="mf">10.2</span><span class="o">.</span><span class="mi">89</span><span class="o">-</span><span class="n">rmccd4tpc5gxbbrjeeohphuuujb4cz2o</span>
+<span class="o">==&gt;</span> <span class="n">Activated</span> <span class="n">Eagle</span> <span class="n">CUDA</span> <span class="n">programming</span> <span class="n">environment</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-nalu-wind">
+<h3>Build Nalu-Wind<a class="headerlink" href="#build-nalu-wind" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Build nalu-wind (see <a class="reference internal" href="#tut-basic-compilation"><span class="std std-ref">Compiling executables using build scripts</span></a> for more details)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="si">${</span><span class="nv">MY_EXAWIND_DIR</span><span class="si">}</span>/source/nalu-wind/
+mkdir build-gcc8-cuda10
+<span class="nb">cd</span> build-gcc8-cuda10
+
+<span class="c1"># Copy exawind-config file</span>
+cp <span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/exawind-config.sh .
+
+<span class="c1"># link build script</span>
+ln -s <span class="si">${</span><span class="nv">EXAWIND_PROJECT_DIR</span><span class="si">}</span>/scripts/nalu-wind-gcc.sh
+
+<span class="c1"># Configure and build</span>
+./nalu-wind-gcc.sh
+<span class="c1"># Install to destination directory</span>
+./nalu-wind-gcc.sh make install
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The script should output the expected path of the tilinos build that is being used</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>==&gt; trilinos = ${HOME}/install/gcc8-cuda10/trilinos-2020-10-08
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installing exawind-builder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, ExaWind project.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
