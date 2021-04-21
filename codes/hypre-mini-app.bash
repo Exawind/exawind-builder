@@ -7,7 +7,20 @@ _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
 
 exawind_proj_env ()
 {
-    exawind_load_deps hypre yaml-cpp
+    exawind_load_deps hypre yaml-cpp 
+
+    local opt_packages=(
+        umpire
+    )
+
+    echo "==> Loading optional dependencies for Hypre-mini-app..."
+
+    for pkg in ${opt_packages[@]} ; do
+        local pkg_flag="ENABLE_${pkg^^}"
+        if [ "${!pkg_flag:-OFF}" = "ON" ] ; then
+            exawind_load_deps $pkg
+        fi
+    done
 }
 
 exawind_cmake_base ()

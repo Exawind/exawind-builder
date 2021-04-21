@@ -15,6 +15,7 @@ exawind_proj_env ()
         hypre
         openfast
         tioga
+        umpire
     )
 
     echo "==> Loading dependencies for nalu-wind... "

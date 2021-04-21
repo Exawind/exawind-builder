@@ -4,7 +4,19 @@ export EXAWIND_GPU_KOKKOS_ENV=OFF
 
 exawind_proj_env ()
 {
-    echo "==> HYPRE: No additional dependencies"
+    local opt_packages=(
+        umpire
+    )
+
+    echo "==> Loading optional dependencies for Hypre ..."
+
+    for pkg in ${opt_packages[@]} ; do
+        local pkg_flag="ENABLE_${pkg^^}"
+        if [ "${!pkg_flag:-OFF}" = "ON" ] ; then
+            exawind_load_deps $pkg
+        fi
+    done
+
 }
 
 exawind_hypre_fix_gpu ()
