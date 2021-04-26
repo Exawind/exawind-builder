@@ -8,6 +8,9 @@ exawind_proj_env ()
     if [ "${ENABLE_NALU_WIND:-OFF}" = "ON" ] ; then
         exawind_load_deps nalu-wind
     fi
+    if [ "${ENABLE_ARBORX:-OFF}" = "ON" ] ; then
+        exawind_load_deps arborx
+    fi
 }
 
 exawind_cmake_base ()
@@ -17,6 +20,12 @@ exawind_cmake_base ()
     if [ -n "$TIOGA_UTILS_INSTALL_PREFIX" ] ; then
         install_dir="-DCMAKE_INSTALL_PREFIX=$TIOGA_UTILS_INSTALL_PREFIX"
     fi
+
+    cmake_prefix_path=""
+    if [ "${ENABLE_ARBORX}" == "ON" ]; then
+        cmake_prefix_path="-DCMAKE_PREFIX_PATH=\"$ARBORX_ROOT_DIR\""
+    fi
+
 
     local compiler_flags=$(exawind_get_compiler_flags)
 
@@ -37,6 +46,7 @@ exawind_cmake_base ()
         -DENABLE_NALU_WIND:BOOL=${ENABLE_NALU_WIND:-OFF}
         -DNALU_DIR:PATH=${NALU_WIND_ROOT_DIR}
         -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON
+        ${cmake_prefix_path}
         ${compiler_flags}
         ${install_dir}
         ${extra_args}
