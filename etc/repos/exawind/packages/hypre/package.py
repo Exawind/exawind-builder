@@ -9,7 +9,7 @@ from spack.pkg.builtin.hypre import Hypre as HypreBase
 class Hypre(HypreBase, CudaPackage):
     """ExaWind specific fork of hypre package"""
 
-    variant('cuda-uvm', default=True,
+    variant('cuda-uvm', default=False,
             description="Enable CUDA UVM support")
     variant('curand', default=True,
             description="Enable CURAND integration")
@@ -57,6 +57,8 @@ class Hypre(HypreBase, CudaPackage):
                 self._cfg_opt_from_spec('curand'),
                 self._cfg_opt_from_spec('cub'),
             ])
+            if '+cuda-uvm' in self.spec:
+                configure_args.append('--enable-unified-memory')
 
         if '~cuda+int64' in self.spec:
             configure_args.append('--enable-bigint')
