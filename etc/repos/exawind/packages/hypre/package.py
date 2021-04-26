@@ -9,7 +9,7 @@ from spack.pkg.builtin.hypre import Hypre as HypreBase
 class Hypre(HypreBase, CudaPackage):
     """ExaWind specific fork of hypre package"""
 
-    variant('cuda-uvm', default=True,
+    variant('cuda-uvm', default=False,
             description="Enable CUDA UVM support")
     variant('curand', default=True,
             description="Enable CURAND integration")
