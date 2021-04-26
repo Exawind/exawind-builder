@@ -57,6 +57,8 @@ class Hypre(HypreBase, CudaPackage):
                 self._cfg_opt_from_spec('curand'),
                 self._cfg_opt_from_spec('cub'),
             ])
+            if '+cuda-uvm' in self.spec:
+                configure_args.append('--enable-unified-memory')
 
         if '~cuda+int64' in self.spec:
             configure_args.append('--enable-bigint')
