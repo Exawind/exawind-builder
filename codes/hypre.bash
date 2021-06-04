@@ -90,12 +90,19 @@ exawind_cmake_base ()
             cuda_args="${cuda_args} --disable-curand "
         fi
 
-        if [ "${HYPRE_ENABLE_CUB:-OFF}" = "ON" ] ; then
-            echo "==> HYPRE: Enabling CUDA cub"
-            cuda_args="${cuda_args} --enable-cub "
+        if [ "${HYPRE_ENABLE_CUBLAS:-OFF}" = "ON" ] ; then
+            echo "==> HYPRE: Enabling CUDA cublas"
+            cuda_args="${cuda_args} --enable-cublas "
         else
-            echo "==> HYPRE: Disabling CUDA cub"
-            cuda_args="${cuda_args} --disable-cub "
+            echo "==> HYPRE: Disabling CUDA cublas"
+            cuda_args="${cuda_args} --disable-cublas "
+        fi
+
+        if [ "${HYPRE_ENABLE_GPU_PROFILING:-OFF}" = "ON" ] ; then
+            echo "==> HYPRE: Enabling GPU Profiling"
+            cuda_args="${cuda_args}  --enable-gpu-profiling "
+        else
+            echo "==> HYPRE: Disabling GPU Profiling"
         fi
 
         # Disable BIGINT as it doesn't work with CUDA
