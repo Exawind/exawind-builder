@@ -1,40 +1,56 @@
 packages:
   all:
     compiler:
-      - gcc@7.4.0
+      - gcc@10.2.0
     providers:
       mpi:
         - spectrum-mpi
   spectrum-mpi:
     buildable: false
     externals:
-      - spec: "spectrum-mpi@10.3%gcc@7.4.0"
+
+      - spec: "spectrum-mpi@10.4%gcc@10.2.0"
         modules:
-          - gcc/7.4.0
-          - spectrum-mpi/10.3.1.2-20200121
+          - gcc/10.2.0
+          - spectrum-mpi/10.4.0.3-20210112
   cuda:
-    version: [10.2.89]
+    version: [11.3.1]
     buildable: false
     externals:
-      - spec: "cuda@9.2.148"
+      - spec: "cuda@10.1.168"
         modules:
-          - cuda/9.2.148
+          - cuda/10.1.168
       - spec: "cuda@10.1.243"
         modules:
           - cuda/10.1.243
       - spec: "cuda@10.2.89"
         modules:
           - cuda/10.2.89
+      - spec: "cuda@11.0.2"
+        modules:
+          - cuda/11.0.2
+      - spec: "cuda@11.0.3"
+        modules:
+          - cuda/11.0.3
+      - spec: "cuda@11.1.1"
+        modules:
+          - cuda/11.1.1
+      - spec: "cuda@11.3.1"
+        modules:
+          - cuda/11.3.1
+      - spec: "cuda@11.4.0"
+        modules:
+          - cuda/11.4.0
   cmake:
-    version: [3.18.2]
+    version: [3.20.2]
     buildable: false
     externals:
-      - spec: "cmake@3.18.2%gcc"
+      - spec: "cmake@3.20.2%gcc"
         modules:
-          - cmake/3.18.2
-      - spec: "cmake@3.15.2%gcc"
+          - cmake/3.20.2
+      - spec: "cmake@3.18.4%gcc"
         modules:
-          - cmake/3.15.2
+          - cmake/3.18.4
   zlib:
     version: [1.2.11]
     buildable: false
@@ -45,24 +61,20 @@ packages:
   bzip2:
     version: [1.0.6]
     buildable: false
-    externals:
-      - spec: "bzip2@1.0.6%gcc"
-        modules:
-          - bzip2/1.0.6
+    paths:
+      bzip2@1.0.6: /usr/
   libxml2:
-    version: [2.9.8]
+    version: [2.9.10]
     buildable: false
     externals:
-      - spec: "libxml2@2.9.8%gcc"
+      - spec: "libxml2@2.9.10%gcc"
         modules:
-          - libxml2/2.9.8
+          - libxml2/2.9.10
   m4:
     version: [1.4.18]
     buildable: false
-    externals:
-      - spec: "m4@1.4.18%gcc"
-        modules:
-          - m4/1.4.18
+    paths:
+      m4@1.4.18: /usr/
   perl:
     version: [5.26.2]
     buildable: false
@@ -92,12 +104,10 @@ packages:
         modules:
           - automake/1.16.1
   pkgconf:
-    version: [1.5.4]
+    version: [1.4.2]
     buildable: false
-    externals:
-      - spec: "pkgconf@1.5.4%gcc"
-        modules:
-          - pkgconf/1.5.4
+    paths:
+      pkgconf@1.4.2: /usr/
   python:
     version: [3.7.0]
     buildable: false

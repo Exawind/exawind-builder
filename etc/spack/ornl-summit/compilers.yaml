@@ -1,19 +1,36 @@
 compilers:
 - compiler:
     paths:
+      cc: /sw/summit/gcc/11.1.0-2/bin/gcc
+      cxx: /sw/summit/gcc/11.1.0-2/bin/g++
+      f77: /sw/summit/gcc/11.1.0-2/bin/gfortran
+      fc: /sw/summit/gcc/11.1.0-2/bin/gfortran
+    operating_system: rhel8
+    target: ppc64le
+    modules:
+    - gcc/11.1.0-2
+    environment: {}
+    extra_rpaths:
+    - /sw/summit/gcc/11.1.0-2/lib
+    - /sw/summit/gcc/11.1.0-2/lib64
+    - /sw/summit/gcc/11.1.0-2/libexec
+    flags: {}
+    spec: gcc@11.1.0
+- compiler:
+    paths:
       cc: /sw/summit/gcc/10.2.0/bin/gcc
       cxx: /sw/summit/gcc/10.2.0/bin/g++
       f77: /sw/summit/gcc/10.2.0/bin/gfortran
       fc: /sw/summit/gcc/10.2.0/bin/gfortran
-    operating_system: rhel7
+    operating_system: rhel8
     target: ppc64le
     modules:
-      - gcc/10.2.0
+    - gcc/10.2.0
     environment: {}
     extra_rpaths:
-      - /sw/summit/gcc/10.2.0/lib
-      - /sw/summit/gcc/10.2.0/lib64
-      - /sw/summit/gcc/10.2.0/libexec
+    - /sw/summit/gcc/10.2.0/lib
+    - /sw/summit/gcc/10.2.0/lib64
+    - /sw/summit/gcc/10.2.0/libexec
     flags: {}
     spec: gcc@10.2.0
 - compiler:
@@ -22,47 +39,47 @@ compilers:
       cxx: /sw/summit/gcc/9.3.0-1/bin/g++
       f77: /sw/summit/gcc/9.3.0-1/bin/gfortran
       fc: /sw/summit/gcc/9.3.0-1/bin/gfortran
-    operating_system: rhel7
+    operating_system: rhel8
     target: ppc64le
     modules:
-      - gcc/9.3.0
+    - gcc/9.3.0
     environment: {}
     extra_rpaths:
-      - /sw/summit/gcc/9.3.0-1/lib
-      - /sw/summit/gcc/9.3.0-1/lib64
-      - /sw/summit/gcc/9.3.0-1/libexec
+    - /sw/summit/gcc/9.3.0-1/lib
+    - /sw/summit/gcc/9.3.0-1/lib64
+    - /sw/summit/gcc/9.3.0-1/libexec
     flags: {}
     spec: gcc@9.3.0
 - compiler:
+    paths:
+      cc: /sw/summit/gcc/9.1.0-alpha+20190716/bin/gcc
+      cxx: /sw/summit/gcc/9.1.0-alpha+20190716/bin/g++
+      f77: /sw/summit/gcc/9.1.0-alpha+20190716/bin/gfortran
+      fc: /sw/summit/gcc/9.1.0-alpha+20190716/bin/gfortran
+    operating_system: rhel8
+    target: ppc64le
+    modules:
+    - gcc/9.3.0
     environment: {}
     extra_rpaths:
-      - /sw/summit/gcc/7.4.0/lib
-      - /sw/summit/gcc/7.4.0/lib64
-      - /sw/summit/gcc/7.4.0/libexec
+    - /sw/summit/gcc/9.1.0-alpha+20190716/lib
+    - /sw/summit/gcc/9.1.0-alpha+20190716/lib64
+    - /sw/summit/gcc/9.1.0-alpha+20190716/libexec
     flags: {}
-    modules:
-      - gcc/7.4.0
-    operating_system: rhel7
-    paths:
-      cc: /sw/summit/gcc/7.4.0/bin/gcc
-      cxx: /sw/summit/gcc/7.4.0/bin/g++
-      f77: /sw/summit/gcc/7.4.0/bin/gfortran
-      fc: /sw/summit/gcc/7.4.0/bin/gfortran
-    spec: gcc@7.4.0
-    target: ppc64le
+    spec: gcc@9.1.0
 - compiler:
     environment: {}
     extra_rpaths: []
     flags:
       fflags: -qzerosize
     modules:
-      - xl/16.1.1-5
-    operating_system: rhel7
+    - xl/16.1.1-10
+    operating_system: rhel8
     paths:
-      cc: /sw/summit/xl/16.1.1-5/xlC/16.1.1/bin/xlc_r
-      cxx: /sw/summit/xl/16.1.1-5/xlC/16.1.1/bin/xlc++_r
-      f77: /sw/summit/xl/16.1.1-5/xlf/16.1.1/bin/xlf_r
-      fc: /sw/summit/xl/16.1.1-5/xlf/16.1.1/bin/xlf95_r
+      cc: /sw/summit/xl/16.1.1-10/xlC/16.1.1/bin/xlc_r
+      cxx: /sw/summit/xl/16.1.1-10/xlC/16.1.1/bin/xlc++_r
+      f77: /sw/summit/xl/16.1.1-10/xlf/16.1.1/bin/xlf_r
+      fc: /sw/summit/xl/16.1.1-10/xlf/16.1.1/bin/xlf95_r
     spec: xl_r@16.1
     target: ppc64le
 - compiler:
@@ -71,12 +88,12 @@ compilers:
     flags:
       fflags: -qzerosize
     modules:
-      - xl/16.1.1-5
-    operating_system: rhel7
+    - xl/16.1.1-10
+    operating_system: rhel8
     paths:
-      cc: /sw/summit/xl/16.1.1-5/xlC/16.1.1/bin/xlc
-      cxx: /sw/summit/xl/16.1.1-5/xlC/16.1.1/bin/xlc++
-      f77: /sw/summit/xl/16.1.1-5/xlf/16.1.1/bin/xlf
-      fc: /sw/summit/xl/16.1.1-5/xlf/16.1.1/bin/xlf95
+      cc: /sw/summit/xl/16.1.1-10/xlC/16.1.1/bin/xlc
+      cxx: /sw/summit/xl/16.1.1-10/xlC/16.1.1/bin/xlc++
+      f77: /sw/summit/xl/16.1.1-10/xlf/16.1.1/bin/xlf
+      fc: /sw/summit/xl/16.1.1-10/xlf/16.1.1/bin/xlf95
     spec: xl@16.1
     target: ppc64le

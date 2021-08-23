@@ -98,6 +98,13 @@ exawind_cmake_base ()
             cuda_args="${cuda_args} --disable-cublas "
         fi
 
+        if [ "${HYPRE_ENABLE_GPU_AWARE_MPI:-OFF}" = "ON" ] ; then
+            echo "==> HYPRE: Enabling GPU Aware MPI"
+            cuda_args="${cuda_args} --enable-gpu-aware-mpi "
+        else
+            echo "==> HYPRE: Disabling GPU Aware MPI"
+        fi
+
         if [ "${HYPRE_ENABLE_GPU_PROFILING:-OFF}" = "ON" ] ; then
             echo "==> HYPRE: Enabling GPU Profiling"
             cuda_args="${cuda_args}  --enable-gpu-profiling "
