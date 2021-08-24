@@ -5,9 +5,9 @@ source ${__EXAWIND_CORE_DIR}/envs/spack.bash
 export EXAWIND_NUM_JOBS_DEFAULT=16
 
 declare -A EXAWIND_MODMAP
-EXAWIND_MODMAP[xl]=xl/16.1.1-5
-EXAWIND_MODMAP[gcc]=gcc/7.4.0
-EXAWIND_MODMAP[cuda]=cuda/9.2.148
+EXAWIND_MODMAP[xl]=xl/16.1.1-10
+EXAWIND_MODMAP[gcc]=gcc/10.2.0
+EXAWIND_MODMAP[cuda]=cuda/11.3.1
 
 exawind_summit_common ()
 {
@@ -40,7 +40,7 @@ exawind_summit_gpu ()
 exawind_env_gcc ()
 {
     module purge
-    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-7.4.0}
+    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-10.2.0}
     exawind_summit_common
     exawind_spack_env gcc
     module load ${EXAWIND_MODMAP[gcc]}

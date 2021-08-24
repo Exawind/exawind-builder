@@ -7,7 +7,7 @@ _EXAWIND_PROJECT_CMAKE_RMEXTRA_=(
 
 exawind_proj_env ()
 {
-    exawind_load_deps hypre yaml-cpp 
+    exawind_load_deps cmake hypre yaml-cpp
 
     local opt_packages=(
         umpire
