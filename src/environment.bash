@@ -13,6 +13,11 @@ export EXAWIND_COMPILER_DEFAULT=gcc
 export EXAWIND_DEP_LOADER=spack
 export EXAWIND_CUDA_WRAPPER_DEFAULT=${__EXAWIND_CORE_DIR}/utils/nvcc_wrapper
 
+exawind_load_system_modules ()
+{
+    echo "==> No load system modules defined"
+}
+
 exawind_env ()
 {
     local srcdir=${__EXAWIND_CORE_DIR}
@@ -58,12 +63,12 @@ exawind_load_modules ()
 {
     for dep in $@ ; do
         root_dir_var="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')_ROOT_DIR"
-
         local depname=${EXAWIND_MODMAP[$dep]:-$dep}
         if [ -z ${!root_dir_var} ] ; then
             module load ${depname} || exawind_default_install_dir $dep
         fi
-        echo "==> ${depname} = ${!root_dir_var}"
+        exawind_load_system_modules ${dep}
+        echo "==> ${depname} = ${root_dir_var}"
     done
 }
 

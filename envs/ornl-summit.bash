@@ -6,14 +6,25 @@ export EXAWIND_NUM_JOBS_DEFAULT=16
 
 declare -A EXAWIND_MODMAP
 EXAWIND_MODMAP[xl]=xl/16.1.1-10
-EXAWIND_MODMAP[gcc]=gcc/10.2.0
-EXAWIND_MODMAP[cuda]=cuda/11.3.1
+EXAWIND_DEP_LOADER=module
 
 exawind_summit_common ()
 {
     if [ -z "${OLCF_SPECTRUM_MPI_ROOT}" ] ; then
         module load DefApps
     fi
+}
+
+exawind_load_system_modules ()
+{
+    local pkg_name="$(echo $dep | sed -e 's/\([-a-zA-Z0-9_]*\).*/\1/;s/-/_/g' | tr '[:lower:]' '[:upper:]')"
+    root_dir_var="${pkg_name}_ROOT_DIR"
+    if [ ${pkg_name} == "MPI" ] ; then
+        local olcf_var="OLCF_SPECTRUM_${pkg_name}_ROOT"
+    else
+        local olcf_var="OLCF_${pkg_name}_ROOT"
+    fi
+    eval "export root_dir_var=\"\${$olcf_var}\""
 }
 
 exawind_summit_gpu ()
@@ -40,13 +51,11 @@ exawind_summit_gpu ()
 exawind_env_gcc ()
 {
     module purge
-    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-10.2.0}
     exawind_summit_common
-    exawind_spack_env gcc
-    module load ${EXAWIND_MODMAP[gcc]}
-    module load git
+    #exawind_spack_env gcc
+    exawind_load_deps mpi gcc cuda cmake netlib-lapack
 
-    exawind_load_deps cmake netlib-lapack
+    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-10.2.0}
 
     export CXX=$(which g++)
     export CC=$(which gcc)
