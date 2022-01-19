@@ -6,5 +6,5 @@ fi
 
 if [ "${EXAWIND_COMPILER}" = "gcc" ] ; then
    module unload xl
-   module load gcc/10.2.0
+   module load gcc/9.3.0
 fi

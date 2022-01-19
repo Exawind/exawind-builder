@@ -55,7 +55,7 @@ exawind_env_gcc ()
     #exawind_spack_env gcc
     exawind_load_deps mpi gcc cuda cmake netlib-lapack hdf5
 
-    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-10.2.0}
+    export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-9.3.0}
 
     export CXX=$(which g++)
     export CC=$(which gcc)
