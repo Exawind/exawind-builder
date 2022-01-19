@@ -59,7 +59,7 @@ compilers:
     operating_system: rhel8
     target: ppc64le
     modules:
-    - gcc/9.3.0
+    - gcc/9.1.0
     environment: {}
     extra_rpaths:
     - /sw/summit/gcc/9.1.0-alpha+20190716/lib
