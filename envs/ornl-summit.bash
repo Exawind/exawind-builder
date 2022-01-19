@@ -53,7 +53,7 @@ exawind_env_gcc ()
     module purge
     exawind_summit_common
     #exawind_spack_env gcc
-    exawind_load_deps mpi gcc cuda cmake netlib-lapack
+    exawind_load_deps mpi gcc cuda cmake netlib-lapack hdf5
 
     export EXAWIND_GCC_VERSION=${EXAWIND_GCC_VERSION:-10.2.0}
 
