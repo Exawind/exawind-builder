@@ -90,6 +90,14 @@ exawind_cmake_base ()
             cuda_args="${cuda_args} --disable-curand "
         fi
 
+        if [ "${HYPRE_ENABLE_CUSOLVER:-ON}" = "ON" ] ; then
+            echo "==> HYPRE: Enabling CUDA cusolver"
+            cuda_args="${cuda_args} --enable-cusolver "
+        else
+            echo "==> HYPRE: Disabling CUDA cusolver"
+            cuda_args="${cuda_args} --disable-cusolver "
+        fi
+
         if [ "${HYPRE_ENABLE_CUSPARSE:-ON}" = "ON" ] ; then
             echo "==> HYPRE: Enabling CUDA cusparse"
             cuda_args="${cuda_args} --enable-cusparse "
